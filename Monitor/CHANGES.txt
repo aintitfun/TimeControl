@@ -1,0 +1,17 @@
+2019/12/11: ya funciona todo, solo falta el grid con apps
+2019/12/14: Creo el proyecto hours_cli. Consolido la clase de messages y apppersist en una (apppersist)
+    la idea es usarla tanto para las comms como para la obtencion de registros de apps
+2019/12/14: Hago que haya 3 proyectos: 1 para el server otro para el cli y otro separado con la libreria 
+    de clases que utilizará el cli (y a futuro tb el server de tal forma que sea todo compartido)
+2019/12/15: Cambio los nombres de los proyectos y clases.
+2019/12/15_: Ya funciona el listado
+2019/12/15__: Hago que el pintado se haga en el cli en vez de en common - communication
+2019/12/16: Ya salen stats (solo del dia de hoy)
+
+
+
+
+
+
+TODO:
+- Comprobar que funciona el log cuando borramos o añadimos una app.

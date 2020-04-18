@@ -1,0 +1,56 @@
+{
+   "version": "0.2.0",
+   "configurations": [
+
+
+        {
+            "name": ".NET Core Launch (console)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            // If you have changed target frameworks, make sure to update the program path.
+            "program": "${workspaceFolder}/bin/Debug/netcoreapp3.0/MonitorFrontendCli.dll",
+            //"args": ["-stats","papa-ESPRIMO-P910","pruebamia11","12"],
+            "args": ["-add","DESKTOP-A221D85","kjkj","1"],
+            //"args": ["-remove","papa-ESPRIMO-P910","kk4"],
+            //"args": ["-list","papa-ESPRIMO-P910"],
+            "cwd": "${workspaceFolder}",
+            // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+        {
+            "name": ".NET Core Attach",
+            "type": "coreclr",
+            "request": "attach",
+            "processId": "${command:pickProcess}"
+        }
+    ]
+}
+/*{
+    "version": "0.2.0",
+    "configurations": [
+         {
+             "name": ".NET Core Launch (console)",
+             "type": "coreclr",
+             "request": "launch",
+             "preLaunchTask": "build",
+             "program": "${workspaceFolder}/bin/Debug/netcoreapp3.0/MonitorFrontendCli.dll",
+            "args": ["-list","papa-ESPRIMO-P910","pruebamia11","12"],
+             //"args": ["-stats","papa-ESPRIMO-P910","pruebamia11","12"],
+            //"args": ["-add","papa-ESPRIMO-P910","pruebamiaxxx","121"],
+            //"args": ["-remove","papa-ESPRIMO-P910","pruebamiaxxx","121"],
+            //"args": ["-stats","127.0.1.1","pruebamia11","12"],             "cwd": "${workspaceFolder}",
+                "console": "internalConsole",
+                "stopAtEntry": false,
+             "internalConsoleOptions": "openOnSessionStart",
+             "pipeTransport": {
+                 "pipeCwd": "${workspaceFolder}",
+                 "pipeProgram": "bash",
+                 "pipeArgs": ["-c"],
+                 "debuggerPath": "/home/papa/samsungnetcore/netcoredbg/bin/netcoredbg",
+                 "quoteArgs": true
+             }
+         }
+     ,]
+ }*/
