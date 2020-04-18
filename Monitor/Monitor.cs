@@ -9,7 +9,7 @@ namespace Monitor
     public class Monitor
     {
         ProcessSQLite vSQLite = new ProcessSQLite();
-        //
+        //test comment
         Logger logger=new Logger();
         public List<ProcessesPersist> processes_persist_old = new List<ProcessesPersist>();
         public List<ProcessesPersist> processes_persist = new List<ProcessesPersist>();
