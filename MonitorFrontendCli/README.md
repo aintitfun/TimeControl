@@ -24,4 +24,4 @@ Removes myapp from the list of monitored apps. So myapp could be run on unlimite
 Show minutes cosumed on the top 10 apps
   
   
-Note the Cli only uses network names at this moment.
+Note the Cli only uses network names at this moment to connect to server.
