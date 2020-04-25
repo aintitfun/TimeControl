@@ -416,3 +416,8 @@ STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('conhost','2020-04
 ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
 DETAIL:  Key (pid, app)=(11200, OmniSharp) already exists.
 STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('OmniSharp','2020-04-25 10:57:41',11200)
+LOG:  received fast shutdown request
+LOG:  aborting any active transactions
+LOG:  autovacuum launcher shutting down
+LOG:  shutting down
+LOG:  database system is shut down

@@ -1,8 +1,10 @@
+using System.Threading;
 using System;
 using System.Diagnostics;
 using System.Linq;
 using System.Collections.Generic;
 using Common;
+using System.IO;
 
 namespace Monitor
 {
@@ -32,7 +34,9 @@ namespace Monitor
 
             //var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "../pgsql/bin/pg_ctl.exe", " -D ..\\..\\..\\..\\pgsql\\data start");
             //var dbpath= Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "../pgsql/data/");
-            Process.Start(Environment.CurrentDirectory+"\\..\\pgsql\\bin\\pg_ctl.exe","-D "+Environment.CurrentDirectory+"\\..\\pgsql\\data -l logfile.txt start");
+            //Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName)
+            string path=System.Reflection.Assembly.GetEntryAssembly().Location.Replace("\\Monitor\\bin\\Debug\\netcoreapp3.0\\Monitor.dll","");
+            Process.Start(path+"\\pgsql\\bin\\pg_ctl.exe","-D "+path+"\\pgsql\\data start");
 
 
             //Process.Start(@"..\\..\\..\\..\\pgsql\\bin\\pg_ctl.exe", " -D ..\\..\\..\\..\\pgsql\\data start ");

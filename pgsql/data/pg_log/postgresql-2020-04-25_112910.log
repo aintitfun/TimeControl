@@ -1,0 +1,35 @@
+LOG:  database system was shut down at 2020-04-25 11:16:49 CEST
+LOG:  MultiXact member wraparound protections are now enabled
+LOG:  database system is ready to accept connections
+LOG:  autovacuum launcher started
+LOG:  could not receive data from client: unrecognized winsock error 10054
+LOG:  could not receive data from client: unrecognized winsock error 10054
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(1744, SearchFilterHost) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('SearchFilterHost','2020-04-25 11:29:34',1744)
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(11728, cmd) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('cmd','2020-04-25 11:30:08',11728)
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(13588, conhost) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('conhost','2020-04-25 11:30:08',13588)
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(8680, SearchProtocolHost) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('SearchProtocolHost','2020-04-25 11:30:26',8680)
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(8700, WmiPrvSE) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('WmiPrvSE','2020-04-25 11:30:32',8700)
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(9812, smartscreen) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('smartscreen','2020-04-25 11:30:44',9812)
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(13332, Calculator) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('Calculator','2020-04-25 11:31:11',13332)
+LOG:  could not receive data from client: unrecognized winsock error 10054
+LOG:  could not receive data from client: unrecognized winsock error 10054
+LOG:  received fast shutdown request
+LOG:  aborting any active transactions
+FATAL:  terminating connection due to administrator command
+LOG:  autovacuum launcher shutting down
+LOG:  shutting down
+LOG:  database system is shut down
