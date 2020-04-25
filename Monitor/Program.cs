@@ -15,16 +15,17 @@ static void Main(string[] args)
 
             StringBuilder sb = new StringBuilder();
 
+            Monitor vMon = new Monitor();
+            vMon.StartDatabase();
 
-
-            ProcessSQLite vSQLite = new ProcessSQLite();
+            ProcessSQL vSQLite = new ProcessSQL();
 
             vSQLite.CheckAndRecreateTables();
             vSQLite.HistApps();
 
             //vSQLite.AddApplication("xterm",true,1);
 
-            Monitor vMon = new Monitor();
+
 
             SocServer vCom = new SocServer();
             Thread thr= new Thread(new ThreadStart(vCom.CreateServer));

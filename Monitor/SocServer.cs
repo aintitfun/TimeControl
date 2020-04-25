@@ -28,7 +28,7 @@ namespace Monitor
 
             Socket listener = new Socket(ipAddr.AddressFamily,
                          SocketType.Stream, ProtocolType.Tcp);
-            ProcessSQLite vSQL = new ProcessSQLite();
+            ProcessSQL vSQL = new ProcessSQL();
 
             Logger logger =new Logger();
 

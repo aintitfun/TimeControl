@@ -1,0 +1,6 @@
+FATAL:  lock file "postmaster.pid" already exists
+HINT:  Is another postmaster (PID 12152) running in data directory "F:/Users/papa/Documents/control_horas/Monitor/../pgsql/data"?
+LOG:  redirecting log output to logging collector process
+HINT:  Future log output will appear in directory "c:/pgsql/data/pg_log".
+LOG:  redirecting log output to logging collector process
+HINT:  Future log output will appear in directory "pg_log".

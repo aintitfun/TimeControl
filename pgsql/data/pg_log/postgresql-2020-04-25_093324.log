@@ -1,0 +1,418 @@
+LOG:  database system was shut down at 2020-04-25 09:32:42 CEST
+LOG:  MultiXact member wraparound protections are now enabled
+LOG:  database system is ready to accept connections
+LOG:  autovacuum launcher started
+ERROR:  type "timeoffset" does not exist at character 54
+STATEMENT:  CREATE TABLE daily_apps (pid int,app text,start_time timeoffset,end_time timeoffset,primary key(pid, app))
+LOG:  could not receive data from client: unrecognized winsock error 10054
+ERROR:  type "timeoffset" does not exist at character 54
+STATEMENT:  CREATE TABLE daily_apps (pid int,app text,start_time timeoffset,end_time timeoffset,primary key(pid, app))
+LOG:  could not receive data from client: unrecognized winsock error 10054
+ERROR:  type "timeoffset" does not exist at character 54
+STATEMENT:  CREATE TABLE daily_apps (pid int,app text,start_time timeoffset,end_time timeoffset,primary key(pid, app))
+ERROR:  type "timeoffset" does not exist at character 54
+STATEMENT:  CREATE TABLE daily_apps (pid int,app text,start_time timeoffset,end_time timeoffset,primary key(pid, app))
+LOG:  could not receive data from client: unrecognized winsock error 10054
+LOG:  could not receive data from client: unrecognized winsock error 10054
+LOG:  could not receive data from client: unrecognized winsock error 10054
+LOG:  could not receive data from client: unrecognized winsock error 10054
+ERROR:  function datetime(unknown, unknown) does not exist at character 41
+HINT:  No function matches the given name and argument types. You might need to add explicit type casts.
+STATEMENT:  delete from hist_apps where start_time <datetime('now','-1 month')
+LOG:  could not receive data from client: unrecognized winsock error 10054
+LOG:  could not receive data from client: unrecognized winsock error 10054
+LOG:  could not receive data from client: unrecognized winsock error 10054
+LOG:  could not receive data from client: unrecognized winsock error 10054
+LOG:  could not receive data from client: unrecognized winsock error 10054
+ERROR:  syntax error at or near "selec" at character 1
+STATEMENT:  selec * from daily_apps ;
+LOG:  could not receive data from client: unrecognized winsock error 10054
+LOG:  could not receive data from client: unrecognized winsock error 10054
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(11284, dash) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('dash','2020-04-25 10:16:03',11284)
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(12656, less) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('less','2020-04-25 10:16:04',12656)
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(8752, SearchFilterHost) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('SearchFilterHost','2020-04-25 10:16:04',8752)
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(5056, dash) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('dash','2020-04-25 10:16:33',5056)
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(11780, less) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('less','2020-04-25 10:16:33',11780)
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(9812, WmiPrvSE) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('WmiPrvSE','2020-04-25 10:16:36',9812)
+LOG:  could not receive data from client: unrecognized winsock error 10054
+LOG:  could not receive data from client: unrecognized winsock error 10054
+ERROR:  relation "app" does not exist at character 13
+STATEMENT:  insert into app values('RobloxPlayerBeta', 60);
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(11940, conhost) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('conhost','2020-04-25 10:18:41',11940)
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(11532, audiodg) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('audiodg','2020-04-25 10:18:50',11532)
+LOG:  could not receive data from client: unrecognized winsock error 10054
+LOG:  could not receive data from client: unrecognized winsock error 10054
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(13304, conhost) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('conhost','2020-04-25 10:19:28',13304)
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(1744, dllhost) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('dllhost','2020-04-25 10:19:40',1744)
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(1232, LocalBridge) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('LocalBridge','2020-04-25 10:19:43',1232)
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(11152, svchost) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('svchost','2020-04-25 10:19:49',11152)
+ERROR:  subquery in FROM must have an alias at character 35
+HINT:  For example, FROM (SELECT ...) [AS] foo.
+STATEMENT:  select ifnull(sum(minutes),0) from(
+	                                        select cast((
+	                                        ifnull(julianday(end_time), julianday(datetime('now', 'localtime'))) - julianday(start_time)
+	                                        ) * 24 * 60 AS INTEGER) as minutes from daily_apps da where app ='RobloxPlayerBeta'
+	                                        union all
+	                                        select cast((
+	                                        ifnull(julianday(end_time), julianday(datetime('now', 'localtime'))) - julianday(start_time)
+	                                        ) * 24 * 60 AS INTEGER) as minutes from hist_apps da where app ='RobloxPlayerBeta' and start_time > date()
+	                                    )
+LOG:  could not receive data from client: unrecognized winsock error 10054
+LOG:  could not receive data from client: unrecognized winsock error 10054
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(11488, SearchFilterHost) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('SearchFilterHost','2020-04-25 10:20:13',11488)
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(11120, conhost) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('conhost','2020-04-25 10:20:16',11120)
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(6992, backgroundTaskHost) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('backgroundTaskHost','2020-04-25 10:20:40',6992)
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(10464, backgroundTaskHost) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('backgroundTaskHost','2020-04-25 10:20:40',10464)
+ERROR:  subquery in FROM must have an alias at character 35
+HINT:  For example, FROM (SELECT ...) [AS] foo.
+STATEMENT:  select ifnull(sum(minutes),0) from(
+	                                        select cast((
+	                                        ifnull(julianday(end_time), julianday(datetime('now', 'localtime'))) - julianday(start_time)
+	                                        ) * 24 * 60 AS INTEGER) as minutes from daily_apps da where app ='RobloxPlayerBeta'
+	                                        union all
+	                                        select cast((
+	                                        ifnull(julianday(end_time), julianday(datetime('now', 'localtime'))) - julianday(start_time)
+	                                        ) * 24 * 60 AS INTEGER) as minutes from hist_apps da where app ='RobloxPlayerBeta' and start_time > date()
+	                                    )
+ERROR:  column "now" does not exist at character 15
+STATEMENT:  select now()-(now-interval '10 minutes');
+ERROR:  cannot cast type timestamp with time zone to interval at character 43
+STATEMENT:  select now()-(now()-interval '10 minutes')::interval;
+ERROR:  syntax error at or near "'minutes'" at character 56
+STATEMENT:  select (now()-(now()-interval '10 minutes'))::interval 'minutes';
+ERROR:  cannot cast type interval to integer at character 45
+STATEMENT:  select (now()-(now()-interval '10 minutes'))::int;
+ERROR:  syntax error at or near "-" at character 33
+STATEMENT:  select extract epoch from (now()-(now()-interval '10 minutes'));
+ERROR:  column "now" does not exist at character 88
+STATEMENT:  select
+	                                        extract (epoch from (coalesce(end_time, now) - start_time))/60 as minutes
+	                                        from daily_apps da where app ='kk';
+ERROR:  subquery in FROM must have an alias at character 37
+HINT:  For example, FROM (SELECT ...) [AS] foo.
+STATEMENT:  select coalesce(sum(minutes),0) from(
+		                                        select
+							                                        extract (epoch from (coalesce(end_time, now()) - start_time))/60 as minutes
+												                                        from daily_apps da where app ='kk'
+																	                                        union all
+																						                                        select 
+																											                                        extract (epoch from (coalesce(end_time, now()) - start_time))/60 as minutes
+																																                                        from hist_apps da where app ='kk' and start_time >now()
+																																					                                    );
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(7732, conhost) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('conhost','2020-04-25 10:32:49',7732)
+LOG:  could not receive data from client: unrecognized winsock error 10054
+LOG:  could not receive data from client: unrecognized winsock error 10054
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(13112, dash) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('dash','2020-04-25 10:34:06',13112)
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(7740, less) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('less','2020-04-25 10:34:06',7740)
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(3036, conhost) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('conhost','2020-04-25 10:34:06',3036)
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(12984, dash) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('dash','2020-04-25 10:34:12',12984)
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(4968, less) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('less','2020-04-25 10:34:12',4968)
+ERROR:  column "name" does not exist at character 8
+STATEMENT:  select name,end_time from daily_apps ;
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(8020, dash) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('dash','2020-04-25 10:34:30',8020)
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(7924, less) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('less','2020-04-25 10:34:30',7924)
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(1472, psql) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('psql','2020-04-25 10:34:33',1472)
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(11632, dash) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('dash','2020-04-25 10:34:36',11632)
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(9272, less) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('less','2020-04-25 10:34:36',9272)
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(10940, dash) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('dash','2020-04-25 10:34:54',10940)
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(2160, less) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('less','2020-04-25 10:34:54',2160)
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(5032, dash) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('dash','2020-04-25 10:34:57',5032)
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(5036, less) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('less','2020-04-25 10:34:57',5036)
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(6924, WmiPrvSE) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('WmiPrvSE','2020-04-25 10:35:15',6924)
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(1732, backgroundTaskHost) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('backgroundTaskHost','2020-04-25 10:35:58',1732)
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(11708, SearchFilterHost) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('SearchFilterHost','2020-04-25 10:36:01',11708)
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(1440, RuntimeBroker) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('RuntimeBroker','2020-04-25 10:36:28',1440)
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(3632, SearchFilterHost) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('SearchFilterHost','2020-04-25 10:38:06',3632)
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(10832, Calculator) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('Calculator','2020-04-25 10:38:27',10832)
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(3804, Calculator) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('Calculator','2020-04-25 10:39:00',3804)
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(9920, dash) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('dash','2020-04-25 10:39:09',9920)
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(12152, less) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('less','2020-04-25 10:39:09',12152)
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(3476, dash) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('dash','2020-04-25 10:39:18',3476)
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(7596, less) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('less','2020-04-25 10:39:18',7596)
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(9640, RuntimeBroker) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('RuntimeBroker','2020-04-25 10:39:27',9640)
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(13200, postgres) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('postgres','2020-04-25 10:39:49',13200)
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(8652, postgres) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('postgres','2020-04-25 10:39:49',8652)
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(4676, backgroundTaskHost) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('backgroundTaskHost','2020-04-25 10:39:49',4676)
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(2836, audiodg) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('audiodg','2020-04-25 10:39:58',2836)
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(5932, svchost) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('svchost','2020-04-25 10:39:58',5932)
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(1440, SearchFilterHost) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('SearchFilterHost','2020-04-25 10:40:01',1440)
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(6512, svchost) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('svchost','2020-04-25 10:40:46',6512)
+LOG:  could not receive data from client: unrecognized winsock error 10054
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(11268, conhost) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('conhost','2020-04-25 10:44:37',11268)
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(5976, svchost) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('svchost','2020-04-25 10:44:55',5976)
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(12144, svchost) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('svchost','2020-04-25 10:45:44',12144)
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(12192, SearchFilterHost) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('SearchFilterHost','2020-04-25 10:46:29',12192)
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(11352, WmiPrvSE) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('WmiPrvSE','2020-04-25 10:46:47',11352)
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(13300, init) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('init','2020-04-25 10:47:11',13300)
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(1308, conhost) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('conhost','2020-04-25 10:47:11',1308)
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(436, MonitorFrontendCli) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('MonitorFrontendCli','2020-04-25 10:47:11',436)
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(12244, Calculator) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('Calculator','2020-04-25 10:47:17',12244)
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(5672, conhost) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('conhost','2020-04-25 10:47:35',5672)
+ERROR:  syntax error at or near "from" at character 148
+STATEMENT:  select app,sum(coalesce(minutes,0)) from (
+		                                        select app,
+		                                        extract(from epoch (coalesce(end_time, now()) - start_time))/60 as minutes 
+	                                            from daily_apps 
+		                                        union all
+		                                        select app,
+		                                        extract(from epoch (coalesce(end_time, now()) - start_time))/ 60 as minutes 
+	                                            from hist_apps where start_time > date()
+	                                        )t
+	                                        group by app order by 2 desc limit 10
+LOG:  could not receive data from client: unrecognized winsock error 10054
+LOG:  could not receive data from client: unrecognized winsock error 10054
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(10872, conhost) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('conhost','2020-04-25 10:48:00',10872)
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(3432, PrivateWin10) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('PrivateWin10','2020-04-25 10:48:03',3432)
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(11524, init) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('init','2020-04-25 10:48:03',11524)
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(7224, conhost) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('conhost','2020-04-25 10:48:03',7224)
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(6868, MonitorFrontendCli) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('MonitorFrontendCli','2020-04-25 10:48:03',6868)
+ERROR:  syntax error at or near "from" at character 148
+STATEMENT:  select app,sum(coalesce(minutes,0)) from (
+		                                        select app,
+		                                        extract(from epoch (coalesce(end_time, now()) - start_time))/60 as minutes 
+	                                            from daily_apps 
+		                                        union all
+		                                        select app,
+		                                        extract(from epoch (coalesce(end_time, now()) - start_time))/ 60 as minutes 
+	                                            from hist_apps where start_time > date()
+	                                        )t
+	                                        group by app order by 2 desc limit 10
+LOG:  could not receive data from client: unrecognized winsock error 10054
+LOG:  could not receive data from client: unrecognized winsock error 10054
+ERROR:  syntax error at or near "from" at character 146
+STATEMENT:  select app,sum(coalesce(minutes,0)) from (
+	                                         select app,
+	                                         extract(from epoch (coalesce(end_time, now()) - start_time))/60 as minutes 
+	                                            from daily_apps 
+	                                         union all
+	                                         select app,
+	                                         extract(from epoch (coalesce(end_time, now()) - start_time))/ 60 as minutes 
+	                                            from hist_apps where start_time > now()
+	                                        )t
+	                                        group by app order by 2 desc limit 10
+	;
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(2460, conhost) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('conhost','2020-04-25 10:49:13',2460)
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(6772, DropboxUpdate) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('DropboxUpdate','2020-04-25 10:49:22',6772)
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(4148, WmiPrvSE) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('WmiPrvSE','2020-04-25 10:49:29',4148)
+LOG:  could not receive data from client: unrecognized winsock error 10054
+LOG:  could not receive data from client: unrecognized winsock error 10054
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(12920, conhost) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('conhost','2020-04-25 10:49:49',12920)
+LOG:  could not receive data from client: unrecognized winsock error 10054
+LOG:  could not receive data from client: unrecognized winsock error 10054
+LOG:  could not receive data from client: unrecognized winsock error 10054
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(14204, conhost) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('conhost','2020-04-25 10:50:17',14204)
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(5036, SearchFilterHost) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('SearchFilterHost','2020-04-25 10:50:50',5036)
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(13500, backgroundTaskHost) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('backgroundTaskHost','2020-04-25 10:50:57',13500)
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(12688, audiodg) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('audiodg','2020-04-25 10:51:00',12688)
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(11116, WmiPrvSE) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('WmiPrvSE','2020-04-25 10:51:24',11116)
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(13580, RuntimeBroker) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('RuntimeBroker','2020-04-25 10:51:27',13580)
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(13056, SearchFilterHost) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('SearchFilterHost','2020-04-25 10:53:00',13056)
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(13544, backgroundTaskHost) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('backgroundTaskHost','2020-04-25 10:54:28',13544)
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(13840, svchost) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('svchost','2020-04-25 10:54:58',13840)
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(2684, SearchFilterHost) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('SearchFilterHost','2020-04-25 10:55:01',2684)
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(10764, Code) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('Code','2020-04-25 10:55:10',10764)
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(1784, Calculator) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('Calculator','2020-04-25 10:55:10',1784)
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(13956, postgres) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('postgres','2020-04-25 10:55:13',13956)
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(13988, postgres) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('postgres','2020-04-25 10:55:13',13988)
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(9372, RuntimeBroker) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('RuntimeBroker','2020-04-25 10:55:37',9372)
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(13536, sh) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('sh','2020-04-25 10:56:50',13536)
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(5560, SearchFilterHost) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('SearchFilterHost','2020-04-25 10:57:02',5560)
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(4796, less) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('less','2020-04-25 10:57:17',4796)
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(2672, Code) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('Code','2020-04-25 10:57:41',2672)
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(13148, CodeHelper) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('CodeHelper','2020-04-25 10:57:41',13148)
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(8900, conhost) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('conhost','2020-04-25 10:57:41',8900)
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(8832, Code) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('Code','2020-04-25 10:57:41',8832)
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(2224, Code) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('Code','2020-04-25 10:57:41',2224)
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(4432, cmd) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('cmd','2020-04-25 10:57:41',4432)
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(7652, conhost) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('conhost','2020-04-25 10:57:41',7652)
+ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+DETAIL:  Key (pid, app)=(11200, OmniSharp) already exists.
+STATEMENT:  INSERT INTO daily_apps(app,start_time,pid) VALUES('OmniSharp','2020-04-25 10:57:41',11200)

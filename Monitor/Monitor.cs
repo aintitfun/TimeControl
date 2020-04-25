@@ -8,7 +8,7 @@ namespace Monitor
 {
     public class Monitor
     {
-        ProcessSQLite vSQLite = new ProcessSQLite();
+        ProcessSQL vSQLite = new ProcessSQL();
         //test comment
         Logger logger=new Logger();
         public List<ProcessesPersist> processes_persist_old = new List<ProcessesPersist>();
@@ -25,6 +25,18 @@ namespace Monitor
 
         }
 
+        public void StartDatabase()
+        {
+            
+
+
+            //var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "../pgsql/bin/pg_ctl.exe", " -D ..\\..\\..\\..\\pgsql\\data start");
+            //var dbpath= Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "../pgsql/data/");
+            Process.Start(Environment.CurrentDirectory+"\\..\\pgsql\\bin\\pg_ctl.exe","-D "+Environment.CurrentDirectory+"\\..\\pgsql\\data -l logfile.txt start");
+
+
+            //Process.Start(@"..\\..\\..\\..\\pgsql\\bin\\pg_ctl.exe", " -D ..\\..\\..\\..\\pgsql\\data start ");
+        }
         /// <summary>
         /// Fills the given list with current processes
         /// </summary>

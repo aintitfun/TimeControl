@@ -1,0 +1,24 @@
+LOG:  database system was shut down at 2020-04-13 17:58:51 CEST
+LOG:  MultiXact member wraparound protections are now enabled
+LOG:  database system is ready to accept connections
+LOG:  autovacuum launcher started
+ERROR:  function pg_stat_statement() does not exist at character 83
+HINT:  No function matches the given name and argument types. You might need to add explicit type casts.
+STATEMENT:  DECLARE "87fa77cc-b8e3-4b4e-8f62-0c75472a5553" CURSOR WITH HOLD FOR select * from pg_stat_statement();
+ERROR:  relation "pg_stat_statement" does not exist at character 83
+STATEMENT:  DECLARE "0dab339c-856e-431d-8492-5745f9509f82" CURSOR WITH HOLD FOR select * from pg_stat_statement;
+ERROR:  syntax error at or near "crete" at character 1
+STATEMENT:  crete table prueba(a int);
+FATAL:  database "prueba2" does not exist
+FATAL:  database "prueba2" does not exist
+FATAL:  database "prueba2" does not exist
+ERROR:  invalid name syntax at character 8
+STATEMENT:  SELECT ''::pg_catalog.regproc::pg_catalog.oid
+LOG:  could not receive data from client: unrecognized winsock error 10054
+ERROR:  relation "prueba" already exists
+STATEMENT:  create table prueba (a int);
+LOG:  received fast shutdown request
+LOG:  aborting any active transactions
+LOG:  autovacuum launcher shutting down
+LOG:  shutting down
+LOG:  database system is shut down
