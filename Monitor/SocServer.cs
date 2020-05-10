@@ -70,10 +70,10 @@ namespace Monitor
                         if (jsonResult.command==(int)Command.add)
                         {
 
-                            if (!vSQL.AddApplication(jsonResult.app, jsonResult.maxTime))
-                                SendMessage(new List<AppsPersist>{ new AppsPersist("Unable to add app as db is busy, please retry...",-1)},clientSocket);
+                            if (!vSQL.AddApplication(jsonResult.app, jsonResult.username,jsonResult.maxTime))
+                                SendMessage(new List<AppsPersist>{ new AppsPersist("Unable to add app as db is busy, please retry...","",-1)},clientSocket);
                             else
-                                SendMessage(new List<AppsPersist>{ new AppsPersist($@"{DateTime.Now} [ADDED]: app {jsonResult.app} to list",0)},clientSocket);
+                                SendMessage(new List<AppsPersist>{ new AppsPersist($@"{DateTime.Now} [ADDED]: app {jsonResult.app} to list","",0)},clientSocket);
                                 
                                 //logger.Log ($@"{DateTime.Now} [ADDED]: app {jsonResult.app} to list");
 
@@ -84,9 +84,9 @@ namespace Monitor
                             if (jsonResult.app != "null")
                             {
                                 if (!vSQL.RemoveApplication(jsonResult.app))
-                                    SendMessage(new List<AppsPersist>{ new AppsPersist("Unable to remove app as db is busy, please retry...",-2)},clientSocket);
+                                    SendMessage(new List<AppsPersist>{ new AppsPersist("Unable to remove app as db is busy, please retry...","",-2)},clientSocket);
                                 else
-                                    SendMessage(new List<AppsPersist>{ new AppsPersist($@"{DateTime.Now} [REMOVED]: app {jsonResult.app} to list",0)},clientSocket);
+                                    SendMessage(new List<AppsPersist>{ new AppsPersist($@"{DateTime.Now} [REMOVED]: app {jsonResult.app} to list","",0)},clientSocket);
 
 
 

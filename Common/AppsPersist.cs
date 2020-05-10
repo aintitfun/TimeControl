@@ -5,15 +5,12 @@ namespace Common
         public string app;
         public int maxTime;
         public int command;
-        public AppsPersist( )
-        {
-
-        }
-        public AppsPersist(string app,int maxTime )
+        public string username;
+        public AppsPersist(string app,string username,int maxTime )
         {
             this.app= app;
             this.maxTime= maxTime;
-            
+            this.username=username;
         }
     }
 }

@@ -39,9 +39,9 @@ namespace Monitor
                 using (NpgsqlCommand cmdCreate = new NpgsqlCommand("drop table if exists  apps; " +
                         " drop table if exists  daily_apps; " +
                         " drop table if exists  hist_apps; " +
-                        " CREATE TABLE apps (name text primary key, max_time int); " +
-                        " CREATE TABLE daily_apps (pid int,app text,start_time timestamp,end_time timestamp,primary key(pid, app));" +
-                        " CREATE TABLE hist_apps (pid int,app text,start_time timestamp,end_time timestamp);",vConn)){
+                        " CREATE TABLE apps (name text , username text,max_time int, primary key (name,username)); " +
+                        " CREATE TABLE daily_apps (pid int,app text,username text,start_time timestamp,end_time timestamp,primary key(pid, app));" +
+                        " CREATE TABLE hist_apps (pid int,app text,username text,start_time timestamp,end_time timestamp);",vConn)){
                     cmdCreate.ExecuteNonQuery();
                 }
                 
@@ -95,19 +95,19 @@ namespace Monitor
         }
 
         /// <summary>
-        /// Inserts on a processpersist object all the records from daily_apps table
+        /// Adds on a processpersist object all the records from daily_apps table
         /// </summary>
         /// <param name="p"></param>
         public void GetDailyApps(ref List<ProcessesPersist> lp){
             using (var conn = new NpgsqlConnection(connString))
             {                
                 conn.Open();  
-                using (NpgsqlCommand cmd = new NpgsqlCommand("select pid,app from daily_apps where end_time is null",conn))
+                using (NpgsqlCommand cmd = new NpgsqlCommand("select pid,app,coalesce(username,'no_username') from daily_apps where end_time is null",conn))
                 {
                     NpgsqlDataReader dr;
                     dr = cmd.ExecuteReader();
                     while (dr.Read()){
-                        lp.Add(new ProcessesPersist(dr.GetInt32(0),dr.GetString(1)));
+                        lp.Add(new ProcessesPersist(dr.GetInt32(0),dr.GetString(1),dr.GetString(2)));
                     }
                 }
             }
@@ -118,12 +118,12 @@ namespace Monitor
         /// </summary>
         /// <param name="strAppName"></param>
         /// <param name="nMaxTime"></param>
-        public bool AddApplication(string strAppName, int nMaxTime)
+        public bool AddApplication(string strAppName, string userName,int nMaxTime)
         {
             using (var conn = new NpgsqlConnection(connString))
             {                
                 conn.Open();  
-                using (NpgsqlCommand cmd = new NpgsqlCommand($@"insert into apps (name,max_time) values ('{strAppName}','{nMaxTime}')",conn))
+                using (NpgsqlCommand cmd = new NpgsqlCommand($@"insert into apps (name,username,max_time) values ('{strAppName}',{userName},'{nMaxTime}')",conn))
                 {
                     try
                     {
@@ -186,7 +186,7 @@ namespace Monitor
             using (var conn = new NpgsqlConnection(connString))
             {                
                 conn.Open();  
-                using (NpgsqlCommand cmd = new NpgsqlCommand("select name, max_time from apps",conn))
+                using (NpgsqlCommand cmd = new NpgsqlCommand("select name,username, max_time from apps",conn))
                 {
                     NpgsqlDataReader dr;
                     try
@@ -194,7 +194,7 @@ namespace Monitor
                         dr = cmd.ExecuteReader();
                         while (dr.Read())
                         {
-                            l.Add(new AppsPersist(dr.GetString(0), dr.GetInt32(1)));
+                            l.Add(new AppsPersist(dr.GetString(0), dr.GetString(1), dr.GetInt32(2) ));
                         }
                     }
                     catch (NpgsqlException e)
@@ -216,7 +216,7 @@ namespace Monitor
         /// </summary>
         /// <param name="strAppName"></param>
         /// <returns></returns>
-        public int GetActiveMinutes(string strAppName){
+        public int GetActiveMinutes(string strAppName, string strUser){
 
             using (var conn = new NpgsqlConnection(connString))
             {                
@@ -224,11 +224,11 @@ namespace Monitor
                 using (NpgsqlCommand cmd = new NpgsqlCommand($@"select coalesce(sum(minutes)::integer,0) from(
                                         select
                                         extract (epoch from (coalesce(end_time, now()) - start_time))/60 as minutes
-                                        from daily_apps da where app ='{strAppName}'
+                                        from daily_apps da where app ='{strAppName}' and username='{strUser}'
                                         union all
                                         select 
                                         extract (epoch from (coalesce(end_time, now()) - start_time))/60 as minutes
-                                        from hist_apps da where app ='{strAppName}' and start_time >now()
+                                        from hist_apps da where app ='{strAppName}' and username='{strUser}' and start_time >now()
                                     )t",conn))
                 {
                     NpgsqlDataReader dr;
@@ -249,21 +249,21 @@ namespace Monitor
             using (var conn = new NpgsqlConnection(connString))
             {                
                 conn.Open();  
-                using (NpgsqlCommand cmd = new NpgsqlCommand($@"select app,sum(coalesce(minutes,0))::integer from (
+                using (NpgsqlCommand cmd = new NpgsqlCommand($@"select app,username,sum(coalesce(minutes,0))::integer from (
 	                                        select app,
 	                                        extract(epoch from (coalesce(end_time, now()) - start_time))/60 as minutes 
                                             from daily_apps 
 	                                        union all
-	                                        select app,
+	                                        select app,username,
 	                                        extract(epoch from (coalesce(end_time, now()) - start_time))/ 60 as minutes 
                                             from hist_apps where start_time > now()
                                         )t
-                                        group by app order by 2 desc limit 10",conn))
+                                        group by app,username order by 3 desc limit 10",conn))
                 {
                     NpgsqlDataReader dr;
                     dr = cmd.ExecuteReader();
                     while (dr.Read())
-                        lap.Add(new AppsPersist(dr.GetString(0),dr.GetInt32(1)));
+                        lap.Add(new AppsPersist(dr.GetString(0),dr.GetString(1),dr.GetInt32(2)));
                     return lap;
                 }
             }
@@ -275,13 +275,13 @@ namespace Monitor
         /// <param name="strApp"></param>
         /// <param name="nPid"></param>
         /// <param name="dtEndTime"></param>
-        public void UpdateApp(string strApp, int nPid)
+        public void UpdateApp(string strApp, string userName,int nPid)
         {
 
             using (var conn = new NpgsqlConnection(connString))
             {                
                 conn.Open();  
-                using (NpgsqlCommand cmd = new NpgsqlCommand($@"INSERT INTO daily_apps(app,start_time,pid) VALUES('{strApp}','{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}',{nPid})",conn))
+                using (NpgsqlCommand cmd = new NpgsqlCommand($@"INSERT INTO daily_apps(app,username,start_time,pid) VALUES('{strApp}','{userName}','{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}',{nPid})",conn))
                 {
                     try 
                     {

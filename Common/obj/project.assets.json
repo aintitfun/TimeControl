@@ -57,11 +57,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\Users\\papa\\Documents\\control_horas\\Common\\Common.csproj",
+      "projectUniqueName": "f:\\Users\\papa\\Documents\\TimeControl\\Common\\Common.csproj",
       "projectName": "Common",
-      "projectPath": "F:\\Users\\papa\\Documents\\control_horas\\Common\\Common.csproj",
+      "projectPath": "f:\\Users\\papa\\Documents\\TimeControl\\Common\\Common.csproj",
       "packagesPath": "C:\\Users\\papa\\.nuget\\packages\\",
-      "outputPath": "F:\\Users\\papa\\Documents\\control_horas\\Common\\obj\\",
+      "outputPath": "f:\\Users\\papa\\Documents\\TimeControl\\Common\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\papa\\AppData\\Roaming\\NuGet\\NuGet.Config",

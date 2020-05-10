@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "F:\\Users\\papa\\Documents\\control_horas\\Common\\Common.csproj": {}
+    "F:\\Users\\papa\\Documents\\TimeControl\\Common\\Common.csproj": {}
   },
   "projects": {
-    "F:\\Users\\papa\\Documents\\control_horas\\Common\\Common.csproj": {
+    "F:\\Users\\papa\\Documents\\TimeControl\\Common\\Common.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\Users\\papa\\Documents\\control_horas\\Common\\Common.csproj",
+        "projectUniqueName": "F:\\Users\\papa\\Documents\\TimeControl\\Common\\Common.csproj",
         "projectName": "Common",
-        "projectPath": "F:\\Users\\papa\\Documents\\control_horas\\Common\\Common.csproj",
+        "projectPath": "F:\\Users\\papa\\Documents\\TimeControl\\Common\\Common.csproj",
         "packagesPath": "C:\\Users\\papa\\.nuget\\packages\\",
-        "outputPath": "F:\\Users\\papa\\Documents\\control_horas\\Common\\obj\\",
+        "outputPath": "F:\\Users\\papa\\Documents\\TimeControl\\Common\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\papa\\AppData\\Roaming\\NuGet\\NuGet.Config",

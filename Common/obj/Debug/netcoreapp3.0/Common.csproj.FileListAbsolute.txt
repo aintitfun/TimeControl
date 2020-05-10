@@ -23,3 +23,12 @@ F:\Users\papa\Documents\control_horas\Common\obj\Debug\netcoreapp3.0\Common.Asse
 F:\Users\papa\Documents\control_horas\Common\obj\Debug\netcoreapp3.0\Common.AssemblyInfo.cs
 F:\Users\papa\Documents\control_horas\Common\obj\Debug\netcoreapp3.0\Common.dll
 F:\Users\papa\Documents\control_horas\Common\obj\Debug\netcoreapp3.0\Common.pdb
+F:\Users\papa\Documents\TimeControl\Common\bin\Debug\netcoreapp3.0\Common.deps.json
+F:\Users\papa\Documents\TimeControl\Common\bin\Debug\netcoreapp3.0\Common.dll
+F:\Users\papa\Documents\TimeControl\Common\bin\Debug\netcoreapp3.0\Common.pdb
+F:\Users\papa\Documents\TimeControl\Common\obj\Debug\netcoreapp3.0\Common.csprojAssemblyReference.cache
+F:\Users\papa\Documents\TimeControl\Common\obj\Debug\netcoreapp3.0\Common.csproj.CoreCompileInputs.cache
+F:\Users\papa\Documents\TimeControl\Common\obj\Debug\netcoreapp3.0\Common.AssemblyInfoInputs.cache
+F:\Users\papa\Documents\TimeControl\Common\obj\Debug\netcoreapp3.0\Common.AssemblyInfo.cs
+F:\Users\papa\Documents\TimeControl\Common\obj\Debug\netcoreapp3.0\Common.dll
+F:\Users\papa\Documents\TimeControl\Common\obj\Debug\netcoreapp3.0\Common.pdb

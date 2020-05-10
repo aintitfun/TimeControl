@@ -13,6 +13,7 @@
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="npgsql" Version="4.1.3.1" />
     <PackageReference Include="System.Data.SQLite" Version="1.0.112.0" />
+    <PackageReference Include="System.Security.Principal.Windows" Version="4.7.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -20,5 +21,12 @@
       <HintPath>..\Common\bin\Debug\netcoreapp3.0\Common.dll</HintPath>
     </Reference>
   </ItemGroup>
+
+
+<ItemGroup>
+  <Reference Include="System.Management">
+    <HintPath>System.Management.dll</HintPath>
+  </Reference>
+</ItemGroup>
 
 </Project>
