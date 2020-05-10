@@ -112,9 +112,7 @@ namespace Monitor
                             SendMessage(vSQL.GetCurrentDayAppUsage(),clientSocket);
                         }
                     }
-                                         
-                
-                
+           
             }
 
             catch (Exception e)

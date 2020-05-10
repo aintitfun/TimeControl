@@ -33,17 +33,18 @@ namespace Monitor
                 }
                                 
                 //cmd.CommandText = $@"select count(*) from pg_tables where tablename like '%app%'";
-                if (AppTables < 3)
-                {
-                    using (NpgsqlCommand cmdCreate = new NpgsqlCommand("drop table if exists  apps; " +
-                            " drop table if exists  daily_apps; " +
-                            " drop table if exists  hist_apps; " +
-                            " CREATE TABLE apps (name text primary key, max_time int); " +
-                            " CREATE TABLE daily_apps (pid int,app text,start_time timestamp,end_time timestamp,primary key(pid, app));" +
-                            " CREATE TABLE hist_apps (pid int,app text,start_time timestamp,end_time timestamp);",vConn)){
-                        cmdCreate.ExecuteNonQuery();
-                    }
+                if (AppTables > 3)
+                    return;
+                
+                using (NpgsqlCommand cmdCreate = new NpgsqlCommand("drop table if exists  apps; " +
+                        " drop table if exists  daily_apps; " +
+                        " drop table if exists  hist_apps; " +
+                        " CREATE TABLE apps (name text primary key, max_time int); " +
+                        " CREATE TABLE daily_apps (pid int,app text,start_time timestamp,end_time timestamp,primary key(pid, app));" +
+                        " CREATE TABLE hist_apps (pid int,app text,start_time timestamp,end_time timestamp);",vConn)){
+                    cmdCreate.ExecuteNonQuery();
                 }
+                
             }
 
         }
@@ -155,9 +156,6 @@ namespace Monitor
                 conn.Open();  
                 using (NpgsqlCommand cmd = new NpgsqlCommand($@"delete from apps where name ='{strAppName}'",conn))
                 {
-                            
-                    conn.Open();  //Initiate connection to the db
-
                 try
                     {
                         cmd.ExecuteNonQuery();
