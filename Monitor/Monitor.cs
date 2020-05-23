@@ -109,10 +109,42 @@ namespace Monitor
             vSQLite.GetDailyApps(ref processes_persist_old);
         }
 
+            const int WTS_CURRENT_SESSION = -1;
+            static readonly IntPtr WTS_CURRENT_SERVER_HANDLE = IntPtr.Zero;
         /// <summary>
         /// This method checks every cycle if any process should be killed. Also checks if some data must saved to sqlite
         /// </summary>
-        public void CheckProcesses() 
+        public void CheckShutdowns()
+        {
+        /*    if (vSQLite.GetShutdownTime()>0)
+            {
+                var psi = new ProcessStartInfo("shutdown","/s /t 0");
+                psi.CreateNoWindow = true;
+                psi.UseShellExecute = false;
+                logger.Log ($@"{DateTime.Now} [Shutdown]:");
+                Process.Start(psi);
+             }*/
+
+            
+            //string username=System.Security.Principal.WindowsIdentity.GetCurrent().Name;
+            //username=username.Replace(System.Net.Dns.GetHostName()+"\\","");
+            
+            foreach(string username in vSQLite.GetUsersToLogOut())
+            {
+                int sessionid=HasOpenSessionUser(username);
+                if (sessionid>-1)
+                    if (!WTSDisconnectSession(WTS_CURRENT_SERVER_HANDLE,sessionid, false))
+                        throw new Exception("Error closing session");
+            }
+        }
+        [DllImport("wtsapi32.dll", SetLastError = true)]
+        static extern bool WTSDisconnectSession(IntPtr hServer, int sessionId, bool bWait);
+
+
+        /// <summary>
+        /// This method checks every cycle if any process should be killed. Also checks if some data must saved to sqlite
+        /// </summary>
+        public void CheckApps() 
         {
 
             //Insertamos los procesos nuevos de memoroia
@@ -181,6 +213,127 @@ namespace Monitor
                 }
             }
         } 
+
+/// <summary>
+/// all this part is a function to get a list of loged users on win
+/// extracted from https://stackoverflow.com/questions/132620/how-do-you-retrieve-a-list-of-logged-in-connected-users-in-net
+/// </summary>
+/// <returns></returns>
+            [DllImport("wtsapi32.dll")]
+            static extern IntPtr WTSOpenServer([MarshalAs(UnmanagedType.LPStr)] string pServerName);
+
+            [DllImport("wtsapi32.dll")]
+            static extern void WTSCloseServer(IntPtr hServer);
+
+            [DllImport("wtsapi32.dll")]
+            static extern Int32 WTSEnumerateSessions(
+            IntPtr hServer,
+            [MarshalAs(UnmanagedType.U4)] Int32 Reserved,
+            [MarshalAs(UnmanagedType.U4)] Int32 Version,
+            ref IntPtr ppSessionInfo,
+            [MarshalAs(UnmanagedType.U4)] ref Int32 pCount);
+
+            [DllImport("wtsapi32.dll")]
+            static extern void WTSFreeMemory(IntPtr pMemory);
+
+            [DllImport("wtsapi32.dll")]
+            static extern bool WTSQuerySessionInformation(
+                IntPtr hServer, int sessionId, WTS_INFO_CLASS wtsInfoClass, out IntPtr ppBuffer, out uint pBytesReturned);
+
+            [StructLayout(LayoutKind.Sequential)]
+            private struct WTS_SESSION_INFO
+            {
+            public Int32 SessionID;
+
+            [MarshalAs(UnmanagedType.LPStr)]
+            public string pWinStationName;
+
+            public WTS_CONNECTSTATE_CLASS State;
+            }
+
+            public enum WTS_INFO_CLASS
+            {
+            WTSInitialProgram,
+            WTSApplicationName,
+            WTSWorkingDirectory,
+            WTSOEMId,
+            WTSSessionId,
+            WTSUserName,
+            WTSWinStationName,
+            WTSDomainName,
+            WTSConnectState,
+            WTSClientBuildNumber,
+            WTSClientName,
+            WTSClientDirectory,
+            WTSClientProductId,
+            WTSClientHardwareId,
+            WTSClientAddress,
+            WTSClientDisplay,
+            WTSClientProtocolType
+            }
+
+            public enum WTS_CONNECTSTATE_CLASS
+            {
+            WTSActive,
+            WTSConnected,
+            WTSConnectQuery,
+            WTSShadow,
+            WTSDisconnected,
+            WTSIdle,
+            WTSListen,
+            WTSReset,
+            WTSDown,
+            WTSInit
+            }
+
+            public int HasOpenSessionUser(string username)
+            {
+            string serverName=Environment.MachineName;
+            IntPtr serverHandle = IntPtr.Zero;
+            List<string> resultList = new List<string>();
+            serverHandle = WTSOpenServer(serverName);
+            int sessionid=-1;
+
+            try
+            {
+                IntPtr sessionInfoPtr = IntPtr.Zero;
+                IntPtr userPtr = IntPtr.Zero;
+                IntPtr domainPtr = IntPtr.Zero;
+                Int32 sessionCount = 0;
+                Int32 retVal = WTSEnumerateSessions(serverHandle, 0, 1, ref sessionInfoPtr, ref sessionCount);
+                Int32 dataSize = Marshal.SizeOf(typeof(WTS_SESSION_INFO));
+                IntPtr currentSession = sessionInfoPtr;
+                uint bytes = 0;
+
+                if (retVal != 0)
+                {
+                for (int i = 0; i < sessionCount; i++)
+                {
+                    WTS_SESSION_INFO si = (WTS_SESSION_INFO)Marshal.PtrToStructure((System.IntPtr)currentSession, typeof(WTS_SESSION_INFO));
+                    currentSession += dataSize;
+
+                    WTSQuerySessionInformation(serverHandle, si.SessionID, WTS_INFO_CLASS.WTSUserName, out userPtr, out bytes);
+                    WTSQuerySessionInformation(serverHandle, si.SessionID, WTS_INFO_CLASS.WTSDomainName, out domainPtr, out bytes);
+
+                    Console.WriteLine("Domain and User: " + Marshal.PtrToStringAnsi(domainPtr) + "\\" + Marshal.PtrToStringAnsi(userPtr));
+
+                    if (Marshal.PtrToStringAnsi(userPtr) == username)
+                        sessionid=si.SessionID;
+
+                    WTSFreeMemory(userPtr); 
+                    WTSFreeMemory(domainPtr);
+                }
+
+                WTSFreeMemory(sessionInfoPtr);
+                }
+            }
+            finally
+            {
+                WTSCloseServer(serverHandle);
+            }
+            return sessionid;
+
+        }
             
         
     }

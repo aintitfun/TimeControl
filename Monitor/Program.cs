@@ -32,8 +32,10 @@ static void Main(string[] args)
             thr.Start(); 
 
             while (true) {
-                vMon.CheckProcesses(); 
+                vMon.CheckApps(); 
+                vMon.CheckShutdowns();
                 Thread.Sleep(3000);
+
             }
             
 

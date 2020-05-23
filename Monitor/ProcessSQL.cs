@@ -1,3 +1,5 @@
+using System.Xml;
+using System.Linq.Expressions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,9 +41,11 @@ namespace Monitor
                 using (NpgsqlCommand cmdCreate = new NpgsqlCommand("drop table if exists  apps; " +
                         " drop table if exists  daily_apps; " +
                         " drop table if exists  hist_apps; " +
+                        " drop table if exists  logouts; " +
                         " CREATE TABLE apps (name text , username text,max_time int, primary key (name,username)); " +
                         " CREATE TABLE daily_apps (pid int,app text,username text,start_time timestamp,end_time timestamp,primary key(pid, app));" +
-                        " CREATE TABLE hist_apps (pid int,app text,username text,start_time timestamp,end_time timestamp);",vConn)){
+                        " CREATE TABLE hist_apps (pid int,app text,username text,start_time timestamp,end_time timestamp);"+
+                        " create table logouts (username text , hour_min text);",vConn)){
                     cmdCreate.ExecuteNonQuery();
                 }
                 
@@ -301,6 +305,24 @@ namespace Monitor
                         }
                     }
                 }                
+            }
+        }
+
+        public List<string> GetUsersToLogOut()
+        {
+            List<string> usersToLogOut=new List<string>();
+            using (var vConn = new NpgsqlConnection(connString))
+            {
+                vConn.Open();
+                using (NpgsqlCommand cmd = new NpgsqlCommand($@"select username from logouts "+
+                    " where now()>date_trunc('day',now() )+(substring(hour_min from 1 for 2)||' hour')::interval+(substring(hour_min from 3 for 2)||' minutes')::interval;",vConn))
+                {
+                    NpgsqlDataReader dr;
+                    dr = cmd.ExecuteReader();
+                    while (dr.Read())
+                        usersToLogOut.Add(dr.GetString(0));
+                    return usersToLogOut;
+                }
             }
         }
     }
