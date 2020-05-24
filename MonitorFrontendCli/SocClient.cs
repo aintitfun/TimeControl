@@ -47,15 +47,16 @@ namespace MonitorFrontendCli
             sender.Close();
         }
 
-        public List<AppsPersist> SendMessage(string inApp, int inMaxTime, int inCommand)
+        public List<AppsPersist> SendMessage(string app, string username,int maxTime, int command)
         {
 
             try
             {
                 AppsPersist message = new AppsPersist();
-                message.app = inApp;
-                message.maxTime = inMaxTime;
-                message.command = inCommand;
+                message.app = app;
+                message.maxTime = maxTime;
+                message.command = command;
+                message.username = username;
                 string mJSon = JsonConvert.SerializeObject(message);
 
 

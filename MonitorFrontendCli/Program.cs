@@ -24,7 +24,7 @@ namespace MonitorFrontendCli
                     {
                         case "-add":
                             socClient.Connect(args[1]);
-                            lap=socClient.SendMessage(args[2],System.Convert.ToInt32(args[3]),(int)Command.add);
+                            lap=socClient.SendMessage(args[2],args[3],System.Convert.ToInt32(args[4]),(int)Command.add);
                             socClient.Disconnect();
                             foreach(AppsPersist a in lap){
                                 Console.WriteLine(a.app+" "+a.maxTime);
@@ -32,7 +32,7 @@ namespace MonitorFrontendCli
                         break;
                         case "-remove":
                             socClient.Connect(args[1]);
-                            lap=socClient.SendMessage(args[2],0,(int)Command.remove);
+                            lap=socClient.SendMessage(args[2],args[3],0,(int)Command.remove);
                             socClient.Disconnect();
                             foreach(AppsPersist a in lap){
                                 Console.WriteLine(a.app+" "+a.maxTime);
@@ -40,18 +40,18 @@ namespace MonitorFrontendCli
                         break;
                         case "-list":
                             socClient.Connect(args[1]);
-                            lap= socClient.SendMessage("null",0,(int)Command.list);
+                            lap= socClient.SendMessage("null","null",0,(int)Command.list);
                             foreach(AppsPersist a in lap){
-                                Console.WriteLine(a.app+" "+a.maxTime);
+                                Console.WriteLine(a.app+" "+" "+a.username+" "+a.maxTime);
                             }
                             //Console.ReadLine();
                             socClient.Disconnect();
                         break;
                         case "-stats":
                             socClient.Connect(args[1]);
-                            lap= socClient.SendMessage("null",0,(int) Command.stats);
+                            lap= socClient.SendMessage("null","null",0,(int) Command.stats);
                             foreach(AppsPersist a in lap){
-                                Console.WriteLine(a.app+" "+a.maxTime);
+                                Console.WriteLine(a.app+" "+" "+a.username+" "+a.maxTime);
                             }
                             socClient.Disconnect();
                         break;

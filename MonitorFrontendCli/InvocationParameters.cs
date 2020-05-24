@@ -6,17 +6,17 @@ namespace MonitorFrontendCli
         public string host;
         public string app;
         public int maxTime;
-        public InvocationParameters(string inCommand, string  inHost, string inApp, int inMaxTime) : this(inCommand,  inHost, inApp)
+        public InvocationParameters(string command, string  host, string userName,string app, int maxTime) : this(command,  host, userName,app)
         {
-            maxTime=inMaxTime;
+            this.maxTime=maxTime;
         }
-        public InvocationParameters(string inCommand, string  inHost, string inApp) : this(inCommand,inHost)
+        public InvocationParameters(string command, string  host, string userName,string app) : this(command,host)
         {
-            app=inApp;
+            this.app=app;
         }
-        public InvocationParameters(string inCommand, string  inHost){
-            command=inCommand;
-            host=inHost;
+        public InvocationParameters(string command, string  host){
+            this.command=command;
+            this.host=host;
         }
     }
 }

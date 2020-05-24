@@ -18,10 +18,10 @@ namespace MonitorFrontendCli
                         return new InvocationParameters(null,null);
                     case 2:
                         return ParseListStats(args[0],args[1]);
-                    case 3:
-                        return ParseRemove(args[0],args[1],args[2]);
                     case 4:
-                        return ParseAdd(args[0],args[1],args[2],System.Convert.ToInt32(args[3]));
+                        return ParseRemove(args[0],args[1],args[2],args[3]);
+                    case 5:
+                        return ParseAdd(args[0],args[1],args[2],args[3],System.Convert.ToInt32(args[4]));
 
                
                 }
@@ -34,19 +34,19 @@ namespace MonitorFrontendCli
 
 
         // the next Parse methods are to customice the check for each operation (nothing now at this moment)
-        public InvocationParameters ParseListStats(string inCommand,string inHost)
+        public InvocationParameters ParseListStats(string command,string host)
         {
-            return new InvocationParameters(inCommand,inHost);
+            return new InvocationParameters(command,host);
         }
 
-        public InvocationParameters ParseRemove(string inCommand,string inHost, string inApp)
+        public InvocationParameters ParseRemove(string command,string host, string userName,string app)
         {
-            return new InvocationParameters(inCommand,inHost,inApp);
+            return new InvocationParameters(command,host,userName,app);
         }
 
-        public InvocationParameters ParseAdd(string inCommand,string inHost, string inApp,int inMaxTime)
+        public InvocationParameters ParseAdd(string command,string host, string userName,string app,int maxTime)
         {
-            return new InvocationParameters(inCommand,inHost,inApp,inMaxTime);
+            return new InvocationParameters(command,host,userName,app,maxTime);
         }
 
         /// <summary>
@@ -62,19 +62,25 @@ namespace MonitorFrontendCli
                 switch(inCommand.Substring(1))
                 {
                     case "add":
-                    return RemoveArguments(4,ref args);
+                    return RemoveArguments(5,ref args);
                     case "list" :
                     return RemoveArguments(2,ref args);
                     case "stats":
                     return RemoveArguments(2,ref args);
                     case "remove":
-                    return RemoveArguments(3,ref args);
+                    return RemoveArguments(4,ref args);
                  
                 }
             }
 
             return false;
         }
+        /// <summary>
+        /// remove arguments after a position
+        /// </summary>
+        /// <param name="pos"></param>
+        /// <param name="args"></param>
+        /// <returns></returns>
         private bool RemoveArguments(int pos, ref string[] args)
         {
             var argsList = args.ToList();

@@ -127,7 +127,7 @@ namespace Monitor
             using (var conn = new NpgsqlConnection(connString))
             {                
                 conn.Open();  
-                using (NpgsqlCommand cmd = new NpgsqlCommand($@"insert into apps (name,username,max_time) values ('{strAppName}',{userName},'{nMaxTime}')",conn))
+                using (NpgsqlCommand cmd = new NpgsqlCommand($@"insert into apps (name,username,max_time) values ('{strAppName}','{userName}','{nMaxTime}')",conn))
                 {
                     try
                     {
@@ -254,7 +254,7 @@ namespace Monitor
             {                
                 conn.Open();  
                 using (NpgsqlCommand cmd = new NpgsqlCommand($@"select app,username,sum(coalesce(minutes,0))::integer from (
-	                                        select app,
+	                                        select app,username,
 	                                        extract(epoch from (coalesce(end_time, now()) - start_time))/60 as minutes 
                                             from daily_apps 
 	                                        union all
