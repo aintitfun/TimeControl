@@ -134,7 +134,7 @@ namespace Monitor
                 int sessionid=HasOpenSessionUser(username);
                 if (sessionid>-1)
                     if (!WTSDisconnectSession(WTS_CURRENT_SERVER_HANDLE,sessionid, false))
-                        throw new Exception("Error closing session");
+                        logger.Log ($@"{DateTime.Now} [ERROR]: Forcing Logout {username}");
             }
         }
         [DllImport("wtsapi32.dll", SetLastError = true)]

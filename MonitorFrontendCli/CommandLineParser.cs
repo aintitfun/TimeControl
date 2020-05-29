@@ -69,6 +69,8 @@ namespace MonitorFrontendCli
                     return RemoveArguments(2,ref args);
                     case "remove":
                     return RemoveArguments(4,ref args);
+                    case "listlogouts" :
+                    return RemoveArguments(2,ref args);
                  
                 }
             }

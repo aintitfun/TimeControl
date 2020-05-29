@@ -14,7 +14,9 @@ namespace MonitorFrontendCli
             add=1,
             remove=2,
             list=3,
-            stats=4
+            stats=4,
+            addlogout=5,
+            listlogouts=6
         }
     public class SocClient
     {
@@ -111,6 +113,21 @@ namespace MonitorFrontendCli
                     return lap;
 
                 }
+
+                if (message.command == (int) Command.listlogouts)
+                {
+                    byte[] messageReceived = new byte[10000];
+                    int byteRecv = sender.Receive(messageReceived);
+                    String data = Encoding.ASCII.GetString(messageReceived, 0, byteRecv);
+
+
+                    List<AppsPersist> lap = JsonConvert.DeserializeObject<List<AppsPersist>>(data.Replace("<EOF>", ""));
+
+                    return lap;
+
+
+                }
+
                 if (message.command == (int) Command.stats)
                 {
                     byte[] messageReceived = new byte[1024];

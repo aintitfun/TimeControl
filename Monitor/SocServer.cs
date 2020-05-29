@@ -11,7 +11,9 @@ namespace Monitor
             add=1,
             remove=2,
             list=3,
-            stats=4
+            stats=4,
+            addlogout=5,
+            listlogouts=6
         }
     public class SocServer
     {
@@ -101,6 +103,16 @@ namespace Monitor
                         {
                             List<AppsPersist> lap=new List<AppsPersist>();
                             lap = vSQL.GetApps();
+                            
+                            SendMessage(lap,clientSocket);
+                        
+                            logger.Log ($@"{DateTime.Now} [LIST]: Error listing apps ");
+                        }
+
+                        if (jsonResult.command==(int)Command.listlogouts)
+                        {
+                            List<AppsPersist> lap=new List<AppsPersist>();
+                            lap = vSQL.GetConfiguredLogouts();
                             
                             SendMessage(lap,clientSocket);
                         

@@ -49,9 +49,25 @@ namespace MonitorFrontendCli
                         break;
                         case "-stats":
                             socClient.Connect(args[1]);
-                            lap= socClient.SendMessage("null","null",0,(int) Command.stats);
+                            lap=socClient.SendMessage("null","null",0,(int) Command.stats);
                             foreach(AppsPersist a in lap){
                                 Console.WriteLine(a.app+" "+" "+a.username+" "+a.maxTime);
+                            }
+                            socClient.Disconnect();
+                        break;
+                        case "-addlogout":
+                            socClient.Connect(args[1]);
+                            lap= socClient.SendMessage(null,args[3],0,(int) Command.stats);
+                            foreach(AppsPersist a in lap){
+                                Console.WriteLine(a.username+" "+a.maxTime);
+                            }
+                            socClient.Disconnect();
+                        break;
+                        case "-listlogouts":
+                            socClient.Connect(args[1]);
+                            lap=socClient.SendMessage("null","null",0,(int) Command.listlogouts);
+                            foreach(AppsPersist a in lap){
+                                Console.WriteLine(a.username+" "+a.maxTime.ToString().Substring(0,2)+":"+a.maxTime.ToString().Substring(2,2));
                             }
                             socClient.Disconnect();
                         break;

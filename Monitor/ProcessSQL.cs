@@ -273,6 +273,25 @@ namespace Monitor
             }
         }
 
+        public List<AppsPersist> GetConfiguredLogouts()
+        {
+            
+            List<AppsPersist> lap=new List<AppsPersist>();
+
+            using (var conn = new NpgsqlConnection(connString))
+            {                
+                conn.Open();  
+                using (NpgsqlCommand cmd = new NpgsqlCommand($@"select username,hour_min from logouts;",conn))
+                {
+                    NpgsqlDataReader dr;
+                    dr = cmd.ExecuteReader();
+                    while (dr.Read())
+                        lap.Add(new AppsPersist(null,dr.GetString(0),System.Convert.ToInt32(dr.GetString(1))));
+                    return lap;
+                }
+            }
+        }
+
         /// <summary>
         /// This method updates or inserts the app on db.false Also updates the start and end Time
         /// </summary>

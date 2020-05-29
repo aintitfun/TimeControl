@@ -19,3 +19,6 @@ select app,username,sum(coalesce(minutes,0))::integer from (
                                             from hist_apps where start_time > now()
                                         )t
                                         group by app,username order by 3 desc limit 10;
+
+
+										select * from logouts;
