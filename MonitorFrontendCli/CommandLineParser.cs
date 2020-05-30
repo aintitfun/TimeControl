@@ -19,7 +19,10 @@ namespace MonitorFrontendCli
                     case 2:
                         return ParseListStats(args[0],args[1]);
                     case 4:
-                        return ParseRemove(args[0],args[1],args[2],args[3]);
+                        if (args[3].Contains(":"))
+                            return ParseAddLogout(args[0],args[1],args[2],args[3]);
+                        else
+                            return ParseRemove(args[0],args[1],args[2],args[3]);
                     case 5:
                         return ParseAdd(args[0],args[1],args[2],args[3],System.Convert.ToInt32(args[4]));
 
@@ -42,6 +45,11 @@ namespace MonitorFrontendCli
         public InvocationParameters ParseRemove(string command,string host, string userName,string app)
         {
             return new InvocationParameters(command,host,userName,app);
+        }
+
+        public InvocationParameters ParseAddLogout(string command,string host, string userName,string hourMin)
+        {
+            return new InvocationParameters(command,host,userName,System.Convert.ToInt32(hourMin.Replace(":","")));
         }
 
         public InvocationParameters ParseAdd(string command,string host, string userName,string app,int maxTime)
@@ -71,6 +79,8 @@ namespace MonitorFrontendCli
                     return RemoveArguments(4,ref args);
                     case "listlogouts" :
                     return RemoveArguments(2,ref args);
+                    case "addlogout" :
+                    return RemoveArguments(4,ref args);
                  
                 }
             }

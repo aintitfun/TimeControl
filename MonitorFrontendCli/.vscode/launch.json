@@ -11,7 +11,7 @@
             // If you have changed target frameworks, make sure to update the program path.
             "program": "${workspaceFolder}/bin/Debug/netcoreapp3.0/MonitorFrontendCli.dll",
             //"args": ["-stats","papa-ESPRIMO-P910","pruebamia11","12"],
-            "args": ["-listlogouts","DESKTOP-A221D85"],
+            "args": ["-addlogout","DESKTOP-A221D85","papa","11:11"],
             //"args": ["-remove","papa-ESPRIMO-P910","kk4"],
             //"args": ["-list","papa-ESPRIMO-P910"],
             "cwd": "${workspaceFolder}",

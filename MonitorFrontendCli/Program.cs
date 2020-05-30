@@ -57,7 +57,7 @@ namespace MonitorFrontendCli
                         break;
                         case "-addlogout":
                             socClient.Connect(args[1]);
-                            lap= socClient.SendMessage(null,args[3],0,(int) Command.stats);
+                            lap= socClient.SendMessage(null,args[2],System.Convert.ToInt32(args[3].Replace(":","")),(int) Command.addlogout);
                             foreach(AppsPersist a in lap){
                                 Console.WriteLine(a.username+" "+a.maxTime);
                             }

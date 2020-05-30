@@ -106,7 +106,7 @@ namespace Monitor
                             
                             SendMessage(lap,clientSocket);
                         
-                            logger.Log ($@"{DateTime.Now} [LIST]: Error listing apps ");
+                            logger.Log ($@"{DateTime.Now} [INFO]: Recieved Order to list apps ");
                         }
 
                         if (jsonResult.command==(int)Command.listlogouts)
@@ -116,7 +116,18 @@ namespace Monitor
                             
                             SendMessage(lap,clientSocket);
                         
-                            logger.Log ($@"{DateTime.Now} [LIST]: Error listing apps ");
+                            logger.Log ($@"{DateTime.Now} [INFO]: Recieved Order to list logouts ");
+                        }
+                        if (jsonResult.command==(int)Command.addlogout)
+                        {
+                            if (vSQL.AddLogout(jsonResult.username,jsonResult.maxTime))
+                                SendMessage(new List<AppsPersist>{ new AppsPersist($@"{DateTime.Now} [INFO]: Added logout {jsonResult.username} with {jsonResult.maxTime}","",0)},clientSocket);
+                            else 
+                            {
+                                SendMessage(new List<AppsPersist>{ new AppsPersist($@"{DateTime.Now} [ERROR]: adding logout {jsonResult.username} {jsonResult.maxTime}","",0)},clientSocket);
+                                logger.Log ($@"{DateTime.Now} [ERROR]: adding logout {jsonResult.username} {jsonResult.maxTime}");
+                            }
+                            
                         }
 
                         if (jsonResult.command==(int)Command.stats)

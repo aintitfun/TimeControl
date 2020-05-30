@@ -292,6 +292,27 @@ namespace Monitor
             }
         }
 
+        public bool AddLogout(string userName, int hour_min)
+        {
+            using (var conn = new NpgsqlConnection(connString))
+            {                
+                conn.Open();  
+                using (NpgsqlCommand cmd = new NpgsqlCommand($@"insert into logouts values ('{userName}',{hour_min});",conn))
+                {
+                    try
+                    {
+                        cmd.ExecuteNonQuery();
+                        return true;
+                    }
+                    catch (NpgsqlException e)
+                    {
+                        logger.Log($@"{DateTime.Now} [ERROR]: inserting logout for {userName}");
+                    }
+                    return false;
+                }
+            }
+        }
+
         /// <summary>
         /// This method updates or inserts the app on db.false Also updates the start and end Time
         /// </summary>
