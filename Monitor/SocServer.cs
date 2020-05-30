@@ -13,7 +13,8 @@ namespace Monitor
             list=3,
             stats=4,
             addlogout=5,
-            listlogouts=6
+            listlogouts=6,
+            removelogout=7
         }
     public class SocServer
     {
@@ -128,6 +129,16 @@ namespace Monitor
                                 logger.Log ($@"{DateTime.Now} [ERROR]: adding logout {jsonResult.username} {jsonResult.maxTime}");
                             }
                             
+                        }
+                        if (jsonResult.command==(int)Command.removelogout)
+                        {
+                            if (vSQL.RemoveLogout(jsonResult.username))
+                                SendMessage(new List<AppsPersist>{ new AppsPersist($@"{DateTime.Now} [INFO]: Removed logout {jsonResult.username}","",0)},clientSocket);
+                            else 
+                            {
+                                SendMessage(new List<AppsPersist>{ new AppsPersist($@"{DateTime.Now} [ERROR]: Removing logout {jsonResult.username}","",0)},clientSocket);
+                                logger.Log ($@"{DateTime.Now} [ERROR]: Removing logout {jsonResult.username}");
+                            }
                         }
 
                         if (jsonResult.command==(int)Command.stats)

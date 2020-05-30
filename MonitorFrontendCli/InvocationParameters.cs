@@ -16,6 +16,10 @@ namespace MonitorFrontendCli
             this.app=app;
             this.userName=userName;
         }
+        public InvocationParameters(string command, string  host, string userName) : this(command,host)
+        {
+            this.userName=userName;
+        }
         public InvocationParameters(string command, string  host){
             this.command=command;
             this.host=host;

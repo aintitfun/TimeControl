@@ -18,6 +18,8 @@ namespace MonitorFrontendCli
                         return new InvocationParameters(null,null);
                     case 2:
                         return ParseListStats(args[0],args[1]);
+                    case 3:
+                        return ParseRemoveLogout(args[0],args[1],args[2]);
                     case 4:
                         if (args[3].Contains(":"))
                             return ParseAddLogout(args[0],args[1],args[2],args[3]);
@@ -57,6 +59,11 @@ namespace MonitorFrontendCli
             return new InvocationParameters(command,host,userName,app,maxTime);
         }
 
+        public InvocationParameters ParseRemoveLogout(string command,string host, string userName)
+        {
+            return new InvocationParameters(command,host,userName);
+        }
+
         /// <summary>
         /// Check that command exists, also remove non used parameters
         /// </summary>
@@ -81,7 +88,8 @@ namespace MonitorFrontendCli
                     return RemoveArguments(2,ref args);
                     case "addlogout" :
                     return RemoveArguments(4,ref args);
-                 
+                    case "removelogout" :
+                    return RemoveArguments(3,ref args);
                 }
             }
 

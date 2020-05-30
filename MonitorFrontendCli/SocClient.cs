@@ -16,7 +16,8 @@ namespace MonitorFrontendCli
             list=3,
             stats=4,
             addlogout=5,
-            listlogouts=6
+            listlogouts=6,
+            removelogout=7
         }
     public class SocClient
     {
