@@ -32,16 +32,9 @@ namespace Monitor
         public void StartDatabase()
         {
             
-
-
-            //var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "../pgsql/bin/pg_ctl.exe", " -D ..\\..\\..\\..\\pgsql\\data start");
-            //var dbpath= Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "../pgsql/data/");
-            //Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName)
+            logger.Log ($@"{DateTime.Now} [INFO]: Trying to start postgres database");
             string path=System.Reflection.Assembly.GetEntryAssembly().Location.Replace("\\Monitor\\bin\\Debug\\netcoreapp3.0\\Monitor.dll","");
             Process.Start(path+"\\pgsql\\bin\\pg_ctl.exe","-D "+path+"\\pgsql\\data start");
-
-
-            //Process.Start(@"..\\..\\..\\..\\pgsql\\bin\\pg_ctl.exe", " -D ..\\..\\..\\..\\pgsql\\data start ");
         }
 
         /// <summary>
@@ -180,7 +173,7 @@ namespace Monitor
                     var results = processes_persist_old.Where(x => x.ProcessName == process.ProcessName && x.Id==process.Id);
                     if (results.Count()==0){
                         vSQLite.UpdateApp(process.ProcessName, process.User,process.Id);
-                        //logger.Log ($@"{DateTime.Now} [STARTED]: {process.ProcessName} {process.Id}");
+                        logger.Log ($@"{DateTime.Now} [STARTED]: {process.ProcessName} {process.Id}");
                     }
 
                 }

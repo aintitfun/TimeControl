@@ -22,3 +22,24 @@ select app,username,sum(coalesce(minutes,0))::integer from (
 
 
 										select * from logouts;
+
+
+
+
+select coalesce(sum(minutes)::integer,0) from(
+                                        select
+                                        extract (epoch from (coalesce(end_time, now()) - start_time))/60 as minutes
+                                        from daily_apps da where app ='RobloxPlayerBeta' and username='saray'
+                                        union all
+                                        select 
+                                        extract (epoch from (coalesce(end_time, now()) - start_time))/60 as minutes
+                                        from hist_apps da where app ='RobloxPlayerBeta' and username='saray' and start_time >date_trunc('day',now())
+                                    )t;
+
+select * from daily_apps where app ='RobloxPlayerBeta';
+select * from hist_apps where app ='RobloxPlayerBeta' and pid=9280;
+
+
+select * from daily_apps where app ='RobloxPlayerBeta' and username='saray';
+
+update daily_apps set start_time=now()-'2 hour'::interval where app ='RobloxPlayerBeta' and username='saray';

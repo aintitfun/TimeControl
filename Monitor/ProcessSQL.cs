@@ -232,7 +232,7 @@ namespace Monitor
                                         union all
                                         select 
                                         extract (epoch from (coalesce(end_time, now()) - start_time))/60 as minutes
-                                        from hist_apps da where app ='{strAppName}' and username='{strUser}' and start_time >now()
+                                        from hist_apps da where app ='{strAppName}' and username='{strUser}' and start_time >date_trunc('day',now())
                                     )t",conn))
                 {
                     NpgsqlDataReader dr;
