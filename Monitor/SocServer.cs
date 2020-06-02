@@ -64,12 +64,11 @@ namespace Monitor
                         if (jsonResult.command==(int)Command.add)
                         {
 
-                            if (!vSQL.AddApplication(jsonResult.app, jsonResult.username,jsonResult.maxTime))
-                                SendMessage(new List<AppsPersist>{ new AppsPersist("Unable to add app as db is busy, please retry...","",-1)},clientSocket);
+                            if (!vSQL.AddApplication(jsonResult.app, jsonResult.userName,jsonResult.maxTime))
+                                SendMessage(new List<AppsPersist>{ new AppsPersist($@"{DateTime.Now} [ERROR] Adding app {jsonResult.app} for {jsonResult.userName}","",-1)},clientSocket);
                             else
                                 SendMessage(new List<AppsPersist>{ new AppsPersist($@"{DateTime.Now} [ADDED]: app {jsonResult.app} to list","",0)},clientSocket);
                                 
-                                //logger.Log ($@"{DateTime.Now} [ADDED]: app {jsonResult.app} to list");
 
                         }
 
@@ -84,7 +83,6 @@ namespace Monitor
 
 
 
-                                    //logger.Log ($@"{DateTime.Now} [REMOVED]: app {jsonResult.app} from list");
                             }
                             
                             
@@ -98,7 +96,6 @@ namespace Monitor
                             
                             SendMessage(lap,clientSocket);
                         
-                            logger.Log ($@"{DateTime.Now} [INFO]: Recieved Order to list apps ");
                         }
 
                         if (jsonResult.command==(int)Command.listlogouts)
@@ -108,27 +105,24 @@ namespace Monitor
                             
                             SendMessage(lap,clientSocket);
                         
-                            logger.Log ($@"{DateTime.Now} [INFO]: Recieved Order to list logouts ");
                         }
                         if (jsonResult.command==(int)Command.addlogout)
                         {
-                            if (vSQL.AddLogout(jsonResult.username,jsonResult.maxTime))
-                                SendMessage(new List<AppsPersist>{ new AppsPersist($@"{DateTime.Now} [INFO]: Added logout {jsonResult.username} with {jsonResult.maxTime}","",0)},clientSocket);
+                            if (vSQL.AddLogout(jsonResult.userName,jsonResult.maxTime))
+                                SendMessage(new List<AppsPersist>{ new AppsPersist($@"{DateTime.Now} [INFO]: Added logout {jsonResult.userName} with {jsonResult.maxTime}","",0)},clientSocket);
                             else 
                             {
-                                SendMessage(new List<AppsPersist>{ new AppsPersist($@"{DateTime.Now} [ERROR]: adding logout {jsonResult.username} {jsonResult.maxTime}","",0)},clientSocket);
-                                logger.Log ($@"{DateTime.Now} [ERROR]: adding logout {jsonResult.username} {jsonResult.maxTime}");
+                                SendMessage(new List<AppsPersist>{ new AppsPersist($@"{DateTime.Now} [ERROR]: adding logout {jsonResult.userName} {jsonResult.maxTime}","",0)},clientSocket);
                             }
                             
                         }
                         if (jsonResult.command==(int)Command.removelogout)
                         {
-                            if (vSQL.RemoveLogout(jsonResult.username))
-                                SendMessage(new List<AppsPersist>{ new AppsPersist($@"{DateTime.Now} [INFO]: Removed logout {jsonResult.username}","",0)},clientSocket);
+                            if (vSQL.RemoveLogout(jsonResult.userName))
+                                SendMessage(new List<AppsPersist>{ new AppsPersist($@"{DateTime.Now} [INFO]: Removed logout {jsonResult.userName}","",0)},clientSocket);
                             else 
                             {
-                                SendMessage(new List<AppsPersist>{ new AppsPersist($@"{DateTime.Now} [ERROR]: Removing logout {jsonResult.username}","",0)},clientSocket);
-                                logger.Log ($@"{DateTime.Now} [ERROR]: Removing logout {jsonResult.username}");
+                                SendMessage(new List<AppsPersist>{ new AppsPersist($@"{DateTime.Now} [ERROR]: Removing logout {jsonResult.userName}","",0)},clientSocket);
                             }
                         }
 

@@ -5,12 +5,25 @@ using System.Text;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using Common;
+using System.Linq;
 
 
 namespace MonitorFrontendCli
 {
 
+/*
+static class Extensions
+{
 
+    public static bool In<T>(this T item, params T[] items)
+    {
+        if (items == null)
+            throw new ArgumentNullException("items");
+
+        return items.Contains(item);
+    }
+
+}*/
     public class SocClient
     {
 
@@ -42,7 +55,7 @@ namespace MonitorFrontendCli
             sender.Close();
         }
 
-        public List<AppsPersist> SendMessage(string app, string username,int maxTime, int command)
+        public List<AppsPersist> SendMessage(string app, string userName,int maxTime, int command)
         {
 
             try
@@ -51,7 +64,7 @@ namespace MonitorFrontendCli
                 message.app = app;
                 message.maxTime = maxTime;
                 message.command = command;
-                message.username = username;
+                message.userName = userName;
                 string mJSon = JsonConvert.SerializeObject(message);
 
 
@@ -59,81 +72,14 @@ namespace MonitorFrontendCli
                 byte[] messageSent = Encoding.ASCII.GetBytes(mJSon + "<EOF>");
                 int byteSent = sender.Send(messageSent);
 
-                if (message.command ==  (int) Command.add )
-                {
-
-                 
-                    byte[] messageReceived = new byte[10000];
-                    int byteRecv = sender.Receive(messageReceived);
-                    String data = Encoding.ASCII.GetString(messageReceived,
-                                                    0, byteRecv);
-
-                    
-                    List<AppsPersist> lap = JsonConvert.DeserializeObject<List<AppsPersist>>(data.Replace("<EOF>", ""));
-
-                    return lap;
-
-                }
-
-                if (message.command ==  (int) Command.remove )
-                {
-
-                 
-                    byte[] messageReceived = new byte[10000];
-                    int byteRecv = sender.Receive(messageReceived);
-                    String data = Encoding.ASCII.GetString(messageReceived,
-                                                    0, byteRecv);
-
-                    
-                    List<AppsPersist> lap = JsonConvert.DeserializeObject<List<AppsPersist>>(data.Replace("<EOF>", ""));
-
-                    return lap;
-
-                }
-
-                if (message.command ==  (int) Command.list )
-                {
-
-                 
-                    byte[] messageReceived = new byte[10000];
-                    int byteRecv = sender.Receive(messageReceived);
-                    String data = Encoding.ASCII.GetString(messageReceived,
-                                                    0, byteRecv);
-
-                    
-                    List<AppsPersist> lap = JsonConvert.DeserializeObject<List<AppsPersist>>(data.Replace("<EOF>", ""));
-
-                    return lap;
-
-                }
-
-                if (message.command == (int) Command.listlogouts)
-                {
+                //if (message.command.In((int)Command.add,(int) Command.remove,(int) Command.list,(int) Command.listlogouts, (int) Command.stats))
+                //{
                     byte[] messageReceived = new byte[10000];
                     int byteRecv = sender.Receive(messageReceived);
                     String data = Encoding.ASCII.GetString(messageReceived, 0, byteRecv);
-
-
                     List<AppsPersist> lap = JsonConvert.DeserializeObject<List<AppsPersist>>(data.Replace("<EOF>", ""));
-
                     return lap;
-
-
-                }
-
-                if (message.command == (int) Command.stats)
-                {
-                    byte[] messageReceived = new byte[1024];
-                    int byteRecv = sender.Receive(messageReceived);
-                    String data = Encoding.ASCII.GetString(messageReceived, 0, byteRecv);
-
-
-                    List<AppsPersist> lap = JsonConvert.DeserializeObject<List<AppsPersist>>(data.Replace("<EOF>", ""));
-
-                    return lap;
-
-
-                }
+                //}
                 return new List<AppsPersist>();
             }
             catch (ArgumentNullException ane)

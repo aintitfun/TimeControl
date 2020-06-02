@@ -4,7 +4,7 @@ namespace Common
     {        
         public int command;
         public string app;
-        public string username;
+        public string userName;
         public int maxTime;
         
 
@@ -12,10 +12,10 @@ namespace Common
         {
             
         }
-        public AppsPersist(string app,string username,int maxTime )
+        public AppsPersist(string app,string userName,int maxTime )
         {
             this.app= app;
-            this.username=username;
+            this.userName=userName;
             this.maxTime= maxTime;
         }
     }

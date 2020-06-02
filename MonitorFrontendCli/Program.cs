@@ -27,7 +27,7 @@ namespace MonitorFrontendCli
                             lap=socClient.SendMessage(args[2],args[3],System.Convert.ToInt32(args[4]),(int)Command.add);
                             socClient.Disconnect();
                             foreach(AppsPersist a in lap){
-                                Console.WriteLine(a.app+" "+a.maxTime);
+                                Console.WriteLine(a.app);
                             }
                         break;
                         case "-remove":
@@ -35,14 +35,14 @@ namespace MonitorFrontendCli
                             lap=socClient.SendMessage(args[2],args[3],0,(int)Command.remove);
                             socClient.Disconnect();
                             foreach(AppsPersist a in lap){
-                                Console.WriteLine(a.app+" "+a.maxTime);
+                                Console.WriteLine(a.app);
                             }
                         break;
                         case "-list":
                             socClient.Connect(args[1]);
                             lap= socClient.SendMessage("null","null",0,(int)Command.list);
                             foreach(AppsPersist a in lap){
-                                Console.WriteLine(a.app+" "+" "+a.username+" "+a.maxTime);
+                                Console.WriteLine(a.app+" "+" "+a.userName+" "+a.maxTime);
                             }
                             //Console.ReadLine();
                             socClient.Disconnect();
@@ -51,7 +51,7 @@ namespace MonitorFrontendCli
                             socClient.Connect(args[1]);
                             lap=socClient.SendMessage("null","null",0,(int) Command.stats);
                             foreach(AppsPersist a in lap){
-                                Console.WriteLine(a.app+" "+" "+a.username+" "+a.maxTime);
+                                Console.WriteLine(a.app+" "+" "+a.userName+" "+a.maxTime);
                             }
                             socClient.Disconnect();
                         break;
@@ -59,7 +59,7 @@ namespace MonitorFrontendCli
                             socClient.Connect(args[1]);
                             lap= socClient.SendMessage(null,args[2],System.Convert.ToInt32(args[3].Replace(":","")),(int) Command.addlogout);
                             foreach(AppsPersist a in lap){
-                                Console.WriteLine(a.username+" "+a.maxTime);
+                                Console.WriteLine(a.app);
                             }
                             socClient.Disconnect();
                         break;
@@ -69,7 +69,7 @@ namespace MonitorFrontendCli
                             string maxTimeTmp;
                             foreach(AppsPersist a in lap){
                                 maxTimeTmp=a.maxTime.ToString().PadLeft(4,'0');
-                                Console.WriteLine(a.username+" "+maxTimeTmp.Substring(0,2)+":"+maxTimeTmp.Substring(2,2));
+                                Console.WriteLine(a.userName+" "+maxTimeTmp.Substring(0,2)+":"+maxTimeTmp.Substring(2,2));
                             }
                             socClient.Disconnect();
                         break;

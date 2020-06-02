@@ -10,12 +10,13 @@
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
             "program": "${workspaceFolder}/bin/Debug/netcoreapp3.0/MonitorFrontendCli.dll",
-            //"args": ["-removelogout","DESKTOP-A221D85","papa"],
+            //"args": ["-removelogout","DESKTOP-A221D85","popo"],
             //"args": ["-stats","papa-ESPRIMO-P910","pruebamia11","12"],
-            //"args": ["-addlogout","DESKTOP-A221D85","papa","11:11"],
-            //"args": ["-remove","papa-ESPRIMO-P910","kk4"],
-            //"args": ["-list","papa-ESPRIMO-P910"],
-            "args": ["-listlogouts","DESKTOP-A221D85"],
+            //"args": ["-addlogout","DESKTOP-A221D85","popo","11:11"],
+            //"args": ["-remove","DESKTOP-A221D85","app","pepe"],
+            "args": ["-list","DESKTOP-A221D85"],
+            //"args": ["-listlogouts","DESKTOP-A221D85"],
+            //"args": ["-add","DESKTOP-A221D85","app","pepe","100"],
             "cwd": "${workspaceFolder}",
             // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
             "console": "internalConsole",

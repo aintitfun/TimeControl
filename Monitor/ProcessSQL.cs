@@ -45,7 +45,7 @@ namespace Monitor
                         " CREATE TABLE apps (name text , username text,max_time int, primary key (name,username)); " +
                         " CREATE TABLE daily_apps (pid int,app text,username text,start_time timestamp,end_time timestamp,primary key(pid, app));" +
                         " CREATE TABLE hist_apps (pid int,app text,username text,start_time timestamp,end_time timestamp);"+
-                        " create table logouts (username text , hour_min text);",vConn)){
+                        " create table logouts (username text primary key, hour_min text);",vConn)){
                     cmdCreate.ExecuteNonQuery();
                 }
                 
@@ -141,7 +141,7 @@ namespace Monitor
                             //logger.Log($@"{DateTime.Now} [LOCK]: {cmd.CommandText}");
                             return false;
                         }
-                        return true;
+                        return false;
                     }
                 }
             }
@@ -205,7 +205,7 @@ namespace Monitor
                     {
                         if (e.Message.Contains(Npgsql.PostgresErrorCodes.LockNotAvailable))
                         {
-                            logger.Log($@"{DateTime.Now} [LOCK]: {cmd.CommandText}");
+                            //logger.Log($@"{DateTime.Now} [LOCK]: {cmd.CommandText}");
                         }
                         return l;
 
@@ -306,7 +306,7 @@ namespace Monitor
                     }
                     catch (NpgsqlException e)
                     {
-                        logger.Log($@"{DateTime.Now} [ERROR]: inserting logout for {userName}");
+                        //logger.Log($@"{DateTime.Now} [ERROR]: inserting logout for {userName}");
                     }
                     return false;
                 }
@@ -326,7 +326,7 @@ namespace Monitor
                     }
                     catch (NpgsqlException e)
                     {
-                        logger.Log($@"{DateTime.Now} [ERROR]: Removing logout {userName}");
+                        //logger.Log($@"{DateTime.Now} [ERROR]: Removing logout {userName}");
                     }
                     return false;
                 }
@@ -355,7 +355,7 @@ namespace Monitor
                     {
                         if (e.Message.Contains(Npgsql.PostgresErrorCodes.LockNotAvailable))
                         {
-                            logger.Log($@"{DateTime.Now} [LOCK]: {cmd.CommandText}");
+                            //logger.Log($@"{DateTime.Now} [LOCK]: {cmd.CommandText}");
                             //return false;
                         }
                         using (NpgsqlCommand cmdUpd = new NpgsqlCommand($@"update daily_apps set end_time='{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}' where app='{strApp}' and pid={nPid}",conn))

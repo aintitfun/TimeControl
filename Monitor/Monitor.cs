@@ -188,16 +188,16 @@ namespace Monitor
                 List<AppsPersist> lap = vSQLite.GetApps();
                 
                 foreach (AppsPersist a in lap){
-                    if (vSQLite.GetActiveMinutes(a.app,a.username)>a.maxTime){
-                        foreach (Process process in Process.GetProcesses().Where(x => x.ProcessName==a.app && GetProcessUser(x)==a.username)){
-                            logger.Log($@"{DateTime.Now} [KILLING]: {process.ProcessName} {process.Id} {a.username}");
+                    if (vSQLite.GetActiveMinutes(a.app,a.userName)>a.maxTime){
+                        foreach (Process process in Process.GetProcesses().Where(x => x.ProcessName==a.app && GetProcessUser(x)==a.userName)){
+                            logger.Log($@"{DateTime.Now} [KILLING]: {process.ProcessName} {process.Id} {a.userName}");
                             try 
                             {
                                 process.Kill();
                             }
                             catch (Exception e)
                             {
-                                logger.Log($@"{DateTime.Now} [ERROR]: Unable to kill {process.ProcessName} {process.Id} {a.username}");
+                                logger.Log($@"{DateTime.Now} [ERROR]: Unable to kill {process.ProcessName} {process.Id} {a.userName}");
 
                             }
                             
