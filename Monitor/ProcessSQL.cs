@@ -101,7 +101,7 @@ namespace Monitor
         /// <summary>
         /// Adds on a processpersist object all the records from daily_apps table
         /// </summary>
-        /// <param name="p"></param>
+        /// <param name="p"></param>    
         public void GetDailyApps(ref List<ProcessesPersist> lp){
             using (var conn = new NpgsqlConnection(connString))
             {                
