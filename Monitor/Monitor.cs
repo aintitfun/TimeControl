@@ -32,9 +32,9 @@ namespace Monitor
         public void StartDatabase()
         {
             
-            logger.Log ($@"{DateTime.Now} [INFO]: Trying to start postgres database");
             string path=System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Monitor.dll","");
-            Process.Start(path+"\\pgsql\\bin\\pg_ctl.exe","-D "+path+"\\pgsql\\data start");
+            logger.Log ($@"{DateTime.Now} [INFO]: Trying to start postgres database on path: {path}");
+            Process.Start(path+"\\pgsql\\bin\\pg_ctl.exe","-D "+path+"\\pgsql\\data start -l "+path+"\\postgres.log ");
         }
 
         /// <summary>

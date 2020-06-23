@@ -84,10 +84,7 @@ namespace MonitorFrontendCli
                     }
                 }
                 else
-                {
                     Console.WriteLine("Error on parameters...");
-
-                }
                 
             }
             

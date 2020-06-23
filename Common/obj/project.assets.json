@@ -57,11 +57,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "f:\\Users\\papa\\Documents\\TimeControl\\Common\\Common.csproj",
+      "projectUniqueName": "F:\\Users\\papa\\Documents\\TimeControl\\Common\\Common.csproj",
       "projectName": "Common",
-      "projectPath": "f:\\Users\\papa\\Documents\\TimeControl\\Common\\Common.csproj",
+      "projectPath": "F:\\Users\\papa\\Documents\\TimeControl\\Common\\Common.csproj",
       "packagesPath": "C:\\Users\\papa\\.nuget\\packages\\",
-      "outputPath": "f:\\Users\\papa\\Documents\\TimeControl\\Common\\obj\\",
+      "outputPath": "F:\\Users\\papa\\Documents\\TimeControl\\Common\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\papa\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -122,7 +122,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100-preview.5.20279.10\\RuntimeIdentifierGraph.json"
       }
     }
   }
