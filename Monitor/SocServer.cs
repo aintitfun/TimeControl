@@ -76,13 +76,10 @@ namespace Monitor
                         {
                             if (jsonResult.app != "null")
                             {
-                                if (!vSQL.RemoveApplication(jsonResult.app))
+                                if (!vSQL.RemoveApplicationFromUser(jsonResult.app,jsonResult.userName))
                                     SendMessage(new List<AppsPersist>{ new AppsPersist("Unable to remove app as db is busy, please retry...","",-2)},clientSocket);
                                 else
-                                    SendMessage(new List<AppsPersist>{ new AppsPersist($@"{DateTime.Now} [REMOVED]: app {jsonResult.app} to list","",0)},clientSocket);
-
-
-
+                                    SendMessage(new List<AppsPersist>{ new AppsPersist($@"{DateTime.Now} [REMOVED]: app {jsonResult.app} from user {jsonResult.userName}","",0)},clientSocket);
                             }
                             
                             

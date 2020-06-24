@@ -151,14 +151,14 @@ namespace Monitor
         /// Remove app from the list of timed/disabled apps
         /// </summary>
         /// <param name="strAppName"></param>
-        public bool RemoveApplication(string strAppName)
+        public bool RemoveApplicationFromUser(string appName,string userName)
         {
 
 
             using (var conn = new NpgsqlConnection(connString))
             {                
                 conn.Open();  
-                using (NpgsqlCommand cmd = new NpgsqlCommand($@"delete from apps where name ='{strAppName}'",conn))
+                using (NpgsqlCommand cmd = new NpgsqlCommand($@"delete from apps where name ='{appName}' and username='{userName}'",conn))
                 {
                 try
                     {
