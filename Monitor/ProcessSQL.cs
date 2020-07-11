@@ -35,22 +35,20 @@ namespace Monitor
                 }
                                 
                 //cmd.CommandText = $@"select count(*) from pg_tables where tablename like '%app%'";
-                if (AppTables > 3)
-                    return;
+                //if (AppTables > 3)
+                //    return;
                 
-                using (NpgsqlCommand cmdCreate = new NpgsqlCommand("drop table if exists  apps; " +
-                        " drop table if exists  daily_apps; " +
-                        " drop table if exists  hist_apps; " +
-                        " drop table if exists  logouts; " +
-                        " CREATE TABLE apps (name text , username text,max_time int, primary key (name,username)); " +
-                        " CREATE TABLE daily_apps (pid int,app text,username text,start_time timestamp,end_time timestamp,primary key(pid, app));" +
-                        " CREATE TABLE hist_apps (pid int,app text,username text,start_time timestamp,end_time timestamp);"+
-                        " create table logouts (username text primary key, hour_min text);",vConn)){
+                using (NpgsqlCommand cmdCreate = new NpgsqlCommand(
+                        " CREATE TABLE if not exists apps (name text , username text,max_time int, primary key (name,username)); " +
+                        " CREATE TABLE if not exists daily_apps (pid int,app text,username text,start_time timestamp,end_time timestamp,primary key(pid, app));" +
+                        " CREATE TABLE if not exists hist_apps (pid int,app text,username text,start_time timestamp,end_time timestamp);"+
+                        " create table if not exists logouts (username text primary key, hour_min text);"+
+                        " create table if not exists logins (username text primary key, hour_min text);"+
+                        " create table if not exists logoutsnow (username text primary key, hour_min text);"+
+                        " truncate logoutsnow;",vConn)){
                     cmdCreate.ExecuteNonQuery();
                 }
-                
             }
-
         }
 
         /// <summary>
@@ -291,7 +289,24 @@ namespace Monitor
                 }
             }
         }
+        public List<AppsPersist> GetConfiguredLogins()
+        {
+            
+            List<AppsPersist> lap=new List<AppsPersist>();
 
+            using (var conn = new NpgsqlConnection(connString))
+            {                
+                conn.Open();  
+                using (NpgsqlCommand cmd = new NpgsqlCommand($@"select username,hour_min from logins;",conn))
+                {
+                    NpgsqlDataReader dr;
+                    dr = cmd.ExecuteReader();
+                    while (dr.Read())
+                        lap.Add(new AppsPersist(null,dr.GetString(0),System.Convert.ToInt32(dr.GetString(1))));
+                    return lap;
+                }
+            }
+        }
         public bool AddLogout(string userName, int hour_min)
         {
             using (var conn = new NpgsqlConnection(connString))
@@ -312,12 +327,72 @@ namespace Monitor
                 }
             }
         }
+        public bool AddLogoutNow(string userName)
+        {
+            using (var conn = new NpgsqlConnection(connString))
+            {                
+                conn.Open();  
+                using (NpgsqlCommand cmd = new NpgsqlCommand($@"insert into logoutsnow values ('{userName}',(lpad(date_part('hour',now())::text,2,'0')||lpad(date_part('minute',now())::text,2,'0'))::integer );",conn))
+                {
+                    try
+                    {
+                        cmd.ExecuteNonQuery();
+                        return true;
+                    }
+                    catch (NpgsqlException e)
+                    {
+                        //logger.Log($@"{DateTime.Now} [ERROR]: inserting logout for {userName}");
+                    }
+                    return false;
+                }
+            }
+        }
+        public bool AddLogin(string userName, int hour_min)
+        {
+            using (var conn = new NpgsqlConnection(connString))
+            {                
+                conn.Open();  
+                using (NpgsqlCommand cmd = new NpgsqlCommand($@"insert into logins values ('{userName}',{hour_min});",conn))
+                {
+                    try
+                    {
+                        cmd.ExecuteNonQuery();
+                        return true;
+                    }
+                    catch (NpgsqlException e)
+                    {
+                        //logger.Log($@"{DateTime.Now} [ERROR]: inserting logout for {userName}");
+                    }
+                    return false;
+                }
+            }
+        }
         public bool RemoveLogout(string userName)
         {
             using (var conn = new NpgsqlConnection(connString))
             {                
                 conn.Open();  
                 using (NpgsqlCommand cmd = new NpgsqlCommand($@"delete from logouts where username ='{userName}';",conn))
+                {
+                    try
+                    {
+                        cmd.ExecuteNonQuery();
+                        return true;
+                    }
+                    catch (NpgsqlException e)
+                    {
+                        //logger.Log($@"{DateTime.Now} [ERROR]: Removing logout {userName}");
+                    }
+                    return false;
+                }
+            }
+        }
+        public bool RemoveLogin(string userName)
+        {
+            using (var conn = new NpgsqlConnection(connString))
+            {                
+                conn.Open();  
+                using (NpgsqlCommand cmd = new NpgsqlCommand($@"delete from logins where username ='{userName}';",conn))
                 {
                     try
                     {
@@ -370,6 +445,7 @@ namespace Monitor
         public List<string> GetUsersToLogOut()
         {
             List<string> usersToLogOut=new List<string>();
+            //users on time > than logout
             using (var vConn = new NpgsqlConnection(connString))
             {
                 vConn.Open();
@@ -380,9 +456,36 @@ namespace Monitor
                     dr = cmd.ExecuteReader();
                     while (dr.Read())
                         usersToLogOut.Add(dr.GetString(0));
-                    return usersToLogOut;
                 }
             }
+            //users on time < than login time
+            using (var vConn = new NpgsqlConnection(connString))
+            {
+            vConn.Open();
+            using (NpgsqlCommand cmd = new NpgsqlCommand($@"select username from logins "+
+                    " where now()<date_trunc('day',now() )+(substring(hour_min from 1 for 2)||' hour')::interval+(substring(hour_min from 3 for 2)||' minutes')::interval;",vConn))
+                {
+                    NpgsqlDataReader dr;
+                    dr = cmd.ExecuteReader();
+                    while (dr.Read())
+                        usersToLogOut.Add(dr.GetString(0));
+                }
+            }
+            //users to logoutnow
+            using (var vConn = new NpgsqlConnection(connString))
+            {
+            vConn.Open();
+            using (NpgsqlCommand cmd = new NpgsqlCommand($@"select username from logoutsnow "+
+                    " where now()>date_trunc('day',now() )+(substring(hour_min from 1 for 2)||' hour')::interval+(substring(hour_min from 3 for 2)||' minutes')::interval;",vConn))
+                {
+                    NpgsqlDataReader dr;
+                    dr = cmd.ExecuteReader();
+                    while (dr.Read())
+                        usersToLogOut.Add(dr.GetString(0));
+                }
+            }
+
+            return usersToLogOut;
         }
     }
 }

@@ -55,14 +55,14 @@ static class Extensions
             sender.Close();
         }
 
-        public List<AppsPersist> SendMessage(string app, string userName,int maxTime, int command)
+        public List<AppsPersist> SendMessage(string app, string userName,int time, int command)
         {
 
             try
             {
                 AppsPersist message = new AppsPersist();
                 message.app = app;
-                message.maxTime = maxTime;
+                message.time = time;
                 message.command = command;
                 message.userName = userName;
                 string mJSon = JsonConvert.SerializeObject(message);

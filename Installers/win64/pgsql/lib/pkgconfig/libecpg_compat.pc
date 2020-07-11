@@ -1,9 +1,0 @@
-Name: libecpg_compat
-Description: PostgreSQL libecpg_compat library
-Url: http://www.postgresql.org/
-Version: 13devel
-Requires: 
-Requires.private: libecpg libpgtypes
-Cflags: -I/f/pgsql/include
-Libs: -L/f/pgsql/lib -lecpg_compat
-Libs.private:  -lm

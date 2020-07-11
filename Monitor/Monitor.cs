@@ -188,7 +188,7 @@ namespace Monitor
                 List<AppsPersist> lap = vSQLite.GetApps();
                 
                 foreach (AppsPersist a in lap){
-                    if (vSQLite.GetActiveMinutes(a.app,a.userName)>a.maxTime){
+                    if (vSQLite.GetActiveMinutes(a.app,a.userName)>a.time){
                         foreach (Process process in Process.GetProcesses().Where(x => x.ProcessName==a.app && GetProcessUser(x)==a.userName)){
                             logger.Log($@"{DateTime.Now} [KILLING]: {process.ProcessName} {process.Id} {a.userName}");
                             try 
