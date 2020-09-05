@@ -14,4 +14,6 @@ icacls %mypath% /grant SYSTEM:(OI)(CI)F /T
 "%mypath%\nssm" set TimeControl Type SERVICE_INTERACTIVE_PROCESS
 "%mypath%\nssm" set TimeControl ObjectName LocalSystem
 
+aspnetcore-runtime-3.0.0-win-x64.exe
+
 Pause TimeControl installed. Press a key ...
