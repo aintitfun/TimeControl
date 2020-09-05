@@ -14,10 +14,26 @@ namespace Monitor
         {
 
         }
+
+        /// <summary>
+        /// Returns the first valid InterNetwork interface to bind to a local network ip
+        /// </summary>
+        /// <returns></returns>
+        public static IPAddress GetLocalIPAddress()
+        {
+            var host = Dns.GetHostEntry(Dns.GetHostName());
+            foreach (var ip in host.AddressList)
+            {
+                if (ip.AddressFamily == AddressFamily.InterNetwork)
+                {
+                    return ip;
+                }
+            }
+            throw new Exception("No network adapters with an IPv4 address in the system!");
+        }
         public void CreateServer()
         {
-            IPHostEntry ipHost = Dns.GetHostEntry(Dns.GetHostName());
-            IPAddress ipAddr = ipHost.AddressList[0];
+            IPAddress ipAddr = GetLocalIPAddress();
             IPEndPoint localEndPoint = new IPEndPoint(ipAddr, 20100);
 
             Socket listener = new Socket(ipAddr.AddressFamily,

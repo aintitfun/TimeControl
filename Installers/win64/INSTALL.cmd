@@ -5,6 +5,8 @@ tar -xf "%mypath%pgsql.zip" -C "%mypath% "
 
 icacls %mypath% /grant SYSTEM:(OI)(CI)F /T
 
+"%mypath%\nssm" remove TimeControl"
+
 "%mypath%\nssm" install TimeControl "%mypath%Monitor.exe"
 "%mypath%\nssm" set TimeControl AppDirectory "%mypath% "
 "%mypath%\nssm" set TimeControl DisplayName TimeControl
