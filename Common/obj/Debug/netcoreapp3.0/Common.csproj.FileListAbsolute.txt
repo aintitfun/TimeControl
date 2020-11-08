@@ -32,3 +32,12 @@ F:\Users\papa\Documents\TimeControl\Common\obj\Debug\netcoreapp3.0\Common.Assemb
 F:\Users\papa\Documents\TimeControl\Common\obj\Debug\netcoreapp3.0\Common.AssemblyInfo.cs
 F:\Users\papa\Documents\TimeControl\Common\obj\Debug\netcoreapp3.0\Common.dll
 F:\Users\papa\Documents\TimeControl\Common\obj\Debug\netcoreapp3.0\Common.pdb
+C:\Users\papa\Documents\TimeControl\Common\bin\Debug\netcoreapp3.0\Common.deps.json
+C:\Users\papa\Documents\TimeControl\Common\bin\Debug\netcoreapp3.0\Common.dll
+C:\Users\papa\Documents\TimeControl\Common\bin\Debug\netcoreapp3.0\Common.pdb
+C:\Users\papa\Documents\TimeControl\Common\obj\Debug\netcoreapp3.0\Common.csprojAssemblyReference.cache
+C:\Users\papa\Documents\TimeControl\Common\obj\Debug\netcoreapp3.0\Common.AssemblyInfoInputs.cache
+C:\Users\papa\Documents\TimeControl\Common\obj\Debug\netcoreapp3.0\Common.AssemblyInfo.cs
+C:\Users\papa\Documents\TimeControl\Common\obj\Debug\netcoreapp3.0\Common.csproj.CoreCompileInputs.cache
+C:\Users\papa\Documents\TimeControl\Common\obj\Debug\netcoreapp3.0\Common.dll
+C:\Users\papa\Documents\TimeControl\Common\obj\Debug\netcoreapp3.0\Common.pdb

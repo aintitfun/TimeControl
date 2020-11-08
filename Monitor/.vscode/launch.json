@@ -16,7 +16,7 @@
             "name": ".NET Core Attach",
             "type": "coreclr",
             "request": "attach",
-            //"processId": "${command:pickProcess}",
+            //"processId": "15484",
             "processName": "Monitor.exe"
         }
     ]

@@ -1,0 +1,19 @@
+@page "/ListApps"
+@using BlazorServer.Data
+@inject SocClient socClient
+
+<h1>Counter</h1>
+
+<button class="btn btn-primary" @onclick="ListAllApps">Show apps</button>
+
+@code {
+    private int currentCount = 0;
+    
+    private void ListAllApps()
+    {
+        socClient.Connect("DESKTOP-3T3SQ7S");
+        
+        List<Common.AppsPersist> lap=socClient.SendMessage(null,null,0,(int)Common.Command.list);
+        
+    }
+}
