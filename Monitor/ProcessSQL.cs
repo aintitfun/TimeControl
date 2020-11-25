@@ -219,7 +219,7 @@ namespace Monitor
         /// </summary>
         /// <param name="strAppName"></param>
         /// <returns></returns>
-        public int GetActiveMinutes(string strAppName, string strUser){
+        public int GetActiveTimeByAppAndUser(string strAppName, string strUser){
 
             using (var conn = new NpgsqlConnection(connString))
             {                
@@ -271,33 +271,23 @@ namespace Monitor
                 }
             }
         }
-        public List<AppsPersist> GetUsersLogonTimeUsage(){
+        public List<AppsPersist> GetActiveTimeByUser(){
 
             List<AppsPersist> lap=new List<AppsPersist>();
 
             using (var conn = new NpgsqlConnection(connString))
             {                
                 conn.Open();  
-                using (NpgsqlCommand cmd = new NpgsqlCommand($@"select username,sum(coalesce(minutes,0))::integer from (
-	                                        select username,
-	                                        extract(epoch from (coalesce(end_time, now()) - start_time))/60 as minutes 
-                                            from daily_apps
-											where app='svchost'
- 	                                        union all
-	                                        select username,
-	                                        extract(epoch from (coalesce(end_time, now()) - start_time))/ 60 as minutes 
-                                            from hist_apps where start_time > now()
-											and app='svchost'
-                                        )t
-                                        group by username;",conn))
+                using (NpgsqlCommand cmd = new NpgsqlCommand($@"select username from login_time_granted ltg 
+                    where minutes_for_username(username)>max_time;",conn))
                 {
                     NpgsqlDataReader dr;
                     dr = cmd.ExecuteReader();
                     while (dr.Read())
-                        lap.Add(new AppsPersist(null,dr.GetString(0),dr.GetInt32(1)));
-                    return lap;
+                        lap.Add(new AppsPersist(null,dr.GetString(0),0));
                 }
             }
+            return lap;
         }
         public List<AppsPersist> GetConfiguredLogouts()
         {
@@ -513,20 +503,9 @@ namespace Monitor
                 }
             }
             //users that consumed all their time
-            foreach (AppsPersist appPersist in GetUsersLogonTimeUsage()){
-                using (var vConn = new NpgsqlConnection(connString))
-                {
-                vConn.Open();
-                using (NpgsqlCommand cmd = new NpgsqlCommand($@"select username from login_time_granted where username='{appPersist.userName}' and max_time<{appPersist.time};",vConn))
-                    {
-                        NpgsqlDataReader dr;
-                        dr = cmd.ExecuteReader();
-                        while (dr.Read())
-                            usersToLogOut.Add(dr.GetString(0));
-                    }
-                }
-            }
-
+            foreach (AppsPersist appPersist in GetActiveTimeByUser())
+                usersToLogOut.Add(appPersist.userName);
+            
             return usersToLogOut;
         }
     }
