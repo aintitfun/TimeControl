@@ -144,6 +144,39 @@
         }
       },
       {
+        "HashCode": -1595930437,
+        "Kind": "Components.Component",
+        "Name": "BlazorServer.Pages.ListApps",
+        "AssemblyName": "BlazorServer",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "ListApps"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorServer.Pages.ListApps"
+        }
+      },
+      {
+        "HashCode": 221597661,
+        "Kind": "Components.Component",
+        "Name": "BlazorServer.Pages.ListApps",
+        "AssemblyName": "BlazorServer",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "BlazorServer.Pages.ListApps"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorServer.Pages.ListApps",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
         "HashCode": -963094403,
         "Kind": "Components.Component",
         "Name": "BlazorServer.Shared.MainLayout",
