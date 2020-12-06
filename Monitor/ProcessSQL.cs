@@ -49,6 +49,70 @@ namespace Monitor
                         " truncate logoutsnow;",vConn)){
                     cmdCreate.ExecuteNonQuery();
                 }
+                using (NpgsqlCommand cmdCreate = new NpgsqlCommand(
+                       @"CREATE OR REPLACE FUNCTION minutes_for_username (username_ text) 
+                        RETURNS INT AS $$
+                    DECLARE
+                        min_start_time timestamp;
+                        cnt int;
+                        i int;
+                    begin
+                        drop table if exists temp_minutes;
+                        create temporary table temp_minutes (minute int);
+                        --hora minima de la primera aplicacion abierta por el usuario
+                        select min(start_time) into min_start_time from (
+                            select min(start_time) as start_time from daily_apps da  where username=username_
+                            union all
+                            select min(start_time) as start_time from hist_apps ha where start_time >date_trunc('day',now()) and username=username_
+                        )t;
+                        -- iter by all the minutes starting from the min_start_time
+                        for i in 1..(
+                            SELECT abs((DATE_PART('day', min_start_time::timestamp - now()::timestamp) * 24 + 
+                                DATE_PART('hour', min_start_time::timestamp - now()::timestamp)) * 60 +
+                                DATE_PART('minute', min_start_time::timestamp - now()::timestamp)
+                        ))::int loop
+                            select count(*) into cnt from ( 
+                                select * from daily_apps where username=username_ 
+                                    and (min_start_time+ ( i||' minutes')::interval) >=start_time
+                                    and (min_start_time+ ( i||' minutes')::interval) <=end_time
+                                    and end_time is not null
+                                union all 
+                                select * from hist_apps where username=username_ 
+                                    and (min_start_time+ ( i||' minutes')::interval) >=start_time
+                                    and (min_start_time+ ( i||' minutes')::interval) <=end_time
+                                    and end_time is not null 
+                                    and start_time >date_trunc('day',now())
+                                    )t;
+                            if cnt>0 THEN
+                                insert into temp_minutes values (i);
+                                continue;
+                            end if;
+                            select count(*) into cnt from (
+                                select * from daily_apps where username=username_ 
+                                    and (min_start_time+ ( i||' minutes')::interval) >=start_time
+                                    and (min_start_time+ ( i||' minutes')::interval) <=now()
+                                    and end_time is null
+                                union all
+                                select * from hist_apps where username=username_ 
+                                    and (min_start_time+ ( i||' minutes')::interval) >=start_time
+                                    and (min_start_time+ ( i||' minutes')::interval) <=now()
+                                    and end_time is null 
+                                    and start_time >date_trunc('day',now())
+                            )t;
+                            if cnt>0 THEN
+                                insert into temp_minutes values (i);
+                                continue;
+                            end if;
+                        end loop;
+                        select count(*) into cnt from temp_minutes;
+                        return cnt;
+                    exception
+                    when others then
+                        return 0;
+                    END;
+                    $$ LANGUAGE plpgsql;",vConn)){
+                    cmdCreate.ExecuteNonQuery();
+                }
             }
         }
 
