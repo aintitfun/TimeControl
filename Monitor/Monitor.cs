@@ -12,7 +12,7 @@ namespace Monitor
 {
     public class Monitor
     {
-        ProcessSQL vSQLite = new ProcessSQL();
+        ProcessSQL vSQL = new ProcessSQL();
         //test comment
         Logger logger=new Logger();
         public List<ProcessesPersist> processes_persist_old = new List<ProcessesPersist>();
@@ -42,12 +42,24 @@ namespace Monitor
             }
         }
 
+       private static string GetProcessUser(Process process) 
+        {
+            
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
+                return GetProcessUserWindows(process);
+            }
+            else 
+            {
+                return GetProcessUserLinux(process);
+            }
+        }
         /// <summary>
         /// Get the owner of a process
         /// </summary>
         /// <param name="processId"></param>
         /// <returns></returns>    
-        private static string GetProcessUser(Process process)
+        private static string GetProcessUserWindows(Process process)
         {
             IntPtr processHandle = IntPtr.Zero;
             try
@@ -69,6 +81,31 @@ namespace Monitor
                 }
             }
         }
+       private static string GetProcessUserLinux(Process process)
+        {
+            //Process bashCall=Process.Start("/usr/bin/ps", $@"-p {process.Id} -o euser | tail -1");
+            var proc = new Process 
+            {
+                StartInfo = new ProcessStartInfo
+                {
+                    FileName = "ps",
+                    Arguments = $@"-p {process.Id} -o euser",
+                    UseShellExecute = false,
+                    RedirectStandardOutput = true,
+                    CreateNoWindow = true
+                }
+            };
+
+            proc.Start();
+            string line="";
+            while (!proc.StandardOutput.EndOfStream)
+            {
+                line = proc.StandardOutput.ReadLine();
+            }
+
+            return line;
+        }
+
 
         [DllImport("advapi32.dll", SetLastError = true)]
         private static extern bool OpenProcessToken(IntPtr ProcessHandle, uint DesiredAccess, out IntPtr TokenHandle);
@@ -104,7 +141,7 @@ namespace Monitor
         /// </summary>
         public void PopulateOldProcessSnapshot(){
             processes_persist_old.Clear();
-            vSQLite.GetDailyApps(ref processes_persist_old);
+            vSQL.GetDailyApps(ref processes_persist_old);
         }
 
             const int WTS_CURRENT_SESSION = -1;
@@ -114,7 +151,7 @@ namespace Monitor
         /// </summary>
         public void CheckShutdowns()
         {
-        /*    if (vSQLite.GetShutdownTime()>0)
+        /*    if (vSQL.GetShutdownTime()>0)
             {
                 var psi = new ProcessStartInfo("shutdown","/s /t 0");
                 psi.CreateNoWindow = true;
@@ -123,11 +160,7 @@ namespace Monitor
                 Process.Start(psi);
              }*/
 
-            
-            //string username=System.Security.Principal.WindowsIdentity.GetCurrent().Name;
-            //username=username.Replace(System.Net.Dns.GetHostName()+"\\","");
-            
-            foreach(string username in vSQLite.GetUsersToLogOut())
+            foreach(string username in vSQL.GetUsersToLogOut())
             {
                 int sessionid=HasOpenSessionUser(username);
                 if (sessionid>-1)
@@ -158,7 +191,7 @@ namespace Monitor
                 {
                     var results = processes_persist.Where(x => x.ProcessName == process.ProcessName && x.Id==process.Id);
                     if (results.Count()==0){
-                        vSQLite.UpdateApp(process.ProcessName, process.User, process.Id);
+                        vSQL.UpdateApp(process.ProcessName, process.User, process.Id);
                         logger.Log ($@"{DateTime.Now} [CLOSED]: {process.ProcessName} {process.Id}");
                     }
 
@@ -177,7 +210,7 @@ namespace Monitor
                     //var results =  Array.FindAll(processes.ProcessName, s => s.Equals(process.ProcessName));
                     var results = processes_persist_old.Where(x => x.ProcessName == process.ProcessName && x.Id==process.Id);
                     if (results.Count()==0){
-                        vSQLite.UpdateApp(process.ProcessName, process.User,process.Id);
+                        vSQL.UpdateApp(process.ProcessName, process.User,process.Id);
                         logger.Log ($@"{DateTime.Now} [STARTED]: {process.ProcessName} {process.Id}");
                     }
 
@@ -190,11 +223,11 @@ namespace Monitor
             nCycleCount++;
             if (nCycleCount>5){
                 nCycleCount=0;
-                List<AppsPersist> lap = vSQLite.GetApps();
+                List<AppsPersist> lap = vSQL.GetApps();
                 
                 foreach (AppsPersist a in lap){
-                    if (vSQLite.GetActiveTimeByAppAndUser(a.app,a.userName)>a.time){
-                        foreach (Process process in Process.GetProcesses().Where(x => x.ProcessName==a.app && GetProcessUser(x)==a.userName)){
+                    if (vSQL.GetActiveTimeByAppAndUser(a.app,a.userName)>a.time){
+                        foreach (Process process in Process.GetProcesses().Where(x => x.ProcessName==a.app && GetProcessUserWindows(x)==a.userName)){
                             logger.Log($@"{DateTime.Now} [KILLING]: {process.ProcessName} {process.Id} {a.userName}");
                             try 
                             {
