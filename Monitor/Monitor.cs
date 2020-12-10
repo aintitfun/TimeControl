@@ -106,7 +106,6 @@ namespace Monitor
             return line;
         }
 
-
         [DllImport("advapi32.dll", SetLastError = true)]
         private static extern bool OpenProcessToken(IntPtr ProcessHandle, uint DesiredAccess, out IntPtr TokenHandle);
         [DllImport("kernel32.dll", SetLastError = true)]
@@ -162,10 +161,26 @@ namespace Monitor
 
             foreach(string username in vSQL.GetUsersToLogOut())
             {
-                int sessionid=HasOpenSessionUser(username);
-                if (sessionid>-1)
-                    if (!WTSDisconnectSession(WTS_CURRENT_SERVER_HANDLE,sessionid, false))
-                        logger.Log ($@"{DateTime.Now} [ERROR]: Forcing Logout {username}");
+                int sessionid=0;
+                if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                {
+                    sessionid=HasOpenSessionUserWindows(username);
+                }
+                else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+                {
+                }
+                if (sessionid>-1){
+                    if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                    {
+                        if (!WTSDisconnectSession(WTS_CURRENT_SERVER_HANDLE,sessionid, false))
+                            logger.Log ($@"{DateTime.Now} [ERROR]: Forcing Logout {username}");
+                    } 
+                    else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+                    {
+                        Process.Start ("/usr/bin/kill",$@"-p {sessionid}");
+                    }
+ 
+                }
             }
         }
         [DllImport("wtsapi32.dll", SetLastError = true)]
@@ -317,7 +332,7 @@ namespace Monitor
             WTSInit
             }
 
-            public int HasOpenSessionUser(string username)
+            public int HasOpenSessionUserWindows(string username)
             {
             string serverName=Environment.MachineName;
             IntPtr serverHandle = IntPtr.Zero;
