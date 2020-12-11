@@ -83,7 +83,6 @@ namespace Monitor
         }
        private static string GetProcessUserLinux(Process process)
         {
-            //Process bashCall=Process.Start("/usr/bin/ps", $@"-p {process.Id} -o euser | tail -1");
             var proc = new Process 
             {
                 StartInfo = new ProcessStartInfo
@@ -168,6 +167,7 @@ namespace Monitor
                 }
                 else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
                 {
+                    sessionid=HasOpenSessionUserLinux(username);
                 }
                 if (sessionid>-1){
                     if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
@@ -332,6 +332,30 @@ namespace Monitor
             WTSInit
             }
 
+            public int HasOpenSessionUserLinux(string username)
+            {
+                var proc = new Process 
+                {
+                    StartInfo = new ProcessStartInfo
+                    {
+                        FileName = "who",
+                        Arguments = $@"-u",
+                        UseShellExecute = false,
+                        RedirectStandardOutput = true,
+                        CreateNoWindow = true
+                    }
+                };
+
+                proc.Start();
+                string line="";
+                while (!proc.StandardOutput.EndOfStream)
+                {
+                    line = proc.StandardOutput.ReadLine();
+                    if (line.Substring(0,line.IndexOf(" "))==username)
+                        return int.Parse(line.Substring(line.LastIndexOf(" ")));
+                }
+                return -1;
+            }
             public int HasOpenSessionUserWindows(string username)
             {
             string serverName=Environment.MachineName;
@@ -378,10 +402,7 @@ namespace Monitor
                 WTSCloseServer(serverHandle);
             }
             return sessionid;
-
         }
-            
-        
     }
 
     /// <summary>
