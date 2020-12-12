@@ -177,7 +177,8 @@ namespace Monitor
                     } 
                     else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
                     {
-                        Process.Start ("/usr/bin/kill",$@"-p {sessionid}");
+                        Process.Start ("/usr/bin/skill",$@"-STOP -u {username}");
+                        logger.Log ($@"{DateTime.Now} [ERROR]: Forcing Logout linux session for {username}");
                     }
  
                 }
@@ -352,7 +353,11 @@ namespace Monitor
                 {
                     line = proc.StandardOutput.ReadLine();
                     if (line.Substring(0,line.IndexOf(" "))==username)
-                        return int.Parse(line.Substring(line.LastIndexOf(" ")));
+                    {
+                        string lineWitoutLastWord=line.Substring(0,line.LastIndexOf(" "));
+                        return int.Parse(lineWitoutLastWord.Substring(lineWitoutLastWord.LastIndexOf(" ")));
+
+                    }
                 }
                 return -1;
             }
