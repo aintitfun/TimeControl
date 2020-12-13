@@ -44,29 +44,18 @@ namespace Monitor
 
             try
             {
-
-
                 listener.Bind(localEndPoint);
-
                 listener.Listen(10);
-
                 while (true)
                 {
                     Console.WriteLine("Waiting connection ... ");
-
-
                     Socket clientSocket = listener.Accept();
-
                     Console.WriteLine("se han conectado");
-
                     byte[] bytes = new Byte[10000];
                     string data = null;
-
                     while (true)
                     {
-
                         int numByte = clientSocket.Receive(bytes);
-
                         data += Encoding.ASCII.GetString(bytes,
                                                    0, numByte);
                         Console.WriteLine(data);
@@ -173,6 +162,40 @@ namespace Monitor
                             else 
                             {
                                 SendMessage(new List<AppsPersist>{ new AppsPersist($@"{DateTime.Now} [ERROR]: Removing login {jsonResult.userName}","",0)},clientSocket);
+                            }
+                        }
+                        if (jsonResult.command==(int)Command.addactivetime)
+                        {
+                            if (vSQL.AddActiveTime(jsonResult.userName, jsonResult.time))
+                                SendMessage(new List<AppsPersist>{ new AppsPersist($@"{DateTime.Now} [INFO]: Added Active Time {jsonResult.userName}","",0)},clientSocket);
+                            else 
+                            {
+                                SendMessage(new List<AppsPersist>{ new AppsPersist($@"{DateTime.Now} [ERROR]: Adding Active Time {jsonResult.userName}","",0)},clientSocket);
+                            }
+                        }
+                        if (jsonResult.command==(int)Command.listactivetime)
+                        {
+                            
+                            List<AppsPersist> lap=new List<AppsPersist>();
+                            lap = vSQL.ListActiveTime();
+                            
+                            SendMessage(lap,clientSocket);
+
+                           /* 
+                            if (vSQL.ListActiveTime())
+                                SendMessage(new List<AppsPersist>{ new AppsPersist($@"{DateTime.Now} [INFO]: Added Active Time {jsonResult.userName}","",0)},clientSocket);
+                            else 
+                            {
+                                SendMessage(new List<AppsPersist>{ new AppsPersist($@"{DateTime.Now} [ERROR]: Adding Active Time {jsonResult.userName}","",0)},clientSocket);
+                            }*/
+                        }
+                        if (jsonResult.command==(int)Command.removeactivetime)
+                        {
+                            if (vSQL.RemoveActiveTime(jsonResult.userName))
+                                SendMessage(new List<AppsPersist>{ new AppsPersist($@"{DateTime.Now} [INFO]: Removed active time for {jsonResult.userName}","",0)},clientSocket);
+                            else 
+                            {
+                                SendMessage(new List<AppsPersist>{ new AppsPersist($@"{DateTime.Now} [ERROR]: Removing active time for {jsonResult.userName}","",0)},clientSocket);
                             }
                         }
                         if (jsonResult.command==(int)Command.stats)

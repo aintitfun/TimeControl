@@ -113,6 +113,32 @@ namespace MonitorFrontendCli
                             }
                             socClient.Disconnect();
                         break;
+                        case "-addactivetime":
+                            socClient.Connect(args[1]);
+                            lap=socClient.SendMessage("null",args[2],System.Convert.ToInt32(args[3]),(int)Command.addactivetime);
+                            socClient.Disconnect();
+                            foreach(AppsPersist a in lap){
+                                Console.WriteLine(a.app);
+                            }
+                        break;
+                        case "-removeactivetime":
+                            socClient.Connect(args[1]);
+                            lap=socClient.SendMessage("null",args[2],0,(int)Command.removeactivetime);
+                            socClient.Disconnect();
+                            foreach(AppsPersist a in lap){
+                                Console.WriteLine(a.app);
+                            }
+                        break;
+                        case "-listactivetime":
+                            socClient.Connect(args[1]);
+                            lap=socClient.SendMessage("null","null",0,(int)Command.listactivetime);
+                            socClient.Disconnect();
+                            foreach(AppsPersist a in lap){
+                                Console.WriteLine(a.userName+" "+a.time);
+                            }
+                        break;
+
+
                     }
                 }
                 else

@@ -11,7 +11,9 @@ namespace Common
             addlogin=8,
             removelogin=9,
             listlogins=10,
-            addlogoutnow=11
-
+            addlogoutnow=11,
+            addactivetime=12,
+            removeactivetime=13,
+            listactivetime=14
         }
 }

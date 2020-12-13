@@ -489,6 +489,64 @@ namespace Monitor
                 }
             }
         }
+        public bool RemoveActiveTime(string userName)
+        {
+            using (var conn = new NpgsqlConnection(connString))
+            {                
+                conn.Open();  
+                using (NpgsqlCommand cmd = new NpgsqlCommand($@"delete from login_time_granted where username ='{userName}';",conn))
+                {
+                    try
+                    {
+                        cmd.ExecuteNonQuery();
+                        return true;
+                    }
+                    catch (NpgsqlException e)
+                    {
+                        //logger.Log($@"{DateTime.Now} [ERROR]: Removing logout {userName}");
+                    }
+                    return false;
+                }
+            }
+        }
+        public bool AddActiveTime(string userName, int maxTime)
+        {
+            using (var conn = new NpgsqlConnection(connString))
+            {                
+                conn.Open();  
+                using (NpgsqlCommand cmd = new NpgsqlCommand($@"insert into login_time_granted values ('{userName}',{maxTime})",conn))
+                {
+                    try
+                    {
+                        cmd.ExecuteNonQuery();
+                        return true;
+                    }
+                    catch (NpgsqlException e)
+                    {
+                        //logger.Log($@"{DateTime.Now} [ERROR]: Removing logout {userName}");
+                    }
+                    return false;
+                }
+            }
+        }
+        public List<AppsPersist> ListActiveTime()
+        {
+            
+            List<AppsPersist> lap=new List<AppsPersist>();
+
+            using (var conn = new NpgsqlConnection(connString))
+            {                
+                conn.Open();  
+                using (NpgsqlCommand cmd = new NpgsqlCommand($@"select username,max_time from login_time_granted;",conn))
+                {
+                    NpgsqlDataReader dr;
+                    dr = cmd.ExecuteReader();
+                    while (dr.Read())
+                        lap.Add(new AppsPersist(null,dr.GetString(0),dr.GetInt32(1)));
+                    return lap;
+                }
+            }
+        }
         /// <summary>
         /// This method updates or inserts the app on db.false Also updates the start and end Time
         /// </summary>

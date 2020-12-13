@@ -25,6 +25,9 @@ namespace MonitorFrontendCli
                             return ParseRemoveLogin(args[0],args[1],args[2]);
                         if (args[0]=="-addlogoutnow")
                             return ParseAddLogoutNow(args[0],args[1],args[2]);
+                        if (args[0]=="-removeactivetime")
+                            return ParseRemoveActiveTime(args[0],args[1],args[2]);
+
                         break;
                     case 4:
                         if (args[3].Contains(":"))
@@ -35,12 +38,16 @@ namespace MonitorFrontendCli
                                 return ParseAddLogin(args[0],args[1],args[2],args[3]);
                         }
                         else
-                            return ParseRemove(args[0],args[1],args[2],args[3]);
+                        {
+                            if (args[0]=="-remove")
+                                return ParseRemove(args[0],args[1],args[2],args[3]);
+                            if (args[0]=="-addactivetime")
+                                return ParseAddActiveTime(args[0],args[1],args[2],System.Convert.ToInt32(args[3]));
+                        }
+
                         break;
                     case 5:
                         return ParseAdd(args[0],args[1],args[2],args[3],System.Convert.ToInt32(args[4]));
-
-               
                 }
 
             } 
@@ -88,7 +95,14 @@ namespace MonitorFrontendCli
         {
             return new InvocationParameters(command,host,userName);
         }
-
+        public InvocationParameters ParseAddActiveTime(string command,string host, string userName, int maxTime)
+        {
+            return new InvocationParameters(command,host,userName,maxTime);
+        }
+        public InvocationParameters ParseRemoveActiveTime(string command,string host, string userName)
+        {
+            return new InvocationParameters(command,host,userName);
+        }
         /// <summary>
         /// Check that command exists, also remove non used parameters
         /// </summary>
@@ -123,6 +137,13 @@ namespace MonitorFrontendCli
                     return RemoveArguments(3,ref args);
                     case "addlogoutnow" :
                     return RemoveArguments(3,ref args);
+                    case "addactivetime" :
+                    return RemoveArguments(4,ref args);
+                    case "removeactivetime" :
+                    return RemoveArguments(3,ref args);
+                    case "listactivetime" :
+                    return RemoveArguments(2,ref args);
+
                 }
             }
 

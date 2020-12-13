@@ -173,12 +173,12 @@ namespace Monitor
                     if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                     {
                         if (!WTSDisconnectSession(WTS_CURRENT_SERVER_HANDLE,sessionid, false))
-                            logger.Log ($@"{DateTime.Now} [ERROR]: Forcing Logout {username}");
+                            logger.Log ($@"{DateTime.Now} [ERROR]: Forcing Logout windows session {username}");
                     } 
                     else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
                     {
-                        Process.Start ("/usr/bin/skill",$@"-STOP -u {username}");
-                        logger.Log ($@"{DateTime.Now} [ERROR]: Forcing Logout linux session for {username}");
+                        Process.Start ("/usr/bin/kill",$@"-p {sessionid}");
+                        logger.Log ($@"{DateTime.Now} [ERROR]: Forcing Logout linux session {username}");
                     }
  
                 }
