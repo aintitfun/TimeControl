@@ -26,23 +26,14 @@ namespace Monitor
         }
         public void CheckAndRecreateTables()
         {
-            int AppTables;
             using (var vConn = new NpgsqlConnection(connString)){
                 vConn.Open();
-                using (NpgsqlCommand cmd = new NpgsqlCommand("select count(*) from pg_tables where tablename like '%app%'",vConn))
-                {
-                    AppTables=System.Convert.ToInt32(cmd.ExecuteScalar());
-                }
                                 
-                //cmd.CommandText = $@"select count(*) from pg_tables where tablename like '%app%'";
-                //if (AppTables > 3)
-                //    return;
-                
                 using (NpgsqlCommand cmdCreate = new NpgsqlCommand(
                         " CREATE TABLE if not exists apps (name text , username text,max_time int, primary key (name,username)); " +
                         " CREATE TABLE if not exists daily_apps (pid int,app text,username text,start_time timestamp,end_time timestamp,primary key(pid, app));" +
                         " CREATE TABLE if not exists hist_apps (pid int,app text,username text,start_time timestamp,end_time timestamp);"+
-                        " create table if not exists login_time_granted (username text primary key, max_time int);"+
+                        " create table if not exists activetime (username text primary key, max_time int);"+
                         " create table if not exists logouts (username text primary key, hour_min text);"+
                         " create table if not exists logins (username text primary key, hour_min text);"+
                         " create table if not exists logoutsnow (username text primary key, hour_min text);"+
@@ -342,7 +333,7 @@ namespace Monitor
             using (var conn = new NpgsqlConnection(connString))
             {                
                 conn.Open();  
-                using (NpgsqlCommand cmd = new NpgsqlCommand($@"select username from login_time_granted ltg 
+                using (NpgsqlCommand cmd = new NpgsqlCommand($@"select username from activetime 
                     where minutes_for_username(username)>max_time;",conn))
                 {
                     NpgsqlDataReader dr;
@@ -494,7 +485,7 @@ namespace Monitor
             using (var conn = new NpgsqlConnection(connString))
             {                
                 conn.Open();  
-                using (NpgsqlCommand cmd = new NpgsqlCommand($@"delete from login_time_granted where username ='{userName}';",conn))
+                using (NpgsqlCommand cmd = new NpgsqlCommand($@"delete from activetime where username ='{userName}';",conn))
                 {
                     try
                     {
@@ -514,7 +505,7 @@ namespace Monitor
             using (var conn = new NpgsqlConnection(connString))
             {                
                 conn.Open();  
-                using (NpgsqlCommand cmd = new NpgsqlCommand($@"insert into login_time_granted values ('{userName}',{maxTime})",conn))
+                using (NpgsqlCommand cmd = new NpgsqlCommand($@"insert into activetime values ('{userName}',{maxTime})",conn))
                 {
                     try
                     {
@@ -537,7 +528,7 @@ namespace Monitor
             using (var conn = new NpgsqlConnection(connString))
             {                
                 conn.Open();  
-                using (NpgsqlCommand cmd = new NpgsqlCommand($@"select username,max_time from login_time_granted;",conn))
+                using (NpgsqlCommand cmd = new NpgsqlCommand($@"select username,max_time from activetime;",conn))
                 {
                     NpgsqlDataReader dr;
                     dr = cmd.ExecuteReader();
