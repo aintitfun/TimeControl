@@ -78,7 +78,7 @@ static class Extensions
                     int byteRecv = sender.Receive(messageReceived);
                     String data = Encoding.ASCII.GetString(messageReceived, 0, byteRecv);
                     List<AppsPersist> lap = JsonConvert.DeserializeObject<List<AppsPersist>>(data.Replace("<EOF>", ""));
-                    return lap;
+                    return lap; 
                 //}
                 return new List<AppsPersist>();
             }
