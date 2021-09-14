@@ -1,4 +1,4 @@
-namespace Common
+namespace TimeControl.Common
 {
     public class AppsPersist 
     {        

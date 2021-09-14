@@ -3,9 +3,10 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using Newtonsoft.Json;
-using Common;
+using TimeControl.Common;
 using System.Collections.Generic;
-namespace Monitor
+
+namespace TimeControl.Monitor
 {
     public class SocServer
     {
@@ -66,7 +67,7 @@ namespace Monitor
 
                         var jsonResult = JsonConvert.DeserializeObject<AppsPersist>(data.Replace("<EOF>",""));
 
-                        if (jsonResult.command==(int)Command.add)
+                        if (jsonResult.command==(int)Command.addapp)
                         {
 
                             if (!vSQL.AddApplication(jsonResult.app, jsonResult.userName,jsonResult.time))
@@ -77,7 +78,7 @@ namespace Monitor
 
                         }
 
-                        if (jsonResult.command==(int)Command.remove)
+                        if (jsonResult.command==(int)Command.removeapp)
                         {
                             if (jsonResult.app != "null")
                             {
@@ -91,7 +92,7 @@ namespace Monitor
 
                         }
 
-                        if (jsonResult.command==(int)Command.list)
+                        if (jsonResult.command==(int)Command.listapps)
                         {
                             List<AppsPersist> lap=new List<AppsPersist>();
                             lap = vSQL.GetApps();

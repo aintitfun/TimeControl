@@ -1,8 +1,8 @@
 ﻿using System;
-using Common;
+using TimeControl.Common;
 using System.Collections.Generic;
 
-namespace MonitorFrontendCli
+namespace TimeControl.MonitorFrontendCli
 {
     class Program
     {
@@ -20,25 +20,25 @@ namespace MonitorFrontendCli
                 {
                     switch (invocationParameters.command)
                     {
-                        case "-add":
+                        case "-addapp":
                             socClient.Connect(args[1]);
-                            lap=socClient.SendMessage(args[2],args[3],System.Convert.ToInt32(args[4]),(int)Command.add);
+                            lap=socClient.SendMessage(args[2],args[3],System.Convert.ToInt32(args[4]),(int)Command.addapp);
                             socClient.Disconnect();
                             foreach(AppsPersist a in lap){
                                 Console.WriteLine(a.app);
                             }
                         break;
-                        case "-remove":
+                        case "-removeapp":
                             socClient.Connect(args[1]);
-                            lap=socClient.SendMessage(args[2],args[3],0,(int)Command.remove);
+                            lap=socClient.SendMessage(args[2],args[3],0,(int)Command.removeapp);
                             socClient.Disconnect();
                             foreach(AppsPersist a in lap){
                                 Console.WriteLine(a.app);
                             }
                         break;
-                        case "-list":
+                        case "-listapps":
                             socClient.Connect(args[1]);
-                            lap= socClient.SendMessage("null","null",0,(int)Command.list);
+                            lap= socClient.SendMessage("null","null",0,(int)Command.listapps);
                             foreach(AppsPersist a in lap){
                                 Console.WriteLine(a.app+" "+" "+a.userName+" "+a.time);
                             }

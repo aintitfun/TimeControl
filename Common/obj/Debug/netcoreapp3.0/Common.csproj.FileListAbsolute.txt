@@ -41,3 +41,12 @@ C:\Users\papa\Documents\TimeControl\Common\obj\Debug\netcoreapp3.0\Common.Assemb
 C:\Users\papa\Documents\TimeControl\Common\obj\Debug\netcoreapp3.0\Common.csproj.CoreCompileInputs.cache
 C:\Users\papa\Documents\TimeControl\Common\obj\Debug\netcoreapp3.0\Common.dll
 C:\Users\papa\Documents\TimeControl\Common\obj\Debug\netcoreapp3.0\Common.pdb
+C:\Users\opolo\Documents\fuentes\TimeControl\Common\bin\Debug\netcoreapp3.0\Common.deps.json
+C:\Users\opolo\Documents\fuentes\TimeControl\Common\bin\Debug\netcoreapp3.0\Common.dll
+C:\Users\opolo\Documents\fuentes\TimeControl\Common\bin\Debug\netcoreapp3.0\Common.pdb
+C:\Users\opolo\Documents\fuentes\TimeControl\Common\obj\Debug\netcoreapp3.0\Common.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\opolo\Documents\fuentes\TimeControl\Common\obj\Debug\netcoreapp3.0\Common.AssemblyInfoInputs.cache
+C:\Users\opolo\Documents\fuentes\TimeControl\Common\obj\Debug\netcoreapp3.0\Common.AssemblyInfo.cs
+C:\Users\opolo\Documents\fuentes\TimeControl\Common\obj\Debug\netcoreapp3.0\Common.csproj.CoreCompileInputs.cache
+C:\Users\opolo\Documents\fuentes\TimeControl\Common\obj\Debug\netcoreapp3.0\Common.dll
+C:\Users\opolo\Documents\fuentes\TimeControl\Common\obj\Debug\netcoreapp3.0\Common.pdb

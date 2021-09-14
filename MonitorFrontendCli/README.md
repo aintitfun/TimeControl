@@ -6,15 +6,15 @@ This is the CLI part. Note that MonitorFrontendCli binary needs Common.dll
 
 Examples:
 
-        MonitorFrontendCli -list myserver
+        MonitorFrontendCli -listapps myserver
 
 List apps on the monitor installed on myserver for each user
 
-        MonitorFrontendCli -add myserver myapp john 120
+        MonitorFrontendCli -addapp myserver myapp john 120
 
 Grants to execute 120 minutes per day to myapp application on myserver to john
   
-        MonitorFrontendCli -remove myserver myapp john
+        MonitorFrontendCli -removeapp myserver myapp john
 
 Removes myapp policy from John user. So myapp could be run by John with unlimited time
   

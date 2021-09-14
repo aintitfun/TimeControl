@@ -10,9 +10,9 @@ using Npgsql;
 using System.Data;
 using System.Text.RegularExpressions;
 using System.Globalization;
-using Common;
+using TimeControl.Common;
 
-namespace Monitor
+namespace TimeControl.Monitor
 {
     class ProcessSQL
     {

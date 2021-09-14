@@ -1,7 +1,7 @@
 using System.IO;
 using System;
 
-namespace Common
+namespace TimeControl.Common
 {
     public class Logger
     {

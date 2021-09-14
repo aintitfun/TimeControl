@@ -4,11 +4,11 @@ using System.Net.Sockets;
 using System.Text;
 using Newtonsoft.Json;
 using System.Collections.Generic;
-using Common;
+using TimeControl.Common;
 using System.Linq;
 
 
-namespace MonitorFrontendCli
+namespace TimeControl.MonitorFrontendCli
 {
 
 /*
@@ -72,7 +72,7 @@ static class Extensions
                 byte[] messageSent = Encoding.ASCII.GetBytes(mJSon + "<EOF>");
                 int byteSent = sender.Send(messageSent);
 
-                //if (message.command.In((int)Command.add,(int) Command.remove,(int) Command.list,(int) Command.listlogouts, (int) Command.stats))
+                //if (message.command.In((int)Command.add,(int) Command.removeapp,(int) Command.list,(int) Command.listlogouts, (int) Command.stats))
                 //{
                     byte[] messageReceived = new byte[10000];
                     int byteRecv = sender.Receive(messageReceived);

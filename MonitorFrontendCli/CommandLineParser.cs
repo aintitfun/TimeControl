@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
 
-namespace MonitorFrontendCli
+namespace TimeControl.MonitorFrontendCli
 {
     /// <summary>
     /// This class should return a InvocationParameter object null in case of some error
@@ -39,7 +39,7 @@ namespace MonitorFrontendCli
                         }
                         else
                         {
-                            if (args[0]=="-remove")
+                            if (args[0]=="-removeapp")
                                 return ParseRemove(args[0],args[1],args[2],args[3]);
                             if (args[0]=="-addactivetime")
                                 return ParseAddActiveTime(args[0],args[1],args[2],System.Convert.ToInt32(args[3]));
@@ -115,13 +115,13 @@ namespace MonitorFrontendCli
             {
                 switch(inCommand.Substring(1))
                 {
-                    case "add":
+                    case "addapp":
                     return RemoveArguments(5,ref args);
-                    case "list" :
+                    case "listapps" :
                     return RemoveArguments(2,ref args);
                     case "stats":
                     return RemoveArguments(2,ref args);
-                    case "remove":
+                    case "removeapp":
                     return RemoveArguments(4,ref args);
                     case "listlogouts" :
                     return RemoveArguments(2,ref args);

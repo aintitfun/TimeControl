@@ -3,12 +3,12 @@ using System;
 using System.Diagnostics;
 using System.Linq;
 using System.Collections.Generic;
-using Common;
+using TimeControl.Common;
 using System.IO;
 using System.Security.Principal ;
 using System.Runtime.InteropServices;
 
-namespace Monitor
+namespace TimeControl.Monitor
 {
     public class Monitor
     {

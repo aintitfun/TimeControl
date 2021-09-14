@@ -1,4 +1,4 @@
-namespace MonitorFrontendCli
+namespace TimeControl.MonitorFrontendCli
 {
     public class InvocationParameters
     {

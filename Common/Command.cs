@@ -1,9 +1,9 @@
-namespace Common
+namespace TimeControl.Common
 {
             public enum Command {
-            add=1,
-            remove=2,
-            list=3,
+            addapp=1,
+            removeapp=2,
+            listapps=3,
             stats=4,
             addlogout=5,
             listlogouts=6,

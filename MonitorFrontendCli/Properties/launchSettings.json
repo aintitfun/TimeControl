@@ -2,7 +2,7 @@
   "profiles": {
     "MonitorFrontendCli": {
       "commandName": "Project",
-      "commandLineArgs": "-add DESKTOP-686AOHF kk2 123"
+      "commandLineArgs": "-addapp DESKTOP-686AOHF kk2 123"
     }
   }
 }
