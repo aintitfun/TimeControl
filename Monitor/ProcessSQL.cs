@@ -30,12 +30,12 @@ namespace TimeControl.Monitor
                 vConn.Open();
                                 
                 using (NpgsqlCommand cmdCreate = new NpgsqlCommand(
-                        " CREATE TABLE if not exists apps (name text , username text,max_time int, primary key (name,username)); " +
+                        " CREATE TABLE if not exists apps (name text , username text,max_time int, day_of_the_week text, primary key (name,username)); " +
                         " CREATE TABLE if not exists daily_apps (pid int,app text,username text,start_time timestamp,end_time timestamp,primary key(pid, app));" +
                         " CREATE TABLE if not exists hist_apps (pid int,app text,username text,start_time timestamp,end_time timestamp);"+
-                        " create table if not exists activetime (username text primary key, max_time int);"+
-                        " create table if not exists logouts (username text primary key, hour_min text);"+
-                        " create table if not exists logins (username text primary key, hour_min text);"+
+                        " create table if not exists activetime (username text primary key, max_time int, day_of_the_week text);" +
+                        " create table if not exists logouts (username text primary key, hour_min text, day_of_the_week text);"+
+                        " create table if not exists logins (username text primary key, hour_min text, day_of_the_week text);" +
                         " create table if not exists logoutsnow (username text primary key, hour_min text);"+
                         " comment on table apps is 'List of rules between apps & users'; "+
                         " comment on table daily_apps is 'Tracking of the start-end apps executed from the last start of Monitor';"+
