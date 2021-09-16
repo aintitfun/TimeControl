@@ -7,9 +7,11 @@ namespace TimeControl.MonitorFrontendCli
         public string app;
         public int maxTime;
         public string userName;
-        public InvocationParameters(string command, string  host, string userName,string app, int maxTime) : this(command,  host, userName,app)
+        public string dayOfTheWeek;
+        public InvocationParameters(string command, string  host, string userName,string app, int maxTime, string dayOfTheWeek) : this(command,  host, userName,app)
         {
             this.maxTime=maxTime;
+            this.dayOfTheWeek = dayOfTheWeek;
         }
         public InvocationParameters(string command, string  host, string userName,string app) : this(command,host)
         {
@@ -29,5 +31,6 @@ namespace TimeControl.MonitorFrontendCli
             this.userName=userName;
             this.maxTime=maxTime;
         }
+
     }
 }

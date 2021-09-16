@@ -242,16 +242,17 @@ namespace TimeControl.Monitor
                 List<AppsPersist> lap = vSQL.GetApps();
                 
                 foreach (AppsPersist a in lap){
-                    if (vSQL.GetActiveTimeByAppAndUser(a.app,a.userName)>a.time){
-                        foreach (Process process in Process.GetProcesses().Where(x => x.ProcessName==a.app && GetProcessUserWindows(x)==a.userName)){
-                            logger.Log($@"{DateTime.Now} [KILLING]: {process.ProcessName} {process.Id} {a.userName}");
+                    if (vSQL.GetActiveTimeByAppAndUser(a._app,a._userName)>a._time && a._dayOfTheWeek.ToLower()==DateTime.Today.DayOfWeek.ToString().ToLower())
+                    {
+                        foreach (Process process in Process.GetProcesses().Where(x => x.ProcessName==a._app && GetProcessUserWindows(x)==a._userName)){
+                            logger.Log($@"{DateTime.Now} [KILLING]: {process.ProcessName} {process.Id} {a._userName}");
                             try 
                             {
                                 process.Kill();
                             }
                             catch (Exception e)
                             {
-                                logger.Log($@"{DateTime.Now} [ERROR]: Unable to kill {process.ProcessName} {process.Id} {a.userName}");
+                                logger.Log($@"{DateTime.Now} [ERROR]: Unable to kill {process.ProcessName} {process.Id} {a._userName}");
 
                             }
                             

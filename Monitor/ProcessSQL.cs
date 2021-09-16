@@ -37,6 +37,13 @@ namespace TimeControl.Monitor
                         " create table if not exists logouts (username text primary key, hour_min text);"+
                         " create table if not exists logins (username text primary key, hour_min text);"+
                         " create table if not exists logoutsnow (username text primary key, hour_min text);"+
+                        " comment on table apps is 'List of rules between apps & users'; "+
+                        " comment on table daily_apps is 'Tracking of the start-end apps executed from the last start of Monitor';"+
+                        " comment on table hist_apps is 'Historic of daily_apps table';"+
+                        " comment on table activetime is 'Screen time granted to an user';"+
+                        " comment on table logins is 'Time when user can start to spend his Screen time';"+
+                        " comment on table logouts is 'Last time when user can enjoy his Screen Time';"+
+                        " comment on table logoutsnow is 'To force a user to quit now';"+
                         " truncate logoutsnow;",vConn)){
                     cmdCreate.ExecuteNonQuery();
                 }
@@ -176,12 +183,12 @@ namespace TimeControl.Monitor
         /// </summary>
         /// <param name="strAppName"></param>
         /// <param name="nMaxTime"></param>
-        public bool AddApplication(string strAppName, string userName,int nMaxTime)
+        public bool AddApplication(string strAppName, string userName,int nMaxTime,string dayOfTheWeek)
         {
             using (var conn = new NpgsqlConnection(connString))
             {                
                 conn.Open();  
-                using (NpgsqlCommand cmd = new NpgsqlCommand($@"insert into apps (name,username,max_time) values ('{strAppName}','{userName}','{nMaxTime}')",conn))
+                using (NpgsqlCommand cmd = new NpgsqlCommand($@"insert into apps (name,username,max_time,day_of_the_week) values ('{strAppName}','{userName}','{nMaxTime}','{dayOfTheWeek}')",conn))
                 {
                     try
                     {
@@ -244,7 +251,7 @@ namespace TimeControl.Monitor
             using (var conn = new NpgsqlConnection(connString))
             {                
                 conn.Open();  
-                using (NpgsqlCommand cmd = new NpgsqlCommand("select name,username, max_time from apps",conn))
+                using (NpgsqlCommand cmd = new NpgsqlCommand("select name,username, max_time,day_of_the_week from apps",conn))
                 {
                     NpgsqlDataReader dr;
                     try
@@ -252,7 +259,7 @@ namespace TimeControl.Monitor
                         dr = cmd.ExecuteReader();
                         while (dr.Read())
                         {
-                            l.Add(new AppsPersist(dr.GetString(0), dr.GetString(1), dr.GetInt32(2) ));
+                            l.Add(new AppsPersist(dr.GetString(0), dr.GetString(1), dr.GetInt32(2), dr.GetString(3)));
                         }
                     }
                     catch (NpgsqlException e)
@@ -321,7 +328,7 @@ namespace TimeControl.Monitor
                     NpgsqlDataReader dr;
                     dr = cmd.ExecuteReader();
                     while (dr.Read())
-                        lap.Add(new AppsPersist(dr.GetString(0),dr.GetString(1),dr.GetInt32(2)));
+                        lap.Add(new AppsPersist(dr.GetString(0),dr.GetString(1),dr.GetInt32(2), dr.GetString(3)));
                     return lap;
                 }
             }
@@ -333,13 +340,13 @@ namespace TimeControl.Monitor
             using (var conn = new NpgsqlConnection(connString))
             {                
                 conn.Open();  
-                using (NpgsqlCommand cmd = new NpgsqlCommand($@"select username from activetime 
+                using (NpgsqlCommand cmd = new NpgsqlCommand($@"select username,day_of_the_week from activetime 
                     where minutes_for_username(username)>max_time;",conn))
                 {
                     NpgsqlDataReader dr;
                     dr = cmd.ExecuteReader();
                     while (dr.Read())
-                        lap.Add(new AppsPersist(null,dr.GetString(0),0));
+                        lap.Add(new AppsPersist(null,dr.GetString(0),0, dr.GetString(1)));
                 }
             }
             return lap;
@@ -352,12 +359,12 @@ namespace TimeControl.Monitor
             using (var conn = new NpgsqlConnection(connString))
             {                
                 conn.Open();  
-                using (NpgsqlCommand cmd = new NpgsqlCommand($@"select username,hour_min from logouts;",conn))
+                using (NpgsqlCommand cmd = new NpgsqlCommand($@"select username,hour_min, day_of_the_week from logouts;",conn))
                 {
                     NpgsqlDataReader dr;
                     dr = cmd.ExecuteReader();
                     while (dr.Read())
-                        lap.Add(new AppsPersist(null,dr.GetString(0),System.Convert.ToInt32(dr.GetString(1))));
+                        lap.Add(new AppsPersist(null,dr.GetString(0),System.Convert.ToInt32(dr.GetString(1)), dr.GetString(2)));
                     return lap;
                 }
             }
@@ -370,22 +377,22 @@ namespace TimeControl.Monitor
             using (var conn = new NpgsqlConnection(connString))
             {                
                 conn.Open();  
-                using (NpgsqlCommand cmd = new NpgsqlCommand($@"select username,hour_min from logins;",conn))
+                using (NpgsqlCommand cmd = new NpgsqlCommand($@"select username,hour_min, day_of_the_week from logins;",conn))
                 {
                     NpgsqlDataReader dr;
                     dr = cmd.ExecuteReader();
                     while (dr.Read())
-                        lap.Add(new AppsPersist(null,dr.GetString(0),System.Convert.ToInt32(dr.GetString(1))));
+                        lap.Add(new AppsPersist(null,dr.GetString(0),System.Convert.ToInt32(dr.GetString(1)), dr.GetString(2)));
                     return lap;
                 }
             }
         }
-        public bool AddLogout(string userName, int hour_min)
+        public bool AddLogout(string userName, int hour_min, string dayOfTheWeek)
         {
             using (var conn = new NpgsqlConnection(connString))
             {                
                 conn.Open();  
-                using (NpgsqlCommand cmd = new NpgsqlCommand($@"insert into logouts values ('{userName}',{hour_min});",conn))
+                using (NpgsqlCommand cmd = new NpgsqlCommand($@"insert into logouts values ('{userName}',{hour_min},'{dayOfTheWeek}');",conn))
                 {
                     try
                     {
@@ -420,12 +427,12 @@ namespace TimeControl.Monitor
                 }
             }
         }
-        public bool AddLogin(string userName, int hour_min)
+        public bool AddLogin(string userName, int hour_min, string dayOfTheWeek)
         {
             using (var conn = new NpgsqlConnection(connString))
             {                
                 conn.Open();  
-                using (NpgsqlCommand cmd = new NpgsqlCommand($@"insert into logins values ('{userName}',{hour_min});",conn))
+                using (NpgsqlCommand cmd = new NpgsqlCommand($@"insert into logins values ('{userName}',{hour_min},'{dayOfTheWeek}');",conn))
                 {
                     try
                     {
@@ -500,12 +507,12 @@ namespace TimeControl.Monitor
                 }
             }
         }
-        public bool AddActiveTime(string userName, int maxTime)
+        public bool AddActiveTime(string userName, int maxTime, string dayOfTheWeek)
         {
             using (var conn = new NpgsqlConnection(connString))
             {                
                 conn.Open();  
-                using (NpgsqlCommand cmd = new NpgsqlCommand($@"insert into activetime values ('{userName}',{maxTime})",conn))
+                using (NpgsqlCommand cmd = new NpgsqlCommand($@"insert into activetime values ('{userName}',{maxTime},'{dayOfTheWeek}')",conn))
                 {
                     try
                     {
@@ -528,12 +535,12 @@ namespace TimeControl.Monitor
             using (var conn = new NpgsqlConnection(connString))
             {                
                 conn.Open();  
-                using (NpgsqlCommand cmd = new NpgsqlCommand($@"select username,max_time from activetime;",conn))
+                using (NpgsqlCommand cmd = new NpgsqlCommand($@"select username,max_time,day_of_the_week from activetime;",conn))
                 {
                     NpgsqlDataReader dr;
                     dr = cmd.ExecuteReader();
                     while (dr.Read())
-                        lap.Add(new AppsPersist(null,dr.GetString(0),dr.GetInt32(1)));
+                        lap.Add(new AppsPersist(null,dr.GetString(0),dr.GetInt32(1), dr.GetString(2)));
                     return lap;
                 }
             }
@@ -580,8 +587,9 @@ namespace TimeControl.Monitor
             using (var vConn = new NpgsqlConnection(connString))
             {
                 vConn.Open();
-                using (NpgsqlCommand cmd = new NpgsqlCommand($@"select username from logouts "+
-                    " where now()>date_trunc('day',now() )+(substring(hour_min from 1 for 2)||' hour')::interval+(substring(hour_min from 3 for 2)||' minutes')::interval;",vConn))
+                using (NpgsqlCommand cmd = new NpgsqlCommand($@"select username from logouts 
+                     where now()>date_trunc('day',now() )+(substring(hour_min from 1 for 2)||' hour')::interval+(substring(hour_min from 3 for 2)||' minutes')::interval
+                     and lower(day_of_the_week)=rtrim(lower(to_char(now(),'day')));", vConn))
                 {
                     NpgsqlDataReader dr;
                     dr = cmd.ExecuteReader();
@@ -594,7 +602,8 @@ namespace TimeControl.Monitor
             {
             vConn.Open();
             using (NpgsqlCommand cmd = new NpgsqlCommand($@"select username from logins "+
-                    " where now()<date_trunc('day',now() )+(substring(hour_min from 1 for 2)||' hour')::interval+(substring(hour_min from 3 for 2)||' minutes')::interval;",vConn))
+                    " where now()<date_trunc('day',now() )+(substring(hour_min from 1 for 2)||' hour')::interval+(substring(hour_min from 3 for 2)||' minutes')::interval" +
+                    " and lower(day_of_the_week)=rtrim(lower(to_char(now(),'day')));", vConn))
                 {
                     NpgsqlDataReader dr;
                     dr = cmd.ExecuteReader();
@@ -606,8 +615,8 @@ namespace TimeControl.Monitor
             using (var vConn = new NpgsqlConnection(connString))
             {
             vConn.Open();
-            using (NpgsqlCommand cmd = new NpgsqlCommand($@"select username from logoutsnow "+
-                    " where now()>date_trunc('day',now() )+(substring(hour_min from 1 for 2)||' hour')::interval+(substring(hour_min from 3 for 2)||' minutes')::interval;",vConn))
+            using (NpgsqlCommand cmd = new NpgsqlCommand($@"select username from logoutsnow 
+                     where now()>date_trunc('day',now() )+(substring(hour_min from 1 for 2)||' hour')::interval+(substring(hour_min from 3 for 2)||' minutes')::interval;",vConn))
                 {
                     NpgsqlDataReader dr;
                     dr = cmd.ExecuteReader();
@@ -616,8 +625,8 @@ namespace TimeControl.Monitor
                 }
             }
             //users that consumed all their time
-            foreach (AppsPersist appPersist in GetActiveTimeByUser())
-                usersToLogOut.Add(appPersist.userName);
+            foreach (AppsPersist appPersist in GetActiveTimeByUser().Where(x=>x._dayOfTheWeek.ToLower()== DateTime.Today.DayOfWeek.ToString().ToLower()))
+                usersToLogOut.Add(appPersist._userName);
             
             return usersToLogOut;
         }

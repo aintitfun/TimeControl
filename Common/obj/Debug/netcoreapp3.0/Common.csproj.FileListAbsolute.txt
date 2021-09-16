@@ -50,3 +50,4 @@ C:\Users\opolo\Documents\fuentes\TimeControl\Common\obj\Debug\netcoreapp3.0\Comm
 C:\Users\opolo\Documents\fuentes\TimeControl\Common\obj\Debug\netcoreapp3.0\Common.csproj.CoreCompileInputs.cache
 C:\Users\opolo\Documents\fuentes\TimeControl\Common\obj\Debug\netcoreapp3.0\Common.dll
 C:\Users\opolo\Documents\fuentes\TimeControl\Common\obj\Debug\netcoreapp3.0\Common.pdb
+C:\Users\opolo\Documents\fuentes\TimeControl\Common\obj\Debug\netcoreapp3.0\Common.csproj.AssemblyReference.cache

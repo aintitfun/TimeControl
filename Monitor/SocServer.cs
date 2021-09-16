@@ -67,32 +67,32 @@ namespace TimeControl.Monitor
 
                         var jsonResult = JsonConvert.DeserializeObject<AppsPersist>(data.Replace("<EOF>",""));
 
-                        if (jsonResult.command==(int)Command.addapp)
+                        if (jsonResult._command==(int)Command.addapp)
                         {
 
-                            if (!vSQL.AddApplication(jsonResult.app, jsonResult.userName,jsonResult.time))
-                                SendMessage(new List<AppsPersist>{ new AppsPersist($@"{DateTime.Now} [ERROR] Adding app {jsonResult.app} for {jsonResult.userName}","",-1)},clientSocket);
+                            if (!vSQL.AddApplication(jsonResult._app, jsonResult._userName,jsonResult._time, jsonResult._dayOfTheWeek))
+                                SendMessage(new List<AppsPersist>{ new AppsPersist($@"{DateTime.Now} [ERROR] Adding app {jsonResult._app} for {jsonResult._userName} on {jsonResult._dayOfTheWeek}","",-1,"")},clientSocket);
                             else
-                                SendMessage(new List<AppsPersist>{ new AppsPersist($@"{DateTime.Now} [ADDED]: app {jsonResult.app} to list","",0)},clientSocket);
+                                SendMessage(new List<AppsPersist>{ new AppsPersist($@"{DateTime.Now} [ADDED]: app {jsonResult._app} to list","",0,"")},clientSocket);
                                 
 
                         }
 
-                        if (jsonResult.command==(int)Command.removeapp)
+                        if (jsonResult._command==(int)Command.removeapp)
                         {
-                            if (jsonResult.app != "null")
+                            if (jsonResult._app != "null")
                             {
-                                if (!vSQL.RemoveApplicationFromUser(jsonResult.app,jsonResult.userName))
-                                    SendMessage(new List<AppsPersist>{ new AppsPersist("Unable to remove app as db is busy, please retry...","",-2)},clientSocket);
+                                if (!vSQL.RemoveApplicationFromUser(jsonResult._app,jsonResult._userName))
+                                    SendMessage(new List<AppsPersist>{ new AppsPersist("Unable to remove app as db is busy, please retry...","",-2,"")},clientSocket);
                                 else
-                                    SendMessage(new List<AppsPersist>{ new AppsPersist($@"{DateTime.Now} [REMOVED]: app {jsonResult.app} from user {jsonResult.userName}","",0)},clientSocket);
+                                    SendMessage(new List<AppsPersist>{ new AppsPersist($@"{DateTime.Now} [REMOVED]: app {jsonResult._app} from user {jsonResult._userName}","",0,"")},clientSocket);
                             }
                             
                             
 
                         }
 
-                        if (jsonResult.command==(int)Command.listapps)
+                        if (jsonResult._command==(int)Command.listapps)
                         {
                             List<AppsPersist> lap=new List<AppsPersist>();
                             lap = vSQL.GetApps();
@@ -101,7 +101,7 @@ namespace TimeControl.Monitor
                         
                         }
 
-                        if (jsonResult.command==(int)Command.listlogouts)
+                        if (jsonResult._command==(int)Command.listlogouts)
                         {
                             List<AppsPersist> lap=new List<AppsPersist>();
                             lap = vSQL.GetConfiguredLogouts();
@@ -109,7 +109,7 @@ namespace TimeControl.Monitor
                             SendMessage(lap,clientSocket);
                         
                         }
-                        if (jsonResult.command==(int)Command.listlogins)
+                        if (jsonResult._command==(int)Command.listlogins)
                         {
                             List<AppsPersist> lap=new List<AppsPersist>();
                             lap = vSQL.GetConfiguredLogins();
@@ -117,64 +117,64 @@ namespace TimeControl.Monitor
                             SendMessage(lap,clientSocket);
                         
                         }
-                        if (jsonResult.command==(int)Command.addlogout)
+                        if (jsonResult._command==(int)Command.addlogout)
                         {
-                            if (vSQL.AddLogout(jsonResult.userName,jsonResult.time))
-                                SendMessage(new List<AppsPersist>{ new AppsPersist($@"{DateTime.Now} [INFO]: Added logout {jsonResult.userName} with {jsonResult.time}","",0)},clientSocket);
+                            if (vSQL.AddLogout(jsonResult._userName,jsonResult._time, jsonResult._dayOfTheWeek))
+                                SendMessage(new List<AppsPersist>{ new AppsPersist($@"{DateTime.Now} [INFO]: Added logout {jsonResult._userName} with {jsonResult._time}","",0,"")},clientSocket);
                             else 
                             {
-                                SendMessage(new List<AppsPersist>{ new AppsPersist($@"{DateTime.Now} [ERROR]: adding logout {jsonResult.userName} {jsonResult.time}","",0)},clientSocket);
+                                SendMessage(new List<AppsPersist>{ new AppsPersist($@"{DateTime.Now} [ERROR]: adding logout {jsonResult._userName} {jsonResult._time}","",0,"")},clientSocket);
                             }
                             
                         }
-                        if (jsonResult.command==(int)Command.addlogoutnow)
+                        if (jsonResult._command==(int)Command.addlogoutnow)
                         {
-                            if (vSQL.AddLogoutNow(jsonResult.userName))
-                                SendMessage(new List<AppsPersist>{ new AppsPersist($@"{DateTime.Now} [INFO]: Added logoutnow {jsonResult.userName}","",0)},clientSocket);
+                            if (vSQL.AddLogoutNow(jsonResult._userName))
+                                SendMessage(new List<AppsPersist>{ new AppsPersist($@"{DateTime.Now} [INFO]: Added logoutnow {jsonResult._userName}","",0,"")},clientSocket);
                             else 
                             {
-                                SendMessage(new List<AppsPersist>{ new AppsPersist($@"{DateTime.Now} [ERROR]: adding logoutnow {jsonResult.userName}","",0)},clientSocket);
+                                SendMessage(new List<AppsPersist>{ new AppsPersist($@"{DateTime.Now} [ERROR]: adding logoutnow {jsonResult._userName}","",0,"")},clientSocket);
                             }
                             
                         }
-                        if (jsonResult.command==(int)Command.addlogin)
+                        if (jsonResult._command==(int)Command.addlogin)
                         {
-                            if (vSQL.AddLogin(jsonResult.userName,jsonResult.time))
-                                SendMessage(new List<AppsPersist>{ new AppsPersist($@"{DateTime.Now} [INFO]: Added login {jsonResult.userName} with {jsonResult.time}","",0)},clientSocket);
+                            if (vSQL.AddLogin(jsonResult._userName,jsonResult._time,jsonResult._dayOfTheWeek))
+                                SendMessage(new List<AppsPersist>{ new AppsPersist($@"{DateTime.Now} [INFO]: Added login {jsonResult._userName} with {jsonResult._time}","",0,"")},clientSocket);
                             else 
                             {
-                                SendMessage(new List<AppsPersist>{ new AppsPersist($@"{DateTime.Now} [ERROR]: adding login {jsonResult.userName} {jsonResult.time}","",0)},clientSocket);
+                                SendMessage(new List<AppsPersist>{ new AppsPersist($@"{DateTime.Now} [ERROR]: adding login {jsonResult._userName} {jsonResult._time}","",0,"")},clientSocket);
                             }
                             
                         }
-                        if (jsonResult.command==(int)Command.removelogout)
+                        if (jsonResult._command==(int)Command.removelogout)
                         {
-                            if (vSQL.RemoveLogout(jsonResult.userName))
-                                SendMessage(new List<AppsPersist>{ new AppsPersist($@"{DateTime.Now} [INFO]: Removed logout {jsonResult.userName}","",0)},clientSocket);
+                            if (vSQL.RemoveLogout(jsonResult._userName))
+                                SendMessage(new List<AppsPersist>{ new AppsPersist($@"{DateTime.Now} [INFO]: Removed logout {jsonResult._userName}","",0,"")},clientSocket);
                             else 
                             {
-                                SendMessage(new List<AppsPersist>{ new AppsPersist($@"{DateTime.Now} [ERROR]: Removing logout {jsonResult.userName}","",0)},clientSocket);
+                                SendMessage(new List<AppsPersist>{ new AppsPersist($@"{DateTime.Now} [ERROR]: Removing logout {jsonResult._userName}","",0,"")},clientSocket);
                             }
                         }
-                        if (jsonResult.command==(int)Command.removelogin)
+                        if (jsonResult._command==(int)Command.removelogin)
                         {
-                            if (vSQL.RemoveLogin(jsonResult.userName))
-                                SendMessage(new List<AppsPersist>{ new AppsPersist($@"{DateTime.Now} [INFO]: Removed login {jsonResult.userName}","",0)},clientSocket);
+                            if (vSQL.RemoveLogin(jsonResult._userName))
+                                SendMessage(new List<AppsPersist>{ new AppsPersist($@"{DateTime.Now} [INFO]: Removed login {jsonResult._userName}","",0,"")},clientSocket);
                             else 
                             {
-                                SendMessage(new List<AppsPersist>{ new AppsPersist($@"{DateTime.Now} [ERROR]: Removing login {jsonResult.userName}","",0)},clientSocket);
+                                SendMessage(new List<AppsPersist>{ new AppsPersist($@"{DateTime.Now} [ERROR]: Removing login {jsonResult._userName}","",0,"")},clientSocket);
                             }
                         }
-                        if (jsonResult.command==(int)Command.addactivetime)
+                        if (jsonResult._command==(int)Command.addactivetime)
                         {
-                            if (vSQL.AddActiveTime(jsonResult.userName, jsonResult.time))
-                                SendMessage(new List<AppsPersist>{ new AppsPersist($@"{DateTime.Now} [INFO]: Added Active Time {jsonResult.userName}","",0)},clientSocket);
+                            if (vSQL.AddActiveTime(jsonResult._userName, jsonResult._time,jsonResult._dayOfTheWeek))
+                                SendMessage(new List<AppsPersist>{ new AppsPersist($@"{DateTime.Now} [INFO]: Added Active Time {jsonResult._userName}","",0,"")},clientSocket);
                             else 
                             {
-                                SendMessage(new List<AppsPersist>{ new AppsPersist($@"{DateTime.Now} [ERROR]: Adding Active Time {jsonResult.userName}","",0)},clientSocket);
+                                SendMessage(new List<AppsPersist>{ new AppsPersist($@"{DateTime.Now} [ERROR]: Adding Active Time {jsonResult._userName}","",0,"")},clientSocket);
                             }
                         }
-                        if (jsonResult.command==(int)Command.listactivetime)
+                        if (jsonResult._command==(int)Command.listactivetime)
                         {
                             
                             List<AppsPersist> lap=new List<AppsPersist>();
@@ -190,16 +190,16 @@ namespace TimeControl.Monitor
                                 SendMessage(new List<AppsPersist>{ new AppsPersist($@"{DateTime.Now} [ERROR]: Adding Active Time {jsonResult.userName}","",0)},clientSocket);
                             }*/
                         }
-                        if (jsonResult.command==(int)Command.removeactivetime)
+                        if (jsonResult._command==(int)Command.removeactivetime)
                         {
-                            if (vSQL.RemoveActiveTime(jsonResult.userName))
-                                SendMessage(new List<AppsPersist>{ new AppsPersist($@"{DateTime.Now} [INFO]: Removed active time for {jsonResult.userName}","",0)},clientSocket);
+                            if (vSQL.RemoveActiveTime(jsonResult._userName))
+                                SendMessage(new List<AppsPersist>{ new AppsPersist($@"{DateTime.Now} [INFO]: Removed active time for {jsonResult._userName}","",0,"")},clientSocket);
                             else 
                             {
-                                SendMessage(new List<AppsPersist>{ new AppsPersist($@"{DateTime.Now} [ERROR]: Removing active time for {jsonResult.userName}","",0)},clientSocket);
+                                SendMessage(new List<AppsPersist>{ new AppsPersist($@"{DateTime.Now} [ERROR]: Removing active time for {jsonResult._userName}","",0,"")},clientSocket);
                             }
                         }
-                        if (jsonResult.command==(int)Command.stats)
+                        if (jsonResult._command==(int)Command.stats)
                         {
                             SendMessage(vSQL.GetCurrentDayAppUsage(),clientSocket);
                         }

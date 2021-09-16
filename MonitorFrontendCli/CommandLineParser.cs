@@ -19,35 +19,37 @@ namespace TimeControl.MonitorFrontendCli
                     case 2:
                         return ParseList(args[0],args[1]);
                     case 3:
-                        if (args[0]=="-removelogout")
-                            return ParseRemoveLogout(args[0],args[1],args[2]);
-                        if (args[0]=="-removelogin")
-                            return ParseRemoveLogin(args[0],args[1],args[2]);
-                        if (args[0]=="-addlogoutnow")
-                            return ParseAddLogoutNow(args[0],args[1],args[2]);
-                        if (args[0]=="-removeactivetime")
-                            return ParseRemoveActiveTime(args[0],args[1],args[2]);
-
+                        if (args[0] == "-addlogoutnow")
+                            return ParseAddLogoutNow(args[0], args[1], args[2], args[3]);
                         break;
                     case 4:
+                        if (args[0]=="-removelogout")
+                            return ParseRemoveLogout(args[0],args[1],args[2], args[3]);
+                        if (args[0]=="-removelogin")
+                            return ParseRemoveLogin(args[0],args[1],args[2], args[3]);
+                        if (args[0]=="-removeactivetime")
+                            return ParseRemoveActiveTime(args[0],args[1],args[2], args[3]);
+
+                        break;
+                    case 5:
                         if (args[3].Contains(":"))
                         {
                             if (args[0]=="-addlogout")
-                                return ParseAddLogout(args[0],args[1],args[2],args[3]);
+                                return ParseAddLogout(args[0],args[1],args[2],args[3], args[4]);
                             if (args[0]=="-addlogin")
-                                return ParseAddLogin(args[0],args[1],args[2],args[3]);
+                                return ParseAddLogin(args[0],args[1],args[2],args[3], args[4]);
                         }
                         else
                         {
                             if (args[0]=="-removeapp")
-                                return ParseRemove(args[0],args[1],args[2],args[3]);
+                                return ParseRemoveApp(args[0],args[1],args[2],args[3], args[3]);
                             if (args[0]=="-addactivetime")
-                                return ParseAddActiveTime(args[0],args[1],args[2],System.Convert.ToInt32(args[3]));
+                                return ParseAddActiveTime(args[0],args[1],args[2],System.Convert.ToInt32(args[3]), args[4]);
                         }
 
                         break;
-                    case 5:
-                        return ParseAdd(args[0],args[1],args[2],args[3],System.Convert.ToInt32(args[4]));
+                    case 6:
+                        return ParseAddApp(args[0],args[1],args[2],args[3],System.Convert.ToInt32(args[4]), args[5]);
                 }
 
             } 
@@ -62,44 +64,44 @@ namespace TimeControl.MonitorFrontendCli
             return new InvocationParameters(command,host);
         }
 
-        public InvocationParameters ParseRemove(string command,string host, string userName,string app)
+        public InvocationParameters ParseRemoveApp(string command,string host, string userName,string app, string dayOfTheWeek)
         {
             return new InvocationParameters(command,host,userName,app);
         }
 
-        public InvocationParameters ParseAddLogout(string command,string host, string userName,string hourMin)
+        public InvocationParameters ParseAddLogout(string command,string host, string userName,string hourMin, string dayOfTheWeek)
         {
             return new InvocationParameters(command,host,userName,System.Convert.ToInt32(hourMin.Replace(":","")));
         }
 
-        public InvocationParameters ParseAddLogin(string command,string host, string userName,string hourMin)
+        public InvocationParameters ParseAddLogin(string command,string host, string userName,string hourMin, string dayOfTheWeek)
         {
             return new InvocationParameters(command,host,userName,System.Convert.ToInt32(hourMin.Replace(":","")));
         }
 
-        public InvocationParameters ParseAddLogoutNow(string command,string host, string userName)
+        public InvocationParameters ParseAddLogoutNow(string command,string host, string userName, string dayOfTheWeek)
         {
             return new InvocationParameters(command,host,userName);
         }
-        public InvocationParameters ParseAdd(string command,string host, string userName,string app,int maxTime)
+        public InvocationParameters ParseAddApp(string command,string host, string userName,string app,int maxTime, string dayOfTheWeek)
         {
-            return new InvocationParameters(command,host,userName,app,maxTime);
+            return new InvocationParameters(command,host,userName,app,maxTime,dayOfTheWeek);
         }
 
-        public InvocationParameters ParseRemoveLogout(string command,string host, string userName)
+        public InvocationParameters ParseRemoveLogout(string command,string host, string userName, string dayOfTheWeek)
         {
             return new InvocationParameters(command,host,userName);
         }
 
-        public InvocationParameters ParseRemoveLogin(string command,string host, string userName)
+        public InvocationParameters ParseRemoveLogin(string command,string host, string userName, string dayOfTheWeek)
         {
             return new InvocationParameters(command,host,userName);
         }
-        public InvocationParameters ParseAddActiveTime(string command,string host, string userName, int maxTime)
+        public InvocationParameters ParseAddActiveTime(string command,string host, string userName, int maxTime, string dayOfTheWeek)
         {
             return new InvocationParameters(command,host,userName,maxTime);
         }
-        public InvocationParameters ParseRemoveActiveTime(string command,string host, string userName)
+        public InvocationParameters ParseRemoveActiveTime(string command,string host, string userName, string dayOfTheWeek)
         {
             return new InvocationParameters(command,host,userName);
         }
@@ -116,31 +118,31 @@ namespace TimeControl.MonitorFrontendCli
                 switch(inCommand.Substring(1))
                 {
                     case "addapp":
-                    return RemoveArguments(5,ref args);
+                    return RemoveArguments(6,ref args);
                     case "listapps" :
-                    return RemoveArguments(2,ref args);
+                    return RemoveArguments(3,ref args);
                     case "stats":
-                    return RemoveArguments(2,ref args);
+                    return RemoveArguments(3,ref args);
                     case "removeapp":
-                    return RemoveArguments(4,ref args);
+                    return RemoveArguments(5,ref args);
                     case "listlogouts" :
-                    return RemoveArguments(2,ref args);
+                    return RemoveArguments(3,ref args);
                     case "listlogins" :
-                    return RemoveArguments(2,ref args);
+                    return RemoveArguments(3,ref args);
                     case "addlogout" :
-                    return RemoveArguments(4,ref args);
+                    return RemoveArguments(5,ref args);
                     case "removelogout" :
-                    return RemoveArguments(3,ref args);
+                    return RemoveArguments(4,ref args);
                     case "addlogin" :
-                    return RemoveArguments(4,ref args);
+                    return RemoveArguments(5,ref args);
                     case "removelogin" :
-                    return RemoveArguments(3,ref args);
-                    case "addlogoutnow" :
-                    return RemoveArguments(3,ref args);
-                    case "addactivetime" :
                     return RemoveArguments(4,ref args);
+                    case "addlogoutnow" :
+                    return RemoveArguments(4,ref args);
+                    case "addactivetime" :
+                    return RemoveArguments(5,ref args);
                     case "removeactivetime" :
-                    return RemoveArguments(3,ref args);
+                    return RemoveArguments(4,ref args);
                     case "listactivetime" :
                     return RemoveArguments(2,ref args);
 
@@ -160,7 +162,8 @@ namespace TimeControl.MonitorFrontendCli
             var argsList = args.ToList();
             
             for (int i=pos;i<args.GetLength(0);i++){
-                 argsList.RemoveAt(i);
+                Console.WriteLine(@$"Ignoring extra parameter {argsList[i]}");
+                argsList.RemoveAt(i);
             }
             args=argsList.ToArray();
             return true;
