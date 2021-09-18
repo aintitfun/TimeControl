@@ -1,0 +1,9 @@
+C:\Users\opolo\Documents\fuentes\TimeControl\Common\bin\Release\netcoreapp3.0\Common.deps.json
+C:\Users\opolo\Documents\fuentes\TimeControl\Common\bin\Release\netcoreapp3.0\Common.dll
+C:\Users\opolo\Documents\fuentes\TimeControl\Common\bin\Release\netcoreapp3.0\Common.pdb
+C:\Users\opolo\Documents\fuentes\TimeControl\Common\obj\Release\netcoreapp3.0\Common.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\opolo\Documents\fuentes\TimeControl\Common\obj\Release\netcoreapp3.0\Common.AssemblyInfoInputs.cache
+C:\Users\opolo\Documents\fuentes\TimeControl\Common\obj\Release\netcoreapp3.0\Common.AssemblyInfo.cs
+C:\Users\opolo\Documents\fuentes\TimeControl\Common\obj\Release\netcoreapp3.0\Common.csproj.CoreCompileInputs.cache
+C:\Users\opolo\Documents\fuentes\TimeControl\Common\obj\Release\netcoreapp3.0\Common.dll
+C:\Users\opolo\Documents\fuentes\TimeControl\Common\obj\Release\netcoreapp3.0\Common.pdb

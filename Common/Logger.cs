@@ -3,14 +3,11 @@ using System;
 
 namespace TimeControl.Common
 {
-    public class Logger
+    public static class Logger
     {
-        public StreamWriter swLog;
-        public Logger()
-        {
-                        
-        }
-        public void Log(string strMessage){
+        public static StreamWriter swLog;
+
+        public static void  Log(string strMessage){
             swLog = new StreamWriter(AppDomain.CurrentDomain.BaseDirectory+"log.txt", true);
             swLog.AutoFlush = true;
             swLog.WriteLine(strMessage);

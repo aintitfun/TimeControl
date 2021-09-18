@@ -14,7 +14,6 @@ namespace TimeControl.Monitor
     {
         ProcessSQL vSQL = new ProcessSQL();
         //test comment
-        Logger logger=new Logger();
         public List<ProcessesPersist> processes_persist_old = new List<ProcessesPersist>();
         public List<ProcessesPersist> processes_persist = new List<ProcessesPersist>();
         public DateTime START_TIME;
@@ -33,7 +32,7 @@ namespace TimeControl.Monitor
         {
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows)){
                 string path=System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Monitor.dll","");
-                logger.Log ($@"{DateTime.Now} [INFO]: Trying to start postgres database on path: {path}");
+                Logger.Log ($@"{DateTime.Now} [INFO]: Trying to start postgres database on path: {path}");
                 Process.Start(path+"\\pgsql\\bin\\pg_ctl.exe","-D "+path+"\\pgsql\\data start -l "+path+"\\postgres.log ");
             }
             else 
@@ -129,7 +128,7 @@ namespace TimeControl.Monitor
                 }
                 catch (Exception e)
                 {
-                    logger.Log ($@"{DateTime.Now} [ERROR]: Populating {process.ProcessName}");
+                    Logger.Log ($@"{DateTime.Now} [ERROR]: Populating {process.ProcessName}");
                 }
 
             }
@@ -154,7 +153,7 @@ namespace TimeControl.Monitor
                 var psi = new ProcessStartInfo("shutdown","/s /t 0");
                 psi.CreateNoWindow = true;
                 psi.UseShellExecute = false;
-                logger.Log ($@"{DateTime.Now} [Shutdown]:");
+                Logger.Log ($@"{DateTime.Now} [Shutdown]:");
                 Process.Start(psi);
              }*/
 
@@ -173,12 +172,12 @@ namespace TimeControl.Monitor
                     if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                     {
                         if (!WTSDisconnectSession(WTS_CURRENT_SERVER_HANDLE,sessionid, false))
-                            logger.Log ($@"{DateTime.Now} [ERROR]: Forcing Logout windows session {username}");
+                            Logger.Log ($@"{DateTime.Now} [ERROR]: Forcing Logout windows session {username}");
                     } 
                     else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
                     {
                         Process.Start ("/usr/bin/kill",$@"-p {sessionid}");
-                        logger.Log ($@"{DateTime.Now} [ERROR]: Forcing Logout linux session {username}");
+                        Logger.Log ($@"{DateTime.Now} [ERROR]: Forcing Logout linux session {username}");
                     }
  
                 }
@@ -208,7 +207,7 @@ namespace TimeControl.Monitor
                     var results = processes_persist.Where(x => x.ProcessName == process.ProcessName && x.Id==process.Id);
                     if (results.Count()==0){
                         vSQL.UpdateApp(process.ProcessName, process.User, process.Id);
-                        logger.Log ($@"{DateTime.Now} [CLOSED]: {process.ProcessName} {process.Id}");
+                        Logger.Log ($@"{DateTime.Now} [CLOSED]: {process.ProcessName} {process.Id}");
                     }
 
                 }
@@ -227,7 +226,7 @@ namespace TimeControl.Monitor
                     var results = processes_persist_old.Where(x => x.ProcessName == process.ProcessName && x.Id==process.Id);
                     if (results.Count()==0){
                         vSQL.UpdateApp(process.ProcessName, process.User,process.Id);
-                        logger.Log ($@"{DateTime.Now} [STARTED]: {process.ProcessName} {process.Id}");
+                        Logger.Log ($@"{DateTime.Now} [STARTED]: {process.ProcessName} {process.Id}");
                     }
 
                 }
@@ -245,14 +244,14 @@ namespace TimeControl.Monitor
                     if (vSQL.GetActiveTimeByAppAndUser(a._app,a._userName)>a._time && a._dayOfTheWeek.ToLower()==DateTime.Today.DayOfWeek.ToString().ToLower())
                     {
                         foreach (Process process in Process.GetProcesses().Where(x => x.ProcessName==a._app && GetProcessUserWindows(x)==a._userName)){
-                            logger.Log($@"{DateTime.Now} [KILLING]: {process.ProcessName} {process.Id} {a._userName}");
+                            Logger.Log($@"{DateTime.Now} [KILLING]: {process.ProcessName} {process.Id} {a._userName}");
                             try 
                             {
                                 process.Kill();
                             }
                             catch (Exception e)
                             {
-                                logger.Log($@"{DateTime.Now} [ERROR]: Unable to kill {process.ProcessName} {process.Id} {a._userName}");
+                                Logger.Log($@"{DateTime.Now} [ERROR]: Unable to kill {process.ProcessName} {process.Id} {a._userName}");
 
                             }
                             

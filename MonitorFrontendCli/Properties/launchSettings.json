@@ -2,7 +2,7 @@
   "profiles": {
     "MonitorFrontendCli": {
       "commandName": "Project",
-      "commandLineArgs": "-addlogout DESKTOP-6N7A8IU saray 1200 Monday"
+      "commandLineArgs": "-addlogout DESKTOP-6N7A8IU saray 12:00 Monday"
     }
   }
 }

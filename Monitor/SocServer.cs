@@ -41,8 +41,6 @@ namespace TimeControl.Monitor
                          SocketType.Stream, ProtocolType.Tcp);
             ProcessSQL vSQL = new ProcessSQL();
 
-            Logger logger =new Logger();
-
             try
             {
                 listener.Bind(localEndPoint);
@@ -82,7 +80,7 @@ namespace TimeControl.Monitor
                         {
                             if (jsonResult._app != "null")
                             {
-                                if (!vSQL.RemoveApplicationFromUser(jsonResult._app,jsonResult._userName))
+                                if (!vSQL.RemoveApplicationFromUser(jsonResult._app,jsonResult._userName,jsonResult._dayOfTheWeek))
                                     SendMessage(new List<AppsPersist>{ new AppsPersist("Unable to remove app as db is busy, please retry...","",-2,"")},clientSocket);
                                 else
                                     SendMessage(new List<AppsPersist>{ new AppsPersist($@"{DateTime.Now} [REMOVED]: app {jsonResult._app} from user {jsonResult._userName}","",0,"")},clientSocket);
@@ -149,7 +147,7 @@ namespace TimeControl.Monitor
                         }
                         if (jsonResult._command==(int)Command.removelogout)
                         {
-                            if (vSQL.RemoveLogout(jsonResult._userName))
+                            if (vSQL.RemoveLogout(jsonResult._userName, jsonResult._dayOfTheWeek))
                                 SendMessage(new List<AppsPersist>{ new AppsPersist($@"{DateTime.Now} [INFO]: Removed logout {jsonResult._userName}","",0,"")},clientSocket);
                             else 
                             {
@@ -158,7 +156,7 @@ namespace TimeControl.Monitor
                         }
                         if (jsonResult._command==(int)Command.removelogin)
                         {
-                            if (vSQL.RemoveLogin(jsonResult._userName))
+                            if (vSQL.RemoveLogin(jsonResult._userName, jsonResult._dayOfTheWeek))
                                 SendMessage(new List<AppsPersist>{ new AppsPersist($@"{DateTime.Now} [INFO]: Removed login {jsonResult._userName}","",0,"")},clientSocket);
                             else 
                             {
@@ -192,7 +190,7 @@ namespace TimeControl.Monitor
                         }
                         if (jsonResult._command==(int)Command.removeactivetime)
                         {
-                            if (vSQL.RemoveActiveTime(jsonResult._userName))
+                            if (vSQL.RemoveActiveTime(jsonResult._userName, jsonResult._dayOfTheWeek))
                                 SendMessage(new List<AppsPersist>{ new AppsPersist($@"{DateTime.Now} [INFO]: Removed active time for {jsonResult._userName}","",0,"")},clientSocket);
                             else 
                             {

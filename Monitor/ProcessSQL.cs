@@ -18,11 +18,10 @@ namespace TimeControl.Monitor
     {
 
         private string strconnPath=AppDomain.CurrentDomain.BaseDirectory+"conn.db";
-        private Logger logger;
         private string connString;
         public ProcessSQL()
         {
-            connString="Host=127.0.0.1;Username=postgres;Password=postgres01;Database=monitor;";
+            connString = "Host=127.0.0.1;Username=postgres;Password=postgres01;Database=monitor;";
         }
         public void CheckAndRecreateTables()
         {
@@ -34,8 +33,8 @@ namespace TimeControl.Monitor
                         " CREATE TABLE if not exists daily_apps (pid int,app text,username text,start_time timestamp,end_time timestamp,primary key(pid, app));" +
                         " CREATE TABLE if not exists hist_apps (pid int,app text,username text,start_time timestamp,end_time timestamp);"+
                         " create table if not exists activetime (username text, max_time int, day_of_the_week text, primary key(username,day_of_the_week));" +
-                        " create table if not exists logouts (username text primary key, hour_min text, day_of_the_week text, primary key(username,day_of_the_week));" +
-                        " create table if not exists logins (username text primary key, hour_min text, day_of_the_week text, primary key(username,day_of_the_week));" +
+                        " create table if not exists logouts (username text, hour_min text, day_of_the_week text, primary key(username,day_of_the_week));" +
+                        " create table if not exists logins (username text, hour_min text, day_of_the_week text, primary key(username,day_of_the_week));" +
                         " create table if not exists logoutsnow (username text primary key, hour_min text);"+
                         " comment on table apps is 'List of rules between apps & users'; "+
                         " comment on table daily_apps is 'Tracking of the start-end apps executed from the last start of Monitor';"+
@@ -199,7 +198,7 @@ namespace TimeControl.Monitor
                     {
                         if (e.Message.Contains(Npgsql.PostgresErrorCodes.LockNotAvailable))
                         {
-                            //logger.Log($@"{DateTime.Now} [LOCK]: {cmd.CommandText}");
+                            //Logger.Log($@"{DateTime.Now} [LOCK]: {cmd.CommandText}");
                             return false;
                         }
                         return false;
@@ -212,14 +211,14 @@ namespace TimeControl.Monitor
         /// Remove app from the list of timed/disabled apps
         /// </summary>
         /// <param name="strAppName"></param>
-        public bool RemoveApplicationFromUser(string appName,string userName)
+        public bool RemoveApplicationFromUser(string appName,string userName, string dayOfTheWeek)
         {
 
 
             using (var conn = new NpgsqlConnection(connString))
             {                
                 conn.Open();  
-                using (NpgsqlCommand cmd = new NpgsqlCommand($@"delete from apps where name ='{appName}' and username='{userName}'",conn))
+                using (NpgsqlCommand cmd = new NpgsqlCommand($@"delete from apps where name ='{appName}' and username='{userName}' and lower(day_of_the_week)='{dayOfTheWeek.ToLower()}';",conn))
                 {
                 try
                     {
@@ -230,7 +229,7 @@ namespace TimeControl.Monitor
                     {
                         if (e.Message.Contains(Npgsql.PostgresErrorCodes.LockNotAvailable))
                         {
-                            //logger.Log($@"{DateTime.Now} [LOCK]: {cmd.CommandText}");
+                            //Logger.Log($@"{DateTime.Now} [LOCK]: {cmd.CommandText}");
                             return false;
                         }
                         return true;
@@ -266,7 +265,7 @@ namespace TimeControl.Monitor
                     {
                         if (e.Message.Contains(Npgsql.PostgresErrorCodes.LockNotAvailable))
                         {
-                            //logger.Log($@"{DateTime.Now} [LOCK]: {cmd.CommandText}");
+                            //Logger.Log($@"{DateTime.Now} [LOCK]: {cmd.CommandText}");
                         }
                         return l;
 
@@ -333,20 +332,26 @@ namespace TimeControl.Monitor
                 }
             }
         }
-        public List<AppsPersist> GetActiveTimeByUser(){
+        public List<AppsPersist> GetUsersWithActivetimeExhausted(){
 
             List<AppsPersist> lap=new List<AppsPersist>();
 
             using (var conn = new NpgsqlConnection(connString))
             {                
                 conn.Open();  
-                using (NpgsqlCommand cmd = new NpgsqlCommand($@"select username,day_of_the_week from activetime 
-                    where minutes_for_username(username)>max_time;",conn))
+                using (NpgsqlCommand cmd = new NpgsqlCommand($@"select username,day_of_the_week,max_time,minutes_for_username(username) from activetime
+                                                                where lower(day_of_the_week)=rtrim(lower(to_char(now(),'day')));",conn))
                 {
                     NpgsqlDataReader dr;
                     dr = cmd.ExecuteReader();
                     while (dr.Read())
-                        lap.Add(new AppsPersist(null,dr.GetString(0),0, dr.GetString(1)));
+                    {
+                        if (dr.GetInt32(3)>dr.GetInt32(2))
+                            lap.Add(new AppsPersist(null, dr.GetString(0), 0, dr.GetString(1)));
+                        Logger.Log($@"{DateTime.Now} [INFO]: Time consumed by {dr.GetString(0)}: {dr.GetInt32(3)}");
+
+                    }
+
                 }
             }
             return lap;
@@ -401,7 +406,7 @@ namespace TimeControl.Monitor
                     }
                     catch (NpgsqlException e)
                     {
-                        //logger.Log($@"{DateTime.Now} [ERROR]: inserting logout for {userName}");
+                        //Logger.Log($@"{DateTime.Now} [ERROR]: inserting logout for {userName}");
                     }
                     return false;
                 }
@@ -421,7 +426,7 @@ namespace TimeControl.Monitor
                     }
                     catch (NpgsqlException e)
                     {
-                        //logger.Log($@"{DateTime.Now} [ERROR]: inserting logout for {userName}");
+                        //Logger.Log($@"{DateTime.Now} [ERROR]: inserting logout for {userName}");
                     }
                     return false;
                 }
@@ -441,18 +446,18 @@ namespace TimeControl.Monitor
                     }
                     catch (NpgsqlException e)
                     {
-                        //logger.Log($@"{DateTime.Now} [ERROR]: inserting logout for {userName}");
+                        //Logger.Log($@"{DateTime.Now} [ERROR]: inserting logout for {userName}");
                     }
                     return false;
                 }
             }
         }
-        public bool RemoveLogout(string userName)
+        public bool RemoveLogout(string userName, string dayOfTheWeek)
         {
             using (var conn = new NpgsqlConnection(connString))
             {                
                 conn.Open();  
-                using (NpgsqlCommand cmd = new NpgsqlCommand($@"delete from logouts where username ='{userName}';",conn))
+                using (NpgsqlCommand cmd = new NpgsqlCommand($@"delete from logouts where username ='{userName}' and lower(day_of_the_week)='{dayOfTheWeek.ToLower()}';",conn))
                 {
                     try
                     {
@@ -461,18 +466,18 @@ namespace TimeControl.Monitor
                     }
                     catch (NpgsqlException e)
                     {
-                        //logger.Log($@"{DateTime.Now} [ERROR]: Removing logout {userName}");
+                        //Logger.Log($@"{DateTime.Now} [ERROR]: Removing logout {userName}");
                     }
                     return false;
                 }
             }
         }
-        public bool RemoveLogin(string userName)
+        public bool RemoveLogin(string userName,string dayOfTheWeek)
         {
             using (var conn = new NpgsqlConnection(connString))
             {                
                 conn.Open();  
-                using (NpgsqlCommand cmd = new NpgsqlCommand($@"delete from logins where username ='{userName}';",conn))
+                using (NpgsqlCommand cmd = new NpgsqlCommand($@"delete from logins where username ='{userName}' and lower(day_of_the_week)='{dayOfTheWeek.ToLower()}';",conn))
                 {
                     try
                     {
@@ -481,18 +486,18 @@ namespace TimeControl.Monitor
                     }
                     catch (NpgsqlException e)
                     {
-                        //logger.Log($@"{DateTime.Now} [ERROR]: Removing logout {userName}");
+                        //Logger.Log($@"{DateTime.Now} [ERROR]: Removing logout {userName}");
                     }
                     return false;
                 }
             }
         }
-        public bool RemoveActiveTime(string userName)
+        public bool RemoveActiveTime(string userName, string dayOfTheWeek)
         {
             using (var conn = new NpgsqlConnection(connString))
             {                
                 conn.Open();  
-                using (NpgsqlCommand cmd = new NpgsqlCommand($@"delete from activetime where username ='{userName}';",conn))
+                using (NpgsqlCommand cmd = new NpgsqlCommand($@"delete from activetime where username ='{userName}' and lower(day_of_the_week)='{dayOfTheWeek.ToLower()}';",conn))
                 {
                     try
                     {
@@ -501,7 +506,7 @@ namespace TimeControl.Monitor
                     }
                     catch (NpgsqlException e)
                     {
-                        //logger.Log($@"{DateTime.Now} [ERROR]: Removing logout {userName}");
+                        //Logger.Log($@"{DateTime.Now} [ERROR]: Removing logout {userName}");
                     }
                     return false;
                 }
@@ -521,7 +526,7 @@ namespace TimeControl.Monitor
                     }
                     catch (NpgsqlException e)
                     {
-                        //logger.Log($@"{DateTime.Now} [ERROR]: Removing logout {userName}");
+                        //Logger.Log($@"{DateTime.Now} [ERROR]: Removing logout {userName}");
                     }
                     return false;
                 }
@@ -568,7 +573,7 @@ namespace TimeControl.Monitor
                     {
                         if (e.Message.Contains(Npgsql.PostgresErrorCodes.LockNotAvailable))
                         {
-                            //logger.Log($@"{DateTime.Now} [LOCK]: {cmd.CommandText}");
+                            //Logger.Log($@"{DateTime.Now} [LOCK]: {cmd.CommandText}");
                             //return false;
                         }
                         using (NpgsqlCommand cmdUpd = new NpgsqlCommand($@"update daily_apps set end_time='{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}' where app='{strApp}' and pid={nPid}",conn))
@@ -588,7 +593,7 @@ namespace TimeControl.Monitor
             {
                 vConn.Open();
                 using (NpgsqlCommand cmd = new NpgsqlCommand($@"select username from logouts 
-                     where now()>date_trunc('day',now() )+(substring(hour_min from 1 for 2)||' hour')::interval+(substring(hour_min from 3 for 2)||' minutes')::interval
+                     where now()>=date_trunc('day',now() )+(substring(hour_min from 1 for 2)||' hour')::interval+(substring(hour_min from 3 for 2)||' minutes')::interval
                      and lower(day_of_the_week)=rtrim(lower(to_char(now(),'day')));", vConn))
                 {
                     NpgsqlDataReader dr;
@@ -625,7 +630,7 @@ namespace TimeControl.Monitor
                 }
             }
             //users that consumed all their time
-            foreach (AppsPersist appPersist in GetActiveTimeByUser().Where(x=>x._dayOfTheWeek.ToLower()== DateTime.Today.DayOfWeek.ToString().ToLower()))
+            foreach (AppsPersist appPersist in GetUsersWithActivetimeExhausted().Where(x=>x._dayOfTheWeek.ToLower()== DateTime.Today.DayOfWeek.ToString().ToLower()))
                 usersToLogOut.Add(appPersist._userName);
             
             return usersToLogOut;
