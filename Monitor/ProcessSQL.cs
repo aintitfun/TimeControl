@@ -332,7 +332,7 @@ namespace TimeControl.Monitor
                 }
             }
         }
-        public List<AppsPersist> GetUsersWithActivetimeExhausted(){
+        public List<AppsPersist> GetUsersWithActiveTimeExhausted(){
 
             List<AppsPersist> lap=new List<AppsPersist>();
 
@@ -346,7 +346,7 @@ namespace TimeControl.Monitor
                     dr = cmd.ExecuteReader();
                     while (dr.Read())
                     {
-                        if (dr.GetInt32(3)>dr.GetInt32(2))
+                        if (dr.GetInt32(3)>=dr.GetInt32(2))
                             lap.Add(new AppsPersist(null, dr.GetString(0), 0, dr.GetString(1)));
                         Logger.Log($@"{DateTime.Now} [INFO]: Time consumed by {dr.GetString(0)}: {dr.GetInt32(3)}");
 
@@ -630,7 +630,7 @@ namespace TimeControl.Monitor
                 }
             }
             //users that consumed all their time
-            foreach (AppsPersist appPersist in GetUsersWithActivetimeExhausted().Where(x=>x._dayOfTheWeek.ToLower()== DateTime.Today.DayOfWeek.ToString().ToLower()))
+            foreach (AppsPersist appPersist in GetUsersWithActiveTimeExhausted().Where(x=>x._dayOfTheWeek.ToLower()== DateTime.Today.DayOfWeek.ToString().ToLower()))
                 usersToLogOut.Add(appPersist._userName);
             
             return usersToLogOut;

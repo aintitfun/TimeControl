@@ -7,3 +7,4 @@ C:\Users\opolo\Documents\fuentes\TimeControl\Common\obj\Release\netcoreapp3.0\Co
 C:\Users\opolo\Documents\fuentes\TimeControl\Common\obj\Release\netcoreapp3.0\Common.csproj.CoreCompileInputs.cache
 C:\Users\opolo\Documents\fuentes\TimeControl\Common\obj\Release\netcoreapp3.0\Common.dll
 C:\Users\opolo\Documents\fuentes\TimeControl\Common\obj\Release\netcoreapp3.0\Common.pdb
+C:\Users\opolo\Documents\fuentes\TimeControl\Common\obj\Release\netcoreapp3.0\Common.csproj.AssemblyReference.cache

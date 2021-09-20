@@ -13,6 +13,7 @@ icacls %mypath% /grant SYSTEM:(OI)(CI)F /T
 "%mypath%\nssm" set TimeControl Start SERVICE_AUTO_START
 "%mypath%\nssm" set TimeControl Type SERVICE_INTERACTIVE_PROCESS
 "%mypath%\nssm" set TimeControl ObjectName LocalSystem
+"%mypath%\nssm" set TimeControl AppRestartDelay 7500
 
 aspnetcore-runtime-3.0.0-win-x64.exe
 

@@ -164,21 +164,22 @@ namespace TimeControl.Monitor
                 {
                     sessionid=HasOpenSessionUserWindows(username);
                 }
-                else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+                /*else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
                 {
                     sessionid=HasOpenSessionUserLinux(username);
-                }
+                }*/
                 if (sessionid>-1){
+                    Logger.Log($@"{DateTime.Now} [KILL]: Forcing Logout session {username}");
                     if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                     {
                         if (!WTSDisconnectSession(WTS_CURRENT_SERVER_HANDLE,sessionid, false))
                             Logger.Log ($@"{DateTime.Now} [ERROR]: Forcing Logout windows session {username}");
                     } 
-                    else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+                    /*else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
                     {
                         Process.Start ("/usr/bin/kill",$@"-p {sessionid}");
                         Logger.Log ($@"{DateTime.Now} [ERROR]: Forcing Logout linux session {username}");
-                    }
+                    }*/
  
                 }
             }
@@ -390,7 +391,7 @@ namespace TimeControl.Monitor
                     WTSQuerySessionInformation(serverHandle, si.SessionID, WTS_INFO_CLASS.WTSUserName, out userPtr, out bytes);
                     WTSQuerySessionInformation(serverHandle, si.SessionID, WTS_INFO_CLASS.WTSDomainName, out domainPtr, out bytes);
 
-                    Console.WriteLine("Domain and User: " + Marshal.PtrToStringAnsi(domainPtr) + "\\" + Marshal.PtrToStringAnsi(userPtr));
+                    //Console.WriteLine("Domain and User: " + Marshal.PtrToStringAnsi(domainPtr) + "\\" + Marshal.PtrToStringAnsi(userPtr));
 
                     if (Marshal.PtrToStringAnsi(userPtr) == username)
                         sessionid=si.SessionID;
