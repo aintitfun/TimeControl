@@ -558,30 +558,38 @@ namespace TimeControl.Monitor
         /// <param name="dtEndTime"></param>
         public void UpdateApp(string strApp, string userName,int nPid)
         {
+            if (Monitor.IgnoredApps.Contains(strApp))
+            {
+                Logger.Log($@"{DateTime.Now} [INFO] Ignored app {strApp}");
+            }
+            else //only insert the app (or update) in case the app is permitted
+            {
 
-            using (var conn = new NpgsqlConnection(connString))
-            {                
-                conn.Open();  
-                using (NpgsqlCommand cmd = new NpgsqlCommand($@"INSERT INTO daily_apps(app,username,start_time,pid) VALUES('{strApp}','{userName}','{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}',{nPid})",conn))
+
+                using (var conn = new NpgsqlConnection(connString))
                 {
-                    try 
+                    conn.Open();
+                    using (NpgsqlCommand cmd = new NpgsqlCommand($@"INSERT INTO daily_apps(app,username,start_time,pid) VALUES('{strApp}','{userName}','{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}',{nPid})", conn))
                     {
-                        cmd.ExecuteNonQuery();
-                    }//si no es una nueva app saltará al catch
+                        try
+                        {
+                            cmd.ExecuteNonQuery();
+                        }//si no es una nueva app saltará al catch
 
-                    catch (NpgsqlException e)
-                    {
-                        if (e.Message.Contains(Npgsql.PostgresErrorCodes.LockNotAvailable))
+                        catch (NpgsqlException e)
                         {
-                            //Logger.Log($@"{DateTime.Now} [LOCK]: {cmd.CommandText}");
-                            //return false;
-                        }
-                        using (NpgsqlCommand cmdUpd = new NpgsqlCommand($@"update daily_apps set end_time='{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}' where app='{strApp}' and pid={nPid}",conn))
-                        {
-                            cmdUpd.ExecuteNonQuery();
+                            if (e.Message.Contains(Npgsql.PostgresErrorCodes.LockNotAvailable))
+                            {
+                                //Logger.Log($@"{DateTime.Now} [LOCK]: {cmd.CommandText}");
+                                //return false;
+                            }
+                            using (NpgsqlCommand cmdUpd = new NpgsqlCommand($@"update daily_apps set end_time='{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}' where app='{strApp}' and pid={nPid}", conn))
+                            {
+                                cmdUpd.ExecuteNonQuery();
+                            }
                         }
                     }
-                }                
+                }
             }
         }
 

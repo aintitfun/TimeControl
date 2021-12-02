@@ -17,7 +17,7 @@ namespace TimeControl.Monitor
         public List<ProcessesPersist> processes_persist_old = new List<ProcessesPersist>();
         public List<ProcessesPersist> processes_persist = new List<ProcessesPersist>();
         public DateTime START_TIME;
-                                      
+        public static List<string> IgnoredApps {get=> File.ReadAllLines("IgnoredApps.cfg").ToList<string>(); }
         public Process[] processes;
         public int nCycleCount;
         public Monitor()
@@ -429,5 +429,9 @@ namespace TimeControl.Monitor
         }
 
     }
+    //public voidGetIgnoredAppsFromFile()
+    //{
+    //    IgnoredApps=File.ReadAllLines(textFile);
+    //}
 }
 
