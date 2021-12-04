@@ -17,6 +17,7 @@ namespace TimeControl.Monitor
         public List<ProcessesPersist> processes_persist_old = new List<ProcessesPersist>();
         public List<ProcessesPersist> processes_persist = new List<ProcessesPersist>();
         public DateTime START_TIME;
+        //this var is not optmized: it reads the file on each app iteration. maybe better read once on start or add a method to reload by commmand line
         public static List<string> IgnoredApps {get=> File.ReadAllLines("IgnoredApps.cfg").ToList<string>(); }
         public Process[] processes;
         public int nCycleCount;
@@ -148,16 +149,20 @@ namespace TimeControl.Monitor
         /// </summary>
         public void CheckShutdowns()
         {
-        /*    if (vSQL.GetShutdownTime()>0)
+            /*    if (vSQL.GetShutdownTime()>0)
+                {
+                    var psi = new ProcessStartInfo("shutdown","/s /t 0");
+                    psi.CreateNoWindow = true;
+                    psi.UseShellExecute = false;
+                    Logger.Log ($@"{DateTime.Now} [Shutdown]:");
+                    Process.Start(psi);
+                 }*/
+            foreach (string userName in vSQL.GetUsers())
             {
-                var psi = new ProcessStartInfo("shutdown","/s /t 0");
-                psi.CreateNoWindow = true;
-                psi.UseShellExecute = false;
-                Logger.Log ($@"{DateTime.Now} [Shutdown]:");
-                Process.Start(psi);
-             }*/
+                vSQL.UpdateSessionTime(userName);
+            }
 
-            foreach(string username in vSQL.GetUsersToLogOut())
+            foreach (string username in vSQL.GetUsersToLogOut())
             {
                 int sessionid=0;
                 if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))

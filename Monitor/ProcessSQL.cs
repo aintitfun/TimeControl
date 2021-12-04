@@ -32,7 +32,7 @@ namespace TimeControl.Monitor
                         " CREATE TABLE if not exists apps (name text , username text,max_time int, day_of_the_week text, primary key (name,username,day_of_the_week)); " +
                         " CREATE TABLE if not exists daily_apps (pid int,app text,username text,start_time timestamp,end_time timestamp,primary key(pid, app));" +
                         " CREATE TABLE if not exists hist_apps (pid int,app text,username text,start_time timestamp,end_time timestamp);"+
-                        " create table if not exists activetime (username text, max_time int, day_of_the_week text, primary key(username,day_of_the_week));" +
+                        " create table if not exists activetime (username text, max_time int, day_of_the_week text, last_time_connected timestamp, minutes_today int, primary key(username,day_of_the_week));" +
                         " create table if not exists logouts (username text, hour_min text, day_of_the_week text, primary key(username,day_of_the_week));" +
                         " create table if not exists logins (username text, hour_min text, day_of_the_week text, primary key(username,day_of_the_week));" +
                         " create table if not exists logoutsnow (username text primary key, hour_min text);"+
@@ -593,6 +593,23 @@ namespace TimeControl.Monitor
             }
         }
 
+        public List<string> GetUsers()
+        {
+            List<string> users = new List<string>();
+            //users on time > than logout
+            using (var vConn = new NpgsqlConnection(connString))
+            {
+                vConn.Open();
+                using (NpgsqlCommand cmd = new NpgsqlCommand($@"select username from activetime", vConn))
+                {
+                    NpgsqlDataReader dr;
+                    dr = cmd.ExecuteReader();
+                    while (dr.Read())
+                        users.Add(dr.GetString(0));
+                }
+            }
+            return users;
+        }
         public List<string> GetUsersToLogOut()
         {
             List<string> usersToLogOut=new List<string>();
@@ -638,10 +655,51 @@ namespace TimeControl.Monitor
                 }
             }
             //users that consumed all their time
-            foreach (AppsPersist appPersist in GetUsersWithActiveTimeExhausted().Where(x=>x._dayOfTheWeek.ToLower()== DateTime.Today.DayOfWeek.ToString().ToLower()))
-                usersToLogOut.Add(appPersist._userName);
-            
+            //foreach (AppsPersist appPersist in GetUsersWithActiveTimeExhausted().Where(x=>x._dayOfTheWeek.ToLower()== DateTime.Today.DayOfWeek.ToString().ToLower()))
+            //    usersToLogOut.Add(appPersist._userName);
+            using (var vConn = new NpgsqlConnection(connString))
+            {
+                vConn.Open();
+                using (NpgsqlCommand cmd = new NpgsqlCommand($@"select username from activetime
+                     where minutes_todat>max_time;", vConn))
+                {
+                    NpgsqlDataReader dr;
+                    dr = cmd.ExecuteReader();
+                    while (dr.Read())
+                        usersToLogOut.Add(dr.GetString(0));
+                }
+            }
+
             return usersToLogOut;
+        }
+        public void UpdateSessionTime(string userName)
+        {
+            using (var vConn = new NpgsqlConnection(connString))
+            {
+                DateTime lastTimeConnected;
+                vConn.Open();
+                using (NpgsqlCommand cmd = new NpgsqlCommand($@"select last_time_connected from activetime where username='{userName}'", vConn))
+                {
+                    lastTimeConnected=(DateTime) cmd.ExecuteScalar();                   
+                }
+                int minutesToday=(int)(DateTime.Now - lastTimeConnected).TotalMinutes;
+                if (minutesToday < 1) //probably continues session
+                {
+                    using (NpgsqlCommand cmd = new NpgsqlCommand($@"update activetime set last_time_connected='{DateTime.Now}', minues_today='{minutesToday}' 
+                        where username='{userName}'", vConn))
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+                else //only update last_time, next iteration will increase the time consumed
+                {
+                    using (NpgsqlCommand cmd = new NpgsqlCommand($@"update activetime set last_time_connected='{DateTime.Now}' 
+                        where username='{userName}'", vConn))
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
         }
     }
 }
