@@ -686,7 +686,8 @@ namespace TimeControl.Monitor
                     Logger.Log($@"{DateTime.Now} [INFO]: Seconds consumed by {userName}: {((int)cmd.ExecuteScalar())}");
                 }
 
-                using (NpgsqlCommand cmd = new NpgsqlCommand($@"select coalesce(last_time_connected,now()) from activetime where username='{userName}'", vConn))
+                using (NpgsqlCommand cmd = new NpgsqlCommand($@"select coalesce(last_time_connected,now()) from activetime where username='{userName}'
+                                                                and lower(day_of_the_week)=rtrim(lower(to_char(now(),'day')))", vConn))
                 {
                     lastTimeConnected = (DateTime)cmd.ExecuteScalar();
                 }
