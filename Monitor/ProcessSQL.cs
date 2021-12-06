@@ -661,7 +661,8 @@ namespace TimeControl.Monitor
             {
                 vConn.Open();
                 using (NpgsqlCommand cmd = new NpgsqlCommand($@"select username from activetime
-                     where seconds_today>max_time*60;", vConn))
+                     where seconds_today>max_time*60
+                     and lower(day_of_the_week)=rtrim(lower(to_char(now(),'day')));", vConn))
                 {
                     NpgsqlDataReader dr;
                     dr = cmd.ExecuteReader();
@@ -679,7 +680,8 @@ namespace TimeControl.Monitor
                 DateTime lastTimeConnected;
                 vConn.Open();
 
-                using (NpgsqlCommand cmd = new NpgsqlCommand($@"select seconds_today from activetime where username='{userName}'", vConn))
+                using (NpgsqlCommand cmd = new NpgsqlCommand($@"select seconds_today from activetime where username='{userName}'
+                                                                and lower(day_of_the_week)=rtrim(lower(to_char(now(),'day')))", vConn))
                 {
                     Logger.Log($@"{DateTime.Now} [INFO]: Seconds consumed by {userName}: {((int)cmd.ExecuteScalar())}");
                 }
@@ -693,7 +695,8 @@ namespace TimeControl.Monitor
                 {
                     using (NpgsqlCommand cmd = new NpgsqlCommand($@"update activetime set last_time_connected='{DateTime.Now}', 
                                                                     seconds_today=seconds_today+'{secondsConsumedFromLastIteration}' 
-                                                                    where username='{userName}'", vConn))
+                                                                    where username='{userName}'
+                                                                    and lower(day_of_the_week)=rtrim(lower(to_char(now(),'day')))", vConn))
                     {
                         cmd.ExecuteNonQuery();
                     }
@@ -701,7 +704,8 @@ namespace TimeControl.Monitor
                 else //only update last_time, next iteration will increase the time consumed
                 {
                     using (NpgsqlCommand cmd = new NpgsqlCommand($@"update activetime set last_time_connected='{DateTime.Now}' 
-                        where username='{userName}'", vConn))
+                        where username='{userName}'
+                        and lower(day_of_the_week)=rtrim(lower(to_char(now(),'day')))", vConn))
                     {
                         cmd.ExecuteNonQuery();
                     }
