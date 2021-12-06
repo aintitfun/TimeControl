@@ -22,7 +22,7 @@ namespace TimeControl.Monitor
 
             vSQLite.CheckAndRecreateTables();
             vSQLite.HistApps();
-            vSQLite.RemoveConsumedTimeFromUsers();
+            vSQLite.ReStartConsumedTimeFromUsers();
 
             //vSQLite.AddApplication("xterm",true,1);
 

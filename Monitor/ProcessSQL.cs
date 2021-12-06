@@ -708,13 +708,19 @@ namespace TimeControl.Monitor
                 }
             }
         }
-        public void RemoveConsumedTimeFromUsers()
+        /// <summary>
+        /// Reset ammount of active time consumed by a session (only if we are on other day than previous active time, this is to contimue time 
+        /// if the machine reboots). Also if the last_time_connected is null.
+        /// </summary>
+        public void ReStartConsumedTimeFromUsers()
         {
             using (var vConn = new NpgsqlConnection(connString))
             {
                 vConn.Open();
 
-                using (NpgsqlCommand cmd = new NpgsqlCommand($@"update activetime set last_time_connected=null,seconds_today=0", vConn))
+                using (NpgsqlCommand cmd = new NpgsqlCommand($@"update activetime set last_time_connected=null,seconds_today=0 
+                                                                    where (last_time_connected<date_trunc('hour',now())
+                                                                    or last_time_connected is null)", vConn))
                 {
                     cmd.ExecuteNonQuery();
                 }
