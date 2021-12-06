@@ -32,7 +32,7 @@ namespace TimeControl.Monitor
                         " CREATE TABLE if not exists apps (name text , username text,max_time int, day_of_the_week text, primary key (name,username,day_of_the_week)); " +
                         " CREATE TABLE if not exists daily_apps (pid int,app text,username text,start_time timestamp,end_time timestamp,primary key(pid, app));" +
                         " CREATE TABLE if not exists hist_apps (pid int,app text,username text,start_time timestamp,end_time timestamp);"+
-                        " create table if not exists activetime (username text, max_time int, day_of_the_week text, last_time_connected timestamp, minutes_today int, primary key(username,day_of_the_week));" +
+                        " create table if not exists activetime (username text, max_time int, day_of_the_week text, last_time_connected timestamp, seconds_today int, primary key(username,day_of_the_week));" +
                         " create table if not exists logouts (username text, hour_min text, day_of_the_week text, primary key(username,day_of_the_week));" +
                         " create table if not exists logins (username text, hour_min text, day_of_the_week text, primary key(username,day_of_the_week));" +
                         " create table if not exists logoutsnow (username text primary key, hour_min text);"+
@@ -517,7 +517,7 @@ namespace TimeControl.Monitor
             using (var conn = new NpgsqlConnection(connString))
             {                
                 conn.Open();  
-                using (NpgsqlCommand cmd = new NpgsqlCommand($@"insert into activetime values ('{userName}',{maxTime},'{dayOfTheWeek}')",conn))
+                using (NpgsqlCommand cmd = new NpgsqlCommand($@"insert into activetime values ('{userName}',{maxTime},'{dayOfTheWeek}',null,0)",conn))
                 {
                     try
                     {
@@ -558,12 +558,12 @@ namespace TimeControl.Monitor
         /// <param name="dtEndTime"></param>
         public void UpdateApp(string strApp, string userName,int nPid)
         {
-            if (Monitor.IgnoredApps.Contains(strApp))
-            {
-                Logger.Log($@"{DateTime.Now} [INFO] Ignored app {strApp}");
-            }
-            else //only insert the app (or update) in case the app is permitted
-            {
+            //if (Monitor.IgnoredApps.Contains(strApp))
+            //{
+            //    Logger.Log($@"{DateTime.Now} [INFO] Ignored app {strApp}");
+            //}
+            //else //only insert the app (or update) in case the app is permitted
+            //{
 
 
                 using (var conn = new NpgsqlConnection(connString))
@@ -590,7 +590,7 @@ namespace TimeControl.Monitor
                         }
                     }
                 }
-            }
+            //}
         }
 
         public List<string> GetUsers()
@@ -661,7 +661,7 @@ namespace TimeControl.Monitor
             {
                 vConn.Open();
                 using (NpgsqlCommand cmd = new NpgsqlCommand($@"select username from activetime
-                     where minutes_todat>max_time;", vConn))
+                     where seconds_today>max_time*60;", vConn))
                 {
                     NpgsqlDataReader dr;
                     dr = cmd.ExecuteReader();
@@ -678,15 +678,22 @@ namespace TimeControl.Monitor
             {
                 DateTime lastTimeConnected;
                 vConn.Open();
-                using (NpgsqlCommand cmd = new NpgsqlCommand($@"select last_time_connected from activetime where username='{userName}'", vConn))
+
+                using (NpgsqlCommand cmd = new NpgsqlCommand($@"select seconds_today from activetime where username='{userName}'", vConn))
                 {
-                    lastTimeConnected=(DateTime) cmd.ExecuteScalar();                   
+                    Logger.Log($@"{DateTime.Now} [INFO]: Seconds consumed by {userName}: {((int)cmd.ExecuteScalar())}");
                 }
-                int minutesToday=(int)(DateTime.Now - lastTimeConnected).TotalMinutes;
-                if (minutesToday < 1) //probably continues session
+
+                using (NpgsqlCommand cmd = new NpgsqlCommand($@"select coalesce(last_time_connected,now()) from activetime where username='{userName}'", vConn))
                 {
-                    using (NpgsqlCommand cmd = new NpgsqlCommand($@"update activetime set last_time_connected='{DateTime.Now}', minues_today='{minutesToday}' 
-                        where username='{userName}'", vConn))
+                    lastTimeConnected = (DateTime)cmd.ExecuteScalar();
+                }
+                int secondsConsumedFromLastIteration=(int)(DateTime.Now - lastTimeConnected).TotalSeconds;
+                if (secondsConsumedFromLastIteration < 60) //probably continues session
+                {
+                    using (NpgsqlCommand cmd = new NpgsqlCommand($@"update activetime set last_time_connected='{DateTime.Now}', 
+                                                                    seconds_today=seconds_today+'{secondsConsumedFromLastIteration}' 
+                                                                    where username='{userName}'", vConn))
                     {
                         cmd.ExecuteNonQuery();
                     }
@@ -698,6 +705,18 @@ namespace TimeControl.Monitor
                     {
                         cmd.ExecuteNonQuery();
                     }
+                }
+            }
+        }
+        public void RemoveConsumedTimeFromUsers()
+        {
+            using (var vConn = new NpgsqlConnection(connString))
+            {
+                vConn.Open();
+
+                using (NpgsqlCommand cmd = new NpgsqlCommand($@"update activetime set last_time_connected=null,seconds_today=0", vConn))
+                {
+                    cmd.ExecuteNonQuery();
                 }
             }
         }
