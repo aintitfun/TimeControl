@@ -16,7 +16,7 @@ namespace TimeControl.Monitor
 {
     class ProcessSQL
     {
-
+        
         private string strconnPath=AppDomain.CurrentDomain.BaseDirectory+"conn.db";
         private string connString;
         public ProcessSQL()
@@ -730,6 +730,28 @@ namespace TimeControl.Monitor
                     cmd.ExecuteNonQuery();
                 }
             }
+        }
+
+        public List<AppsPersist> GetUsersRemainingTime()
+        {
+            List<AppsPersist> lap = new List<AppsPersist>();
+
+            using (var conn = new NpgsqlConnection(connString))
+            {
+                conn.Open();
+                using (NpgsqlCommand cmd = new NpgsqlCommand($@"select username,max_time-seconds_today/60 from activetime
+                                                                where lower(day_of_the_week)=rtrim(lower(to_char(now(),'day')));", conn))
+                {
+                    NpgsqlDataReader dr;
+                    dr = cmd.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        lap.Add(new AppsPersist(null, dr.GetString(0), dr.GetInt32(1),null));
+                    }
+
+                }
+            }
+            return lap;
         }
     }
 }

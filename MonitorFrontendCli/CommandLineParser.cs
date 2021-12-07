@@ -145,6 +145,8 @@ namespace TimeControl.MonitorFrontendCli
                     return RemoveArguments(4,ref args);
                     case "listactivetime" :
                     return RemoveArguments(2,ref args);
+                    case "listremainingtime":
+                    return RemoveArguments(2, ref args);
 
                 }
             }

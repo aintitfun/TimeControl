@@ -137,7 +137,15 @@ namespace TimeControl.MonitorFrontendCli
                                 Console.WriteLine(a._userName+" "+a._time+ " "+a._dayOfTheWeek);
                             }
                         break;
-
+                        case "-listremainingtime":
+                            socClient.Connect(args[1]);
+                            lap = socClient.SendMessage("null", "null", 0, (int)Command.listremainingtime, "null");
+                            socClient.Disconnect();
+                            foreach (AppsPersist a in lap)
+                            {
+                                Console.WriteLine(a._userName + " " + a._time);
+                            }
+                            break;
 
                     }
                 }

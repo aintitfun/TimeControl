@@ -188,8 +188,8 @@ namespace TimeControl.Monitor
                                 SendMessage(new List<AppsPersist>{ new AppsPersist($@"{DateTime.Now} [ERROR]: Adding Active Time {jsonResult.userName}","",0)},clientSocket);
                             }*/
                         }
-                        if (jsonResult._command==(int)Command.removeactivetime)
-                        {
+                    if (jsonResult._command==(int)Command.removeactivetime)
+                    {
                             if (vSQL.RemoveActiveTime(jsonResult._userName, jsonResult._dayOfTheWeek))
                                 SendMessage(new List<AppsPersist>{ new AppsPersist($@"{DateTime.Now} [INFO]: Removed active time for {jsonResult._userName}","",0,"")},clientSocket);
                             else 
@@ -201,7 +201,25 @@ namespace TimeControl.Monitor
                         {
                             SendMessage(vSQL.GetCurrentDayAppUsage(),clientSocket);
                         }
+
+                    if (jsonResult._command == (int)Command.listremainingtime)
+                    {
+
+                        List<AppsPersist> lap = new List<AppsPersist>();
+                        lap = vSQL.GetUsersRemainingTime();
+
+                        SendMessage(lap, clientSocket);
+
+                        /* 
+                         if (vSQL.ListActiveTime())
+                             SendMessage(new List<AppsPersist>{ new AppsPersist($@"{DateTime.Now} [INFO]: Added Active Time {jsonResult.userName}","",0)},clientSocket);
+                         else 
+                         {
+                             SendMessage(new List<AppsPersist>{ new AppsPersist($@"{DateTime.Now} [ERROR]: Adding Active Time {jsonResult.userName}","",0)},clientSocket);
+                         }*/
                     }
+                }
+
            
             }
 
