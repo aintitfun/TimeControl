@@ -724,7 +724,7 @@ namespace TimeControl.Monitor
                 vConn.Open();
 
                 using (NpgsqlCommand cmd = new NpgsqlCommand($@"update activetime set last_time_connected=null,seconds_today=0 
-                                                                    where (last_time_connected<date_trunc('hour',now())
+                                                                    where (last_time_connected<date_trunc('day',now())
                                                                     or last_time_connected is null)", vConn))
                 {
                     cmd.ExecuteNonQuery();
