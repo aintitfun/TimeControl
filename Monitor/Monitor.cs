@@ -159,7 +159,7 @@ namespace TimeControl.Monitor
                  }*/
             foreach (string userName in vSQL.GetUsers())
             {
-                if (HasOpenSessionUserWindows(userName)>1)
+                if (HasOpenSessionUserWindows(userName)>-1)
                     vSQL.UpdateSessionTime(userName);
             }
 
