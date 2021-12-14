@@ -35,7 +35,7 @@ namespace TimeControl.Monitor
                 string path=System.Reflection.Assembly.GetEntryAssembly().Location.Replace("Monitor.dll","");
                 Logger.Log ($@"{DateTime.Now} [INFO]: Trying to start postgres database on path: {path}");
                 Process.Start(path+"\\pgsql\\bin\\pg_ctl.exe","-D "+path+"\\pgsql\\data start");
-                Thread.Sleep(30000);
+                //Thread.Sleep(30000);
             }
             else 
             {

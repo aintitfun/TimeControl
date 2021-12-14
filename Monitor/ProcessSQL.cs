@@ -600,7 +600,8 @@ namespace TimeControl.Monitor
             using (var vConn = new NpgsqlConnection(connString))
             {
                 vConn.Open();
-                using (NpgsqlCommand cmd = new NpgsqlCommand($@"select username from activetime", vConn))
+                using (NpgsqlCommand cmd = new NpgsqlCommand($@"select username from activetime 
+                            where lower(day_of_the_week)=rtrim(lower(to_char(now(),'day')))", vConn))
                 {
                     NpgsqlDataReader dr;
                     dr = cmd.ExecuteReader();
@@ -680,11 +681,11 @@ namespace TimeControl.Monitor
                 DateTime lastTimeConnected;
                 vConn.Open();
 
-                using (NpgsqlCommand cmd = new NpgsqlCommand($@"select seconds_today from activetime where username='{userName}'
-                                                                and lower(day_of_the_week)=rtrim(lower(to_char(now(),'day')))", vConn))
-                {
-                    Logger.Log($@"{DateTime.Now} [INFO]: Seconds consumed by {userName}: {((int)cmd.ExecuteScalar())}");
-                }
+                //using (NpgsqlCommand cmd = new NpgsqlCommand($@"select seconds_today from activetime where username='{userName}'
+                //                                                and lower(day_of_the_week)=rtrim(lower(to_char(now(),'day')))", vConn))
+                //{
+                //    Logger.Log($@"{DateTime.Now} [INFO]: Seconds consumed by {userName}: {((int)cmd.ExecuteScalar())}");
+                //}
 
                 using (NpgsqlCommand cmd = new NpgsqlCommand($@"select coalesce(last_time_connected,now()) from activetime where username='{userName}'
                                                                 and lower(day_of_the_week)=rtrim(lower(to_char(now(),'day')))", vConn))
