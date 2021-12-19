@@ -126,7 +126,7 @@ namespace TimeControl.MonitorFrontendCli
                             lap=socClient.SendMessage("null",args[2],0,(int)Command.removeactivetime, args[3]);
                             socClient.Disconnect();
                             foreach(AppsPersist a in lap){
-                                Console.WriteLine(a._app);
+                                Console.WriteLine($@"{a._app} Removing active time for {a._userName}, remaining time: {a._time}");
                             }
                         break;
                         case "-listactivetime":

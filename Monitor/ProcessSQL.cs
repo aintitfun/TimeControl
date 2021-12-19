@@ -754,5 +754,33 @@ namespace TimeControl.Monitor
             }
             return lap;
         }
+        public AppsPersist GetUserRemainingTime(string userName)
+        {
+            AppsPersist ap = new AppsPersist();
+
+            using (var conn = new NpgsqlConnection(connString))
+            {
+                conn.Open();
+                using (NpgsqlCommand cmd = new NpgsqlCommand($@"select username,max_time-seconds_today/60 from activetime
+                                                                where lower(day_of_the_week)=rtrim(lower(to_char(now(),'day')))
+                                                                and username='{userName}';", conn))
+                {
+                    NpgsqlDataReader dr;
+                    dr = cmd.ExecuteReader();
+                    try
+                    {
+                        while (dr.Read())
+                        {
+                            ap = new AppsPersist(null, dr.GetString(0), dr.GetInt32(1), null);
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        ap = new AppsPersist(null, userName, 0, null);
+                    }
+                }
+            }
+            return ap;
+        }
     }
 }

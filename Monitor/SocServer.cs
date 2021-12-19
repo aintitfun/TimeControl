@@ -190,17 +190,20 @@ namespace TimeControl.Monitor
                         }
                     if (jsonResult._command==(int)Command.removeactivetime)
                     {
-                            if (vSQL.RemoveActiveTime(jsonResult._userName, jsonResult._dayOfTheWeek))
-                                SendMessage(new List<AppsPersist>{ new AppsPersist($@"{DateTime.Now} [INFO]: Removed active time for {jsonResult._userName}","",0,"")},clientSocket);
-                            else 
-                            {
-                                SendMessage(new List<AppsPersist>{ new AppsPersist($@"{DateTime.Now} [ERROR]: Removing active time for {jsonResult._userName}","",0,"")},clientSocket);
-                            }
-                        }
-                        if (jsonResult._command==(int)Command.stats)
+                        int remainingTime = vSQL.GetUserRemainingTime(jsonResult._userName)._time;
+                        if (vSQL.RemoveActiveTime(jsonResult._userName, jsonResult._dayOfTheWeek))
                         {
-                            SendMessage(vSQL.GetCurrentDayAppUsage(),clientSocket);
+                            SendMessage(new List<AppsPersist> { new AppsPersist("[INFO]", jsonResult._userName, remainingTime, jsonResult._dayOfTheWeek)}, clientSocket);
                         }
+                        else 
+                        {
+                            SendMessage(new List<AppsPersist> { new AppsPersist("[ERROR]", jsonResult._userName, remainingTime, jsonResult._dayOfTheWeek)}, clientSocket);
+                        }
+                    }
+                    if (jsonResult._command==(int)Command.stats)
+                    {
+                        SendMessage(vSQL.GetCurrentDayAppUsage(),clientSocket);
+                    }
 
                     if (jsonResult._command == (int)Command.listremainingtime)
                     {
