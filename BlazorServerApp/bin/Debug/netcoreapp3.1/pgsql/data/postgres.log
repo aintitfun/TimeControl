@@ -1,0 +1,1068 @@
+2021-12-06 09:18:57.976 CET [7132] FATAL:  lock file "postmaster.pid" already exists
+2021-12-06 09:18:57.976 CET [7132] HINT:  Is another postmaster (PID 4964) running in data directory "C:/Users/papa/Source/Repos/TimeControl/Monitor/bin/Debug/netcoreapp3.0/pgsql/data"?
+2021-12-06 09:32:03.950 CET [7372] FATAL:  lock file "postmaster.pid" already exists
+2021-12-06 09:32:03.950 CET [7372] HINT:  Is another postmaster (PID 4964) running in data directory "C:/Users/papa/Source/Repos/TimeControl/Monitor/bin/Debug/netcoreapp3.0/pgsql/data"?
+2021-12-06 09:32:40.622 CET [3060] FATAL:  lock file "postmaster.pid" already exists
+2021-12-06 09:32:40.622 CET [3060] HINT:  Is another postmaster (PID 4964) running in data directory "C:/Users/papa/Source/Repos/TimeControl/Monitor/bin/Debug/netcoreapp3.0/pgsql/data"?
+2021-12-06 09:38:35.635 CET [12016] FATAL:  lock file "postmaster.pid" already exists
+2021-12-06 09:38:35.635 CET [12016] HINT:  Is another postmaster (PID 4964) running in data directory "C:/Users/papa/Source/Repos/TimeControl/Monitor/bin/Debug/netcoreapp3.0/pgsql/data"?
+2021-12-06 09:39:11.189 CET [12596] FATAL:  lock file "postmaster.pid" already exists
+2021-12-06 09:39:11.189 CET [12596] HINT:  Is another postmaster (PID 4964) running in data directory "C:/Users/papa/Source/Repos/TimeControl/Monitor/bin/Debug/netcoreapp3.0/pgsql/data"?
+2021-12-06 09:40:04.567 CET [8988] FATAL:  lock file "postmaster.pid" already exists
+2021-12-06 09:40:04.567 CET [8988] HINT:  Is another postmaster (PID 4964) running in data directory "C:/Users/papa/Source/Repos/TimeControl/Monitor/bin/Debug/netcoreapp3.0/pgsql/data"?
+2021-12-06 12:25:08.165 CET [14644] FATAL:  lock file "postmaster.pid" already exists
+2021-12-06 12:25:08.165 CET [14644] HINT:  Is another postmaster (PID 4964) running in data directory "C:/Users/papa/Source/Repos/TimeControl/Monitor/bin/Debug/netcoreapp3.0/pgsql/data"?
+2021-12-06 12:30:54.350 CET [15140] FATAL:  lock file "postmaster.pid" already exists
+2021-12-06 12:30:54.350 CET [15140] HINT:  Is another postmaster (PID 4964) running in data directory "C:/Users/papa/Source/Repos/TimeControl/Monitor/bin/Debug/netcoreapp3.0/pgsql/data"?
+2021-12-06 13:25:14.475 CET [15044] FATAL:  lock file "postmaster.pid" already exists
+2021-12-06 13:25:14.475 CET [15044] HINT:  Is another postmaster (PID 4964) running in data directory "C:/Users/papa/Source/Repos/TimeControl/Monitor/bin/Debug/netcoreapp3.0/pgsql/data"?
+2021-12-06 13:25:49.167 CET [1648] FATAL:  lock file "postmaster.pid" already exists
+2021-12-06 13:25:49.167 CET [1648] HINT:  Is another postmaster (PID 4964) running in data directory "C:/Users/papa/Source/Repos/TimeControl/Monitor/bin/Debug/netcoreapp3.0/pgsql/data"?
+2021-12-06 20:25:31.936 CET [400] LOG:  starting PostgreSQL 13devel on x86_64-w64-mingw32, compiled by x86_64-w64-mingw32-gcc.exe (Rev2, Built by MSYS2 project) 9.2.0, 64-bit
+2021-12-06 20:25:31.995 CET [400] LOG:  listening on IPv6 address "::1", port 5432
+2021-12-06 20:25:31.997 CET [400] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2021-12-06 20:25:32.308 CET [4424] LOG:  database system was interrupted; last known up at 2021-12-06 20:12:28 CET
+2021-12-06 20:25:33.152 CET [6388] FATAL:  the database system is starting up
+2021-12-06 20:26:15.720 CET [4424] LOG:  could not open file "./postgres.log": sharing violation
+2021-12-06 20:26:15.720 CET [4424] DETAIL:  Continuing to retry for 30 seconds.
+2021-12-06 20:26:15.720 CET [4424] HINT:  You might have antivirus, backup, or similar software interfering with the database system.
+2021-12-06 20:26:42.149 CET [3480] FATAL:  the database system is starting up
+2021-12-06 20:26:43.669 CET [4424] LOG:  database system was not properly shut down; automatic recovery in progress
+2021-12-06 20:26:43.703 CET [4424] LOG:  redo starts at 0/22299B0
+2021-12-06 20:26:43.703 CET [4424] LOG:  invalid record length at 0/2229A98: wanted 24, got 0
+2021-12-06 20:26:43.703 CET [4424] LOG:  redo done at 0/2229A60
+2021-12-06 20:26:43.829 CET [400] LOG:  database system is ready to accept connections
+2021-12-06 20:28:25.670 CET [1096] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-06 20:28:25.670 CET [1096] DETAIL:  Key (pid, app)=(7820, pg_ctl) already exists.
+2021-12-06 20:28:25.670 CET [1096] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('pg_ctl','papa','2021-12-06 20:28:25',7820)
+2021-12-06 20:29:26.205 CET [5320] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-06 20:29:26.205 CET [5320] DETAIL:  Key (pid, app)=(9188, svchost) already exists.
+2021-12-06 20:29:26.205 CET [5320] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('svchost','SYSTEM','2021-12-06 20:29:26',9188)
+2021-12-06 20:29:55.270 CET [5320] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-06 20:29:55.270 CET [5320] DETAIL:  Key (pid, app)=(5332, pg_ctl) already exists.
+2021-12-06 20:29:55.270 CET [5320] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('pg_ctl','papa','2021-12-06 20:29:55',5332)
+2021-12-06 20:29:59.522 CET [9268] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2021-12-06 20:30:17.084 CET [9360] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-06 20:30:17.084 CET [9360] DETAIL:  Key (pid, app)=(980, svchost) already exists.
+2021-12-06 20:30:17.084 CET [9360] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('svchost','SYSTEM','2021-12-06 20:30:17',980)
+2021-12-06 20:30:44.349 CET [9360] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-06 20:30:44.349 CET [9360] DETAIL:  Key (pid, app)=(9880, pg_ctl) already exists.
+2021-12-06 20:30:44.349 CET [9360] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('pg_ctl','papa','2021-12-06 20:30:44',9880)
+2021-12-06 20:30:57.168 CET [9360] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-06 20:30:57.168 CET [9360] DETAIL:  Key (pid, app)=(7684, FileCoAuth) already exists.
+2021-12-06 20:30:57.168 CET [9360] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('FileCoAuth','papa','2021-12-06 20:30:57',7684)
+2021-12-06 20:31:14.796 CET [9360] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-06 20:31:14.796 CET [9360] DETAIL:  Key (pid, app)=(10356, dllhost) already exists.
+2021-12-06 20:31:14.796 CET [9360] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('dllhost','papa','2021-12-06 20:31:14',10356)
+2021-12-06 20:31:19.157 CET [9360] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-06 20:31:19.157 CET [9360] DETAIL:  Key (pid, app)=(9248, backgroundTaskHost) already exists.
+2021-12-06 20:31:19.157 CET [9360] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('backgroundTaskHost','papa','2021-12-06 20:31:19',9248)
+2021-12-06 20:31:19.293 CET [9360] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-06 20:31:19.293 CET [9360] DETAIL:  Key (pid, app)=(936, sppsvc) already exists.
+2021-12-06 20:31:19.293 CET [9360] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('sppsvc','','2021-12-06 20:31:19',936)
+2021-12-06 20:31:37.632 CET [9360] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-06 20:31:37.632 CET [9360] DETAIL:  Key (pid, app)=(4712, dllhost) already exists.
+2021-12-06 20:31:37.632 CET [9360] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('dllhost','papa','2021-12-06 20:31:37',4712)
+2021-12-06 20:31:54.594 CET [9360] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-06 20:31:54.594 CET [9360] DETAIL:  Key (pid, app)=(11044, sppsvc) already exists.
+2021-12-06 20:31:54.594 CET [9360] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('sppsvc','','2021-12-06 20:31:54',11044)
+2021-12-06 20:32:38.470 CET [11232] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-06 20:32:38.470 CET [11232] DETAIL:  Key (pid, app)=(204, WmiPrvSE) already exists.
+2021-12-06 20:32:38.470 CET [11232] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('WmiPrvSE','NETWORK SERVICE','2021-12-06 20:32:38',204)
+2021-12-06 20:32:38.604 CET [11232] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-06 20:32:38.604 CET [11232] DETAIL:  Key (pid, app)=(8436, dllhost) already exists.
+2021-12-06 20:32:38.604 CET [11232] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('dllhost','papa','2021-12-06 20:32:38',8436)
+2021-12-06 20:32:38.762 CET [11232] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-06 20:32:38.762 CET [11232] DETAIL:  Key (pid, app)=(9324, cmd) already exists.
+2021-12-06 20:32:38.762 CET [11232] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('cmd','','2021-12-06 20:32:38',9324)
+2021-12-06 20:32:39.115 CET [11232] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-06 20:32:39.115 CET [11232] DETAIL:  Key (pid, app)=(3332, conhost) already exists.
+2021-12-06 20:32:39.115 CET [11232] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('conhost','','2021-12-06 20:32:39',3332)
+2021-12-06 20:32:56.074 CET [11232] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-06 20:32:56.074 CET [11232] DETAIL:  Key (pid, app)=(4464, ctfmon) already exists.
+2021-12-06 20:32:56.074 CET [11232] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('ctfmon','papa','2021-12-06 20:32:56',4464)
+2021-12-06 20:33:01.001 CET [11232] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-06 20:33:01.001 CET [11232] DETAIL:  Key (pid, app)=(4712, dllhost) already exists.
+2021-12-06 20:33:01.001 CET [11232] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('dllhost','pepe','2021-12-06 20:33:00',4712)
+2021-12-06 20:33:06.590 CET [11232] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-06 20:33:06.590 CET [11232] DETAIL:  Key (pid, app)=(3204, pg_ctl) already exists.
+2021-12-06 20:33:06.590 CET [11232] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('pg_ctl','papa','2021-12-06 20:33:06',3204)
+2021-12-06 20:33:06.688 CET [11232] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-06 20:33:06.688 CET [11232] DETAIL:  Key (pid, app)=(10688, dllhost) already exists.
+2021-12-06 20:33:06.688 CET [11232] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('dllhost','pepe','2021-12-06 20:33:06',10688)
+2021-12-06 20:33:12.572 CET [11232] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-06 20:33:12.572 CET [11232] DETAIL:  Key (pid, app)=(1016, WmiPrvSE) already exists.
+2021-12-06 20:33:12.572 CET [11232] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('WmiPrvSE','SYSTEM','2021-12-06 20:33:12',1016)
+2021-12-06 20:33:12.703 CET [11232] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-06 20:33:12.703 CET [11232] DETAIL:  Key (pid, app)=(6776, LogonUI) already exists.
+2021-12-06 20:33:12.703 CET [11232] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('LogonUI','SYSTEM','2021-12-06 20:33:12',6776)
+2021-12-06 20:33:18.024 CET [11232] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-06 20:33:18.024 CET [11232] DETAIL:  Key (pid, app)=(12264, backgroundTaskHost) already exists.
+2021-12-06 20:33:18.024 CET [11232] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('backgroundTaskHost','','2021-12-06 20:33:18',12264)
+2021-12-06 20:33:26.825 CET [11232] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-06 20:33:26.825 CET [11232] DETAIL:  Key (pid, app)=(5476, mobsync) already exists.
+2021-12-06 20:33:26.825 CET [11232] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('mobsync','pepe','2021-12-06 20:33:26',5476)
+2021-12-06 20:33:27.125 CET [11232] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-06 20:33:27.125 CET [11232] DETAIL:  Key (pid, app)=(9232, dllhost) already exists.
+2021-12-06 20:33:27.125 CET [11232] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('dllhost','pepe','2021-12-06 20:33:27',9232)
+2021-12-06 20:33:32.750 CET [11232] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-06 20:33:32.750 CET [11232] DETAIL:  Key (pid, app)=(9276, LogonUI) already exists.
+2021-12-06 20:33:32.750 CET [11232] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('LogonUI','SYSTEM','2021-12-06 20:33:32',9276)
+2021-12-06 20:33:32.837 CET [11232] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-06 20:33:32.837 CET [11232] DETAIL:  Key (pid, app)=(4556, userinit) already exists.
+2021-12-06 20:33:32.837 CET [11232] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('userinit','pepe','2021-12-06 20:33:32',4556)
+2021-12-06 20:33:33.030 CET [11232] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-06 20:33:33.030 CET [11232] DETAIL:  Key (pid, app)=(12004, ctfmon) already exists.
+2021-12-06 20:33:33.030 CET [11232] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('ctfmon','pepe','2021-12-06 20:33:33',12004)
+2021-12-06 20:33:50.239 CET [11232] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-06 20:33:50.239 CET [11232] DETAIL:  Key (pid, app)=(13076, postgres) already exists.
+2021-12-06 20:33:50.239 CET [11232] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('postgres','','2021-12-06 20:33:50',13076)
+2021-12-06 20:33:55.776 CET [11232] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-06 20:33:55.776 CET [11232] DETAIL:  Key (pid, app)=(12792, LogonUI) already exists.
+2021-12-06 20:33:55.776 CET [11232] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('LogonUI','SYSTEM','2021-12-06 20:33:55',12792)
+2021-12-06 20:34:00.311 CET [11232] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-06 20:34:00.311 CET [11232] DETAIL:  Key (pid, app)=(11696, dllhost) already exists.
+2021-12-06 20:34:00.311 CET [11232] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('dllhost','','2021-12-06 20:34:00',11696)
+2021-12-06 20:34:18.037 CET [11232] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-06 20:34:18.037 CET [11232] DETAIL:  Key (pid, app)=(11788, backgroundTaskHost) already exists.
+2021-12-06 20:34:18.037 CET [11232] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('backgroundTaskHost','pepe','2021-12-06 20:34:18',11788)
+2021-12-06 20:34:34.296 CET [11232] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-06 20:34:34.296 CET [11232] DETAIL:  Key (pid, app)=(3800, MoUsoCoreWorker) already exists.
+2021-12-06 20:34:34.296 CET [11232] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('MoUsoCoreWorker','SYSTEM','2021-12-06 20:34:34',3800)
+2021-12-06 20:35:45.607 CET [11232] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-06 20:35:45.607 CET [11232] DETAIL:  Key (pid, app)=(7712, MonitorFrontendCli) already exists.
+2021-12-06 20:35:45.607 CET [11232] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('MonitorFrontendCli','papa','2021-12-06 20:35:45',7712)
+2021-12-06 20:35:45.713 CET [11232] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-06 20:35:45.713 CET [11232] DETAIL:  Key (pid, app)=(9388, taskhostw) already exists.
+2021-12-06 20:35:45.713 CET [11232] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('taskhostw','papa','2021-12-06 20:35:45',9388)
+2021-12-06 20:35:49.937 CET [11232] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-06 20:35:49.937 CET [11232] DETAIL:  Key (pid, app)=(9916, postgres) already exists.
+2021-12-06 20:35:49.937 CET [11232] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('postgres','','2021-12-06 20:35:49',9916)
+2021-12-07 09:08:37.563 CET [10048] LOG:  starting PostgreSQL 13devel on x86_64-w64-mingw32, compiled by x86_64-w64-mingw32-gcc.exe (Rev2, Built by MSYS2 project) 9.2.0, 64-bit
+2021-12-07 09:08:37.575 CET [10048] LOG:  listening on IPv6 address "::1", port 5432
+2021-12-07 09:08:37.576 CET [10048] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2021-12-07 09:08:37.737 CET [10112] LOG:  database system was interrupted; last known up at 2021-12-06 20:36:47 CET
+2021-12-07 09:08:39.287 CET [10188] FATAL:  the database system is starting up
+2021-12-07 09:08:52.993 CET [10112] LOG:  could not open file "./postgres.log": sharing violation
+2021-12-07 09:08:52.993 CET [10112] DETAIL:  Continuing to retry for 30 seconds.
+2021-12-07 09:08:52.993 CET [10112] HINT:  You might have antivirus, backup, or similar software interfering with the database system.
+2021-12-07 09:09:20.767 CET [10112] LOG:  database system was not properly shut down; automatic recovery in progress
+2021-12-07 09:09:20.798 CET [10112] LOG:  redo starts at 0/22DB488
+2021-12-07 09:09:20.798 CET [10112] LOG:  invalid record length at 0/22DB570: wanted 24, got 0
+2021-12-07 09:09:20.798 CET [10112] LOG:  redo done at 0/22DB538
+2021-12-07 09:09:20.945 CET [10048] LOG:  database system is ready to accept connections
+2021-12-07 09:10:04.859 CET [9712] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 09:10:04.859 CET [9712] DETAIL:  Key (pid, app)=(5176, explorer) already exists.
+2021-12-07 09:10:04.859 CET [9712] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('explorer','','2021-12-07 09:10:04',5176)
+2021-12-07 09:10:14.056 CET [9712] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 09:10:14.056 CET [9712] DETAIL:  Key (pid, app)=(9900, pg_ctl) already exists.
+2021-12-07 09:10:14.056 CET [9712] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('pg_ctl','papa','2021-12-07 09:10:14',9900)
+2021-12-07 09:10:18.106 CET [9712] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 09:10:18.106 CET [9712] DETAIL:  Key (pid, app)=(8844, dllhost) already exists.
+2021-12-07 09:10:18.106 CET [9712] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('dllhost','papa','2021-12-07 09:10:18',8844)
+2021-12-07 09:10:26.716 CET [9712] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 09:10:26.716 CET [9712] DETAIL:  Key (pid, app)=(4628, postgres) already exists.
+2021-12-07 09:10:26.716 CET [9712] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('postgres','','2021-12-07 09:10:26',4628)
+2021-12-07 09:11:17.289 CET [9712] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 09:11:17.289 CET [9712] DETAIL:  Key (pid, app)=(9996, FileCoAuth) already exists.
+2021-12-07 09:11:17.289 CET [9712] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('FileCoAuth','papa','2021-12-07 09:11:17',9996)
+2021-12-07 09:11:21.490 CET [9712] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 09:11:21.490 CET [9712] DETAIL:  Key (pid, app)=(5248, svchost) already exists.
+2021-12-07 09:11:21.490 CET [9712] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('svchost','SYSTEM','2021-12-07 09:11:21',5248)
+2021-12-07 09:12:48.453 CET [9712] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 09:12:48.453 CET [9712] DETAIL:  Key (pid, app)=(8624, SearchProtocolHost) already exists.
+2021-12-07 09:12:48.453 CET [9712] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('SearchProtocolHost','SYSTEM','2021-12-07 09:12:48',8624)
+2021-12-07 09:12:48.547 CET [9712] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 09:12:48.547 CET [9712] DETAIL:  Key (pid, app)=(9660, SearchFilterHost) already exists.
+2021-12-07 09:12:48.547 CET [9712] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('SearchFilterHost','SYSTEM','2021-12-07 09:12:48',9660)
+2021-12-07 09:13:21.825 CET [9712] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 09:13:21.825 CET [9712] DETAIL:  Key (pid, app)=(6512, svchost) already exists.
+2021-12-07 09:13:21.825 CET [9712] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('svchost','','2021-12-07 09:13:21',6512)
+2021-12-07 09:13:30.979 CET [9712] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 09:13:30.979 CET [9712] DETAIL:  Key (pid, app)=(9304, smartscreen) already exists.
+2021-12-07 09:13:30.979 CET [9712] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('smartscreen','papa','2021-12-07 09:13:30',9304)
+2021-12-07 09:13:34.280 CET [9712] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 09:13:34.280 CET [9712] DETAIL:  Key (pid, app)=(9608, audiodg) already exists.
+2021-12-07 09:13:34.280 CET [9712] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('audiodg','LOCAL SERVICE','2021-12-07 09:13:34',9608)
+2021-12-07 09:14:41.922 CET [10484] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 09:14:41.922 CET [10484] DETAIL:  Key (pid, app)=(9712, postgres) already exists.
+2021-12-07 09:14:41.922 CET [10484] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('postgres','papa','2021-12-07 09:14:41',9712)
+2021-12-07 09:14:41.990 CET [10484] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 09:14:41.990 CET [10484] DETAIL:  Key (pid, app)=(9880, postgres) already exists.
+2021-12-07 09:14:41.990 CET [10484] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('postgres','papa','2021-12-07 09:14:41',9880)
+2021-12-07 09:14:54.951 CET [10484] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 09:14:54.951 CET [10484] DETAIL:  Key (pid, app)=(1280, VBCSCompiler) already exists.
+2021-12-07 09:14:54.951 CET [10484] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('VBCSCompiler','papa','2021-12-07 09:14:54',1280)
+2021-12-07 09:14:55.034 CET [10484] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 09:14:55.034 CET [10484] DETAIL:  Key (pid, app)=(4092, conhost) already exists.
+2021-12-07 09:14:55.034 CET [10484] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('conhost','papa','2021-12-07 09:14:55',4092)
+2021-12-07 09:15:13.445 CET [10484] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 09:15:13.445 CET [10484] DETAIL:  Key (pid, app)=(2976, svchost) already exists.
+2021-12-07 09:15:13.445 CET [10484] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('svchost','','2021-12-07 09:15:13',2976)
+2021-12-07 09:15:16.684 CET [10484] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 09:15:16.684 CET [10484] DETAIL:  Key (pid, app)=(5880, WmiPrvSE) already exists.
+2021-12-07 09:15:16.684 CET [10484] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('WmiPrvSE','SYSTEM','2021-12-07 09:15:16',5880)
+2021-12-07 09:17:44.267 CET [10484] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 09:17:44.267 CET [10484] DETAIL:  Key (pid, app)=(5268, svchost) already exists.
+2021-12-07 09:17:44.267 CET [10484] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('svchost','SYSTEM','2021-12-07 09:17:44',5268)
+2021-12-07 09:18:13.240 CET [10484] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 09:18:13.240 CET [10484] DETAIL:  Key (pid, app)=(8592, sppsvc) already exists.
+2021-12-07 09:18:13.240 CET [10484] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('sppsvc','','2021-12-07 09:18:13',8592)
+2021-12-07 09:18:38.130 CET [10484] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 09:18:38.130 CET [10484] DETAIL:  Key (pid, app)=(8368, postgres) already exists.
+2021-12-07 09:18:38.130 CET [10484] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('postgres','','2021-12-07 09:18:38',8368)
+2021-12-07 09:18:47.513 CET [10484] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 09:18:47.513 CET [10484] DETAIL:  Key (pid, app)=(9784, svchost) already exists.
+2021-12-07 09:18:47.513 CET [10484] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('svchost','','2021-12-07 09:18:47',9784)
+2021-12-07 09:18:51.787 CET [10484] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 09:18:51.787 CET [10484] DETAIL:  Key (pid, app)=(9828, MoUsoCoreWorker) already exists.
+2021-12-07 09:18:51.787 CET [10484] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('MoUsoCoreWorker','SYSTEM','2021-12-07 09:18:51',9828)
+2021-12-07 09:19:14.287 CET [10484] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 09:19:14.287 CET [10484] DETAIL:  Key (pid, app)=(9060, WmiPrvSE) already exists.
+2021-12-07 09:19:14.287 CET [10484] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('WmiPrvSE','NETWORK SERVICE','2021-12-07 09:19:14',9060)
+2021-12-07 09:19:37.975 CET [3252] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 09:19:37.975 CET [3252] DETAIL:  Key (pid, app)=(10484, postgres) already exists.
+2021-12-07 09:19:37.975 CET [3252] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('postgres','papa','2021-12-07 09:19:37',10484)
+2021-12-07 09:19:49.638 CET [3252] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 09:19:49.638 CET [3252] DETAIL:  Key (pid, app)=(1476, MSBuild) already exists.
+2021-12-07 09:19:49.638 CET [3252] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('MSBuild','papa','2021-12-07 09:19:49',1476)
+2021-12-07 09:19:49.703 CET [3252] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 09:19:49.703 CET [3252] DETAIL:  Key (pid, app)=(4772, conhost) already exists.
+2021-12-07 09:19:49.703 CET [3252] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('conhost','papa','2021-12-07 09:19:49',4772)
+2021-12-07 09:19:49.762 CET [3252] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 09:19:49.762 CET [3252] DETAIL:  Key (pid, app)=(2200, MSBuild) already exists.
+2021-12-07 09:19:49.762 CET [3252] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('MSBuild','papa','2021-12-07 09:19:49',2200)
+2021-12-07 09:19:49.805 CET [3252] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 09:19:49.805 CET [3252] DETAIL:  Key (pid, app)=(2888, conhost) already exists.
+2021-12-07 09:19:49.805 CET [3252] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('conhost','papa','2021-12-07 09:19:49',2888)
+2021-12-07 09:21:06.258 CET [3252] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 09:21:06.258 CET [3252] DETAIL:  Key (pid, app)=(9828, HxTsr) already exists.
+2021-12-07 09:21:06.258 CET [3252] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('HxTsr','papa','2021-12-07 09:21:06',9828)
+2021-12-07 09:21:18.086 CET [3252] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 09:21:18.086 CET [3252] DETAIL:  Key (pid, app)=(5924, FileCoAuth) already exists.
+2021-12-07 09:21:18.086 CET [3252] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('FileCoAuth','papa','2021-12-07 09:21:18',5924)
+2021-12-07 09:21:27.284 CET [3252] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 09:21:27.284 CET [3252] DETAIL:  Key (pid, app)=(6344, backgroundTaskHost) already exists.
+2021-12-07 09:21:27.284 CET [3252] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('backgroundTaskHost','papa','2021-12-07 09:21:27',6344)
+2021-12-07 09:21:37.746 CET [3252] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 09:21:37.746 CET [3252] DETAIL:  Key (pid, app)=(10180, RuntimeBroker) already exists.
+2021-12-07 09:21:37.746 CET [3252] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('RuntimeBroker','papa','2021-12-07 09:21:37',10180)
+2021-12-07 09:21:37.804 CET [3252] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 09:21:37.804 CET [3252] DETAIL:  Key (pid, app)=(1788, RuntimeBroker) already exists.
+2021-12-07 09:21:37.804 CET [3252] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('RuntimeBroker','papa','2021-12-07 09:21:37',1788)
+2021-12-07 09:21:41.515 CET [3252] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 09:21:41.515 CET [3252] DETAIL:  Key (pid, app)=(5256, MoUsoCoreWorker) already exists.
+2021-12-07 09:21:41.515 CET [3252] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('MoUsoCoreWorker','SYSTEM','2021-12-07 09:21:41',5256)
+2021-12-07 09:21:41.563 CET [3252] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 09:21:41.563 CET [3252] DETAIL:  Key (pid, app)=(5012, svchost) already exists.
+2021-12-07 09:21:41.563 CET [3252] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('svchost','','2021-12-07 09:21:41',5012)
+2021-12-07 09:21:53.914 CET [3252] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 09:21:53.914 CET [3252] DETAIL:  Key (pid, app)=(10752, backgroundTaskHost) already exists.
+2021-12-07 09:21:53.914 CET [3252] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('backgroundTaskHost','papa','2021-12-07 09:21:53',10752)
+2021-12-07 09:21:53.972 CET [3252] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 09:21:53.972 CET [3252] DETAIL:  Key (pid, app)=(5312, RuntimeBroker) already exists.
+2021-12-07 09:21:53.972 CET [3252] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('RuntimeBroker','papa','2021-12-07 09:21:53',5312)
+2021-12-07 09:21:58.187 CET [3252] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 09:21:58.187 CET [3252] DETAIL:  Key (pid, app)=(1800, backgroundTaskHost) already exists.
+2021-12-07 09:21:58.187 CET [3252] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('backgroundTaskHost','papa','2021-12-07 09:21:58',1800)
+2021-12-07 09:24:47.886 CET [5384] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 09:24:47.886 CET [5384] DETAIL:  Key (pid, app)=(3252, postgres) already exists.
+2021-12-07 09:24:47.886 CET [5384] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('postgres','papa','2021-12-07 09:24:47',3252)
+2021-12-07 09:25:58.944 CET [5384] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 09:25:58.944 CET [5384] DETAIL:  Key (pid, app)=(4596, svchost) already exists.
+2021-12-07 09:25:58.944 CET [5384] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('svchost','','2021-12-07 09:25:58',4596)
+2021-12-07 09:26:06.956 CET [5384] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 09:26:06.956 CET [5384] DETAIL:  Key (pid, app)=(10484, svchost) already exists.
+2021-12-07 09:26:06.956 CET [5384] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('svchost','SYSTEM','2021-12-07 09:26:06',10484)
+2021-12-07 09:26:38.127 CET [5384] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 09:26:38.127 CET [5384] DETAIL:  Key (pid, app)=(9596, backgroundTaskHost) already exists.
+2021-12-07 09:26:38.127 CET [5384] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('backgroundTaskHost','papa','2021-12-07 09:26:38',9596)
+2021-12-07 09:27:09.797 CET [5384] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 09:27:09.797 CET [5384] DETAIL:  Key (pid, app)=(9312, RuntimeBroker) already exists.
+2021-12-07 09:27:09.797 CET [5384] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('RuntimeBroker','papa','2021-12-07 09:27:09',9312)
+2021-12-07 09:29:48.223 CET [6900] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 09:29:48.223 CET [6900] DETAIL:  Key (pid, app)=(5384, postgres) already exists.
+2021-12-07 09:29:48.223 CET [6900] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('postgres','papa','2021-12-07 09:29:48',5384)
+2021-12-07 09:29:52.314 CET [6900] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 09:29:52.314 CET [6900] DETAIL:  Key (pid, app)=(10816, backgroundTaskHost) already exists.
+2021-12-07 09:29:52.314 CET [6900] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('backgroundTaskHost','','2021-12-07 09:29:52',10816)
+2021-12-07 09:29:52.374 CET [6900] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 09:29:52.374 CET [6900] DETAIL:  Key (pid, app)=(3584, backgroundTaskHost) already exists.
+2021-12-07 09:29:52.374 CET [6900] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('backgroundTaskHost','','2021-12-07 09:29:52',3584)
+2021-12-07 09:30:32.494 CET [6900] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 09:30:32.494 CET [6900] DETAIL:  Key (pid, app)=(9332, RuntimeBroker) already exists.
+2021-12-07 09:30:32.494 CET [6900] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('RuntimeBroker','papa','2021-12-07 09:30:32',9332)
+2021-12-07 09:30:32.550 CET [6900] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 09:30:32.550 CET [6900] DETAIL:  Key (pid, app)=(10372, RuntimeBroker) already exists.
+2021-12-07 09:30:32.550 CET [6900] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('RuntimeBroker','papa','2021-12-07 09:30:32',10372)
+2021-12-07 09:30:43.902 CET [6900] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 09:30:43.902 CET [6900] DETAIL:  Key (pid, app)=(4628, svchost) already exists.
+2021-12-07 09:30:43.902 CET [6900] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('svchost','','2021-12-07 09:30:43',4628)
+2021-12-07 09:30:47.818 CET [6900] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 09:30:47.818 CET [6900] DETAIL:  Key (pid, app)=(9488, MoUsoCoreWorker) already exists.
+2021-12-07 09:30:47.818 CET [6900] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('MoUsoCoreWorker','SYSTEM','2021-12-07 09:30:47',9488)
+2021-12-07 09:31:11.960 CET [6900] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 09:31:11.960 CET [6900] DETAIL:  Key (pid, app)=(5700, FileCoAuth) already exists.
+2021-12-07 09:31:11.960 CET [6900] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('FileCoAuth','papa','2021-12-07 09:31:11',5700)
+2021-12-07 09:34:48.423 CET [6900] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 09:34:48.423 CET [6900] DETAIL:  Key (pid, app)=(9112, svchost) already exists.
+2021-12-07 09:34:48.423 CET [6900] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('svchost','','2021-12-07 09:34:48',9112)
+2021-12-07 09:34:52.301 CET [2420] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 09:34:52.301 CET [2420] DETAIL:  Key (pid, app)=(6900, postgres) already exists.
+2021-12-07 09:34:52.301 CET [2420] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('postgres','papa','2021-12-07 09:34:52',6900)
+2021-12-07 09:39:47.750 CET [2420] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 09:39:47.750 CET [2420] DETAIL:  Key (pid, app)=(4136, svchost) already exists.
+2021-12-07 09:39:47.750 CET [2420] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('svchost','SYSTEM','2021-12-07 09:39:47',4136)
+2021-12-07 09:39:55.532 CET [5144] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 09:39:55.532 CET [5144] DETAIL:  Key (pid, app)=(2420, postgres) already exists.
+2021-12-07 09:39:55.532 CET [5144] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('postgres','papa','2021-12-07 09:39:55',2420)
+2021-12-07 09:41:15.537 CET [5144] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 09:41:15.537 CET [5144] DETAIL:  Key (pid, app)=(7156, FileCoAuth) already exists.
+2021-12-07 09:41:15.537 CET [5144] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('FileCoAuth','papa','2021-12-07 09:41:15',7156)
+2021-12-07 09:41:34.176 CET [5144] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 09:41:34.176 CET [5144] DETAIL:  Key (pid, app)=(9136, svchost) already exists.
+2021-12-07 09:41:34.176 CET [5144] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('svchost','SYSTEM','2021-12-07 09:41:34',9136)
+2021-12-07 09:44:57.142 CET [10500] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 09:44:57.142 CET [10500] DETAIL:  Key (pid, app)=(5144, postgres) already exists.
+2021-12-07 09:44:57.142 CET [10500] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('postgres','papa','2021-12-07 09:44:57',5144)
+2021-12-07 09:45:40.428 CET [10500] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 09:45:40.428 CET [10500] DETAIL:  Key (pid, app)=(1932, svchost) already exists.
+2021-12-07 09:45:40.428 CET [10500] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('svchost','SYSTEM','2021-12-07 09:45:40',1932)
+2021-12-07 09:45:40.542 CET [10500] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 09:45:40.542 CET [10500] DETAIL:  Key (pid, app)=(9376, svchost) already exists.
+2021-12-07 09:45:40.542 CET [10500] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('svchost','','2021-12-07 09:45:40',9376)
+2021-12-07 09:50:06.844 CET [4856] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 09:50:06.844 CET [4856] DETAIL:  Key (pid, app)=(10500, postgres) already exists.
+2021-12-07 09:50:06.844 CET [4856] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('postgres','papa','2021-12-07 09:50:06',10500)
+2021-12-07 09:51:10.807 CET [4856] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 09:51:10.807 CET [4856] DETAIL:  Key (pid, app)=(2076, FileCoAuth) already exists.
+2021-12-07 09:51:10.807 CET [4856] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('FileCoAuth','papa','2021-12-07 09:51:10',2076)
+2021-12-07 12:15:56.326 CET [4856] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:15:56.326 CET [4856] DETAIL:  Key (pid, app)=(1144, svchost) already exists.
+2021-12-07 12:15:56.326 CET [4856] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('svchost','LOCAL SERVICE','2021-12-07 12:15:56',1144)
+2021-12-07 12:16:02.456 CET [4856] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:16:02.456 CET [4856] DETAIL:  Key (pid, app)=(9376, dllhost) already exists.
+2021-12-07 12:16:02.456 CET [4856] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('dllhost','','2021-12-07 12:16:02',9376)
+2021-12-07 12:16:02.588 CET [4856] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:16:02.588 CET [4856] DETAIL:  Key (pid, app)=(10392, MicrosoftEdgeUpdate) already exists.
+2021-12-07 12:16:02.588 CET [4856] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('MicrosoftEdgeUpdate','','2021-12-07 12:16:02',10392)
+2021-12-07 12:16:02.726 CET [4856] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:16:02.726 CET [4856] DETAIL:  Key (pid, app)=(5424, UsoClient) already exists.
+2021-12-07 12:16:02.726 CET [4856] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('UsoClient','SYSTEM','2021-12-07 12:16:02',5424)
+2021-12-07 12:16:02.995 CET [4856] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:16:02.995 CET [4856] DETAIL:  Key (pid, app)=(2420, taskhostw) already exists.
+2021-12-07 12:16:02.995 CET [4856] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('taskhostw','','2021-12-07 12:16:02',2420)
+2021-12-07 12:16:03.141 CET [4856] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:16:03.141 CET [4856] DETAIL:  Key (pid, app)=(7676, firefox) already exists.
+2021-12-07 12:16:03.141 CET [4856] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('firefox','papa','2021-12-07 12:16:03',7676)
+2021-12-07 12:16:03.412 CET [4856] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:16:03.412 CET [4856] DETAIL:  Key (pid, app)=(11656, firefox) already exists.
+2021-12-07 12:16:03.412 CET [4856] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('firefox','papa','2021-12-07 12:16:03',11656)
+2021-12-07 12:16:03.715 CET [4856] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:16:03.715 CET [4856] DETAIL:  Key (pid, app)=(11756, pingsender) already exists.
+2021-12-07 12:16:03.715 CET [4856] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('pingsender','','2021-12-07 12:16:03',11756)
+2021-12-07 12:16:04.075 CET [4856] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:16:04.075 CET [4856] DETAIL:  Key (pid, app)=(11764, conhost) already exists.
+2021-12-07 12:16:04.075 CET [4856] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('conhost','','2021-12-07 12:16:04',11764)
+2021-12-07 12:16:09.381 CET [4856] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:16:09.381 CET [4856] DETAIL:  Key (pid, app)=(10748, svchost) already exists.
+2021-12-07 12:16:09.381 CET [4856] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('svchost','SYSTEM','2021-12-07 12:16:09',10748)
+2021-12-07 12:16:33.762 CET [4856] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:16:33.762 CET [4856] DETAIL:  Key (pid, app)=(2196, backgroundTaskHost) already exists.
+2021-12-07 12:16:33.762 CET [4856] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('backgroundTaskHost','papa','2021-12-07 12:16:33',2196)
+2021-12-07 12:16:33.880 CET [4856] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:16:33.880 CET [4856] DETAIL:  Key (pid, app)=(11300, HxTsr) already exists.
+2021-12-07 12:16:33.880 CET [4856] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('HxTsr','papa','2021-12-07 12:16:33',11300)
+2021-12-07 12:16:39.691 CET [4856] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:16:39.691 CET [4856] DETAIL:  Key (pid, app)=(11736, sppsvc) already exists.
+2021-12-07 12:16:39.691 CET [4856] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('sppsvc','','2021-12-07 12:16:39',11736)
+2021-12-07 12:16:54.352 CET [4856] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:16:54.352 CET [4856] DETAIL:  Key (pid, app)=(11520, RuntimeBroker) already exists.
+2021-12-07 12:16:54.352 CET [4856] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('RuntimeBroker','papa','2021-12-07 12:16:54',11520)
+2021-12-07 12:17:13.453 CET [4856] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:17:13.453 CET [4856] DETAIL:  Key (pid, app)=(9068, backgroundTaskHost) already exists.
+2021-12-07 12:17:13.453 CET [4856] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('backgroundTaskHost','papa','2021-12-07 12:17:13',9068)
+2021-12-07 12:17:13.576 CET [4856] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:17:13.576 CET [4856] DETAIL:  Key (pid, app)=(2832, backgroundTaskHost) already exists.
+2021-12-07 12:17:13.576 CET [4856] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('backgroundTaskHost','papa','2021-12-07 12:17:13',2832)
+2021-12-07 12:17:20.188 CET [4856] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:17:20.188 CET [4856] DETAIL:  Key (pid, app)=(10308, svchost) already exists.
+2021-12-07 12:17:20.188 CET [4856] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('svchost','','2021-12-07 12:17:20',10308)
+2021-12-07 12:17:20.294 CET [4856] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:17:20.294 CET [4856] DETAIL:  Key (pid, app)=(11088, RuntimeBroker) already exists.
+2021-12-07 12:17:20.294 CET [4856] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('RuntimeBroker','papa','2021-12-07 12:17:20',11088)
+2021-12-07 12:17:27.045 CET [4856] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:17:27.045 CET [4856] DETAIL:  Key (pid, app)=(8704, backgroundTaskHost) already exists.
+2021-12-07 12:17:27.045 CET [4856] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('backgroundTaskHost','papa','2021-12-07 12:17:27',8704)
+2021-12-07 12:17:33.114 CET [4856] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:17:33.114 CET [4856] DETAIL:  Key (pid, app)=(11540, MoUsoCoreWorker) already exists.
+2021-12-07 12:17:33.114 CET [4856] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('MoUsoCoreWorker','SYSTEM','2021-12-07 12:17:33',11540)
+2021-12-07 12:18:03.522 CET [4856] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:18:03.522 CET [4856] DETAIL:  Key (pid, app)=(6256, RuntimeBroker) already exists.
+2021-12-07 12:18:03.522 CET [4856] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('RuntimeBroker','papa','2021-12-07 12:18:03',6256)
+2021-12-07 12:18:04.479 CET [4856] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:18:04.479 CET [4856] DETAIL:  Key (pid, app)=(11404, WmiPrvSE) already exists.
+2021-12-07 12:18:04.479 CET [4856] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('WmiPrvSE','NETWORK SERVICE','2021-12-07 12:18:04',11404)
+2021-12-07 12:18:04.577 CET [4856] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:18:04.577 CET [4856] DETAIL:  Key (pid, app)=(9428, RuntimeBroker) already exists.
+2021-12-07 12:18:04.577 CET [4856] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('RuntimeBroker','papa','2021-12-07 12:18:04',9428)
+2021-12-07 12:18:48.225 CET [4856] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:18:48.225 CET [4856] DETAIL:  Key (pid, app)=(11156, TrustedInstaller) already exists.
+2021-12-07 12:18:48.225 CET [4856] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('TrustedInstaller','SYSTEM','2021-12-07 12:18:48',11156)
+2021-12-07 12:18:48.302 CET [4856] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:18:48.302 CET [4856] DETAIL:  Key (pid, app)=(9824, TiWorker) already exists.
+2021-12-07 12:18:48.302 CET [4856] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('TiWorker','SYSTEM','2021-12-07 12:18:48',9824)
+2021-12-07 12:19:25.504 CET [3252] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:19:25.504 CET [3252] DETAIL:  Key (pid, app)=(4856, postgres) already exists.
+2021-12-07 12:19:25.504 CET [3252] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('postgres','papa','2021-12-07 12:19:25',4856)
+2021-12-07 12:19:25.597 CET [3252] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:19:25.597 CET [3252] DETAIL:  Key (pid, app)=(3252, postgres) already exists.
+2021-12-07 12:19:25.597 CET [3252] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('postgres','papa','2021-12-07 12:19:25',3252)
+2021-12-07 12:19:30.472 CET [3252] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:19:30.472 CET [3252] DETAIL:  Key (pid, app)=(3252, postgres) already exists.
+2021-12-07 12:19:30.472 CET [3252] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('postgres','papa','2021-12-07 12:19:30',3252)
+2021-12-07 12:19:35.539 CET [3252] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:19:35.539 CET [3252] DETAIL:  Key (pid, app)=(3252, postgres) already exists.
+2021-12-07 12:19:35.539 CET [3252] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('postgres','papa','2021-12-07 12:19:35',3252)
+2021-12-07 12:19:41.268 CET [3252] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:19:41.268 CET [3252] DETAIL:  Key (pid, app)=(3252, postgres) already exists.
+2021-12-07 12:19:41.268 CET [3252] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('postgres','papa','2021-12-07 12:19:41',3252)
+2021-12-07 12:19:47.175 CET [3252] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:19:47.175 CET [3252] DETAIL:  Key (pid, app)=(3252, postgres) already exists.
+2021-12-07 12:19:47.175 CET [3252] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('postgres','papa','2021-12-07 12:19:47',3252)
+2021-12-07 12:19:53.831 CET [3252] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:19:53.831 CET [3252] DETAIL:  Key (pid, app)=(3252, postgres) already exists.
+2021-12-07 12:19:53.831 CET [3252] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('postgres','papa','2021-12-07 12:19:53',3252)
+2021-12-07 12:20:00.499 CET [3252] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:20:00.499 CET [3252] DETAIL:  Key (pid, app)=(3252, postgres) already exists.
+2021-12-07 12:20:00.499 CET [3252] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('postgres','papa','2021-12-07 12:20:00',3252)
+2021-12-07 12:20:07.543 CET [3252] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:20:07.543 CET [3252] DETAIL:  Key (pid, app)=(3252, postgres) already exists.
+2021-12-07 12:20:07.543 CET [3252] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('postgres','papa','2021-12-07 12:20:07',3252)
+2021-12-07 12:20:14.254 CET [3252] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:20:14.254 CET [3252] DETAIL:  Key (pid, app)=(3252, postgres) already exists.
+2021-12-07 12:20:14.254 CET [3252] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('postgres','papa','2021-12-07 12:20:14',3252)
+2021-12-07 12:20:20.992 CET [3252] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:20:20.992 CET [3252] DETAIL:  Key (pid, app)=(9208, svchost) already exists.
+2021-12-07 12:20:20.992 CET [3252] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('svchost','SYSTEM','2021-12-07 12:20:20',9208)
+2021-12-07 12:20:21.084 CET [3252] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:20:21.084 CET [3252] DETAIL:  Key (pid, app)=(3252, postgres) already exists.
+2021-12-07 12:20:21.084 CET [3252] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('postgres','papa','2021-12-07 12:20:21',3252)
+2021-12-07 12:20:27.631 CET [3252] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:20:27.631 CET [3252] DETAIL:  Key (pid, app)=(3252, postgres) already exists.
+2021-12-07 12:20:27.631 CET [3252] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('postgres','papa','2021-12-07 12:20:27',3252)
+2021-12-07 12:20:34.650 CET [3252] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:20:34.650 CET [3252] DETAIL:  Key (pid, app)=(3252, postgres) already exists.
+2021-12-07 12:20:34.650 CET [3252] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('postgres','papa','2021-12-07 12:20:34',3252)
+2021-12-07 12:20:41.292 CET [3252] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:20:41.292 CET [3252] DETAIL:  Key (pid, app)=(3252, postgres) already exists.
+2021-12-07 12:20:41.292 CET [3252] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('postgres','papa','2021-12-07 12:20:41',3252)
+2021-12-07 12:20:47.779 CET [3252] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:20:47.779 CET [3252] DETAIL:  Key (pid, app)=(3252, postgres) already exists.
+2021-12-07 12:20:47.779 CET [3252] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('postgres','papa','2021-12-07 12:20:47',3252)
+2021-12-07 12:20:54.737 CET [3252] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:20:54.737 CET [3252] DETAIL:  Key (pid, app)=(3252, postgres) already exists.
+2021-12-07 12:20:54.737 CET [3252] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('postgres','papa','2021-12-07 12:20:54',3252)
+2021-12-07 12:21:01.062 CET [3252] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:21:01.062 CET [3252] DETAIL:  Key (pid, app)=(3252, postgres) already exists.
+2021-12-07 12:21:01.062 CET [3252] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('postgres','papa','2021-12-07 12:21:01',3252)
+2021-12-07 12:21:07.530 CET [3252] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:21:07.530 CET [3252] DETAIL:  Key (pid, app)=(3252, postgres) already exists.
+2021-12-07 12:21:07.530 CET [3252] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('postgres','papa','2021-12-07 12:21:07',3252)
+2021-12-07 12:21:13.820 CET [3252] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:21:13.820 CET [3252] DETAIL:  Key (pid, app)=(3252, postgres) already exists.
+2021-12-07 12:21:13.820 CET [3252] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('postgres','papa','2021-12-07 12:21:13',3252)
+2021-12-07 12:21:20.221 CET [3252] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:21:20.221 CET [3252] DETAIL:  Key (pid, app)=(3252, postgres) already exists.
+2021-12-07 12:21:20.221 CET [3252] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('postgres','papa','2021-12-07 12:21:20',3252)
+2021-12-07 12:21:28.110 CET [3252] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:21:28.110 CET [3252] DETAIL:  Key (pid, app)=(3252, postgres) already exists.
+2021-12-07 12:21:28.110 CET [3252] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('postgres','papa','2021-12-07 12:21:28',3252)
+2021-12-07 12:21:35.004 CET [3252] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:21:35.004 CET [3252] DETAIL:  Key (pid, app)=(3252, postgres) already exists.
+2021-12-07 12:21:35.004 CET [3252] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('postgres','papa','2021-12-07 12:21:35',3252)
+2021-12-07 12:21:41.739 CET [3252] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:21:41.739 CET [3252] DETAIL:  Key (pid, app)=(3252, postgres) already exists.
+2021-12-07 12:21:41.739 CET [3252] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('postgres','papa','2021-12-07 12:21:41',3252)
+2021-12-07 12:21:48.263 CET [3252] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:21:48.263 CET [3252] DETAIL:  Key (pid, app)=(3252, postgres) already exists.
+2021-12-07 12:21:48.263 CET [3252] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('postgres','papa','2021-12-07 12:21:48',3252)
+2021-12-07 12:21:54.487 CET [3252] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:21:54.487 CET [3252] DETAIL:  Key (pid, app)=(3252, postgres) already exists.
+2021-12-07 12:21:54.487 CET [3252] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('postgres','papa','2021-12-07 12:21:54',3252)
+2021-12-07 12:22:01.289 CET [3252] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:22:01.289 CET [3252] DETAIL:  Key (pid, app)=(3252, postgres) already exists.
+2021-12-07 12:22:01.289 CET [3252] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('postgres','papa','2021-12-07 12:22:01',3252)
+2021-12-07 12:22:08.116 CET [3252] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:22:08.116 CET [3252] DETAIL:  Key (pid, app)=(3252, postgres) already exists.
+2021-12-07 12:22:08.116 CET [3252] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('postgres','papa','2021-12-07 12:22:08',3252)
+2021-12-07 12:22:14.763 CET [3252] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:22:14.763 CET [3252] DETAIL:  Key (pid, app)=(3252, postgres) already exists.
+2021-12-07 12:22:14.763 CET [3252] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('postgres','papa','2021-12-07 12:22:14',3252)
+2021-12-07 12:22:21.355 CET [3252] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:22:21.355 CET [3252] DETAIL:  Key (pid, app)=(3252, postgres) already exists.
+2021-12-07 12:22:21.355 CET [3252] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('postgres','papa','2021-12-07 12:22:21',3252)
+2021-12-07 12:22:27.395 CET [3252] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:22:27.395 CET [3252] DETAIL:  Key (pid, app)=(3252, postgres) already exists.
+2021-12-07 12:22:27.395 CET [3252] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('postgres','papa','2021-12-07 12:22:27',3252)
+2021-12-07 12:22:34.202 CET [3252] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:22:34.202 CET [3252] DETAIL:  Key (pid, app)=(3252, postgres) already exists.
+2021-12-07 12:22:34.202 CET [3252] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('postgres','papa','2021-12-07 12:22:34',3252)
+2021-12-07 12:22:40.472 CET [3252] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:22:40.472 CET [3252] DETAIL:  Key (pid, app)=(3252, postgres) already exists.
+2021-12-07 12:22:40.472 CET [3252] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('postgres','papa','2021-12-07 12:22:40',3252)
+2021-12-07 12:22:46.206 CET [3252] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:22:46.206 CET [3252] DETAIL:  Key (pid, app)=(3252, postgres) already exists.
+2021-12-07 12:22:46.206 CET [3252] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('postgres','papa','2021-12-07 12:22:46',3252)
+2021-12-07 12:22:51.956 CET [3252] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:22:51.956 CET [3252] DETAIL:  Key (pid, app)=(7824, audiodg) already exists.
+2021-12-07 12:22:51.956 CET [3252] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('audiodg','LOCAL SERVICE','2021-12-07 12:22:51',7824)
+2021-12-07 12:22:52.034 CET [3252] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:22:52.034 CET [3252] DETAIL:  Key (pid, app)=(3252, postgres) already exists.
+2021-12-07 12:22:52.034 CET [3252] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('postgres','papa','2021-12-07 12:22:52',3252)
+2021-12-07 12:22:57.494 CET [3252] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:22:57.494 CET [3252] DETAIL:  Key (pid, app)=(3252, postgres) already exists.
+2021-12-07 12:22:57.494 CET [3252] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('postgres','papa','2021-12-07 12:22:57',3252)
+2021-12-07 12:23:04.215 CET [3252] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:23:04.215 CET [3252] DETAIL:  Key (pid, app)=(2144, svchost) already exists.
+2021-12-07 12:23:04.215 CET [3252] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('svchost','','2021-12-07 12:23:04',2144)
+2021-12-07 12:23:04.427 CET [3252] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:23:04.427 CET [3252] DETAIL:  Key (pid, app)=(3252, postgres) already exists.
+2021-12-07 12:23:04.427 CET [3252] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('postgres','papa','2021-12-07 12:23:04',3252)
+2021-12-07 12:23:10.244 CET [3252] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:23:10.244 CET [3252] DETAIL:  Key (pid, app)=(10892, svchost) already exists.
+2021-12-07 12:23:10.244 CET [3252] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('svchost','SYSTEM','2021-12-07 12:23:10',10892)
+2021-12-07 12:23:10.338 CET [3252] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:23:10.338 CET [3252] DETAIL:  Key (pid, app)=(3252, postgres) already exists.
+2021-12-07 12:23:10.338 CET [3252] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('postgres','papa','2021-12-07 12:23:10',3252)
+2021-12-07 12:23:16.240 CET [3252] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:23:16.240 CET [3252] DETAIL:  Key (pid, app)=(3252, postgres) already exists.
+2021-12-07 12:23:16.240 CET [3252] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('postgres','papa','2021-12-07 12:23:16',3252)
+2021-12-07 12:23:23.447 CET [3252] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:23:23.447 CET [3252] DETAIL:  Key (pid, app)=(3252, postgres) already exists.
+2021-12-07 12:23:23.447 CET [3252] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('postgres','papa','2021-12-07 12:23:23',3252)
+2021-12-07 12:23:29.723 CET [3252] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:23:29.723 CET [3252] DETAIL:  Key (pid, app)=(3252, postgres) already exists.
+2021-12-07 12:23:29.723 CET [3252] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('postgres','papa','2021-12-07 12:23:29',3252)
+2021-12-07 12:23:36.677 CET [3252] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:23:36.677 CET [3252] DETAIL:  Key (pid, app)=(3252, postgres) already exists.
+2021-12-07 12:23:36.677 CET [3252] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('postgres','papa','2021-12-07 12:23:36',3252)
+2021-12-07 12:23:43.965 CET [3252] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:23:43.965 CET [3252] DETAIL:  Key (pid, app)=(3252, postgres) already exists.
+2021-12-07 12:23:43.965 CET [3252] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('postgres','papa','2021-12-07 12:23:43',3252)
+2021-12-07 12:23:50.294 CET [3252] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:23:50.294 CET [3252] DETAIL:  Key (pid, app)=(3252, postgres) already exists.
+2021-12-07 12:23:50.294 CET [3252] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('postgres','papa','2021-12-07 12:23:50',3252)
+2021-12-07 12:23:56.472 CET [3252] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:23:56.472 CET [3252] DETAIL:  Key (pid, app)=(3252, postgres) already exists.
+2021-12-07 12:23:56.472 CET [3252] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('postgres','papa','2021-12-07 12:23:56',3252)
+2021-12-07 12:24:02.536 CET [3252] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:24:02.536 CET [3252] DETAIL:  Key (pid, app)=(3252, postgres) already exists.
+2021-12-07 12:24:02.536 CET [3252] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('postgres','papa','2021-12-07 12:24:02',3252)
+2021-12-07 12:24:08.826 CET [3252] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:24:08.826 CET [3252] DETAIL:  Key (pid, app)=(4164, svchost) already exists.
+2021-12-07 12:24:08.826 CET [3252] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('svchost','','2021-12-07 12:24:08',4164)
+2021-12-07 12:24:08.900 CET [3252] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:24:08.900 CET [3252] DETAIL:  Key (pid, app)=(3252, postgres) already exists.
+2021-12-07 12:24:08.900 CET [3252] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('postgres','papa','2021-12-07 12:24:08',3252)
+2021-12-07 12:24:14.260 CET [3252] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:24:14.260 CET [3252] DETAIL:  Key (pid, app)=(3252, postgres) already exists.
+2021-12-07 12:24:14.260 CET [3252] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('postgres','papa','2021-12-07 12:24:14',3252)
+2021-12-07 12:24:18.935 CET [3252] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:24:18.935 CET [3252] DETAIL:  Key (pid, app)=(3252, postgres) already exists.
+2021-12-07 12:24:18.935 CET [3252] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('postgres','papa','2021-12-07 12:24:18',3252)
+2021-12-07 12:24:23.107 CET [3252] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:24:23.107 CET [3252] DETAIL:  Key (pid, app)=(3252, postgres) already exists.
+2021-12-07 12:24:23.107 CET [3252] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('postgres','papa','2021-12-07 12:24:23',3252)
+2021-12-07 12:24:27.526 CET [3252] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:24:27.526 CET [3252] DETAIL:  Key (pid, app)=(3252, postgres) already exists.
+2021-12-07 12:24:27.526 CET [3252] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('postgres','papa','2021-12-07 12:24:27',3252)
+2021-12-07 12:24:32.193 CET [3252] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:24:32.193 CET [3252] DETAIL:  Key (pid, app)=(3252, postgres) already exists.
+2021-12-07 12:24:32.193 CET [3252] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('postgres','papa','2021-12-07 12:24:32',3252)
+2021-12-07 12:24:37.182 CET [3252] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:24:37.182 CET [3252] DETAIL:  Key (pid, app)=(3252, postgres) already exists.
+2021-12-07 12:24:37.182 CET [3252] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('postgres','papa','2021-12-07 12:24:37',3252)
+2021-12-07 12:24:42.126 CET [3252] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:24:42.126 CET [3252] DETAIL:  Key (pid, app)=(3252, postgres) already exists.
+2021-12-07 12:24:42.126 CET [3252] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('postgres','papa','2021-12-07 12:24:42',3252)
+2021-12-07 12:24:47.234 CET [3252] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:24:47.234 CET [3252] DETAIL:  Key (pid, app)=(7912, smartscreen) already exists.
+2021-12-07 12:24:47.234 CET [3252] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('smartscreen','papa','2021-12-07 12:24:47',7912)
+2021-12-07 12:24:47.352 CET [3252] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:24:47.352 CET [3252] DETAIL:  Key (pid, app)=(3252, postgres) already exists.
+2021-12-07 12:24:47.352 CET [3252] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('postgres','papa','2021-12-07 12:24:47',3252)
+2021-12-07 12:24:53.088 CET [3252] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:24:53.088 CET [3252] DETAIL:  Key (pid, app)=(3252, postgres) already exists.
+2021-12-07 12:24:53.088 CET [3252] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('postgres','papa','2021-12-07 12:24:53',3252)
+2021-12-07 12:24:59.426 CET [3252] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:24:59.426 CET [3252] DETAIL:  Key (pid, app)=(3252, postgres) already exists.
+2021-12-07 12:24:59.426 CET [3252] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('postgres','papa','2021-12-07 12:24:59',3252)
+2021-12-07 12:25:06.447 CET [3252] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:25:06.447 CET [3252] DETAIL:  Key (pid, app)=(3252, postgres) already exists.
+2021-12-07 12:25:06.447 CET [3252] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('postgres','papa','2021-12-07 12:25:06',3252)
+2021-12-07 12:25:13.485 CET [3252] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:25:13.485 CET [3252] DETAIL:  Key (pid, app)=(3252, postgres) already exists.
+2021-12-07 12:25:13.485 CET [3252] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('postgres','papa','2021-12-07 12:25:13',3252)
+2021-12-07 12:25:21.113 CET [3252] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:25:21.113 CET [3252] DETAIL:  Key (pid, app)=(3252, postgres) already exists.
+2021-12-07 12:25:21.113 CET [3252] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('postgres','papa','2021-12-07 12:25:21',3252)
+2021-12-07 12:25:28.765 CET [3252] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:25:28.765 CET [3252] DETAIL:  Key (pid, app)=(3252, postgres) already exists.
+2021-12-07 12:25:28.765 CET [3252] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('postgres','papa','2021-12-07 12:25:28',3252)
+2021-12-07 12:25:36.546 CET [3252] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:25:36.546 CET [3252] DETAIL:  Key (pid, app)=(3252, postgres) already exists.
+2021-12-07 12:25:36.546 CET [3252] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('postgres','papa','2021-12-07 12:25:36',3252)
+2021-12-07 12:25:43.974 CET [3252] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:25:43.974 CET [3252] DETAIL:  Key (pid, app)=(3252, postgres) already exists.
+2021-12-07 12:25:43.974 CET [3252] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('postgres','papa','2021-12-07 12:25:43',3252)
+2021-12-07 12:25:51.341 CET [3252] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:25:51.341 CET [3252] DETAIL:  Key (pid, app)=(3252, postgres) already exists.
+2021-12-07 12:25:51.341 CET [3252] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('postgres','papa','2021-12-07 12:25:51',3252)
+2021-12-07 12:25:58.508 CET [3252] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:25:58.508 CET [3252] DETAIL:  Key (pid, app)=(3252, postgres) already exists.
+2021-12-07 12:25:58.508 CET [3252] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('postgres','papa','2021-12-07 12:25:58',3252)
+2021-12-07 12:26:05.769 CET [3252] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:26:05.769 CET [3252] DETAIL:  Key (pid, app)=(3252, postgres) already exists.
+2021-12-07 12:26:05.769 CET [3252] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('postgres','papa','2021-12-07 12:26:05',3252)
+2021-12-07 12:26:13.791 CET [3252] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:26:13.791 CET [3252] DETAIL:  Key (pid, app)=(3252, postgres) already exists.
+2021-12-07 12:26:13.791 CET [3252] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('postgres','papa','2021-12-07 12:26:13',3252)
+2021-12-07 12:26:21.686 CET [3252] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:26:21.686 CET [3252] DETAIL:  Key (pid, app)=(7048, RuntimeBroker) already exists.
+2021-12-07 12:26:21.686 CET [3252] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('RuntimeBroker','papa','2021-12-07 12:26:21',7048)
+2021-12-07 12:26:21.854 CET [3252] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:26:21.854 CET [3252] DETAIL:  Key (pid, app)=(3252, postgres) already exists.
+2021-12-07 12:26:21.854 CET [3252] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('postgres','papa','2021-12-07 12:26:21',3252)
+2021-12-07 12:26:52.395 CET [5968] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:26:52.395 CET [5968] DETAIL:  Key (pid, app)=(6664, svchost) already exists.
+2021-12-07 12:26:52.395 CET [5968] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('svchost','','2021-12-07 12:26:52',6664)
+2021-12-07 12:26:59.948 CET [5968] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:26:59.948 CET [5968] DETAIL:  Key (pid, app)=(5124, MoUsoCoreWorker) already exists.
+2021-12-07 12:26:59.948 CET [5968] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('MoUsoCoreWorker','SYSTEM','2021-12-07 12:26:59',5124)
+2021-12-07 12:27:54.242 CET [5968] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:27:54.242 CET [5968] DETAIL:  Key (pid, app)=(6892, FileCoAuth) already exists.
+2021-12-07 12:27:54.242 CET [5968] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('FileCoAuth','papa','2021-12-07 12:27:54',6892)
+2021-12-07 12:29:24.789 CET [5968] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:29:24.789 CET [5968] DETAIL:  Key (pid, app)=(10364, RuntimeBroker) already exists.
+2021-12-07 12:29:24.789 CET [5968] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('RuntimeBroker','papa','2021-12-07 12:29:24',10364)
+2021-12-07 12:29:24.959 CET [5968] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:29:24.959 CET [5968] DETAIL:  Key (pid, app)=(5828, RuntimeBroker) already exists.
+2021-12-07 12:29:24.959 CET [5968] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('RuntimeBroker','papa','2021-12-07 12:29:24',5828)
+2021-12-07 12:29:56.030 CET [5968] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:29:56.030 CET [5968] DETAIL:  Key (pid, app)=(9404, svchost) already exists.
+2021-12-07 12:29:56.030 CET [5968] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('svchost','SYSTEM','2021-12-07 12:29:56',9404)
+2021-12-07 12:33:32.770 CET [3564] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:33:32.770 CET [3564] DETAIL:  Key (pid, app)=(5968, postgres) already exists.
+2021-12-07 12:33:32.770 CET [3564] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('postgres','papa','2021-12-07 12:33:32',5968)
+2021-12-07 12:34:15.575 CET [3564] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:34:15.575 CET [3564] DETAIL:  Key (pid, app)=(11772, svchost) already exists.
+2021-12-07 12:34:15.575 CET [3564] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('svchost','SYSTEM','2021-12-07 12:34:15',11772)
+2021-12-07 12:34:36.546 CET [3564] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:34:36.546 CET [3564] DETAIL:  Key (pid, app)=(4668, MicrosoftEdgeUpdate) already exists.
+2021-12-07 12:34:36.546 CET [3564] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('MicrosoftEdgeUpdate','SYSTEM','2021-12-07 12:34:36',4668)
+2021-12-07 12:35:26.663 CET [3564] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:35:26.663 CET [3564] DETAIL:  Key (pid, app)=(11396, svchost) already exists.
+2021-12-07 12:35:26.663 CET [3564] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('svchost','','2021-12-07 12:35:26',11396)
+2021-12-07 12:39:39.042 CET [3564] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:39:39.042 CET [3564] DETAIL:  Key (pid, app)=(10536, svchost) already exists.
+2021-12-07 12:39:39.042 CET [3564] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('svchost','SYSTEM','2021-12-07 12:39:39',10536)
+2021-12-07 12:40:51.671 CET [9776] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:40:51.671 CET [9776] DETAIL:  Key (pid, app)=(3564, postgres) already exists.
+2021-12-07 12:40:51.671 CET [9776] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('postgres','papa','2021-12-07 12:40:51',3564)
+2021-12-07 12:41:54.300 CET [9776] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:41:54.300 CET [9776] DETAIL:  Key (pid, app)=(10368, FileCoAuth) already exists.
+2021-12-07 12:41:54.300 CET [9776] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('FileCoAuth','papa','2021-12-07 12:41:54',10368)
+2021-12-07 12:47:45.395 CET [10620] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:47:45.395 CET [10620] DETAIL:  Key (pid, app)=(9776, postgres) already exists.
+2021-12-07 12:47:45.395 CET [10620] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('postgres','papa','2021-12-07 12:47:45',9776)
+2021-12-07 12:51:11.062 CET [10620] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:51:11.062 CET [10620] DETAIL:  Key (pid, app)=(10348, svchost) already exists.
+2021-12-07 12:51:11.062 CET [10620] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('svchost','SYSTEM','2021-12-07 12:51:11',10348)
+2021-12-07 12:54:53.202 CET [12192] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:54:53.202 CET [12192] DETAIL:  Key (pid, app)=(10620, postgres) already exists.
+2021-12-07 12:54:53.202 CET [12192] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('postgres','papa','2021-12-07 12:54:53',10620)
+2021-12-07 12:55:58.914 CET [12192] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 12:55:58.914 CET [12192] DETAIL:  Key (pid, app)=(6284, FileCoAuth) already exists.
+2021-12-07 12:55:58.914 CET [12192] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('FileCoAuth','papa','2021-12-07 12:55:58',6284)
+2021-12-07 16:42:57.102 CET [2600] LOG:  starting PostgreSQL 13devel on x86_64-w64-mingw32, compiled by x86_64-w64-mingw32-gcc.exe (Rev2, Built by MSYS2 project) 9.2.0, 64-bit
+2021-12-07 16:42:57.112 CET [2600] LOG:  listening on IPv6 address "::1", port 5432
+2021-12-07 16:42:57.112 CET [2600] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2021-12-07 16:42:57.223 CET [2876] LOG:  database system was interrupted; last known up at 2021-12-07 12:53:26 CET
+2021-12-07 16:42:58.518 CET [6220] FATAL:  the database system is starting up
+2021-12-07 16:43:08.637 CET [5460] FATAL:  the database system is starting up
+2021-12-07 16:43:09.649 CET [2876] LOG:  could not open file "./postgres.log": sharing violation
+2021-12-07 16:43:09.649 CET [2876] DETAIL:  Continuing to retry for 30 seconds.
+2021-12-07 16:43:09.649 CET [2876] HINT:  You might have antivirus, backup, or similar software interfering with the database system.
+2021-12-07 16:43:20.182 CET [10168] FATAL:  the database system is starting up
+2021-12-07 16:43:43.091 CET [2876] LOG:  database system was not properly shut down; automatic recovery in progress
+2021-12-07 16:43:43.106 CET [2876] LOG:  redo starts at 0/23769D8
+2021-12-07 16:43:43.120 CET [2876] LOG:  invalid record length at 0/237C0E0: wanted 24, got 0
+2021-12-07 16:43:43.120 CET [2876] LOG:  redo done at 0/237C0A8
+2021-12-07 16:43:43.229 CET [2600] LOG:  database system is ready to accept connections
+2021-12-07 16:43:52.098 CET [2600] LOG:  background writer process (PID 7204) exited with exit code 1
+2021-12-07 16:43:52.098 CET [2600] LOG:  terminating any other active server processes
+2021-12-07 16:43:52.098 CET [8768] WARNING:  terminating connection because of crash of another server process
+2021-12-07 16:43:52.098 CET [8768] DETAIL:  The postmaster has commanded this server process to roll back the current transaction and exit, because another server process exited abnormally and possibly corrupted shared memory.
+2021-12-07 16:43:52.098 CET [8768] HINT:  In a moment you should be able to reconnect to the database and repeat your command.
+2021-12-07 16:43:52.111 CET [2600] LOG:  all server processes terminated; reinitializing
+2021-12-07 16:43:52.151 CET [9356] LOG:  database system was interrupted; last known up at 2021-12-07 16:43:43 CET
+2021-12-07 16:43:55.761 CET [2600] LOG:  startup process (PID 9356) exited with exit code 1
+2021-12-07 16:43:55.761 CET [2600] LOG:  aborting startup due to startup process failure
+2021-12-07 16:43:55.763 CET [2600] LOG:  database system is shut down
+2021-12-07 16:44:01.742 CET [7136] LOG:  starting PostgreSQL 13devel on x86_64-w64-mingw32, compiled by x86_64-w64-mingw32-gcc.exe (Rev2, Built by MSYS2 project) 9.2.0, 64-bit
+2021-12-07 16:44:01.752 CET [7136] LOG:  listening on IPv6 address "::1", port 5432
+2021-12-07 16:44:01.753 CET [7136] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2021-12-07 16:44:01.809 CET [2032] LOG:  database system was interrupted; last known up at 2021-12-07 16:43:43 CET
+2021-12-07 16:44:02.297 CET [8920] FATAL:  the database system is starting up
+2021-12-07 16:44:12.486 CET [2032] LOG:  could not open file "./postgres.log": sharing violation
+2021-12-07 16:44:12.486 CET [2032] DETAIL:  Continuing to retry for 30 seconds.
+2021-12-07 16:44:12.486 CET [2032] HINT:  You might have antivirus, backup, or similar software interfering with the database system.
+2021-12-07 16:44:20.331 CET [7136] LOG:  startup process (PID 2032) was terminated by exception 0xC000013A
+2021-12-07 16:44:20.331 CET [7136] HINT:  See C include file "ntstatus.h" for a description of the hexadecimal value.
+2021-12-07 16:44:20.331 CET [7136] LOG:  aborting startup due to startup process failure
+^C2021-12-07 16:44:27.295 CET [6152] LOG:  starting PostgreSQL 13devel on x86_64-w64-mingw32, compiled by x86_64-w64-mingw32-gcc.exe (Rev2, Built by MSYS2 project) 9.2.0, 64-bit
+2021-12-07 16:44:27.320 CET [6152] LOG:  listening on IPv6 address "::1", port 5432
+2021-12-07 16:44:27.320 CET [6152] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2021-12-07 16:44:27.465 CET [7620] LOG:  database system was interrupted; last known up at 2021-12-07 16:43:43 CET
+2021-12-07 16:44:27.957 CET [7652] FATAL:  the database system is starting up
+2021-12-07 16:44:40.144 CET [7620] LOG:  could not open file "./postgres.log": sharing violation
+2021-12-07 16:44:40.144 CET [7620] DETAIL:  Continuing to retry for 30 seconds.
+2021-12-07 16:44:40.144 CET [7620] HINT:  You might have antivirus, backup, or similar software interfering with the database system.
+2021-12-07 16:45:02.948 CET [6152] LOG:  startup process (PID 7620) was terminated by exception 0xC000013A
+2021-12-07 16:45:02.948 CET [6152] HINT:  See C include file "ntstatus.h" for a description of the hexadecimal value.
+2021-12-07 16:45:02.948 CET [6152] LOG:  aborting startup due to startup process failure
+^C2021-12-07 16:45:13.690 CET [4884] LOG:  starting PostgreSQL 13devel on x86_64-w64-mingw32, compiled by x86_64-w64-mingw32-gcc.exe (Rev2, Built by MSYS2 project) 9.2.0, 64-bit
+2021-12-07 16:45:13.705 CET [4884] LOG:  listening on IPv6 address "::1", port 5432
+2021-12-07 16:45:13.705 CET [4884] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2021-12-07 16:45:13.800 CET [10180] LOG:  database system was interrupted; last known up at 2021-12-07 16:43:43 CET
+2021-12-07 16:45:14.964 CET [6804] FATAL:  the database system is starting up
+2021-12-07 16:45:27.156 CET [10180] LOG:  could not open file "./postgres.log": sharing violation
+2021-12-07 16:45:27.156 CET [10180] DETAIL:  Continuing to retry for 30 seconds.
+2021-12-07 16:45:27.156 CET [10180] HINT:  You might have antivirus, backup, or similar software interfering with the database system.
+2021-12-07 16:46:07.724 CET [10180] LOG:  database system was not properly shut down; automatic recovery in progress
+2021-12-07 16:46:07.733 CET [10180] LOG:  invalid record length at 0/237C158: wanted 24, got 0
+2021-12-07 16:46:07.733 CET [10180] LOG:  redo is not required
+2021-12-07 16:46:07.800 CET [4884] LOG:  database system is ready to accept connections
+2021-12-07 16:46:41.084 CET [4884] LOG:  checkpointer process (PID 7692) exited with exit code 1
+2021-12-07 16:46:41.084 CET [4884] LOG:  terminating any other active server processes
+2021-12-07 16:46:41.084 CET [2068] WARNING:  terminating connection because of crash of another server process
+2021-12-07 16:46:41.084 CET [2068] DETAIL:  The postmaster has commanded this server process to roll back the current transaction and exit, because another server process exited abnormally and possibly corrupted shared memory.
+2021-12-07 16:46:41.084 CET [2068] HINT:  In a moment you should be able to reconnect to the database and repeat your command.
+2021-12-07 16:46:41.100 CET [4884] LOG:  all server processes terminated; reinitializing
+2021-12-07 16:46:41.189 CET [8596] LOG:  database system was interrupted; last known up at 2021-12-07 16:46:07 CET
+2021-12-07 16:46:45.626 CET [4884] LOG:  startup process (PID 8596) exited with exit code 1
+2021-12-07 16:46:45.626 CET [4884] LOG:  aborting startup due to startup process failure
+2021-12-07 16:46:45.631 CET [4884] LOG:  database system is shut down
+2021-12-07 16:47:03.981 CET [7744] LOG:  starting PostgreSQL 13devel on x86_64-w64-mingw32, compiled by x86_64-w64-mingw32-gcc.exe (Rev2, Built by MSYS2 project) 9.2.0, 64-bit
+2021-12-07 16:47:04.014 CET [7744] LOG:  listening on IPv6 address "::1", port 5432
+2021-12-07 16:47:04.014 CET [7744] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2021-12-07 16:47:04.096 CET [10040] LOG:  database system was interrupted; last known up at 2021-12-07 16:46:07 CET
+2021-12-07 16:47:05.085 CET [8284] FATAL:  the database system is starting up
+2021-12-07 16:47:15.258 CET [10040] LOG:  could not open file "./postgres.log": sharing violation
+2021-12-07 16:47:15.258 CET [10040] DETAIL:  Continuing to retry for 30 seconds.
+2021-12-07 16:47:15.258 CET [10040] HINT:  You might have antivirus, backup, or similar software interfering with the database system.
+2021-12-07 16:47:51.820 CET [10040] LOG:  database system was not properly shut down; automatic recovery in progress
+2021-12-07 16:47:51.828 CET [10040] LOG:  redo starts at 0/237C1D0
+2021-12-07 16:47:51.828 CET [10040] LOG:  invalid record length at 0/237C208: wanted 24, got 0
+2021-12-07 16:47:51.828 CET [10040] LOG:  redo done at 0/237C1D0
+2021-12-07 16:47:51.909 CET [7744] LOG:  database system is ready to accept connections
+2021-12-07 16:50:16.740 CET [4384] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 16:50:16.740 CET [4384] DETAIL:  Key (pid, app)=(1948, ScriptedSandbox64) already exists.
+2021-12-07 16:50:16.740 CET [4384] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('ScriptedSandbox64','papa','2021-12-07 16:50:16',1948)
+2021-12-07 16:50:44.286 CET [4384] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 16:50:44.286 CET [4384] DETAIL:  Key (pid, app)=(9868, msvsmon) already exists.
+2021-12-07 16:50:44.286 CET [4384] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('msvsmon','papa','2021-12-07 16:50:44',9868)
+2021-12-07 16:50:44.290 CET [4384] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 16:50:44.290 CET [4384] DETAIL:  Key (pid, app)=(9496, MonitorFrontendCli) already exists.
+2021-12-07 16:50:44.290 CET [4384] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('MonitorFrontendCli','papa','2021-12-07 16:50:44',9496)
+2021-12-07 16:50:44.295 CET [4384] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 16:50:44.295 CET [4384] DETAIL:  Key (pid, app)=(6276, conhost) already exists.
+2021-12-07 16:50:44.295 CET [4384] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('conhost','papa','2021-12-07 16:50:44',6276)
+2021-12-07 16:50:50.003 CET [7744] LOG:  server process (PID 6964) was terminated by exception 0xC000013A
+2021-12-07 16:50:50.003 CET [7744] DETAIL:  Failed process was running: truncate table daily_apps
+2021-12-07 16:50:50.003 CET [7744] HINT:  See C include file "ntstatus.h" for a description of the hexadecimal value.
+2021-12-07 16:50:50.003 CET [7744] LOG:  terminating any other active server processes
+2021-12-07 16:50:50.004 CET [808] WARNING:  terminating connection because of crash of another server process
+2021-12-07 16:50:50.004 CET [808] DETAIL:  The postmaster has commanded this server process to roll back the current transaction and exit, because another server process exited abnormally and possibly corrupted shared memory.
+2021-12-07 16:50:50.004 CET [808] HINT:  In a moment you should be able to reconnect to the database and repeat your command.
+2021-12-07 16:50:50.016 CET [7744] LOG:  all server processes terminated; reinitializing
+2021-12-07 16:50:50.056 CET [10904] LOG:  database system was interrupted; last known up at 2021-12-07 16:47:51 CET
+2021-12-07 16:50:52.401 CET [7744] LOG:  startup process (PID 10904) was terminated by exception 0xC000013A
+2021-12-07 16:50:52.401 CET [7744] HINT:  See C include file "ntstatus.h" for a description of the hexadecimal value.
+2021-12-07 16:50:52.401 CET [7744] LOG:  aborting startup due to startup process failure
+^C2021-12-07 16:51:17.564 CET [10500] LOG:  starting PostgreSQL 13devel on x86_64-w64-mingw32, compiled by x86_64-w64-mingw32-gcc.exe (Rev2, Built by MSYS2 project) 9.2.0, 64-bit
+2021-12-07 16:51:17.572 CET [10500] LOG:  listening on IPv6 address "::1", port 5432
+2021-12-07 16:51:17.572 CET [10500] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2021-12-07 16:51:17.631 CET [10548] LOG:  database system was interrupted; last known up at 2021-12-07 16:47:51 CET
+2021-12-07 16:51:18.047 CET [10560] FATAL:  the database system is starting up
+2021-12-07 16:51:28.631 CET [10548] LOG:  could not open file "./postgres.log": sharing violation
+2021-12-07 16:51:28.631 CET [10548] DETAIL:  Continuing to retry for 30 seconds.
+2021-12-07 16:51:28.631 CET [10548] HINT:  You might have antivirus, backup, or similar software interfering with the database system.
+2021-12-07 16:51:46.528 CET [10176] LOG:  starting PostgreSQL 13devel on x86_64-w64-mingw32, compiled by x86_64-w64-mingw32-gcc.exe (Rev2, Built by MSYS2 project) 9.2.0, 64-bit
+2021-12-07 16:51:46.535 CET [10176] LOG:  listening on IPv6 address "::1", port 5432
+2021-12-07 16:51:46.535 CET [10176] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2021-12-07 16:51:46.584 CET [10212] LOG:  database system was interrupted; last known up at 2021-12-07 16:47:51 CET
+2021-12-07 16:51:47.153 CET [8284] FATAL:  the database system is starting up
+2021-12-07 16:51:55.646 CET [10212] LOG:  could not open file "./postgres.log": sharing violation
+2021-12-07 16:51:55.646 CET [10212] DETAIL:  Continuing to retry for 30 seconds.
+2021-12-07 16:51:55.646 CET [10212] HINT:  You might have antivirus, backup, or similar software interfering with the database system.
+2021-12-07 16:52:21.455 CET [2196] FATAL:  the database system is starting up
+2021-12-07 16:52:26.029 CET [10212] LOG:  database system was not properly shut down; automatic recovery in progress
+2021-12-07 16:52:26.039 CET [10212] LOG:  redo starts at 0/237C280
+2021-12-07 16:52:26.072 CET [10212] LOG:  invalid record length at 0/23B6B30: wanted 24, got 0
+2021-12-07 16:52:26.072 CET [10212] LOG:  redo done at 0/23B6B08
+2021-12-07 16:52:26.306 CET [10176] LOG:  database system is ready to accept connections
+2021-12-07 16:52:54.923 CET [10492] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 16:52:54.923 CET [10492] DETAIL:  Key (pid, app)=(4668, SearchProtocolHost) already exists.
+2021-12-07 16:52:54.923 CET [10492] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('SearchProtocolHost','SYSTEM','2021-12-07 16:52:54',4668)
+2021-12-07 16:52:54.939 CET [10492] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 16:52:54.939 CET [10492] DETAIL:  Key (pid, app)=(9044, SearchFilterHost) already exists.
+2021-12-07 16:52:54.939 CET [10492] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('SearchFilterHost','SYSTEM','2021-12-07 16:52:54',9044)
+2021-12-07 16:53:08.655 CET [10492] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 16:53:08.655 CET [10492] DETAIL:  Key (pid, app)=(5396, smartscreen) already exists.
+2021-12-07 16:53:08.655 CET [10492] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('smartscreen','papa','2021-12-07 16:53:08',5396)
+2021-12-07 16:53:08.660 CET [10492] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 16:53:08.660 CET [10492] DETAIL:  Key (pid, app)=(11232, pg_ctl) already exists.
+2021-12-07 16:53:08.660 CET [10492] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('pg_ctl','papa','2021-12-07 16:53:08',11232)
+2021-12-07 16:53:13.240 CET [10492] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 16:53:13.240 CET [10492] DETAIL:  Key (pid, app)=(6752, audiodg) already exists.
+2021-12-07 16:53:13.240 CET [10492] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('audiodg','LOCAL SERVICE','2021-12-07 16:53:13',6752)
+2021-12-07 16:53:26.936 CET [10492] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 16:53:26.936 CET [10492] DETAIL:  Key (pid, app)=(796, pg_ctl) already exists.
+2021-12-07 16:53:26.936 CET [10492] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('pg_ctl','papa','2021-12-07 16:53:26',796)
+2021-12-07 16:53:49.779 CET [10492] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 16:53:49.779 CET [10492] DETAIL:  Key (pid, app)=(9464, MonitorFrontendCli) already exists.
+2021-12-07 16:53:49.779 CET [10492] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('MonitorFrontendCli','papa','2021-12-07 16:53:49',9464)
+2021-12-07 16:55:02.753 CET [10492] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 16:55:02.753 CET [10492] DETAIL:  Key (pid, app)=(3280, WmiPrvSE) already exists.
+2021-12-07 16:55:02.753 CET [10492] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('WmiPrvSE','SYSTEM','2021-12-07 16:55:02',3280)
+2021-12-07 16:55:07.311 CET [10492] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 16:55:07.311 CET [10492] DETAIL:  Key (pid, app)=(11184, MonitorFrontendCli) already exists.
+2021-12-07 16:55:07.311 CET [10492] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('MonitorFrontendCli','papa','2021-12-07 16:55:07',11184)
+2021-12-07 16:55:14.592 CET [4696] ERROR:  canceling statement due to user request
+2021-12-07 16:55:14.592 CET [9616] ERROR:  canceling statement due to user request
+2021-12-07 16:55:14.593 CET [10176] LOG:  received fast shutdown request
+2021-12-07 16:55:14.598 CET [10492] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2021-12-07 16:55:14.598 CET [10764] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2021-12-07 16:55:14.603 CET [10176] LOG:  aborting any active transactions
+2021-12-07 16:55:14.603 CET [10176] LOG:  background worker "logical replication launcher" (PID 9616) exited with exit code 1
+2021-12-07 16:55:14.628 CET [10188] LOG:  shutting down
+2021-12-07 16:55:14.790 CET [10176] LOG:  database system is shut down
+2021-12-07 16:58:20.267 CET [8680] LOG:  starting PostgreSQL 13devel on x86_64-w64-mingw32, compiled by x86_64-w64-mingw32-gcc.exe (Rev2, Built by MSYS2 project) 9.2.0, 64-bit
+2021-12-07 16:58:20.293 CET [8680] LOG:  listening on IPv6 address "::1", port 5432
+2021-12-07 16:58:20.294 CET [8680] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2021-12-07 16:58:20.364 CET [10960] LOG:  database system was shut down at 2021-12-07 16:55:14 CET
+2021-12-07 16:58:20.454 CET [8680] LOG:  database system is ready to accept connections
+2021-12-07 17:00:57.256 CET [2068] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 17:00:57.256 CET [2068] DETAIL:  Key (pid, app)=(9108, MonitorFrontendCli) already exists.
+2021-12-07 17:00:57.256 CET [2068] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('MonitorFrontendCli','papa','2021-12-07 17:00:57',9108)
+2021-12-07 17:01:25.651 CET [2068] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 17:01:25.651 CET [2068] DETAIL:  Key (pid, app)=(4768, firefox) already exists.
+2021-12-07 17:01:25.651 CET [2068] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('firefox','','2021-12-07 17:01:25',4768)
+2021-12-07 17:02:22.635 CET [2068] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 17:02:22.635 CET [2068] DETAIL:  Key (pid, app)=(7664, MonitorFrontendCli) already exists.
+2021-12-07 17:02:22.635 CET [2068] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('MonitorFrontendCli','papa','2021-12-07 17:02:22',7664)
+2021-12-07 17:03:04.620 CET [2068] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 17:03:04.620 CET [2068] DETAIL:  Key (pid, app)=(8300, MonitorFrontendCli) already exists.
+2021-12-07 17:03:04.620 CET [2068] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('MonitorFrontendCli','papa','2021-12-07 17:03:04',8300)
+2021-12-07 17:03:12.825 CET [2068] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2021-12-07 17:03:12.825 CET [4500] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2021-12-07 17:03:40.139 CET [4284] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 17:03:40.139 CET [4284] DETAIL:  Key (pid, app)=(10376, MonitorFrontendCli) already exists.
+2021-12-07 17:03:40.139 CET [4284] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('MonitorFrontendCli','papa','2021-12-07 17:03:40',10376)
+2021-12-07 17:04:36.884 CET [4284] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 17:04:36.884 CET [4284] DETAIL:  Key (pid, app)=(3892, pg_ctl) already exists.
+2021-12-07 17:04:36.884 CET [4284] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('pg_ctl','papa','2021-12-07 17:04:36',3892)
+2021-12-07 17:04:36.953 CET [4284] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 17:04:36.953 CET [4284] DETAIL:  Key (pid, app)=(5144, MonitorFrontendCli) already exists.
+2021-12-07 17:04:36.953 CET [4284] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('MonitorFrontendCli','','2021-12-07 17:04:36',5144)
+2021-12-07 17:05:29.869 CET [4284] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 17:05:29.869 CET [4284] DETAIL:  Key (pid, app)=(9336, MonitorFrontendCli) already exists.
+2021-12-07 17:05:29.869 CET [4284] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('MonitorFrontendCli','papa','2021-12-07 17:05:29',9336)
+2021-12-07 17:06:35.889 CET [4284] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 17:06:35.889 CET [4284] DETAIL:  Key (pid, app)=(4228, MonitorFrontendCli) already exists.
+2021-12-07 17:06:35.889 CET [4284] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('MonitorFrontendCli','','2021-12-07 17:06:35',4228)
+2021-12-07 17:07:03.091 CET [4284] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 17:07:03.091 CET [4284] DETAIL:  Key (pid, app)=(3224, ctfmon) already exists.
+2021-12-07 17:07:03.091 CET [4284] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('ctfmon','papa','2021-12-07 17:07:03',3224)
+2021-12-07 17:07:03.235 CET [4284] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 17:07:03.235 CET [4284] DETAIL:  Key (pid, app)=(8344, dllhost) already exists.
+2021-12-07 17:07:03.235 CET [4284] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('dllhost','papa','2021-12-07 17:07:03',8344)
+2021-12-07 17:07:03.405 CET [4284] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 17:07:03.405 CET [4284] DETAIL:  Key (pid, app)=(5148, taskhostw) already exists.
+2021-12-07 17:07:03.405 CET [4284] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('taskhostw','','2021-12-07 17:07:03',5148)
+2021-12-07 17:07:11.186 CET [4284] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 17:07:11.186 CET [4284] DETAIL:  Key (pid, app)=(11428, LogonUI) already exists.
+2021-12-07 17:07:11.186 CET [4284] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('LogonUI','SYSTEM','2021-12-07 17:07:11',11428)
+2021-12-07 17:07:11.363 CET [4284] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 17:07:11.363 CET [4284] DETAIL:  Key (pid, app)=(2828, dllhost) already exists.
+2021-12-07 17:07:11.363 CET [4284] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('dllhost','pepe','2021-12-07 17:07:11',2828)
+2021-12-07 17:07:18.430 CET [4284] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 17:07:18.430 CET [4284] DETAIL:  Key (pid, app)=(12464, dllhost) already exists.
+2021-12-07 17:07:18.430 CET [4284] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('dllhost','','2021-12-07 17:07:18',12464)
+2021-12-07 17:07:26.504 CET [4284] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 17:07:26.504 CET [4284] DETAIL:  Key (pid, app)=(8512, LogonUI) already exists.
+2021-12-07 17:07:26.504 CET [4284] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('LogonUI','SYSTEM','2021-12-07 17:07:26',8512)
+2021-12-07 17:07:26.648 CET [4284] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 17:07:26.648 CET [4284] DETAIL:  Key (pid, app)=(13516, dllhost) already exists.
+2021-12-07 17:07:26.648 CET [4284] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('dllhost','pepe','2021-12-07 17:07:26',13516)
+2021-12-07 17:07:33.630 CET [4284] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 17:07:33.630 CET [4284] DETAIL:  Key (pid, app)=(12788, userinit) already exists.
+2021-12-07 17:07:33.630 CET [4284] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('userinit','pepe','2021-12-07 17:07:33',12788)
+2021-12-07 17:07:33.762 CET [4284] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 17:07:33.762 CET [4284] DETAIL:  Key (pid, app)=(7316, ctfmon) already exists.
+2021-12-07 17:07:33.762 CET [4284] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('ctfmon','pepe','2021-12-07 17:07:33',7316)
+2021-12-07 17:07:33.888 CET [4284] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 17:07:33.888 CET [4284] DETAIL:  Key (pid, app)=(13440, mobsync) already exists.
+2021-12-07 17:07:33.888 CET [4284] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('mobsync','pepe','2021-12-07 17:07:33',13440)
+2021-12-07 17:07:34.025 CET [4284] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 17:07:34.025 CET [4284] DETAIL:  Key (pid, app)=(13504, dllhost) already exists.
+2021-12-07 17:07:34.025 CET [4284] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('dllhost','pepe','2021-12-07 17:07:34',13504)
+2021-12-07 17:07:34.158 CET [4284] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 17:07:34.158 CET [4284] DETAIL:  Key (pid, app)=(13612, taskhostw) already exists.
+2021-12-07 17:07:34.158 CET [4284] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('taskhostw','','2021-12-07 17:07:34',13612)
+2021-12-07 17:07:34.291 CET [4284] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 17:07:34.291 CET [4284] DETAIL:  Key (pid, app)=(7572, AtBroker) already exists.
+2021-12-07 17:07:34.291 CET [4284] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('AtBroker','','2021-12-07 17:07:34',7572)
+2021-12-07 17:07:34.443 CET [4284] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 17:07:34.443 CET [4284] DETAIL:  Key (pid, app)=(4396, LogonUI) already exists.
+2021-12-07 17:07:34.443 CET [4284] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('LogonUI','SYSTEM','2021-12-07 17:07:34',4396)
+2021-12-07 17:07:34.591 CET [4284] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 17:07:34.591 CET [4284] DETAIL:  Key (pid, app)=(4716, taskhostw) already exists.
+2021-12-07 17:07:34.591 CET [4284] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('taskhostw','','2021-12-07 17:07:34',4716)
+2021-12-07 17:07:40.750 CET [4284] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 17:07:40.750 CET [4284] DETAIL:  Key (pid, app)=(5812, rundll32) already exists.
+2021-12-07 17:07:40.750 CET [4284] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('rundll32','pepe','2021-12-07 17:07:40',5812)
+2021-12-07 17:07:40.848 CET [4284] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 17:07:40.848 CET [4284] DETAIL:  Key (pid, app)=(13972, dllhost) already exists.
+2021-12-07 17:07:40.848 CET [4284] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('dllhost','papa','2021-12-07 17:07:40',13972)
+2021-12-07 17:07:46.893 CET [4284] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 17:07:46.893 CET [4284] DETAIL:  Key (pid, app)=(15308, dllhost) already exists.
+2021-12-07 17:07:46.893 CET [4284] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('dllhost','pepe','2021-12-07 17:07:46',15308)
+2021-12-07 17:08:01.181 CET [4284] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 17:08:01.181 CET [4284] DETAIL:  Key (pid, app)=(12948, OneDrive) already exists.
+2021-12-07 17:08:01.181 CET [4284] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('OneDrive','pepe','2021-12-07 17:08:01',12948)
+2021-12-07 17:08:08.278 CET [4284] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 17:08:08.278 CET [4284] DETAIL:  Key (pid, app)=(4232, OneDriveSetup) already exists.
+2021-12-07 17:08:08.278 CET [4284] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('OneDriveSetup','pepe','2021-12-07 17:08:08',4232)
+2021-12-07 17:08:08.435 CET [4284] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 17:08:08.435 CET [4284] DETAIL:  Key (pid, app)=(7316, OneDriveSetup) already exists.
+2021-12-07 17:08:08.435 CET [4284] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('OneDriveSetup','pepe','2021-12-07 17:08:08',7316)
+2021-12-07 17:08:08.565 CET [4284] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 17:08:08.565 CET [4284] DETAIL:  Key (pid, app)=(15144, FileSyncConfig) already exists.
+2021-12-07 17:08:08.565 CET [4284] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('FileSyncConfig','','2021-12-07 17:08:08',15144)
+2021-12-07 17:08:14.999 CET [4284] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 17:08:14.999 CET [4284] DETAIL:  Key (pid, app)=(14988, dllhost) already exists.
+2021-12-07 17:08:14.999 CET [4284] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('dllhost','pepe','2021-12-07 17:08:14',14988)
+2021-12-07 17:08:32.644 CET [4284] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 17:08:32.644 CET [4284] DETAIL:  Key (pid, app)=(4144, smartscreen) already exists.
+2021-12-07 17:08:32.644 CET [4284] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('smartscreen','papa','2021-12-07 17:08:32',4144)
+2021-12-07 17:08:42.891 CET [4284] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 17:08:42.891 CET [4284] DETAIL:  Key (pid, app)=(1260, backgroundTaskHost) already exists.
+2021-12-07 17:08:42.891 CET [4284] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('backgroundTaskHost','pepe','2021-12-07 17:08:42',1260)
+2021-12-07 17:08:46.852 CET [4284] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 17:08:46.852 CET [4284] DETAIL:  Key (pid, app)=(7492, WmiPrvSE) already exists.
+2021-12-07 17:08:46.852 CET [4284] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('WmiPrvSE','SYSTEM','2021-12-07 17:08:46',7492)
+2021-12-07 17:08:46.897 CET [4284] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 17:08:46.897 CET [4284] DETAIL:  Key (pid, app)=(11840, WmiPrvSE) already exists.
+2021-12-07 17:08:46.897 CET [4284] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('WmiPrvSE','NETWORK SERVICE','2021-12-07 17:08:46',11840)
+2021-12-07 17:08:55.620 CET [4284] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 17:08:55.620 CET [4284] DETAIL:  Key (pid, app)=(2032, MoUsoCoreWorker) already exists.
+2021-12-07 17:08:55.620 CET [4284] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('MoUsoCoreWorker','SYSTEM','2021-12-07 17:08:55',2032)
+2021-12-07 17:09:39.226 CET [4284] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 17:09:39.226 CET [4284] DETAIL:  Key (pid, app)=(11712, TrustedInstaller) already exists.
+2021-12-07 17:09:39.226 CET [4284] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('TrustedInstaller','SYSTEM','2021-12-07 17:09:39',11712)
+2021-12-07 17:09:39.308 CET [4284] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 17:09:39.308 CET [4284] DETAIL:  Key (pid, app)=(11916, TiWorker) already exists.
+2021-12-07 17:09:39.308 CET [4284] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('TiWorker','SYSTEM','2021-12-07 17:09:39',11916)
+2021-12-07 17:09:39.416 CET [4284] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 17:09:39.416 CET [4284] DETAIL:  Key (pid, app)=(9796, backgroundTaskHost) already exists.
+2021-12-07 17:09:39.416 CET [4284] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('backgroundTaskHost','pepe','2021-12-07 17:09:39',9796)
+2021-12-07 17:09:51.994 CET [4284] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 17:09:51.994 CET [4284] DETAIL:  Key (pid, app)=(3324, HxTsr) already exists.
+2021-12-07 17:09:51.994 CET [4284] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('HxTsr','pepe','2021-12-07 17:09:51',3324)
+2021-12-07 17:09:58.029 CET [4284] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-07 17:09:58.029 CET [4284] DETAIL:  Key (pid, app)=(15244, HxTsr) already exists.
+2021-12-07 17:09:58.029 CET [4284] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('HxTsr','papa','2021-12-07 17:09:58',15244)
+2021-12-07 17:10:20.139 CET [4556] LOG:  could not receive data from client: An existing connection was forcibly closed by the remote host.
+	
+2021-12-08 10:57:59.537 CET [8680] LOG:  server process (PID 136) exited with exit code 1
+2021-12-08 10:57:59.537 CET [8680] DETAIL:  Failed process was running: select * from activetime;
+2021-12-08 10:57:59.537 CET [8680] LOG:  terminating any other active server processes
+2021-12-08 10:57:59.542 CET [9092] WARNING:  terminating connection because of crash of another server process
+2021-12-08 10:57:59.542 CET [9092] DETAIL:  The postmaster has commanded this server process to roll back the current transaction and exit, because another server process exited abnormally and possibly corrupted shared memory.
+2021-12-08 10:57:59.542 CET [9092] HINT:  In a moment you should be able to reconnect to the database and repeat your command.
+2021-12-08 10:57:59.771 CET [8680] LOG:  all server processes terminated; reinitializing
+2021-12-08 10:57:59.955 CET [11764] LOG:  database system was interrupted; last known up at 2021-12-07 17:12:31 CET
+2021-12-08 10:58:20.357 CET [11764] LOG:  could not open file "./postgres.log": sharing violation
+2021-12-08 10:58:20.357 CET [11764] DETAIL:  Continuing to retry for 30 seconds.
+2021-12-08 10:58:20.357 CET [11764] HINT:  You might have antivirus, backup, or similar software interfering with the database system.
+2021-12-08 10:58:50.972 CET [11764] LOG:  database system was not properly shut down; automatic recovery in progress
+2021-12-08 10:58:51.011 CET [11764] LOG:  redo starts at 0/245B528
+2021-12-08 10:58:51.011 CET [11764] LOG:  invalid record length at 0/245B610: wanted 24, got 0
+2021-12-08 10:58:51.011 CET [11764] LOG:  redo done at 0/245B5D8
+2021-12-08 10:58:51.369 CET [8680] LOG:  database system is ready to accept connections
+2021-12-08 11:02:31.181 CET [8680] LOG:  background worker "logical replication launcher" (PID 8196) was terminated by exception 0xC000013A
+2021-12-08 11:02:31.181 CET [8680] HINT:  See C include file "ntstatus.h" for a description of the hexadecimal value.
+2021-12-08 11:02:31.181 CET [8680] LOG:  terminating any other active server processes
+2021-12-08 11:02:31.181 CET [8680] LOG:  statistics collector process (PID 8228) was terminated by exception 0xC000013A
+2021-12-08 11:02:31.181 CET [8680] HINT:  See C include file "ntstatus.h" for a description of the hexadecimal value.
+2021-12-08 11:02:31.181 CET [8680] LOG:  received fast shutdown request
+2021-12-08 11:58:03.847 CET [5044] LOG:  starting PostgreSQL 13devel on x86_64-w64-mingw32, compiled by x86_64-w64-mingw32-gcc.exe (Rev2, Built by MSYS2 project) 9.2.0, 64-bit
+2021-12-08 11:58:03.862 CET [5044] LOG:  listening on IPv6 address "::1", port 5432
+2021-12-08 11:58:03.862 CET [5044] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2021-12-08 11:58:04.080 CET [6480] LOG:  database system was interrupted; last known up at 2021-12-08 10:58:51 CET
+2021-12-08 11:58:04.097 CET [2484] FATAL:  the database system is starting up
+2021-12-08 11:58:16.051 CET [6480] LOG:  could not open file "./postgres.log": sharing violation
+2021-12-08 11:58:16.051 CET [6480] DETAIL:  Continuing to retry for 30 seconds.
+2021-12-08 11:58:16.051 CET [6480] HINT:  You might have antivirus, backup, or similar software interfering with the database system.
+2021-12-08 11:58:47.221 CET [6480] LOG:  database system was not properly shut down; automatic recovery in progress
+2021-12-08 11:58:47.237 CET [6480] LOG:  redo starts at 0/245B688
+2021-12-08 11:58:47.237 CET [6480] LOG:  invalid record length at 0/245B6C0: wanted 24, got 0
+2021-12-08 11:58:47.237 CET [6480] LOG:  redo done at 0/245B688
+2021-12-08 11:58:47.362 CET [5044] LOG:  database system is ready to accept connections
+2021-12-08 11:59:00.221 CET [2752] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-08 11:59:00.221 CET [2752] DETAIL:  Key (pid, app)=(6528, RuntimeBroker) already exists.
+2021-12-08 11:59:00.221 CET [2752] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('RuntimeBroker','papa','2021-12-08 11:59:00',6528)
+2021-12-08 11:59:00.268 CET [2752] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-08 11:59:00.268 CET [2752] DETAIL:  Key (pid, app)=(4584, RuntimeBroker) already exists.
+2021-12-08 11:59:00.268 CET [2752] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('RuntimeBroker','papa','2021-12-08 11:59:00',4584)
+2021-12-08 11:59:28.309 CET [2752] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-08 11:59:28.309 CET [2752] DETAIL:  Key (pid, app)=(6500, pg_ctl) already exists.
+2021-12-08 11:59:28.309 CET [2752] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('pg_ctl','papa','2021-12-08 11:59:28',6500)
+2021-12-08 11:59:40.796 CET [2752] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-08 11:59:40.796 CET [2752] DETAIL:  Key (pid, app)=(1652, WMIADAP) already exists.
+2021-12-08 11:59:40.796 CET [2752] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('WMIADAP','SYSTEM','2021-12-08 11:59:40',1652)
+2021-12-08 11:59:43.919 CET [2752] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-08 11:59:43.919 CET [2752] DETAIL:  Key (pid, app)=(3944, svchost) already exists.
+2021-12-08 11:59:43.919 CET [2752] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('svchost','','2021-12-08 11:59:43',3944)
+2021-12-08 11:59:50.154 CET [2752] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-08 11:59:50.154 CET [2752] DETAIL:  Key (pid, app)=(4452, MoUsoCoreWorker) already exists.
+2021-12-08 11:59:50.154 CET [2752] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('MoUsoCoreWorker','SYSTEM','2021-12-08 11:59:50',4452)
+2021-12-08 11:59:56.419 CET [2752] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-08 11:59:56.419 CET [2752] DETAIL:  Key (pid, app)=(1536, consent) already exists.
+2021-12-08 11:59:56.419 CET [2752] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('consent','SYSTEM','2021-12-08 11:59:56',1536)
+2021-12-08 11:59:59.570 CET [2752] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-08 11:59:59.570 CET [2752] DETAIL:  Key (pid, app)=(1248, consent) already exists.
+2021-12-08 11:59:59.570 CET [2752] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('consent','SYSTEM','2021-12-08 11:59:59',1248)
+2021-12-08 12:00:02.679 CET [2752] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-08 12:00:02.679 CET [2752] DETAIL:  Key (pid, app)=(1644, dllhost) already exists.
+2021-12-08 12:00:02.679 CET [2752] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('dllhost','papa','2021-12-08 12:00:02',1644)
+2021-12-08 12:00:12.007 CET [2752] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-08 12:00:12.007 CET [2752] DETAIL:  Key (pid, app)=(5728, svchost) already exists.
+2021-12-08 12:00:12.007 CET [2752] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('svchost','SYSTEM','2021-12-08 12:00:12',5728)
+2021-12-08 12:00:39.960 CET [2752] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-08 12:00:39.960 CET [2752] DETAIL:  Key (pid, app)=(7128, backgroundTaskHost) already exists.
+2021-12-08 12:00:39.960 CET [2752] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('backgroundTaskHost','papa','2021-12-08 12:00:39',7128)
+2021-12-08 12:01:23.444 CET [2752] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-08 12:01:23.444 CET [2752] DETAIL:  Key (pid, app)=(3028, svchost) already exists.
+2021-12-08 12:01:23.444 CET [2752] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('svchost','','2021-12-08 12:01:23',3028)
+2021-12-08 12:03:40.194 CET [2752] ERROR:  duplicate key value violates unique constraint "daily_apps_pkey"
+2021-12-08 12:03:40.194 CET [2752] DETAIL:  Key (pid, app)=(6480, MonitorFrontendCli) already exists.
+2021-12-08 12:03:40.194 CET [2752] STATEMENT:  INSERT INTO daily_apps(app,username,start_time,pid) VALUES('MonitorFrontendCli','papa','2021-12-08 12:03:40',6480)
