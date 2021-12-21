@@ -17,7 +17,7 @@ namespace BlazorServerApp
     {
         public static void Main(string[] args)
         {
-            Backend.Monitor monitor= new Backend.Monitor();
+            Backend.Monitor monitor = new Backend.Monitor();
             Thread thr = new Thread(new ThreadStart(monitor.Start));
             thr.Start();
             CreateHostBuilder(args).Build().Run();

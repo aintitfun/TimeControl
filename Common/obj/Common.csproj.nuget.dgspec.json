@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\papa\\Source\\Repos\\TimeControl\\Common\\Common.csproj": {}
+    "C:\\Users\\opolo\\Source\\Repos\\aintitfun\\TimeControl\\Common\\Common.csproj": {}
   },
   "projects": {
-    "C:\\Users\\papa\\Source\\Repos\\TimeControl\\Common\\Common.csproj": {
+    "C:\\Users\\opolo\\Source\\Repos\\aintitfun\\TimeControl\\Common\\Common.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\papa\\Source\\Repos\\TimeControl\\Common\\Common.csproj",
+        "projectUniqueName": "C:\\Users\\opolo\\Source\\Repos\\aintitfun\\TimeControl\\Common\\Common.csproj",
         "projectName": "Common",
-        "projectPath": "C:\\Users\\papa\\Source\\Repos\\TimeControl\\Common\\Common.csproj",
-        "packagesPath": "C:\\Users\\papa\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\papa\\Source\\Repos\\TimeControl\\Common\\obj\\",
+        "projectPath": "C:\\Users\\opolo\\Source\\Repos\\aintitfun\\TimeControl\\Common\\Common.csproj",
+        "packagesPath": "C:\\Users\\opolo\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\opolo\\Source\\Repos\\aintitfun\\TimeControl\\Common\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\papa\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\opolo\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -74,7 +74,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.403\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     }

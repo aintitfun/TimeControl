@@ -38,7 +38,6 @@ namespace Backend
             vSQLite.HistApps();
             vSQLite.ReStartConsumedTimeFromUsers();
 
-            //vSQLite.AddApplication("xterm",true,1);
 
 
 

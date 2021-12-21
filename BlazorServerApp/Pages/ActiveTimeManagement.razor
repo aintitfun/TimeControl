@@ -1,0 +1,59 @@
+﻿@page "/ActiveTimeManagement"
+<h3>ActiveTimeManagement</h3>
+
+@using Backend;
+
+<EditForm Model="listOfUsers">
+    <select 
+    @onchange="listOfUsers.OnValueChanged">
+        @foreach (string user in listOfUsers.users)
+        {
+            <option>@user</option>
+        }
+    </select>
+    <input @bind="listOfUsers.monday" />
+    <input @bind="listOfUsers.tuesday" name="tuesday"  />
+    <input @bind="listOfUsers.wednesday" name="wednesday"  />
+    <input @bind="listOfUsers.thursday" name="thursday"  />
+    <input @bind="listOfUsers.friday" name="friday"  />
+    <input @bind="listOfUsers.saturday" name="saturday"  />
+    <input @bind="listOfUsers.sunday" name="sunday"  />
+</EditForm>
+
+@code {
+    ListOfUsers listOfUsers = new ListOfUsers();
+
+    class ListOfUsers
+    {
+        public int monday=0;
+        public int tuesday=0;
+        public int wednesday=0;
+        public int thursday=0;
+        public int friday=0;
+        public int saturday=0;
+        public int sunday=0;
+
+        public List<string> users = new List<string>();
+        public ListOfUsers()
+        {
+            ProcessSQL pSQL = new ProcessSQL();
+            users=pSQL.GetUsers();
+
+            //users.Add("alexa");
+            //users.Add("Saray");
+        }
+
+        public Task OnValueChanged(ChangeEventArgs e)
+        {
+            ProcessSQL pSQL = new ProcessSQL();
+            //listOfUsers.Users=value; 
+            users=pSQL.GetUsers();
+            return Task.CompletedTask;
+
+        }
+
+    }
+
+
+
+}
