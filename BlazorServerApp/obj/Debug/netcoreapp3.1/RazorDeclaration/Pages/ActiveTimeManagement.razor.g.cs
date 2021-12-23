@@ -97,14 +97,15 @@ using System.Linq;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 24 "C:\Users\opolo\Source\Repos\aintitfun\TimeControl\BlazorServerApp\Pages\ActiveTimeManagement.razor"
+#line 28 "C:\Users\opolo\Source\Repos\aintitfun\TimeControl\BlazorServerApp\Pages\ActiveTimeManagement.razor"
        
     ListOfUsers listOfUsers = new ListOfUsers();
 
     class ListOfUsers
     {
         public Dictionary<string,int> dayOfTheWeekAndTime=new Dictionary<string, int>();
-
+        private string currentUser;
+        private ProcessSQL pSQL;
         //public int monday=0;
         //public int tuesday=0;
         //public int wednesday=0;
@@ -116,7 +117,7 @@ using System.Linq;
         public List<string> users = new List<string>();
         public ListOfUsers()
         {
-            ProcessSQL pSQL = new ProcessSQL();
+            pSQL = new ProcessSQL();
             users=pSQL.GetUsers();
 
             dayOfTheWeekAndTime.Add("monday",0);
@@ -133,11 +134,9 @@ using System.Linq;
 
         public Task OnValueChanged(ChangeEventArgs e)
         {
-            ProcessSQL pSQL = new ProcessSQL();
-            users=pSQL.GetUsers();
-            List<AppsPersist> lap = new List<AppsPersist>();
-
-            foreach (AppsPersist app in pSQL.ListActiveTime().Where(m => m._userName == (string)e.Value))
+            currentUser = (string)e.Value;
+            //users=pSQL.GetUsers();
+            foreach (AppsPersist app in pSQL.ListActiveTime().Where(m => m._userName == currentUser))
             {
                 dayOfTheWeekAndTime[app._dayOfTheWeek.ToLower()] = app._time;
             }
@@ -155,6 +154,17 @@ using System.Linq;
             return Task.CompletedTask;
 
         }
+        public void CommitValues()
+        {
+            int secondsToday=pSQL.GetUserConsumedSeconds(currentUser);
+            foreach (string d in dayOfTheWeekAndTime.Keys)
+            {
+                pSQL.RemoveActiveTime(currentUser, d);
+                pSQL.AddActiveTime(currentUser, dayOfTheWeekAndTime[d], d);
+            }
+            pSQL.SetUserConsumedSeconds(currentUser, secondsToday);
+        }
+
 
     }
 

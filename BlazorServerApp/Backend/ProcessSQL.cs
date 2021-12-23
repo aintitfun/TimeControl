@@ -781,5 +781,56 @@ namespace Backend
             }
             return ap;
         }
+        public int GetUserConsumedSeconds(string userName)
+        {
+            AppsPersist ap = new AppsPersist();
+
+            using (var conn = new NpgsqlConnection(connString))
+            {
+                conn.Open();
+                using (NpgsqlCommand cmd = new NpgsqlCommand($@"select username,seconds_today from activetime
+                                                                where lower(day_of_the_week)=rtrim(lower(to_char(now(),'day')))
+                                                                and username='{userName}';", conn))
+                {
+                    NpgsqlDataReader dr;
+                    dr = cmd.ExecuteReader();
+                    try
+                    {
+                        while (dr.Read())
+                        {
+                            ap = new AppsPersist(null, dr.GetString(0), dr.GetInt32(1), null);
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        ap = new AppsPersist(null, userName, 0, null);
+                    }
+                }
+            }
+            return ap._time;
+        }
+        public bool SetUserConsumedSeconds(string userName, int seconds)
+        {
+            AppsPersist ap = new AppsPersist();
+
+            using (var conn = new NpgsqlConnection(connString))
+            {
+                conn.Open();
+                using (NpgsqlCommand cmd = new NpgsqlCommand($@"update activetime set seconds_today={seconds}
+                                                                where lower(day_of_the_week)=rtrim(lower(to_char(now(),'day')))
+                                                                and username='{userName}';", conn))
+                {
+                    try
+                    {
+                        cmd.ExecuteNonQuery();
+                        return true;
+                    }
+                    catch (Exception e)
+                    {
+                        return false;
+                    }
+                }
+            }
+        }
     }
 }
