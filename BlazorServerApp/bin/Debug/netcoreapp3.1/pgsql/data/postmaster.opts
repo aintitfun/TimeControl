@@ -1,1 +1,1 @@
-C:/Users/opolo/source/repos/aintitfun/TimeControl/BlazorServerApp/bin/Debug/netcoreapp3.1/pgsql/bin/postgres.exe "-D" "../data"
+C:/Users/opolo/Source/Repos/aintitfun/TimeControl/BlazorServerApp/bin/Debug/netcoreapp3.1/pgsql/bin/postgres.exe "-D" "C:/Users/opolo/Source/Repos/aintitfun/TimeControl/BlazorServerApp/bin/Debug/netcoreapp3.1/pgsql/data"

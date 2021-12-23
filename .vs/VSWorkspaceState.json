@@ -1,9 +1,7 @@
 {
   "ExpandedNodes": [
     "",
-    "\\BlazorServer",
-    "\\Common"
+    "\\BlazorServerApp"
   ],
-  "SelectedNode": "\\Common\\Common.csproj",
   "PreviewInSolutionExplorer": false
 }

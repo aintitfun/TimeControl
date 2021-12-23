@@ -9,7 +9,6 @@ namespace BlazorServerApp.Pages
     #line hidden
     using System;
     using System.Collections.Generic;
-    using System.Linq;
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Components;
 #nullable restore
@@ -82,6 +81,13 @@ using Backend;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 5 "C:\Users\opolo\Source\Repos\aintitfun\TimeControl\BlazorServerApp\Pages\ActiveTimeManagement.razor"
+using System.Linq;
+
+#line default
+#line hidden
+#nullable disable
     [Microsoft.AspNetCore.Components.RouteAttribute("/ActiveTimeManagement")]
     public partial class ActiveTimeManagement : Microsoft.AspNetCore.Components.ComponentBase
     {
@@ -91,25 +97,35 @@ using Backend;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 23 "C:\Users\opolo\Source\Repos\aintitfun\TimeControl\BlazorServerApp\Pages\ActiveTimeManagement.razor"
+#line 24 "C:\Users\opolo\Source\Repos\aintitfun\TimeControl\BlazorServerApp\Pages\ActiveTimeManagement.razor"
        
     ListOfUsers listOfUsers = new ListOfUsers();
 
     class ListOfUsers
     {
-        public int monday=0;
-        public int tuesday=0;
-        public int wednesday=0;
-        public int thursday=0;
-        public int friday=0;
-        public int saturday=0;
-        public int sunday=0;
+        public Dictionary<string,int> dayOfTheWeekAndTime=new Dictionary<string, int>();
+
+        //public int monday=0;
+        //public int tuesday=0;
+        //public int wednesday=0;
+        //public int thursday=0;
+        //public int friday=0;
+        //public int saturday=0;
+        //public int sunday=0;
 
         public List<string> users = new List<string>();
         public ListOfUsers()
         {
             ProcessSQL pSQL = new ProcessSQL();
             users=pSQL.GetUsers();
+
+            dayOfTheWeekAndTime.Add("monday",0);
+            dayOfTheWeekAndTime.Add("tuesday",0);
+            dayOfTheWeekAndTime.Add("wednesday",0);
+            dayOfTheWeekAndTime.Add("thursday",0);
+            dayOfTheWeekAndTime.Add("friday",0);
+            dayOfTheWeekAndTime.Add("saturday",0);
+            dayOfTheWeekAndTime.Add("sunday",0);
 
             //users.Add("alexa");
             //users.Add("Saray");
@@ -118,8 +134,24 @@ using Backend;
         public Task OnValueChanged(ChangeEventArgs e)
         {
             ProcessSQL pSQL = new ProcessSQL();
-            //listOfUsers.Users=value; 
             users=pSQL.GetUsers();
+            List<AppsPersist> lap = new List<AppsPersist>();
+
+            foreach (AppsPersist app in pSQL.ListActiveTime().Where(m => m._userName == (string)e.Value))
+            {
+                dayOfTheWeekAndTime[app._dayOfTheWeek.ToLower()] = app._time;
+            }
+
+
+
+            //monday = (pSQL.ListActiveTime().Where(m => m._userName == (string)e.Value && m._dayOfTheWeek.ToLower() == "monday").Select(m=> m._time).First()) ? 0;
+            //tuesday = pSQL.ListActiveTime().Where(m => m._userName == (string)e.Value && m._dayOfTheWeek.ToLower() == "tuesday").Select(m=> m._time).First() ?? 0;
+            //wednesday = pSQL.ListActiveTime().Where(m => m._userName == (string)e.Value && m._dayOfTheWeek.ToLower() == "wednesday").Select(m=> m._time).First();
+            //thursday = pSQL.ListActiveTime().Where(m => m._userName == (string)e.Value && m._dayOfTheWeek.ToLower() == "thursday").Select(m=> m._time).First();
+            //friday = pSQL.ListActiveTime().Where(m => m._userName == (string)e.Value && m._dayOfTheWeek.ToLower() == "friday").Select(m=> m._time).First();
+            //saturday = pSQL.ListActiveTime().Where(m => m._userName == (string)e.Value && m._dayOfTheWeek.ToLower() == "saturday").Select(m=> m._time).First();
+            //sunday = pSQL.ListActiveTime().Where(m => m._userName == (string)e.Value && m._dayOfTheWeek.ToLower() == "sunday").Select(m=> m._time).First();
+
             return Task.CompletedTask;
 
         }
