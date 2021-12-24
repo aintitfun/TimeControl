@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <_PublishTargetUrl>C:\temp\publicacion</_PublishTargetUrl>
+    <History>True|2021-12-24T08:48:36.0937530Z;True|2021-12-24T09:43:11.1507530+01:00;True|2021-12-24T09:31:55.6417546+01:00;True|2021-12-24T09:28:01.4087533+01:00;True|2021-12-23T17:41:51.3120413+01:00;True|2021-12-23T16:34:26.1438920+01:00;</History>
+  </PropertyGroup>
+</Project>

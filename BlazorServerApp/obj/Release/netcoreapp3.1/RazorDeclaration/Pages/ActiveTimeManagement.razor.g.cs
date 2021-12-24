@@ -9,75 +9,81 @@ namespace BlazorServerApp.Pages
     #line hidden
     using System;
     using System.Collections.Generic;
-    using System.Linq;
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Components;
 #nullable restore
-#line 1 "C:\Users\opolo\source\repos\aintitfun\TimeControl\BlazorServerApp\_Imports.razor"
+#line 1 "C:\Users\opolo\Source\Repos\aintitfun\TimeControl\BlazorServerApp\_Imports.razor"
 using System.Net.Http;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 2 "C:\Users\opolo\source\repos\aintitfun\TimeControl\BlazorServerApp\_Imports.razor"
+#line 2 "C:\Users\opolo\Source\Repos\aintitfun\TimeControl\BlazorServerApp\_Imports.razor"
 using Microsoft.AspNetCore.Authorization;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 3 "C:\Users\opolo\source\repos\aintitfun\TimeControl\BlazorServerApp\_Imports.razor"
+#line 3 "C:\Users\opolo\Source\Repos\aintitfun\TimeControl\BlazorServerApp\_Imports.razor"
 using Microsoft.AspNetCore.Components.Authorization;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 4 "C:\Users\opolo\source\repos\aintitfun\TimeControl\BlazorServerApp\_Imports.razor"
+#line 4 "C:\Users\opolo\Source\Repos\aintitfun\TimeControl\BlazorServerApp\_Imports.razor"
 using Microsoft.AspNetCore.Components.Forms;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 5 "C:\Users\opolo\source\repos\aintitfun\TimeControl\BlazorServerApp\_Imports.razor"
+#line 5 "C:\Users\opolo\Source\Repos\aintitfun\TimeControl\BlazorServerApp\_Imports.razor"
 using Microsoft.AspNetCore.Components.Routing;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 6 "C:\Users\opolo\source\repos\aintitfun\TimeControl\BlazorServerApp\_Imports.razor"
+#line 6 "C:\Users\opolo\Source\Repos\aintitfun\TimeControl\BlazorServerApp\_Imports.razor"
 using Microsoft.AspNetCore.Components.Web;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 7 "C:\Users\opolo\source\repos\aintitfun\TimeControl\BlazorServerApp\_Imports.razor"
+#line 7 "C:\Users\opolo\Source\Repos\aintitfun\TimeControl\BlazorServerApp\_Imports.razor"
 using Microsoft.JSInterop;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 8 "C:\Users\opolo\source\repos\aintitfun\TimeControl\BlazorServerApp\_Imports.razor"
+#line 8 "C:\Users\opolo\Source\Repos\aintitfun\TimeControl\BlazorServerApp\_Imports.razor"
 using BlazorServerApp;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 9 "C:\Users\opolo\source\repos\aintitfun\TimeControl\BlazorServerApp\_Imports.razor"
+#line 9 "C:\Users\opolo\Source\Repos\aintitfun\TimeControl\BlazorServerApp\_Imports.razor"
 using BlazorServerApp.Shared;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 4 "C:\Users\opolo\source\repos\aintitfun\TimeControl\BlazorServerApp\Pages\ActiveTimeManagement.razor"
+#line 4 "C:\Users\opolo\Source\Repos\aintitfun\TimeControl\BlazorServerApp\Pages\ActiveTimeManagement.razor"
 using Backend;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 5 "C:\Users\opolo\Source\Repos\aintitfun\TimeControl\BlazorServerApp\Pages\ActiveTimeManagement.razor"
+using System.Linq;
 
 #line default
 #line hidden
@@ -91,38 +97,76 @@ using Backend;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 23 "C:\Users\opolo\source\repos\aintitfun\TimeControl\BlazorServerApp\Pages\ActiveTimeManagement.razor"
+#line 32 "C:\Users\opolo\Source\Repos\aintitfun\TimeControl\BlazorServerApp\Pages\ActiveTimeManagement.razor"
        
     ListOfUsers listOfUsers = new ListOfUsers();
 
     class ListOfUsers
     {
-        public int monday=0;
-        public int tuesday=0;
-        public int wednesday=0;
-        public int thursday=0;
-        public int friday=0;
-        public int saturday=0;
-        public int sunday=0;
+        public Dictionary<string,int> dayOfTheWeekAndTime=new Dictionary<string, int>();
+        private string currentUser;
+        private ProcessSQL pSQL;
+        public int secondsToday;
+        //public int monday=0;
+        //public int tuesday=0;
+        //public int wednesday=0;
+        //public int thursday=0;
+        //public int friday=0;
+        //public int saturday=0;
+        //public int sunday=0;
 
         public List<string> users = new List<string>();
         public ListOfUsers()
         {
-            ProcessSQL pSQL = new ProcessSQL();
-            users=pSQL.GetUsers();
 
+            pSQL = new ProcessSQL();
+            secondsToday = 0;
+            users=pSQL.GetUsers();
+            currentUser = users[0];
+
+            dayOfTheWeekAndTime.Add("monday",0);
+            dayOfTheWeekAndTime.Add("tuesday",0);
+            dayOfTheWeekAndTime.Add("wednesday",0);
+            dayOfTheWeekAndTime.Add("thursday",0);
+            dayOfTheWeekAndTime.Add("friday",0);
+            dayOfTheWeekAndTime.Add("saturday",0);
+            dayOfTheWeekAndTime.Add("sunday",0);
+
+            PopulateWeek();
             //users.Add("alexa");
             //users.Add("Saray");
         }
 
+        public void PopulateWeek()
+        {
+            foreach (AppsPersist app in pSQL.ListActiveTime().Where(m => m._userName == currentUser))
+            {
+                dayOfTheWeekAndTime[app._dayOfTheWeek.ToLower()] = app._time;
+            }
+        }
+
         public Task OnValueChanged(ChangeEventArgs e)
         {
-            ProcessSQL pSQL = new ProcessSQL();
-            //listOfUsers.Users=value; 
-            users=pSQL.GetUsers();
+            currentUser = (string)e.Value;
+            secondsToday=pSQL.GetUserConsumedSeconds(currentUser);
+
+            //users=pSQL.GetUsers();
+            PopulateWeek();
+
             return Task.CompletedTask;
 
         }
+        public void CommitValues()
+        {
+            secondsToday=pSQL.GetUserConsumedSeconds(currentUser);
+            foreach (string d in dayOfTheWeekAndTime.Keys)
+            {
+                pSQL.RemoveActiveTime(currentUser, d);
+                pSQL.AddActiveTime(currentUser, dayOfTheWeekAndTime[d], d);
+            }
+            pSQL.SetUserConsumedSeconds(currentUser, secondsToday);
+        }
+
 
     }
 

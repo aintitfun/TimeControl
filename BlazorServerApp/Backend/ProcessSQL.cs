@@ -689,7 +689,7 @@ namespace Backend
                 using (NpgsqlCommand cmd = new NpgsqlCommand($@"select coalesce(last_time_connected,now()) from activetime where username='{userName}'
                                                                 and lower(day_of_the_week)=rtrim(lower(to_char(now(),'day')))", vConn))
                 {
-                    lastTimeConnected = (DateTime)cmd.ExecuteScalar();
+                    lastTimeConnected = ((DateTime)cmd.ExecuteScalar()).ToLocalTime();
                 }
                 int secondsConsumedFromLastIteration=(int)(DateTime.Now - lastTimeConnected).TotalSeconds;
                 if (secondsConsumedFromLastIteration < 60) //probably continues session

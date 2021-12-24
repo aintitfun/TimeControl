@@ -97,7 +97,7 @@ using System.Linq;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 28 "C:\Users\opolo\Source\Repos\aintitfun\TimeControl\BlazorServerApp\Pages\ActiveTimeManagement.razor"
+#line 32 "C:\Users\opolo\Source\Repos\aintitfun\TimeControl\BlazorServerApp\Pages\ActiveTimeManagement.razor"
        
     ListOfUsers listOfUsers = new ListOfUsers();
 
@@ -106,6 +106,7 @@ using System.Linq;
         public Dictionary<string,int> dayOfTheWeekAndTime=new Dictionary<string, int>();
         private string currentUser;
         private ProcessSQL pSQL;
+        public int secondsToday;
         //public int monday=0;
         //public int tuesday=0;
         //public int wednesday=0;
@@ -117,8 +118,11 @@ using System.Linq;
         public List<string> users = new List<string>();
         public ListOfUsers()
         {
+
             pSQL = new ProcessSQL();
+            secondsToday = 0;
             users=pSQL.GetUsers();
+            currentUser = users[0];
 
             dayOfTheWeekAndTime.Add("monday",0);
             dayOfTheWeekAndTime.Add("tuesday",0);
@@ -128,35 +132,33 @@ using System.Linq;
             dayOfTheWeekAndTime.Add("saturday",0);
             dayOfTheWeekAndTime.Add("sunday",0);
 
+            PopulateWeek();
             //users.Add("alexa");
             //users.Add("Saray");
+        }
+
+        public void PopulateWeek()
+        {
+            foreach (AppsPersist app in pSQL.ListActiveTime().Where(m => m._userName == currentUser))
+            {
+                dayOfTheWeekAndTime[app._dayOfTheWeek.ToLower()] = app._time;
+            }
         }
 
         public Task OnValueChanged(ChangeEventArgs e)
         {
             currentUser = (string)e.Value;
+            secondsToday=pSQL.GetUserConsumedSeconds(currentUser);
+
             //users=pSQL.GetUsers();
-            foreach (AppsPersist app in pSQL.ListActiveTime().Where(m => m._userName == currentUser))
-            {
-                dayOfTheWeekAndTime[app._dayOfTheWeek.ToLower()] = app._time;
-            }
-
-
-
-            //monday = (pSQL.ListActiveTime().Where(m => m._userName == (string)e.Value && m._dayOfTheWeek.ToLower() == "monday").Select(m=> m._time).First()) ? 0;
-            //tuesday = pSQL.ListActiveTime().Where(m => m._userName == (string)e.Value && m._dayOfTheWeek.ToLower() == "tuesday").Select(m=> m._time).First() ?? 0;
-            //wednesday = pSQL.ListActiveTime().Where(m => m._userName == (string)e.Value && m._dayOfTheWeek.ToLower() == "wednesday").Select(m=> m._time).First();
-            //thursday = pSQL.ListActiveTime().Where(m => m._userName == (string)e.Value && m._dayOfTheWeek.ToLower() == "thursday").Select(m=> m._time).First();
-            //friday = pSQL.ListActiveTime().Where(m => m._userName == (string)e.Value && m._dayOfTheWeek.ToLower() == "friday").Select(m=> m._time).First();
-            //saturday = pSQL.ListActiveTime().Where(m => m._userName == (string)e.Value && m._dayOfTheWeek.ToLower() == "saturday").Select(m=> m._time).First();
-            //sunday = pSQL.ListActiveTime().Where(m => m._userName == (string)e.Value && m._dayOfTheWeek.ToLower() == "sunday").Select(m=> m._time).First();
+            PopulateWeek();
 
             return Task.CompletedTask;
 
         }
         public void CommitValues()
         {
-            int secondsToday=pSQL.GetUserConsumedSeconds(currentUser);
+            secondsToday=pSQL.GetUserConsumedSeconds(currentUser);
             foreach (string d in dayOfTheWeekAndTime.Keys)
             {
                 pSQL.RemoveActiveTime(currentUser, d);
