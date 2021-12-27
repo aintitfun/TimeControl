@@ -1,8 +1,0 @@
-{
-  "runtimeOptions": {
-    "additionalProbingPaths": [
-      "C:\\Users\\opolo\\.dotnet\\store\\|arch|\\|tfm|",
-      "C:\\Users\\opolo\\.nuget\\packages"
-    ]
-  }
-}
