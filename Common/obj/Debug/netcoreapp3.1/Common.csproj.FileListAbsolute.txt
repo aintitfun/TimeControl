@@ -1,8 +1,0 @@
-E:\Users\papa\Downloads\control_horas_20191216\control_horas\Common\bin\Debug\netcoreapp3.1\Common.deps.json
-E:\Users\papa\Downloads\control_horas_20191216\control_horas\Common\bin\Debug\netcoreapp3.1\Common.dll
-E:\Users\papa\Downloads\control_horas_20191216\control_horas\Common\bin\Debug\netcoreapp3.1\Common.pdb
-E:\Users\papa\Downloads\control_horas_20191216\control_horas\Common\obj\Debug\netcoreapp3.1\Common.csprojAssemblyReference.cache
-E:\Users\papa\Downloads\control_horas_20191216\control_horas\Common\obj\Debug\netcoreapp3.1\Common.AssemblyInfoInputs.cache
-E:\Users\papa\Downloads\control_horas_20191216\control_horas\Common\obj\Debug\netcoreapp3.1\Common.AssemblyInfo.cs
-E:\Users\papa\Downloads\control_horas_20191216\control_horas\Common\obj\Debug\netcoreapp3.1\Common.dll
-E:\Users\papa\Downloads\control_horas_20191216\control_horas\Common\obj\Debug\netcoreapp3.1\Common.pdb
