@@ -6,6 +6,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Security.Principal ;
 using System.Runtime.InteropServices;
+using System.Diagnostics.Eventing.Reader;
+using System.Management;
+
 
 namespace Backend
 {
@@ -20,10 +23,13 @@ namespace Backend
         public static List<string> IgnoredApps {get=> File.ReadAllLines("IgnoredApps.cfg").ToList<string>(); }
         public Process[] processes;
         public int nCycleCount;
+        public static List<string> users;
         public Monitor()
         {
-            
-            START_TIME=DateTime.Now;
+            users = new List<string>();
+            PopulateListOfWindowsLocalUsers();
+
+            START_TIME =DateTime.Now;
             nCycleCount=0;
 
         }
@@ -63,7 +69,7 @@ namespace Backend
             }
         }
 
-       private static string GetProcessUser(Process process) 
+        private static string GetProcessUser(Process process) 
         {
             
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
@@ -436,6 +442,33 @@ namespace Backend
             }
             return sessionid;
         }
+        string GetSidByUserName(string username)
+        {
+            // var user = WindowsIdentity.
+            //var user = WindowsIdentity.GetCurrent().User;
+            // string sid = UserPrincipal.Current.Sid.ToString();
+
+
+            NTAccount f = new NTAccount(username);
+            SecurityIdentifier s = (SecurityIdentifier)f.Translate(typeof(SecurityIdentifier));
+            String sidString = s.ToString();
+
+            
+
+            return sidString;
+        }
+        public void PopulateListOfWindowsLocalUsers()
+        {
+            SelectQuery query = new SelectQuery("Win32_UserAccount");
+            ManagementObjectSearcher searcher = new ManagementObjectSearcher(query);
+            foreach (ManagementObject envVar in searcher.Get())
+            {
+                if (envVar["AccountType"].ToString()=="512" && envVar["Disabled"].ToString()=="False")
+                    users.Add(envVar["Name"].ToString());
+                //Console.WriteLine("Username : {0} {1}", envVar["Name"], GetSidByUserName(envVar["Name"].ToString()));
+                //vSQL.InsertLocalUser(envVar["Name"].ToString(), GetSidByUserName(envVar["Name"].ToString()));
+            }
+        }
     }
 
     /// <summary>
@@ -454,7 +487,6 @@ namespace Backend
             User=username;
             
         }
-
     }
     //public voidGetIgnoredAppsFromFile()
     //{

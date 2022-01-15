@@ -1,0 +1,121 @@
+﻿@page "/TimeWindow"
+<h3>Time Window Management</h3>
+
+@using Backend;
+@using System.Linq;
+
+<EditForm Model="listOfUsers">
+    <select 
+    @onchange="listOfUsers.OnValueChanged">
+        @foreach (string user in listOfUsers.users)
+        {
+            <option>@user</option>
+        }
+    </select>
+    <br /><input @bind='listOfUsers.windowStart["monday"]' />      <input @bind='listOfUsers.windowEnd["monday"]' />
+    <br /><input @bind='listOfUsers.windowStart["tuesday" ]'  />   <input @bind='listOfUsers.windowEnd["tuesday" ]'  />
+    <br /><input @bind='listOfUsers.windowStart["wednesday"] '  /> <input @bind='listOfUsers.windowEnd["wednesday"] '  />
+    <br /><input @bind='listOfUsers.windowStart["thursday"]'  />   <input @bind='listOfUsers.windowEnd["thursday"]'  />
+    <br /><input @bind='listOfUsers.windowStart["friday"]'  />     <input @bind='listOfUsers.windowEnd["friday"]'  />
+    <br /><input @bind='listOfUsers.windowStart["saturday"]'  />   <input @bind='listOfUsers.windowEnd["saturday"]'  />
+    <br /><input @bind='listOfUsers.windowStart["sunday"]'  />     <input @bind='listOfUsers.windowEnd["sunday"]'  />
+
+    <br /><label>
+        Consumed time (minutes): 
+        <input @bind="listOfUsers.secondsToday" />
+    </label>
+
+    <br /><button class="btn btn-primary" @onclick="listOfUsers.CommitValues">Commit Values</button>
+
+</EditForm>
+
+@code {
+    ListOfUsers listOfUsers = new ListOfUsers();
+
+    class ListOfUsers
+    {
+        public Dictionary<string,int> windowStart=new Dictionary<string, int>();
+        public Dictionary<string,int> windowEnd=new Dictionary<string, int>();
+
+        private string currentUser;
+        private ProcessSQL pSQL;
+        public int secondsToday;
+        //public int monday=0;
+        //public int tuesday=0;
+        //public int wednesday=0;
+        //public int thursday=0;
+        //public int friday=0;
+        //public int saturday=0;
+        //public int sunday=0;
+
+        public List<string> users = new List<string>();
+        public ListOfUsers()
+        {
+
+            pSQL = new ProcessSQL();
+            secondsToday = 0;
+            users=pSQL.GetUsers();
+            currentUser = users[0];
+
+            windowStart.Add("monday",830);
+            windowStart.Add("tuesday",830);
+            windowStart.Add("wednesday",830);
+            windowStart.Add("thursday",830);
+            windowStart.Add("friday",830);
+            windowStart.Add("saturday",830);
+            windowStart.Add("sunday",830);
+
+            windowEnd.Add("monday",2130);
+            windowEnd.Add("tuesday",2130);
+            windowEnd.Add("wednesday",2130);
+            windowEnd.Add("thursday",2130);
+            windowEnd.Add("friday",2130);
+            windowEnd.Add("saturday",2130);
+            windowEnd.Add("sunday",2130);
+
+            PopulateWeek();
+            //users.Add("alexa");
+            //users.Add("Saray");
+        }
+
+        public void PopulateWeek()
+        {
+            foreach (AppsPersist app in pSQL.GetConfiguredLogins().Where(m => m._userName == currentUser))
+            {
+                AppsPersist app2 = pSQL.GetConfiguredLogouts().Where(m => m._userName == currentUser && m._dayOfTheWeek==app._dayOfTheWeek).First();
+                windowStart[app._dayOfTheWeek.ToLower()] = app._time;
+                windowEnd[app._dayOfTheWeek.ToLower()] = app2._time;
+            }
+        }
+
+        public Task OnValueChanged(ChangeEventArgs e)
+        {
+            currentUser = (string)e.Value;
+            secondsToday=pSQL.GetUserConsumedSeconds(currentUser);
+
+            //users=pSQL.GetUsers();
+            PopulateWeek();
+
+            return Task.CompletedTask;
+
+        }
+        public void CommitValues()
+        {
+            foreach (string d in windowStart.Keys)
+            {
+                pSQL.RemoveLogin(currentUser, d);
+                pSQL.AddLogin(currentUser, windowStart[d], d);
+            }
+             foreach (string d in windowEnd.Keys)
+            {
+                pSQL.RemoveLogout(currentUser, d);
+                pSQL.AddLogout(currentUser, windowEnd[d], d);
+            }
+        }
+
+
+    }
+
+
+
+}

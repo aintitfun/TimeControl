@@ -37,6 +37,7 @@
         public Dictionary<string,int> dayOfTheWeekAndTime=new Dictionary<string, int>();
         private string currentUser;
         private ProcessSQL pSQL;
+        private Monitor vMon;
         public int secondsToday;
         //public int monday=0;
         //public int tuesday=0;
@@ -52,7 +53,7 @@
 
             pSQL = new ProcessSQL();
             secondsToday = 0;
-            users=pSQL.GetUsers();
+            users = Monitor.users;
             currentUser = users[0];
 
             dayOfTheWeekAndTime.Add("monday",0);
