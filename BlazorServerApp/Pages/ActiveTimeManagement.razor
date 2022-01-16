@@ -12,17 +12,17 @@
             <option>@user</option>
         }
     </select>
-    <br /><input @bind='listOfUsers.dayOfTheWeekAndTime["monday"]' />
-    <br /><input @bind='listOfUsers.dayOfTheWeekAndTime["tuesday" ]'  />
-    <br /><input @bind='listOfUsers.dayOfTheWeekAndTime["wednesday"] '  />
-    <br /><input @bind='listOfUsers.dayOfTheWeekAndTime["thursday"]'  />
-    <br /><input @bind='listOfUsers.dayOfTheWeekAndTime["friday"]'  />
-    <br /><input @bind='listOfUsers.dayOfTheWeekAndTime["saturday"]'  />
-    <br /><input @bind='listOfUsers.dayOfTheWeekAndTime["sunday"]'  />
+    <br />monday:   <input @bind='listOfUsers.dayOfTheWeekAndTime["monday"]' />
+    <br />tuesday:  <input @bind='listOfUsers.dayOfTheWeekAndTime["tuesday" ]'  />
+    <br />wednesday:<input @bind='listOfUsers.dayOfTheWeekAndTime["wednesday"] '  />
+    <br />thursday: <input @bind='listOfUsers.dayOfTheWeekAndTime["thursday"]'  />
+    <br />friday:   <input @bind='listOfUsers.dayOfTheWeekAndTime["friday"]'  />
+    <br />saturday: <input @bind='listOfUsers.dayOfTheWeekAndTime["saturday"]'  />
+    <br />sunday:   <input @bind='listOfUsers.dayOfTheWeekAndTime["sunday"]'  />
 
     <br /><label>
-        Consumed time (minutes): 
-        <input @bind="listOfUsers.secondsToday" />
+        Consumed time (hh:mi:ss): 
+        <input @bind="listOfUsers.secondsTodayFormatted" />
     </label>
 
     <br /><button class="btn btn-primary" @onclick="listOfUsers.CommitValues">Commit Values</button>
@@ -30,14 +30,15 @@
 </EditForm>
 
 @code {
-    ListOfUsers listOfUsers = new ListOfUsers();
+    ActiveTime listOfUsers = new ActiveTime();
 
-    class ListOfUsers
+    class ActiveTime
     {
         public Dictionary<string,int> dayOfTheWeekAndTime=new Dictionary<string, int>();
         private string currentUser;
         private ProcessSQL pSQL;
         private Monitor vMon;
+        public string secondsTodayFormatted;
         public int secondsToday;
         //public int monday=0;
         //public int tuesday=0;
@@ -48,7 +49,7 @@
         //public int sunday=0;
 
         public List<string> users = new List<string>();
-        public ListOfUsers()
+        public ActiveTime()
         {
 
             pSQL = new ProcessSQL();
@@ -65,6 +66,7 @@
             dayOfTheWeekAndTime.Add("sunday",0);
 
             PopulateWeek();
+            RefreshConsumedSeconds();
             //users.Add("alexa");
             //users.Add("Saray");
         }
@@ -76,12 +78,17 @@
                 dayOfTheWeekAndTime[app._dayOfTheWeek.ToLower()] = app._time;
             }
         }
-
+        public void RefreshConsumedSeconds()
+        {
+            secondsToday = pSQL.GetUserConsumedSeconds(currentUser);
+            TimeSpan time = TimeSpan.FromSeconds(secondsToday);
+            secondsTodayFormatted=time .ToString(@"hh\:mm\:ss");            
+        }
         public Task OnValueChanged(ChangeEventArgs e)
         {
             currentUser = (string)e.Value;
-            secondsToday=pSQL.GetUserConsumedSeconds(currentUser);
 
+            RefreshConsumedSeconds();
             //users=pSQL.GetUsers();
             PopulateWeek();
 
