@@ -416,24 +416,28 @@ namespace Backend
 
                 if (retVal != 0)
                 {
-                for (int i = 0; i < sessionCount; i++)
-                {
-                    WTS_SESSION_INFO si = (WTS_SESSION_INFO)Marshal.PtrToStructure((System.IntPtr)currentSession, typeof(WTS_SESSION_INFO));
-                    currentSession += dataSize;
+                    for (int i = 0; i < sessionCount; i++)
+                    {
+                        WTS_SESSION_INFO si = (WTS_SESSION_INFO)Marshal.PtrToStructure((System.IntPtr)currentSession, typeof(WTS_SESSION_INFO));
+                        currentSession += dataSize;
 
-                    WTSQuerySessionInformation(serverHandle, si.SessionID, WTS_INFO_CLASS.WTSUserName, out userPtr, out bytes);
-                    WTSQuerySessionInformation(serverHandle, si.SessionID, WTS_INFO_CLASS.WTSDomainName, out domainPtr, out bytes);
+                        WTSQuerySessionInformation(serverHandle, si.SessionID, WTS_INFO_CLASS.WTSUserName, out userPtr, out bytes);
+                        WTSQuerySessionInformation(serverHandle, si.SessionID, WTS_INFO_CLASS.WTSDomainName, out domainPtr, out bytes);
 
-                    //Console.WriteLine("Domain and User: " + Marshal.PtrToStringAnsi(domainPtr) + "\\" + Marshal.PtrToStringAnsi(userPtr));
+                        //Console.WriteLine("Domain and User: " + Marshal.PtrToStringAnsi(domainPtr) + "\\" + Marshal.PtrToStringAnsi(userPtr));
 
-                    if (Marshal.PtrToStringAnsi(userPtr) == username)
-                        sessionid=si.SessionID;
+                        if (Marshal.PtrToStringAnsi(userPtr) == username)
+                        {
+                            if (si.State == WTS_CONNECTSTATE_CLASS.WTSActive)
+                                sessionid = si.SessionID;
+                        } 
+                            
 
-                    WTSFreeMemory(userPtr); 
-                    WTSFreeMemory(domainPtr);
-                }
+                        WTSFreeMemory(userPtr); 
+                        WTSFreeMemory(domainPtr);
+                    }
 
-                WTSFreeMemory(sessionInfoPtr);
+                    WTSFreeMemory(sessionInfoPtr);
                 }
             }
             finally
