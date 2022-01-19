@@ -396,7 +396,7 @@ namespace Backend
             using (var conn = new NpgsqlConnection(connString))
             {                
                 conn.Open();  
-                using (NpgsqlCommand cmd = new NpgsqlCommand($@"insert into logouts values ('{userName}',{hour_min},'{dayOfTheWeek}');",conn))
+                using (NpgsqlCommand cmd = new NpgsqlCommand($@"insert into logouts values ('{userName}',lpad({hour_min}::text,4,'0'),'{dayOfTheWeek}');",conn))
                 {
                     try
                     {
