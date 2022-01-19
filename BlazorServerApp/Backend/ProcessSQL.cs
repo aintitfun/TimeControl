@@ -436,7 +436,7 @@ namespace Backend
             using (var conn = new NpgsqlConnection(connString))
             {                
                 conn.Open();  
-                using (NpgsqlCommand cmd = new NpgsqlCommand($@"insert into logins values ('{userName}',{hour_min},'{dayOfTheWeek}');",conn))
+                using (NpgsqlCommand cmd = new NpgsqlCommand($@"insert into logins values ('{userName}',lpad({hour_min}::text,4,'0'),'{dayOfTheWeek}');",conn))
                 {
                     try
                     {
@@ -631,9 +631,9 @@ namespace Backend
             using (var vConn = new NpgsqlConnection(connString))
             {
             vConn.Open();
-            using (NpgsqlCommand cmd = new NpgsqlCommand($@"select username from logins "+
-                    " where now()<date_trunc('day',now() )+(substring(hour_min from 1 for 2)||' hour')::interval+(substring(hour_min from 3 for 2)||' minutes')::interval" +
-                    " and lower(day_of_the_week)=rtrim(lower(to_char(now(),'day')));", vConn))
+            using (NpgsqlCommand cmd = new NpgsqlCommand($@"select username from logins 
+                    where now()<date_trunc('day',now() )+(substring(hour_min from 1 for 2)||' hour')::interval+(substring(hour_min from 3 for 2)||' minutes')::interval
+                    and lower(day_of_the_week)=rtrim(lower(to_char(now(),'day')));", vConn))
                 {
                     NpgsqlDataReader dr;
                     dr = cmd.ExecuteReader();

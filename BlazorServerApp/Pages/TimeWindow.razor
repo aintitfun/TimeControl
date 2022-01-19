@@ -34,8 +34,8 @@
 
     class ListOfUsers
     {
-        public Dictionary<string,int> windowStart=new Dictionary<string, int>();
-        public Dictionary<string,int> windowEnd=new Dictionary<string, int>();
+        public Dictionary<string,string> windowStart=new Dictionary<string, string>();
+        public Dictionary<string,string> windowEnd=new Dictionary<string, string>();
 
         private string currentUser;
         private ProcessSQL pSQL;
@@ -57,21 +57,21 @@
             users=pSQL.GetUsers();
             currentUser = users[0];
 
-            windowStart.Add("monday",830);
-            windowStart.Add("tuesday",830);
-            windowStart.Add("wednesday",830);
-            windowStart.Add("thursday",830);
-            windowStart.Add("friday",830);
-            windowStart.Add("saturday",830);
-            windowStart.Add("sunday",830);
+            windowStart.Add("monday","0830");
+            windowStart.Add("tuesday","0830");
+            windowStart.Add("wednesday","0830");
+            windowStart.Add("thursday","0830");
+            windowStart.Add("friday","0830");
+            windowStart.Add("saturday","0830");
+            windowStart.Add("sunday","0830");
 
-            windowEnd.Add("monday",2130);
-            windowEnd.Add("tuesday",2130);
-            windowEnd.Add("wednesday",2130);
-            windowEnd.Add("thursday",2130);
-            windowEnd.Add("friday",2130);
-            windowEnd.Add("saturday",2130);
-            windowEnd.Add("sunday",2130);
+            windowEnd.Add("monday","2130");
+            windowEnd.Add("tuesday","2130");
+            windowEnd.Add("wednesday","2130");
+            windowEnd.Add("thursday","2130");
+            windowEnd.Add("friday","2130");
+            windowEnd.Add("saturday","2130");
+            windowEnd.Add("sunday","2130");
 
             PopulateWeek();
             //users.Add("alexa");
@@ -83,8 +83,8 @@
             foreach (AppsPersist app in pSQL.GetConfiguredLogins().Where(m => m._userName == currentUser))
             {
                 AppsPersist app2 = pSQL.GetConfiguredLogouts().Where(m => m._userName == currentUser && m._dayOfTheWeek==app._dayOfTheWeek).First();
-                windowStart[app._dayOfTheWeek.ToLower()] = app._time;
-                windowEnd[app._dayOfTheWeek.ToLower()] = app2._time;
+                windowStart[app._dayOfTheWeek.ToLower()] = app._time.ToString().PadLeft(4,'0');
+                windowEnd[app._dayOfTheWeek.ToLower()] = app2._time.ToString().PadLeft(4,'0');;
             }
         }
 
@@ -104,12 +104,12 @@
             foreach (string d in windowStart.Keys)
             {
                 pSQL.RemoveLogin(currentUser, d);
-                pSQL.AddLogin(currentUser, windowStart[d], d);
+                pSQL.AddLogin(currentUser, Int32.Parse(windowStart[d]), d);
             }
              foreach (string d in windowEnd.Keys)
             {
                 pSQL.RemoveLogout(currentUser, d);
-                pSQL.AddLogout(currentUser, windowEnd[d], d);
+                pSQL.AddLogout(currentUser, Int32.Parse(windowEnd[d]), d);
             }
         }
 
