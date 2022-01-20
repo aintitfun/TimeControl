@@ -431,6 +431,27 @@ namespace Backend
                 }
             }
         }
+
+        public bool RemoveLogoutNow(string userName)
+        {
+            using (var conn = new NpgsqlConnection(connString))
+            {
+                conn.Open();
+                using (NpgsqlCommand cmd = new NpgsqlCommand($@"delete from logoutsnow where username='{userName}';", conn))
+                {
+                    try
+                    {
+                        cmd.ExecuteNonQuery();
+                        return true;
+                    }
+                    catch (NpgsqlException e)
+                    {
+                        //Logger.Log($@"{DateTime.Now} [ERROR]: inserting logout for {userName}");
+                    }
+                    return false;
+                }
+            }
+        }
         public bool AddLogin(string userName, int hour_min, string dayOfTheWeek)
         {
             using (var conn = new NpgsqlConnection(connString))

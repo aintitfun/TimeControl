@@ -1,0 +1,70 @@
+﻿@page "/LogOutNow"
+<h3>Time Window Management</h3>
+
+@using Backend;
+@using System.Linq;
+
+<EditForm Model="logOutNowManagement">
+    <select 
+    @onchange="logOutNowManagement.OnValueChanged">
+        @foreach (string user in logOutNowManagement.users)
+        {
+            <option>@user</option>
+        }
+    </select>
+
+    <br /><button class="btn btn-primary" @onclick="logOutNowManagement.DisableUser">Log out Now</button>
+    <br /><button class="btn btn-primary" @onclick="logOutNowManagement.EnableUser">Rollback Log out</button>
+</EditForm>
+
+@code {
+    LogOutNowManagement logOutNowManagement = new LogOutNowManagement();
+
+    class LogOutNowManagement
+    {
+        public Dictionary<string,string> windowStart=new Dictionary<string, string>();
+        public Dictionary<string,string> windowEnd=new Dictionary<string, string>();
+
+        private string currentUser;
+        private ProcessSQL pSQL;
+        public int secondsToday;
+
+        public List<string> users = new List<string>();
+        public LogOutNowManagement()
+        {
+
+            pSQL = new ProcessSQL();
+            users=pSQL.GetUsers();
+            currentUser = users[0];
+
+         
+            //users.Add("alexa");
+            //users.Add("Saray");
+        }
+
+        
+        public Task OnValueChanged(ChangeEventArgs e)
+        {
+            currentUser = (string)e.Value;
+            secondsToday=pSQL.GetUserConsumedSeconds(currentUser);
+
+            //users=pSQL.GetUsers();
+        
+            return Task.CompletedTask;
+
+        }
+        public void DisableUser()
+        {
+            pSQL.AddLogoutNow(currentUser);
+        }
+        public void EnableUser()
+        {
+                pSQL.RemoveLogoutNow(currentUser);
+        }
+
+
+    }
+
+
+
+}

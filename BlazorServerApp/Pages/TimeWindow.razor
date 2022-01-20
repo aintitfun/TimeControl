@@ -4,35 +4,35 @@
 @using Backend;
 @using System.Linq;
 
-<EditForm Model="listOfUsers">
+<EditForm Model="timeWindowManagement">
     <select 
-    @onchange="listOfUsers.OnValueChanged">
-        @foreach (string user in listOfUsers.users)
+    @onchange="timeWindowManagement.OnValueChanged">
+        @foreach (string user in timeWindowManagement.users)
         {
             <option>@user</option>
         }
     </select>
-    <br /><input @bind='listOfUsers.windowStart["monday"]' />      <input @bind='listOfUsers.windowEnd["monday"]' />
-    <br /><input @bind='listOfUsers.windowStart["tuesday" ]'  />   <input @bind='listOfUsers.windowEnd["tuesday" ]'  />
-    <br /><input @bind='listOfUsers.windowStart["wednesday"] '  /> <input @bind='listOfUsers.windowEnd["wednesday"] '  />
-    <br /><input @bind='listOfUsers.windowStart["thursday"]'  />   <input @bind='listOfUsers.windowEnd["thursday"]'  />
-    <br /><input @bind='listOfUsers.windowStart["friday"]'  />     <input @bind='listOfUsers.windowEnd["friday"]'  />
-    <br /><input @bind='listOfUsers.windowStart["saturday"]'  />   <input @bind='listOfUsers.windowEnd["saturday"]'  />
-    <br /><input @bind='listOfUsers.windowStart["sunday"]'  />     <input @bind='listOfUsers.windowEnd["sunday"]'  />
+        <br />monday:   <input @bind='timeWindowManagement.windowStart["monday"]' />      <input @bind='timeWindowManagement.windowEnd["monday"]' />
+        <br />tuesday:  <input @bind='timeWindowManagement.windowStart["tuesday" ]'  />   <input @bind='timeWindowManagement.windowEnd["tuesday" ]'  />
+        <br />wednesday:<input @bind='timeWindowManagement.windowStart["wednesday"] '  /> <input @bind='timeWindowManagement.windowEnd["wednesday"] '  />
+        <br />thursday: <input @bind='timeWindowManagement.windowStart["thursday"]'  />   <input @bind='timeWindowManagement.windowEnd["thursday"]'  />
+        <br />friday:   <input @bind='timeWindowManagement.windowStart["friday"]'  />     <input @bind='timeWindowManagement.windowEnd["friday"]'  />
+        <br />saturday: <input @bind='timeWindowManagement.windowStart["saturday"]'  />   <input @bind='timeWindowManagement.windowEnd["saturday"]'  />
+        <br />sunday:   <input @bind='timeWindowManagement.windowStart["sunday"]'  />     <input @bind='timeWindowManagement.windowEnd["sunday"]'  />
 
     <br /><label>
         Consumed time (minutes): 
-        <input @bind="listOfUsers.secondsToday" />
+        <input @bind="timeWindowManagement.secondsToday" />
     </label>
 
-    <br /><button class="btn btn-primary" @onclick="listOfUsers.CommitValues">Commit Values</button>
+    <br /><button class="btn btn-primary" @onclick="timeWindowManagement.CommitValues">Commit Values</button>
 
 </EditForm>
 
 @code {
-    ListOfUsers listOfUsers = new ListOfUsers();
+    TimeWindowManagement timeWindowManagement = new TimeWindowManagement();
 
-    class ListOfUsers
+    class TimeWindowManagement
     {
         public Dictionary<string,string> windowStart=new Dictionary<string, string>();
         public Dictionary<string,string> windowEnd=new Dictionary<string, string>();
@@ -49,7 +49,7 @@
         //public int sunday=0;
 
         public List<string> users = new List<string>();
-        public ListOfUsers()
+        public TimeWindowManagement()
         {
 
             pSQL = new ProcessSQL();
