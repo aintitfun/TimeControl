@@ -7,7 +7,7 @@ icacls %mypath% /grant SYSTEM:(OI)(CI)F /T
 
 "%mypath%\nssm" remove TimeControl"
 
-"%mypath%\nssm" install TimeControl "%mypath%Monitor.exe"
+"%mypath%\nssm" install TimeControl "%mypath%BlazorServerApp.exe"
 "%mypath%\nssm" set TimeControl AppDirectory "%mypath% "
 "%mypath%\nssm" set TimeControl DisplayName TimeControl
 "%mypath%\nssm" set TimeControl Start SERVICE_AUTO_START

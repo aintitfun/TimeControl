@@ -57,16 +57,18 @@ namespace Backend
 
         public void StartDatabase()
         {
-            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows)){
-                string path=System.Reflection.Assembly.GetEntryAssembly().Location.Replace("BlazorServerApp.dll","");
-                Logger.Log ($@"{DateTime.Now} [INFO]: Trying to start postgres database on path: {path}");
-                Process.Start(path+"\\pgsql\\bin\\pg_ctl.exe","-D "+path+"\\pgsql\\data start");
-                //Thread.Sleep(30000);
-            }
-            else 
+            try
             {
-                //Process.Start(path+"/pgsql/bin/pg_ctl","-D "+path+"/pgsql/data start -l "+path+"/postgres.log ");
+                string path = System.Reflection.Assembly.GetEntryAssembly().Location.Replace("BlazorServerApp.dll", "");
+                Logger.Log($@"{DateTime.Now} [INFO]: Trying to start postgres database on path: {path}");
+                Process.Start(path + "\\pgsql\\bin\\pg_ctl.exe", "-D " + path + "\\pgsql\\data start");
             }
+            catch (Exception ex)
+            {
+                Logger.Log($@"Error starting PG: {ex.Message}. Anyway trying to start Monitor");
+            }
+                //Thread.Sleep(30000);
+            
         }
 
         private static string GetProcessUser(Process process) 
