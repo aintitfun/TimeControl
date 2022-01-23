@@ -1,11 +1,9 @@
 # TimeControl
 
-Simple monitor to control consumed time of an app installed on windows/linux.
+Simple monitor to control consumed time of an app installed on windows.
 
-There are 3 components:
+Just download the repo and go to Installer folder. Run Install.cmd as administrator and voila. You can reach the app with your pc or your mobile. Just browse with chrome/firefox/edge etc to <pc ip address>:8123
 
-- Common: needed by the other 2 proyects
-- Monitor: which monitor the usage of apps
-- MonitorFrontEndCli: client to add apps to monitor and logouts. This is the only one binary to be used by the TimeControl administrator. See the page for MonitorFrontEndCli to view the instructions to use it.
+Note there is no security control at this moment!
 
-More on each directory
+Talk/Explain carefully to the people affected before implementing this.
