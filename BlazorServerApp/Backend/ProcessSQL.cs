@@ -514,6 +514,7 @@ namespace Backend
         }
         public bool RemoveActiveTime(string userName, string dayOfTheWeek)
         {
+            Logger.Log($@"[RemoveActiveTime] username: {userName} dayoftheweek: {dayOfTheWeek}");
             using (var conn = new NpgsqlConnection(connString))
             {                
                 conn.Open();  
@@ -696,6 +697,7 @@ namespace Backend
         }
         public void UpdateSessionTime(string userName)
         {
+            Logger.Log($@"[UpdateSessionTime] username: {userName}");
             using (var vConn = new NpgsqlConnection(connString))
             {
                 DateTime lastTimeConnected;
@@ -740,6 +742,7 @@ namespace Backend
         /// </summary>
         public void ReStartConsumedTimeFromUsers()
         {
+            Logger.Log($@"[ReStartConsumedTimeFromUsers]");
             using (var vConn = new NpgsqlConnection(connString))
             {
                 vConn.Open();
@@ -832,6 +835,7 @@ namespace Backend
         }
         public bool SetUserConsumedSeconds(string userName, int seconds)
         {
+            Logger.Log($@"[SetUserConsumedSeconds] username: {userName} seconds: {seconds}");
             AppsPersist ap = new AppsPersist();
 
             using (var conn = new NpgsqlConnection(connString))

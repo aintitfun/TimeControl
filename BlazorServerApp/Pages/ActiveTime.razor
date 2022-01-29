@@ -97,7 +97,7 @@
         }
         public void CommitValues()
         {
-            secondsToday=pSQL.GetUserConsumedSeconds(currentUser);
+            RefreshConsumedSeconds();
             foreach (string d in dayOfTheWeekAndTime.Keys)
             {
                 pSQL.RemoveActiveTime(currentUser, d);
