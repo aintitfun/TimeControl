@@ -34,7 +34,7 @@ namespace Backend
                         " create table if not exists activetime (username text, max_time int, day_of_the_week text, last_time_connected timestamp, seconds_today int, primary key(username,day_of_the_week));" +
                         " create table if not exists logouts (username text, hour_min text, day_of_the_week text, primary key(username,day_of_the_week));" +
                         " create table if not exists logins (username text, hour_min text, day_of_the_week text, primary key(username,day_of_the_week));" +
-                        " create table if not exists logoutsnow (username text primary key, hour_min text);"+
+                        " create table if not exists logoutsnow (username text primary key primary key, day timestamp);"+
                         " comment on table apps is 'List of rules between apps & users'; "+
                         " comment on table daily_apps is 'Tracking of the start-end apps executed from the last start of Monitor';"+
                         " comment on table hist_apps is 'Historic of daily_apps table';"+
@@ -42,7 +42,7 @@ namespace Backend
                         " comment on table logins is 'Time when user can start to spend his Screen time';"+
                         " comment on table logouts is 'Last time when user can enjoy his Screen Time';"+
                         " comment on table logoutsnow is 'To force a user to quit now';"+
-                        " truncate logoutsnow;",vConn)){
+                        " delete from logoutsnow where day<date_trunc('day',now());", vConn)){
                     cmdCreate.ExecuteNonQuery();
                 }
                 using (NpgsqlCommand cmdCreate = new NpgsqlCommand(
@@ -416,7 +416,8 @@ namespace Backend
             using (var conn = new NpgsqlConnection(connString))
             {                
                 conn.Open();  
-                using (NpgsqlCommand cmd = new NpgsqlCommand($@"insert into logoutsnow values ('{userName}',(lpad(date_part('hour',now())::text,2,'0')||lpad(date_part('minute',now())::text,2,'0'))::integer );",conn))
+                using (NpgsqlCommand cmd = new NpgsqlCommand($@"insert into logoutsnow values ('{userName}',date_trunc('day',now()) )
+                                                                    on conflict(username) do update set day=date_trunc('day',now());",conn))
                 {
                     try
                     {
@@ -667,8 +668,8 @@ namespace Backend
             using (var vConn = new NpgsqlConnection(connString))
             {
             vConn.Open();
-            using (NpgsqlCommand cmd = new NpgsqlCommand($@"select username from logoutsnow 
-                     where now()>date_trunc('day',now() )+(substring(hour_min from 1 for 2)||' hour')::interval+(substring(hour_min from 3 for 2)||' minutes')::interval;",vConn))
+            using (NpgsqlCommand cmd = new NpgsqlCommand($@"select username from logoutsnow;", vConn))
+                    //where now()>date_trunc('day',now() )+(substring(hour_min from 1 for 2)||' hour')::interval+(substring(hour_min from 3 for 2)||' minutes')::interval;",vConn))
                 {
                     NpgsqlDataReader dr;
                     dr = cmd.ExecuteReader();
@@ -854,6 +855,20 @@ namespace Backend
                     {
                         return false;
                     }
+                }
+            }
+        }
+        public bool GetLogougNowStatusForUser(string userName)
+        {
+            Logger.Log($@"[GetLogougNowStatusForUser] username: {userName}");
+            AppsPersist ap = new AppsPersist();
+
+            using (var conn = new NpgsqlConnection(connString))
+            {
+                conn.Open();
+                using (NpgsqlCommand cmd = new NpgsqlCommand($@"select count(*) from logoutsnow where username like '{userName}'", conn))
+                {
+                    return (System.Int64) cmd.ExecuteScalar() == 1;
                 }
             }
         }

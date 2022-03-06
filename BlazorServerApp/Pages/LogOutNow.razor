@@ -4,6 +4,15 @@
 @using Backend;
 @using System.Linq;
 
+@*grayed buttons seems more disabled*@
+<style>
+.btn-primary.disabled, .btn-primary:disabled
+{
+    background-color: gray;
+    // etc.
+}
+</style>
+
 <EditForm Model="logOutNowManagement">
     <select 
     @onchange="logOutNowManagement.OnValueChanged">
@@ -13,8 +22,8 @@
         }
     </select>
 
-    <br /><button class="btn btn-primary" @onclick="logOutNowManagement.DisableUser">Log out Now</button>
-    <br /><button class="btn btn-primary" @onclick="logOutNowManagement.EnableUser">Rollback Log out</button>
+    <br /><button class="btn btn-primary" disabled="@logOutNowManagement.IsDisabledDisabledUser" @onclick="logOutNowManagement.DisableUser">Log out Now</button>
+    <br /><button class="btn btn-primary" disabled="@logOutNowManagement.IsDisabledEnabledUser" @onclick="logOutNowManagement.EnableUser">Rollback Log out</button>
 </EditForm>
 
 @code {
@@ -29,6 +38,9 @@
         private ProcessSQL pSQL;
         public int secondsToday;
 
+        public bool IsDisabledDisabledUser { get; set; }
+        public bool IsDisabledEnabledUser { get; set; }
+
         public List<string> users = new List<string>();
         public LogOutNowManagement()
         {
@@ -36,32 +48,46 @@
             pSQL = new ProcessSQL();
             users = Monitor.users;
             currentUser = users[0];
+            EnableOrDisableButtons(currentUser);
 
-         
             //users.Add("alexa");
             //users.Add("Saray");
         }
 
-        
+
         public Task OnValueChanged(ChangeEventArgs e)
         {
             currentUser = (string)e.Value;
             secondsToday=pSQL.GetUserConsumedSeconds(currentUser);
-
+            EnableOrDisableButtons(currentUser);
             //users=pSQL.GetUsers();
-        
+
             return Task.CompletedTask;
 
         }
         public void DisableUser()
         {
             pSQL.AddLogoutNow(currentUser);
+            EnableOrDisableButtons(currentUser);
         }
         public void EnableUser()
         {
-                pSQL.RemoveLogoutNow(currentUser);
+            pSQL.RemoveLogoutNow(currentUser);
+            EnableOrDisableButtons(currentUser);
         }
-
+        public void EnableOrDisableButtons(string userName)
+        {
+            if (pSQL.GetLogougNowStatusForUser(currentUser) == true)
+            {
+                IsDisabledEnabledUser = false;
+                IsDisabledDisabledUser = true;
+            }
+            else
+            {
+                IsDisabledEnabledUser = true;
+                IsDisabledDisabledUser = false;
+            }
+        }
 
     }
 
