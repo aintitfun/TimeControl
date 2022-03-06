@@ -34,7 +34,7 @@ namespace Backend
                         " create table if not exists activetime (username text, max_time int, day_of_the_week text, last_time_connected timestamp, seconds_today int, primary key(username,day_of_the_week));" +
                         " create table if not exists logouts (username text, hour_min text, day_of_the_week text, primary key(username,day_of_the_week));" +
                         " create table if not exists logins (username text, hour_min text, day_of_the_week text, primary key(username,day_of_the_week));" +
-                        " create table if not exists logoutsnow (username text primary key primary key, day timestamp);"+
+                        " create table if not exists logoutsnow (username text primary key, day timestamp);"+
                         " comment on table apps is 'List of rules between apps & users'; "+
                         " comment on table daily_apps is 'Tracking of the start-end apps executed from the last start of Monitor';"+
                         " comment on table hist_apps is 'Historic of daily_apps table';"+
