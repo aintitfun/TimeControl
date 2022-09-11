@@ -13,26 +13,26 @@
         }
     </select>
     <select 
-    @onchange="appsProhibited.OnAppValueChanged">
+    @onchange="appsProhibited.OnAppValueChanged"
+    disabled="@appsProhibited.IsDisabled" >
         @foreach (string app in appsProhibited.apps)
         {
             <option>@app</option>
         }
     </select>
-    <br />monday:   <input @bind='appsProhibited.dayOfTheWeekAndTime["monday"]' />
-    <br />tuesday:  <input @bind='appsProhibited.dayOfTheWeekAndTime["tuesday" ]'  />
-    <br />wednesday:<input @bind='appsProhibited.dayOfTheWeekAndTime["wednesday"] '  />
-    <br />thursday: <input @bind='appsProhibited.dayOfTheWeekAndTime["thursday"]'  />
-    <br />friday:   <input @bind='appsProhibited.dayOfTheWeekAndTime["friday"]'  />
-    <br />saturday: <input @bind='appsProhibited.dayOfTheWeekAndTime["saturday"]'  />
-    <br />sunday:   <input @bind='appsProhibited.dayOfTheWeekAndTime["sunday"]'  />
+    <br />monday:   <input disabled="@appsProhibited.IsDisabled" @bind='appsProhibited.dayOfTheWeekAndTime["monday"]' />
+    <br />tuesday:  <input disabled="@appsProhibited.IsDisabled" @bind='appsProhibited.dayOfTheWeekAndTime["tuesday" ]'  />
+    <br />wednesday:<input disabled="@appsProhibited.IsDisabled" @bind='appsProhibited.dayOfTheWeekAndTime["wednesday"] '  />
+    <br />thursday: <input disabled="@appsProhibited.IsDisabled" @bind='appsProhibited.dayOfTheWeekAndTime["thursday"]'  />
+    <br />friday:   <input disabled="@appsProhibited.IsDisabled" @bind='appsProhibited.dayOfTheWeekAndTime["friday"]'  />
+    <br />saturday: <input disabled="@appsProhibited.IsDisabled" @bind='appsProhibited.dayOfTheWeekAndTime["saturday"]'  />
+    <br />sunday:   <input disabled="@appsProhibited.IsDisabled" @bind='appsProhibited.dayOfTheWeekAndTime["sunday"]'  />
+    <br /><button class="btn btn-primary" @onclick="appsProhibited.UpdateApp">Update App</button>
+    <button class="btn btn-primary" @onclick="appsProhibited.DeleteApp">Delete App</button>
 
-    <br /><label>
-        Consumed time (hh:mi:ss): 
-        <input @bind="appsProhibited.secondsTodayFormatted" />
-    </label>
-
-    <br /><button class="btn btn-primary" @onclick="appsProhibited.CommitValues">Commit Values</button>
+    <br />App to add: <input  @bind='appsProhibited.appToAdd'  />
+    <br /><button class="btn btn-primary" @onclick="appsProhibited.AddApp">Add App</button>
+    
 
 </EditForm>
 
@@ -46,27 +46,19 @@
         private string? currentApp;
         private ProcessSQL pSQL;
         private Monitor vMon;
-        public string secondsTodayFormatted;
-        public int secondsToday;
-        //public int monday=0;
-        //public int tuesday=0;
-        //public int wednesday=0;
-        //public int thursday=0;
-        //public int friday=0;
-        //public int saturday=0;
-        //public int sunday=0;
+        public bool IsDisabled = false;
+
 
         public List<string> users = new List<string>();
         public List<string> apps = new List<string>();
-
+        public string appToAdd;
         public AppsProhibitedManagement()
         {
 
             pSQL = new ProcessSQL();
-            secondsToday = 0;
             users = Monitor.users;
             currentUser = users[0];
-            apps=pSQL.GetApps().Select(m => m._app).ToList<string>();
+            apps = pSQL.GetApps().Where(m => m._userName == currentUser).Select(m => m._app).Distinct().ToList<string>();
             dayOfTheWeekAndTime.Add("monday",0);
             dayOfTheWeekAndTime.Add("tuesday",0);
             dayOfTheWeekAndTime.Add("wednesday",0);
@@ -74,10 +66,20 @@
             dayOfTheWeekAndTime.Add("friday",0);
             dayOfTheWeekAndTime.Add("saturday",0);
             dayOfTheWeekAndTime.Add("sunday",0);
-            
+
             if (apps.Count()>0)
             {
+                IsDisabled = false;
                 currentApp = apps[0];
+
+                PopulateApps();
+                PopulateWeek();
+            }
+            else 
+            {
+                IsDisabled = true;
+
+                currentApp = "";
 
                 PopulateApps();
                 PopulateWeek();
@@ -94,6 +96,13 @@
         }
         public void PopulateApps()
         {
+
+            apps = pSQL.GetApps().Where(m => m._userName == currentUser).Select(m => m._app).Distinct().ToList<string>();
+            if (apps.Count() > 0)
+                IsDisabled = false;
+            else
+                IsDisabled = true;
+
             foreach (AppsPersist app in pSQL.GetApps().Where(m => m._userName == currentUser))
             {
                 dayOfTheWeekAndTime[app._dayOfTheWeek.ToLower()] = app._time;
@@ -106,6 +115,14 @@
             //users=pSQL.GetUsers();
             PopulateApps();
 
+            if (apps.Count() > 0)
+                IsDisabled = false;
+            else
+                IsDisabled = true;
+
+            if (apps.Count()>0)
+                currentApp = apps[0];
+
             return Task.CompletedTask;
 
         }
@@ -117,17 +134,30 @@
             return Task.CompletedTask;
 
         }
-        public void CommitValues()
+        public void UpdateApp()
         {
             foreach (string d in dayOfTheWeekAndTime.Keys)
             {
-                pSQL.RemoveActiveTime(currentUser, d);
-                pSQL.AddActiveTime(currentUser, dayOfTheWeekAndTime[d], d);
+                pSQL.RemoveApplicationFromUser(currentApp, currentUser, d);
+                pSQL.AddApplication(currentApp, currentUser, dayOfTheWeekAndTime[d], d);
             }
-            pSQL.SetUserConsumedSeconds(currentUser, secondsToday);
+            //pSQL.SetUserConsumedSeconds(currentUser, secondsToday);
         }
-
-        
+        public void AddApp()
+        {
+            foreach (string d in dayOfTheWeekAndTime.Keys)
+            {
+                pSQL.RemoveApplicationFromUser(appToAdd, currentUser, d);
+                pSQL.AddApplication(appToAdd, currentUser, 0, d);
+            }
+        }
+        public void DeleteApp()
+        {
+            foreach (string d in dayOfTheWeekAndTime.Keys)
+            {
+                pSQL.RemoveApplicationFromUser(currentApp, currentUser, d);
+            }
+        }
 
 
     }
