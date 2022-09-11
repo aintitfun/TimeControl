@@ -1,0 +1,137 @@
+﻿@page "/AppsProhibited"
+<h3>Prohibited Apps</h3>
+
+@using Backend;
+@using System.Linq;
+
+<EditForm Model="appsProhibited">
+    <select 
+    @onchange="appsProhibited.OnUserValueChanged">
+        @foreach (string user in appsProhibited.users)
+        {
+            <option>@user</option>
+        }
+    </select>
+    <select 
+    @onchange="appsProhibited.OnAppValueChanged">
+        @foreach (string app in appsProhibited.apps)
+        {
+            <option>@app</option>
+        }
+    </select>
+    <br />monday:   <input @bind='appsProhibited.dayOfTheWeekAndTime["monday"]' />
+    <br />tuesday:  <input @bind='appsProhibited.dayOfTheWeekAndTime["tuesday" ]'  />
+    <br />wednesday:<input @bind='appsProhibited.dayOfTheWeekAndTime["wednesday"] '  />
+    <br />thursday: <input @bind='appsProhibited.dayOfTheWeekAndTime["thursday"]'  />
+    <br />friday:   <input @bind='appsProhibited.dayOfTheWeekAndTime["friday"]'  />
+    <br />saturday: <input @bind='appsProhibited.dayOfTheWeekAndTime["saturday"]'  />
+    <br />sunday:   <input @bind='appsProhibited.dayOfTheWeekAndTime["sunday"]'  />
+
+    <br /><label>
+        Consumed time (hh:mi:ss): 
+        <input @bind="appsProhibited.secondsTodayFormatted" />
+    </label>
+
+    <br /><button class="btn btn-primary" @onclick="appsProhibited.CommitValues">Commit Values</button>
+
+</EditForm>
+
+@code {
+    AppsProhibitedManagement appsProhibited = new AppsProhibitedManagement();
+
+    class AppsProhibitedManagement
+    {
+        public Dictionary<string,int> dayOfTheWeekAndTime=new Dictionary<string, int>();
+        private string currentUser;
+        private string? currentApp;
+        private ProcessSQL pSQL;
+        private Monitor vMon;
+        public string secondsTodayFormatted;
+        public int secondsToday;
+        //public int monday=0;
+        //public int tuesday=0;
+        //public int wednesday=0;
+        //public int thursday=0;
+        //public int friday=0;
+        //public int saturday=0;
+        //public int sunday=0;
+
+        public List<string> users = new List<string>();
+        public List<string> apps = new List<string>();
+
+        public AppsProhibitedManagement()
+        {
+
+            pSQL = new ProcessSQL();
+            secondsToday = 0;
+            users = Monitor.users;
+            currentUser = users[0];
+            apps=pSQL.GetApps().Select(m => m._app).ToList<string>();
+            dayOfTheWeekAndTime.Add("monday",0);
+            dayOfTheWeekAndTime.Add("tuesday",0);
+            dayOfTheWeekAndTime.Add("wednesday",0);
+            dayOfTheWeekAndTime.Add("thursday",0);
+            dayOfTheWeekAndTime.Add("friday",0);
+            dayOfTheWeekAndTime.Add("saturday",0);
+            dayOfTheWeekAndTime.Add("sunday",0);
+            
+            if (apps.Count()>0)
+            {
+                currentApp = apps[0];
+
+                PopulateApps();
+                PopulateWeek();
+            }
+        }
+
+        public void PopulateWeek()
+        {
+            foreach (AppsPersist app in pSQL.GetApps().Where(m => m._userName == currentUser &&
+                                                                  m._app==currentApp  ))
+            {
+                dayOfTheWeekAndTime[app._dayOfTheWeek.ToLower()] = app._time;
+            }
+        }
+        public void PopulateApps()
+        {
+            foreach (AppsPersist app in pSQL.GetApps().Where(m => m._userName == currentUser))
+            {
+                dayOfTheWeekAndTime[app._dayOfTheWeek.ToLower()] = app._time;
+            }
+        }
+        public Task OnUserValueChanged(ChangeEventArgs e)
+        {
+            currentUser = (string)e.Value;
+
+            //users=pSQL.GetUsers();
+            PopulateApps();
+
+            return Task.CompletedTask;
+
+        }
+        public Task OnAppValueChanged(ChangeEventArgs e)
+        {
+            currentApp = (string)e.Value;
+            PopulateWeek();
+
+            return Task.CompletedTask;
+
+        }
+        public void CommitValues()
+        {
+            foreach (string d in dayOfTheWeekAndTime.Keys)
+            {
+                pSQL.RemoveActiveTime(currentUser, d);
+                pSQL.AddActiveTime(currentUser, dayOfTheWeekAndTime[d], d);
+            }
+            pSQL.SetUserConsumedSeconds(currentUser, secondsToday);
+        }
+
+        
+
+
+    }
+
+
+
+}

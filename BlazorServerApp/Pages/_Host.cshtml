@@ -4,7 +4,12 @@
 @{
     Layout = null;
 }
-
+@using Microsoft.AspNetCore.Http;
+@using BlazorServerApp.Data;
+@inject IHttpContextAccessor httpContextAccessor
+@{
+    BlazorAppContext.CurrentUserIP =   httpContextAccessor.HttpContext.Connection?.RemoteIpAddress.ToString();
+}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,3 +39,4 @@
     <script src="_framework/blazor.server.js"></script>
 </body>
 </html>
+
