@@ -69,17 +69,17 @@
             return Task.CompletedTask;
 
         }
-        public void DisableUser()
+        public async Task DisableUser()
         {
             pSQL.AddLogoutNow(currentUser);
             EnableOrDisableButtons(currentUser);
-            FeedbackMessage = $@"Processed {System.DateTime.Now.ToString()}";
+            await GiveFeedback();
         }
-        public void EnableUser()
+        public async Task EnableUser()
         {
             pSQL.RemoveLogoutNow(currentUser);
             EnableOrDisableButtons(currentUser);
-            FeedbackMessage = $@"Processed {System.DateTime.Now.ToString()}";
+            await GiveFeedback();
         }
         public void EnableOrDisableButtons(string userName)
         {
@@ -93,6 +93,12 @@
                 IsDisabledEnabledUser = true;
                 IsDisabledDisabledUser = false;
             }
+        }
+        private async Task GiveFeedback()
+        {
+            FeedbackMessage = $@"";
+            await Task.Delay(200);
+            FeedbackMessage = $@"Processed {System.DateTime.Now.ToString()}";
         }
 
     }

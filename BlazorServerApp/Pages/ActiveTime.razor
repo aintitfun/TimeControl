@@ -97,7 +97,7 @@
             return Task.CompletedTask;
 
         }
-        public void CommitValues()
+        public async Task CommitValues()
         {
             RefreshConsumedSeconds();
             foreach (string d in dayOfTheWeekAndTime.Keys)
@@ -106,10 +106,14 @@
                 pSQL.AddActiveTime(currentUser, dayOfTheWeekAndTime[d], d);
             }
             pSQL.SetUserConsumedSeconds(currentUser, secondsToday);
-            FeedbackMessage = $@"Processed {System.DateTime.Now.ToString()}";
-            
+            await GiveFeedback();
         }
-
+        private async Task GiveFeedback()
+        {
+            FeedbackMessage = $@"";
+            await Task.Delay(200);
+            FeedbackMessage = $@"Processed {System.DateTime.Now.ToString()}";
+        }
 
     }
 

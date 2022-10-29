@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Shared\SharedActions.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Npgsql" Version="6.0.1" />
     <PackageReference Include="System.Management" Version="6.0.0" />
   </ItemGroup>

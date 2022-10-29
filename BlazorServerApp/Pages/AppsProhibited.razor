@@ -139,7 +139,7 @@
             return Task.CompletedTask;
 
         }
-        public void UpdateApp()
+        public async Task UpdateApp()
         {
             foreach (string d in dayOfTheWeekAndTime.Keys)
             {
@@ -148,10 +148,10 @@
             }
             PopulateApps();
             PopulateWeek();
-            FeedbackMessage = $@"Processed {System.DateTime.Now.ToString()}";
+            await GiveFeedback();
 
         }
-        public void AddApp()
+        public async Task AddApp()
         {
             foreach (string d in dayOfTheWeekAndTime.Keys)
             {
@@ -161,9 +161,9 @@
             PopulateApps();
             PopulateWeek();
             //navigationManager.NavigateTo("/AppsProhibited");
-            FeedbackMessage = $@"Processed {System.DateTime.Now.ToString()}";
+            await GiveFeedback();
         }
-        public void DeleteApp()
+        public async Task DeleteApp()
         {
             foreach (string d in dayOfTheWeekAndTime.Keys)
             {
@@ -171,10 +171,14 @@
             }
             PopulateApps();
             PopulateWeek();
-            FeedbackMessage = $@"Processed {System.DateTime.Now.ToString()}";
-
+            await GiveFeedback();
         }
-
+        private async Task GiveFeedback()
+        {
+            FeedbackMessage = $@"";
+            await Task.Delay(200);
+            FeedbackMessage = $@"Processed {System.DateTime.Now.ToString()}";
+        }
 
     }
 

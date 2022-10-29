@@ -102,18 +102,24 @@
             return Task.CompletedTask;
 
         }
-        public void CommitValues()
+        public async Task CommitValues()
         {
             foreach (string d in windowStart.Keys)
             {
                 pSQL.RemoveLogin(currentUser, d);
                 pSQL.AddLogin(currentUser, Int32.Parse(windowStart[d]), d);
             }
-             foreach (string d in windowEnd.Keys)
+            foreach (string d in windowEnd.Keys)
             {
                 pSQL.RemoveLogout(currentUser, d);
                 pSQL.AddLogout(currentUser, Int32.Parse(windowEnd[d]), d);
             }
+            await GiveFeedback();        
+        }
+        private async Task GiveFeedback()
+        {
+            FeedbackMessage = $@"";
+            await Task.Delay(200);
             FeedbackMessage = $@"Processed {System.DateTime.Now.ToString()}";
         }
 
