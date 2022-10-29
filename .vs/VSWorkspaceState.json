@@ -1,7 +1,8 @@
 {
   "ExpandedNodes": [
     "",
-    "\\BlazorServerApp"
+    "\\BlazorServerApp",
+    "\\BlazorServerApp\\Pages"
   ],
   "SelectedNode": "\\TimeControl.sln",
   "PreviewInSolutionExplorer": false
