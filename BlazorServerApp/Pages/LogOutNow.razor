@@ -24,6 +24,8 @@
 
     <br /><button class="btn btn-primary" disabled="@logOutNowManagement.IsDisabledDisabledUser" @onclick="logOutNowManagement.DisableUser">Log out Now</button>
     <br /><button class="btn btn-primary" disabled="@logOutNowManagement.IsDisabledEnabledUser" @onclick="logOutNowManagement.EnableUser">Rollback Log out</button>
+    <br /><br /><label>@logOutNowManagement.FeedbackMessage</label>
+
 </EditForm>
 
 @code {
@@ -42,9 +44,11 @@
         public bool IsDisabledEnabledUser { get; set; }
 
         public List<string> users = new List<string>();
+        public string FeedbackMessage { get; set; }
+
         public LogOutNowManagement()
         {
-
+            FeedbackMessage="";
             pSQL = new ProcessSQL();
             users = Monitor.users;
             currentUser = users[0];
@@ -69,11 +73,13 @@
         {
             pSQL.AddLogoutNow(currentUser);
             EnableOrDisableButtons(currentUser);
+            FeedbackMessage = $@"Processed {System.DateTime.Now.ToString()}";
         }
         public void EnableUser()
         {
             pSQL.RemoveLogoutNow(currentUser);
             EnableOrDisableButtons(currentUser);
+            FeedbackMessage = $@"Processed {System.DateTime.Now.ToString()}";
         }
         public void EnableOrDisableButtons(string userName)
         {

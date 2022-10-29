@@ -26,6 +26,7 @@
     </label>
 
     <br /><button class="btn btn-primary" @onclick="activeTime.CommitValues">Commit Values</button>
+    <br /><br /><label>@activeTime.FeedbackMessage</label>
 
 </EditForm>
 
@@ -40,6 +41,7 @@
         private Monitor vMon;
         public string secondsTodayFormatted;
         public int secondsToday;
+        public string FeedbackMessage { get; set; }
         //public int monday=0;
         //public int tuesday=0;
         //public int wednesday=0;
@@ -51,7 +53,7 @@
         public List<string> users = new List<string>();
         public ActiveTimeManagement()
         {
-
+            FeedbackMessage="";
             pSQL = new ProcessSQL();
             secondsToday = 0;
             users = Monitor.users;
@@ -104,6 +106,8 @@
                 pSQL.AddActiveTime(currentUser, dayOfTheWeekAndTime[d], d);
             }
             pSQL.SetUserConsumedSeconds(currentUser, secondsToday);
+            FeedbackMessage = $@"Processed {System.DateTime.Now.ToString()}";
+            
         }
 
 

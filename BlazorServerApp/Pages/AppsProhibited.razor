@@ -32,11 +32,13 @@
 
     <br />App to add: <input  @bind='appsProhibited.appToAdd'  />
     <br /><button class="btn btn-primary" @onclick="appsProhibited.AddApp">Add App</button>
-    
+    <br /><br /><label>@appsProhibited.FeedbackMessage</label>
 
 </EditForm>
 
 @code {
+    @inject NavigationManager NavigationManager;
+
     AppsProhibitedManagement appsProhibited = new AppsProhibitedManagement();
 
     class AppsProhibitedManagement
@@ -47,14 +49,17 @@
         private ProcessSQL pSQL;
         private Monitor vMon;
         public bool IsDisabled = false;
+        
 
 
         public List<string> users = new List<string>();
         public List<string> apps = new List<string>();
         public string appToAdd;
+        public string FeedbackMessage { get; set; }
+        private NavigationManager navigationManager;
         public AppsProhibitedManagement()
         {
-
+            FeedbackMessage="";
             pSQL = new ProcessSQL();
             users = Monitor.users;
             currentUser = users[0];
@@ -141,7 +146,10 @@
                 pSQL.RemoveApplicationFromUser(currentApp, currentUser, d);
                 pSQL.AddApplication(currentApp, currentUser, dayOfTheWeekAndTime[d], d);
             }
-            //pSQL.SetUserConsumedSeconds(currentUser, secondsToday);
+            PopulateApps();
+            PopulateWeek();
+            FeedbackMessage = $@"Processed {System.DateTime.Now.ToString()}";
+
         }
         public void AddApp()
         {
@@ -150,6 +158,10 @@
                 pSQL.RemoveApplicationFromUser(appToAdd, currentUser, d);
                 pSQL.AddApplication(appToAdd, currentUser, 0, d);
             }
+            PopulateApps();
+            PopulateWeek();
+            //navigationManager.NavigateTo("/AppsProhibited");
+            FeedbackMessage = $@"Processed {System.DateTime.Now.ToString()}";
         }
         public void DeleteApp()
         {
@@ -157,6 +169,10 @@
             {
                 pSQL.RemoveApplicationFromUser(currentApp, currentUser, d);
             }
+            PopulateApps();
+            PopulateWeek();
+            FeedbackMessage = $@"Processed {System.DateTime.Now.ToString()}";
+
         }
 
 

@@ -26,6 +26,7 @@
     </label>
 
     <br /><button class="btn btn-primary" @onclick="timeWindowManagement.CommitValues">Commit Values</button>
+    <br /><br /><label>@timeWindowManagement.FeedbackMessage</label>
 
 </EditForm>
 
@@ -49,9 +50,11 @@
         //public int sunday=0;
 
         public List<string> users = new List<string>();
+        public string FeedbackMessage { get; set; }
+
         public TimeWindowManagement()
         {
-
+            FeedbackMessage="";
             pSQL = new ProcessSQL();
             secondsToday = 0;
             users = Monitor.users;
@@ -111,6 +114,7 @@
                 pSQL.RemoveLogout(currentUser, d);
                 pSQL.AddLogout(currentUser, Int32.Parse(windowEnd[d]), d);
             }
+            FeedbackMessage = $@"Processed {System.DateTime.Now.ToString()}";
         }
 
 
