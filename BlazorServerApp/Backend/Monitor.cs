@@ -465,8 +465,9 @@ namespace Backend
         }
         public void PopulateListOfWindowsLocalUsers()
         {
-            SelectQuery query = new SelectQuery("Win32_UserAccount");
+            SelectQuery query = new SelectQuery("select * from Win32_UserAccount where LocalAccount=true");
             ManagementObjectSearcher searcher = new ManagementObjectSearcher(query);
+            searcher.Options.Timeout = new TimeSpan(0, 0, 90);
             foreach (ManagementObject envVar in searcher.Get())
             {
                 if (envVar["AccountType"].ToString()=="512" && envVar["Disabled"].ToString()=="False")
