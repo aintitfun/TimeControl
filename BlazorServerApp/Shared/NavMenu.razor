@@ -12,11 +12,13 @@
                 <span class="oi oi-home" aria-hidden="true"></span> Home
             </NavLink>
         </li>
+        <CascadingAuthenticationState>
         <li class="nav-item px-3">
             <NavLink class="nav-link" href="ActiveTime">
                 <span class="oi oi-list-rich" aria-hidden="true"></span> Active Time
             </NavLink>
         </li>
+        <AuthorizeView>
          <li class="nav-item px-3">
             <NavLink class="nav-link" href="TimeWindow">
                 <span class="oi oi-list-rich" aria-hidden="true"></span> Time Window
@@ -32,6 +34,9 @@
                 <span class="oi oi-list-rich" aria-hidden="true"></span> Apps prohibited
             </NavLink>
         </li>
+        </AuthorizeView>
+        </CascadingAuthenticationState>
+
     </ul>
 </div>
 

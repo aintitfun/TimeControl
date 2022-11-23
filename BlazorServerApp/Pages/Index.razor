@@ -1,6 +1,44 @@
 ﻿@page "/"
+@using System.Security.Claims;
+@using BlazorServerApp.Data;
 
 <h1>Time Control</h1>
 
 Use the hamburguer menu or the frame to the left to access to the different ways to control the timing for this computer.
 
+<br />
+<input @bind='@Password' />
+<br />
+<button class="btn btn-primary" @onclick="Login">Commit Values</button>
+@code {
+    public string Email { get; set; }
+
+    public string Password { get; set; }
+
+    public string Id { get; set; } = "12345";
+
+
+    [CascadingParameter] public Task<AuthenticationState> AuthTask { get; set; }
+
+    [Inject] private AuthenticationStateProvider AuthState { get; set; }
+
+    private System.Security.Claims.ClaimsPrincipal user;
+
+    protected async override Task OnInitializedAsync()
+    {
+        CustomAuthenticationStateProvider customAuthenticationStateProvider = new CustomAuthenticationStateProvider();
+        var authState = await customAuthenticationStateProvider.GetAuthenticationStateAsync();
+        this.user = authState.User;
+    }
+
+    public async Task Login()
+    {
+        if (Password=="mia")
+        {
+            var authState = await ((CustomAuthenticationStateProvider)AuthState).ChangeUser("mailvacio@mio.es", this.Id, "Associate");
+            this.user = authState.User;
+        } 
+        
+    }
+
+}

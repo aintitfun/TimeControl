@@ -24,8 +24,12 @@
         Consumed time (hh:mi:ss): 
         <input @bind="activeTime.secondsTodayFormatted" />
     </label>
-
+    <CascadingAuthenticationState>
+    <AuthorizeView Context="otro">
     <br /><button class="btn btn-primary" @onclick="activeTime.CommitValues">Commit Values</button>
+    </AuthorizeView>
+    </CascadingAuthenticationState>
+
     <br /><br /><label>@activeTime.FeedbackMessage</label>
 
 </EditForm>

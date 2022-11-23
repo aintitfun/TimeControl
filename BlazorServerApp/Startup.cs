@@ -11,6 +11,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Components.Authorization;
+using Microsoft.AspNetCore.Components.Server;
 
 namespace BlazorServerApp
 {
@@ -33,6 +35,8 @@ namespace BlazorServerApp
             services.AddScoped<BlazorAppContext>();
             //services.AddScoped<Microsoft.AspNetCore.Http.IHttpContextAccessor>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
+
 
         }
 
