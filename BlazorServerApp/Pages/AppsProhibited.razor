@@ -27,11 +27,14 @@
     <br />friday:   <input disabled="@appsProhibited.IsDisabled" @bind='appsProhibited.dayOfTheWeekAndTime["friday"]'  />
     <br />saturday: <input disabled="@appsProhibited.IsDisabled" @bind='appsProhibited.dayOfTheWeekAndTime["saturday"]'  />
     <br />sunday:   <input disabled="@appsProhibited.IsDisabled" @bind='appsProhibited.dayOfTheWeekAndTime["sunday"]'  />
+    <CascadingAuthenticationState>
+    <AuthorizeView Context="AppsProhibited">
     <br /><button class="btn btn-primary" @onclick="appsProhibited.UpdateApp">Update App</button>
     <button class="btn btn-primary" @onclick="appsProhibited.DeleteApp">Delete App</button>
-
     <br />App to add: <input  @bind='appsProhibited.appToAdd'  />
     <br /><button class="btn btn-primary" @onclick="appsProhibited.AddApp">Add App</button>
+    </AuthorizeView>
+    </CascadingAuthenticationState>
     <br /><br /><label>@appsProhibited.FeedbackMessage</label>
 
 </EditForm>

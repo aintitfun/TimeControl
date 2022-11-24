@@ -1,4 +1,5 @@
 ﻿@page "/LogOutNow"
+
 <h3>Time Window Management</h3>
 
 @using Backend;
@@ -21,9 +22,12 @@
             <option>@user</option>
         }
     </select>
-
+    <CascadingAuthenticationState>
+    <AuthorizeView Context="LogOutNow">
     <br /><button class="btn btn-primary" disabled="@logOutNowManagement.IsDisabledDisabledUser" @onclick="logOutNowManagement.DisableUser">Log out Now</button>
     <br /><button class="btn btn-primary" disabled="@logOutNowManagement.IsDisabledEnabledUser" @onclick="logOutNowManagement.EnableUser">Rollback Log out</button>
+        </AuthorizeView>
+    </CascadingAuthenticationState>
     <br /><br /><label>@logOutNowManagement.FeedbackMessage</label>
 
 </EditForm>

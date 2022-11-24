@@ -24,8 +24,11 @@
         Consumed time (minutes): 
         <input @bind="timeWindowManagement.secondsToday" />
     </label>
-
+    <CascadingAuthenticationState>
+    <AuthorizeView Context="TimeWindow">
     <br /><button class="btn btn-primary" @onclick="timeWindowManagement.CommitValues">Commit Values</button>
+    </AuthorizeView>
+    </CascadingAuthenticationState>
     <br /><br /><label>@timeWindowManagement.FeedbackMessage</label>
 
 </EditForm>
