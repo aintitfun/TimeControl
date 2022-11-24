@@ -1,6 +1,7 @@
 ﻿@page "/"
 @using System.Security.Claims;
 @using BlazorServerApp.Data;
+@using Npgsql;
 
 <h1>Time Control</h1>
 
@@ -33,12 +34,29 @@ Use the hamburguer menu or the frame to the left to access to the different ways
 
     public async Task Login()
     {
-        if (Password=="mia")
+        if (CheckPassword())
         {
             var authState = await ((CustomAuthenticationStateProvider)AuthState).ChangeUser("mailvacio@mio.es", this.Id, "Associate");
             this.user = authState.User;
         } 
-        
+
+    }
+
+    private bool CheckPassword()
+    {
+        using (var vConn = new NpgsqlConnection($@"Host=127.0.0.1;Username=postgres;Password={Password};Database=monitor;"))
+        {
+            try
+            {
+                vConn.Open();
+                return true;
+
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 
 }
