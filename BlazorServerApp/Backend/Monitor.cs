@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Security.Principal ;
 using System.Runtime.InteropServices;
-using System.Diagnostics.Eventing.Reader;
 using System.Management;
 using System.Text.RegularExpressions;
 

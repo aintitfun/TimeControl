@@ -9,6 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="FluentNHibernate" Version="3.4.0" />
     <PackageReference Include="Npgsql" Version="6.0.1" />
     <PackageReference Include="System.Management" Version="6.0.0" />
   </ItemGroup>
