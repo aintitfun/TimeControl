@@ -21,27 +21,28 @@ namespace Backend
         }
         public void CheckAndRecreateTables()
         {
+            CreateDatabaseBasedOnNHibernate();
             using (var vConn = new NpgsqlConnection(connString)){
                 vConn.Open();
                                 
-                using (NpgsqlCommand cmdCreate = new NpgsqlCommand(
-                        " CREATE TABLE if not exists apps (name text , username text,max_time int, day_of_the_week text, primary key (name,username,day_of_the_week)); " +
-                        " CREATE TABLE if not exists daily_apps (pid int,app text,username text,start_time timestamp,end_time timestamp,primary key(pid, app));" +
-                        " CREATE TABLE if not exists hist_apps (pid int,app text,username text,start_time timestamp,end_time timestamp);"+
-                        " create table if not exists activetime (username text, max_time int, day_of_the_week text, last_time_connected timestamp, seconds_today int, primary key(username,day_of_the_week));" +
-                        " create table if not exists logouts (username text, hour_min text, day_of_the_week text, primary key(username,day_of_the_week));" +
-                        " create table if not exists logins (username text, hour_min text, day_of_the_week text, primary key(username,day_of_the_week));" +
-                        " create table if not exists logoutsnow (username text primary key, day timestamp);"+
-                        " comment on table apps is 'List of rules between apps & users'; "+
-                        " comment on table daily_apps is 'Tracking of the start-end apps executed from the last start of Monitor';"+
-                        " comment on table hist_apps is 'Historic of daily_apps table';"+
-                        " comment on table activetime is 'Screen time granted to an user';"+
-                        " comment on table logins is 'Time when user can start to spend his Screen time';"+
-                        " comment on table logouts is 'Last time when user can enjoy his Screen Time';"+
-                        " comment on table logoutsnow is 'To force a user to quit now';"+
-                        " delete from logoutsnow where day<date_trunc('day',now());", vConn)){
-                    cmdCreate.ExecuteNonQuery();
-                }
+                // using (NpgsqlCommand cmdCreate = new NpgsqlCommand(
+                //         " CREATE TABLE if not exists apps (name text , username text,max_time int, day_of_the_week text, primary key (name,username,day_of_the_week)); " +
+                //         " CREATE TABLE if not exists daily_apps (pid int,app text,username text,start_time timestamp,end_time timestamp,primary key(pid, app));" +
+                //         " CREATE TABLE if not exists hist_apps (pid int,app text,username text,start_time timestamp,end_time timestamp);"+
+                //         " create table if not exists activetime (username text, max_time int, day_of_the_week text, last_time_connected timestamp, seconds_today int, primary key(username,day_of_the_week));" +
+                //         " create table if not exists logouts (username text, hour_min text, day_of_the_week text, primary key(username,day_of_the_week));" +
+                //         " create table if not exists logins (username text, hour_min text, day_of_the_week text, primary key(username,day_of_the_week));" +
+                //         " create table if not exists logoutsnow (username text primary key, day timestamp);"+
+                //         " comment on table apps is 'List of rules between apps & users'; "+
+                //         " comment on table daily_apps is 'Tracking of the start-end apps executed from the last start of Monitor';"+
+                //         " comment on table hist_apps is 'Historic of daily_apps table';"+
+                //         " comment on table activetime is 'Screen time granted to an user';"+
+                //         " comment on table logins is 'Time when user can start to spend his Screen time';"+
+                //         " comment on table logouts is 'Last time when user can enjoy his Screen Time';"+
+                //         " comment on table logoutsnow is 'To force a user to quit now';"+
+                //         " delete from logoutsnow where day<date_trunc('day',now());", vConn)){
+                //     cmdCreate.ExecuteNonQuery();
+                // }
                 using (NpgsqlCommand cmdCreate = new NpgsqlCommand(
                        @"CREATE OR REPLACE FUNCTION minutes_for_username (username_ text) 
                         RETURNS INT AS $$
@@ -114,8 +115,11 @@ namespace Backend
             var builder = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+
             IConfigurationRoot configuration = builder.Build();
+
             var connectionString = configuration.GetConnectionString("PostgreSqlConnection");
+
             var sessionFactory = Fluently.Configure()
                 .Database(PostgreSQLConfiguration.Standard
                     .ConnectionString(connectionString))
