@@ -1,5 +1,11 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
+using BlazorServerApp.Model;
+using FluentNHibernate.Cfg;
+using FluentNHibernate.Cfg.Db;
+using Microsoft.Extensions.Configuration;
+using NHibernate.Tool.hbm2ddl;
 using Npgsql;
 
 namespace Backend
@@ -101,6 +107,21 @@ namespace Backend
                     cmdCreate.ExecuteNonQuery();
                 }
             }
+        }
+
+        public void CreateDatabaseBasedOnNHibernate()
+        {
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+            IConfigurationRoot configuration = builder.Build();
+            var connectionString = configuration.GetConnectionString("PostgreSqlConnection");
+            var sessionFactory = Fluently.Configure()
+                .Database(PostgreSQLConfiguration.Standard
+                    .ConnectionString(connectionString))
+                .Mappings(m => m.FluentMappings.AddFromAssemblyOf<AppMap>())
+                .ExposeConfiguration(cfg => new SchemaExport(cfg).Create(true, true))
+                .BuildSessionFactory();
         }
 
         /// <summary>
