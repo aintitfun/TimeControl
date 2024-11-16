@@ -1,2 +1,10 @@
 bin
 obj
+*.bin
+/.vs/TimeControl/DesignTimeBuild/.dtbcache.v2
+/.vs/TimeControl/FileContentIndex
+*.v2
+/.vs/slnx.sqlite
+/.vs/TimeControl/v17/.suo
+/.vs/TimeControl/v17/.wsuo
+/.vs/VSWorkspaceState.json
