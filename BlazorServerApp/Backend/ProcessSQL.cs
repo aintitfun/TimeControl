@@ -6,6 +6,8 @@ using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using Microsoft.Extensions.Configuration;
 using NHibernate.Tool.hbm2ddl;
+using NHibernate;
+using NHibernate.Cfg;
 using Npgsql;
 
 namespace Backend
@@ -15,34 +17,33 @@ namespace Backend
         
         private string strconnPath=AppDomain.CurrentDomain.BaseDirectory+"conn.db";
         private string connString;
+        private static IConfigurationRoot configuration;
         public ProcessSQL()
         {
-            connString = "Host=127.0.0.1;Username=postgres;Password=postgres01;Database=monitor;";
+
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+
+            configuration = builder.Build();
+            connString = configuration.GetConnectionString("PostgreSqlConnection");
         }
-        public void CheckAndRecreateTables()
+        private static ISessionFactory CreateSessionFactory()
         {
-            CreateDatabaseBasedOnNHibernate();
+            return Fluently.Configure()
+                .Database(PostgreSQLConfiguration.Standard
+                .ConnectionString (configuration.GetConnectionString("PostgreSqlConnection")))
+                .Mappings(m => m.FluentMappings.AddFromAssemblyOf<AppMap>())
+                .BuildSessionFactory();
+        }
+
+
+        public void RecreateDB()
+        {
+            RecreateTablesBasedOnNHibernate();
             using (var vConn = new NpgsqlConnection(connString)){
                 vConn.Open();
                                 
-                // using (NpgsqlCommand cmdCreate = new NpgsqlCommand(
-                //         " CREATE TABLE if not exists apps (name text , username text,max_time int, day_of_the_week text, primary key (name,username,day_of_the_week)); " +
-                //         " CREATE TABLE if not exists daily_apps (pid int,app text,username text,start_time timestamp,end_time timestamp,primary key(pid, app));" +
-                //         " CREATE TABLE if not exists hist_apps (pid int,app text,username text,start_time timestamp,end_time timestamp);"+
-                //         " create table if not exists activetime (username text, max_time int, day_of_the_week text, last_time_connected timestamp, seconds_today int, primary key(username,day_of_the_week));" +
-                //         " create table if not exists logouts (username text, hour_min text, day_of_the_week text, primary key(username,day_of_the_week));" +
-                //         " create table if not exists logins (username text, hour_min text, day_of_the_week text, primary key(username,day_of_the_week));" +
-                //         " create table if not exists logoutsnow (username text primary key, day timestamp);"+
-                //         " comment on table apps is 'List of rules between apps & users'; "+
-                //         " comment on table daily_apps is 'Tracking of the start-end apps executed from the last start of Monitor';"+
-                //         " comment on table hist_apps is 'Historic of daily_apps table';"+
-                //         " comment on table activetime is 'Screen time granted to an user';"+
-                //         " comment on table logins is 'Time when user can start to spend his Screen time';"+
-                //         " comment on table logouts is 'Last time when user can enjoy his Screen Time';"+
-                //         " comment on table logoutsnow is 'To force a user to quit now';"+
-                //         " delete from logoutsnow where day<date_trunc('day',now());", vConn)){
-                //     cmdCreate.ExecuteNonQuery();
-                // }
                 using (NpgsqlCommand cmdCreate = new NpgsqlCommand(
                        @"CREATE OR REPLACE FUNCTION minutes_for_username (username_ text) 
                         RETURNS INT AS $$
@@ -110,13 +111,8 @@ namespace Backend
             }
         }
 
-        public void CreateDatabaseBasedOnNHibernate()
+        public void RecreateTablesBasedOnNHibernate()
         {
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
-
-            IConfigurationRoot configuration = builder.Build();
 
             var connectionString = configuration.GetConnectionString("PostgreSqlConnection");
 
@@ -124,7 +120,7 @@ namespace Backend
                 .Database(PostgreSQLConfiguration.Standard
                     .ConnectionString(connectionString))
                 .Mappings(m => m.FluentMappings.AddFromAssemblyOf<AppMap>())
-                .ExposeConfiguration(cfg => new SchemaExport(cfg).Create(true, true))
+                .ExposeConfiguration(cfg => new SchemaUpdate(cfg).Execute(false, true))
                 .BuildSessionFactory();
         }
 
@@ -197,27 +193,23 @@ namespace Backend
         /// </summary>
         /// <param name="strAppName"></param>
         /// <param name="nMaxTime"></param>
-        public bool AddApplication(string strAppName, string userName,int nMaxTime,string dayOfTheWeek)
+        public void AddApplication(string strAppName, string userName,int nMaxTime,string dayOfTheWeek)
         {
-            using (var conn = new NpgsqlConnection(connString))
-            {                
-                conn.Open();  
-                using (NpgsqlCommand cmd = new NpgsqlCommand($@"insert into apps (name,username,max_time,day_of_the_week) values ('{strAppName}','{userName}','{nMaxTime}','{dayOfTheWeek}')",conn))
+            var sessionFactory = CreateSessionFactory();
+            using (var session = sessionFactory.OpenSession())
+            {
+                using (var transaction = session.BeginTransaction())
                 {
-                    try
+                    var app = new App
                     {
-                        cmd.ExecuteNonQuery();
-                        return true;
-                    }
-                    catch (NpgsqlException e)
-                    {
-                        if (e.Message.Contains(Npgsql.PostgresErrorCodes.LockNotAvailable))
-                        {
-                            //Logger.Log($@"{DateTime.Now} [LOCK]: {cmd.CommandText}");
-                            return false;
-                        }
-                        return false;
-                    }
+                        Name = strAppName,
+                        Username = userName,
+                        MaxTime = nMaxTime,
+                        DayOfTheWeek = dayOfTheWeek
+                    };
+
+                    session.Save(app);
+                    transaction.Commit();
                 }
             }
         }
@@ -570,6 +562,8 @@ namespace Backend
                 }
             }
         }
+
+
         public List<AppsPersist> ListActiveTime()
         {
             

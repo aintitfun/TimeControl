@@ -39,7 +39,7 @@ namespace Backend
 
             ProcessSQL vSQLite = new ProcessSQL();
 
-            vSQLite.CheckAndRecreateTables();
+            vSQLite.RecreateDB();
             vSQLite.HistApps();
             vSQLite.ReStartConsumedTimeFromUsers();
 
