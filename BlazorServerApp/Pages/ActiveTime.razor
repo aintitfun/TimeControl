@@ -20,6 +20,8 @@
     <br />saturday: <input @bind='activeTime.dayOfTheWeekAndTime["saturday"]'  />
     <br />sunday:   <input @bind='activeTime.dayOfTheWeekAndTime["sunday"]'  />
 
+    <br />extra time:   <input @bind='activeTime.extraTime' />
+
     <br /><label>
         Consumed time (hh:mi:ss): 
         <input @bind="activeTime.secondsTodayFormatted" />
@@ -41,6 +43,7 @@
     {
         public Dictionary<string,int> dayOfTheWeekAndTime=new Dictionary<string, int>();
         private string currentUser;
+        public int extraTime;
         private ProcessSQL pSQL;
         private Monitor vMon;
         public string secondsTodayFormatted;
@@ -71,6 +74,8 @@
             dayOfTheWeekAndTime.Add("saturday",0);
             dayOfTheWeekAndTime.Add("sunday",0);
 
+            extraTime = 0;
+
             PopulateWeek();
             RefreshConsumedSeconds();
             //users.Add("alexa");
@@ -84,6 +89,12 @@
                 dayOfTheWeekAndTime[app._dayOfTheWeek.ToLower()] = app._time;
             }
         }
+
+        public void PopulateExtraTime()
+        {
+            extraTime = pSQL.GetExtraTime(currentUser);
+        }
+
         public void RefreshConsumedSeconds()
         {
             secondsToday = pSQL.GetUserConsumedSeconds(currentUser);
@@ -97,6 +108,7 @@
             RefreshConsumedSeconds();
             //users=pSQL.GetUsers();
             PopulateWeek();
+            PopulateExtraTime();
 
             return Task.CompletedTask;
 
@@ -109,6 +121,7 @@
                 pSQL.RemoveActiveTime(currentUser, d);
                 pSQL.AddActiveTime(currentUser, dayOfTheWeekAndTime[d], d);
             }
+            pSQL.AddExtraTime(currentUser, extraTime);
             pSQL.SetUserConsumedSeconds(currentUser, secondsToday);
             await GiveFeedback();
         }

@@ -35,13 +35,16 @@ namespace Backend
                         " create table if not exists logouts (username text, hour_min text, day_of_the_week text, primary key(username,day_of_the_week));" +
                         " create table if not exists logins (username text, hour_min text, day_of_the_week text, primary key(username,day_of_the_week));" +
                         " create table if not exists logoutsnow (username text primary key, day timestamp);"+
-                        " comment on table apps is 'List of rules between apps & users'; "+
+                        " create table if not exists extratime (username text primary key, minutes int);" +
+                        " comment on table apps is 'List of rules between apps & users'; " +
                         " comment on table daily_apps is 'Tracking of the start-end apps executed from the last start of Monitor';"+
                         " comment on table hist_apps is 'Historic of daily_apps table';"+
                         " comment on table activetime is 'Screen time granted to an user';"+
                         " comment on table logins is 'Time when user can start to spend his Screen time';"+
                         " comment on table logouts is 'Last time when user can enjoy his Screen Time';"+
                         " comment on table logoutsnow is 'To force a user to quit now';"+
+                        " comment on table extratime is 'To add extra time to an user on current day';" +
+                        " truncate table extratime;" +
                         " delete from logoutsnow where day<date_trunc('day',now());", vConn)){
                     cmdCreate.ExecuteNonQuery();
                 }
@@ -554,6 +557,49 @@ namespace Backend
                 }
             }
         }
+        public bool AddExtraTime(string userName, int minutes)
+        {
+            using (var conn = new NpgsqlConnection(connString))
+            {
+                conn.Open();
+                using (NpgsqlCommand cmd = new NpgsqlCommand($@"insert into extratime values ('{userName}',{minutes})
+                    ON CONFLICT(userName)
+                    DO UPDATE SET
+                      minutes = EXCLUDED.minutes;", conn))
+                {
+                    try
+                    {
+                        cmd.ExecuteNonQuery();
+                        return true;
+                    }
+                    catch (NpgsqlException e)
+                    {
+                        //Logger.Log($@"{DateTime.Now} [ERROR]: Removing logout {userName}");
+                    }
+                    return false;
+                }
+            }
+        }
+
+        public int GetExtraTime(string userName)
+        {
+            using (var conn = new NpgsqlConnection(connString))
+            {
+                conn.Open();
+                using (NpgsqlCommand cmd = new NpgsqlCommand($@"select minutes from extratime where username = '{userName}';", conn))
+                {
+                    try
+                    {
+                        return (int)cmd.ExecuteScalar();
+                    }
+                    catch (Exception ex)
+                    {
+                        return 0;
+                    }
+                }
+            }
+        }
+
         public List<AppsPersist> ListActiveTime()
         {
             
@@ -684,7 +730,7 @@ namespace Backend
             {
                 vConn.Open();
                 using (NpgsqlCommand cmd = new NpgsqlCommand($@"select username from activetime
-                     where seconds_today>max_time*60
+                     where seconds_today>max_time*60+(select minutes*60 from extratime where username=activetime.username) 
                      and lower(day_of_the_week)=rtrim(lower(to_char(now(),'day')));", vConn))
                 {
                     NpgsqlDataReader dr;
