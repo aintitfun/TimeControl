@@ -586,7 +586,7 @@ namespace Backend
             using (var conn = new NpgsqlConnection(connString))
             {
                 conn.Open();
-                using (NpgsqlCommand cmd = new NpgsqlCommand($@"select minutes from extratime where username = '{userName}';", conn))
+                using (NpgsqlCommand cmd = new NpgsqlCommand($@"SELECT COALESCE((SELECT minutes FROM extratime WHERE username = '{userName}'), 0) AS result;", conn))
                 {
                     try
                     {
@@ -729,9 +729,18 @@ namespace Backend
             using (var vConn = new NpgsqlConnection(connString))
             {
                 vConn.Open();
-                using (NpgsqlCommand cmd = new NpgsqlCommand($@"select username from activetime
-                     where seconds_today>max_time*60+(select minutes*60 from extratime where username=activetime.username) 
-                     and lower(day_of_the_week)=rtrim(lower(to_char(now(),'day')));", vConn))
+                using (NpgsqlCommand cmd = new NpgsqlCommand($@"
+                --select username from activetime
+                --                     where seconds_today>max_time*60+(SELECT COALESCE((SELECT minutes*60 FROM extratime WHERE username = activetime.username), 0) AS result) 
+                --                     and lower(day_of_the_week)=rtrim(lower(to_char(now(),'day')));
+                select a.username , seconds_today, max_time*60+COALESCE(e.minutes,0)*60 
+                from activetime a
+                left join extratime e on a.username=e.username
+                where 
+                seconds_today>max_time*60+COALESCE(e.minutes,0)*60 
+                                     and 
+                lower(day_of_the_week)=rtrim(lower(to_char(now(),'day')));
+                ", vConn))
                 {
                     NpgsqlDataReader dr;
                     dr = cmd.ExecuteReader();
