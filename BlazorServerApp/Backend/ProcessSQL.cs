@@ -35,7 +35,7 @@ namespace Backend
                         " create table if not exists logouts (username text, hour_min text, day_of_the_week text, primary key(username,day_of_the_week));" +
                         " create table if not exists logins (username text, hour_min text, day_of_the_week text, primary key(username,day_of_the_week));" +
                         " create table if not exists logoutsnow (username text primary key, day timestamp);"+
-                        " create table if not exists extratime (username text primary key, minutes int);" +
+                        " create table if not exists extratime (username text primary key, minutes int, day timestamp);" +
                         " comment on table apps is 'List of rules between apps & users'; " +
                         " comment on table daily_apps is 'Tracking of the start-end apps executed from the last start of Monitor';"+
                         " comment on table hist_apps is 'Historic of daily_apps table';"+
@@ -44,7 +44,7 @@ namespace Backend
                         " comment on table logouts is 'Last time when user can enjoy his Screen Time';"+
                         " comment on table logoutsnow is 'To force a user to quit now';"+
                         " comment on table extratime is 'To add extra time to an user on current day';" +
-                        " truncate table extratime;" +
+                        " delete from extratime where day<date_trunc('day',now());" +
                         " delete from logoutsnow where day<date_trunc('day',now());", vConn)){
                     cmdCreate.ExecuteNonQuery();
                 }
@@ -562,7 +562,7 @@ namespace Backend
             using (var conn = new NpgsqlConnection(connString))
             {
                 conn.Open();
-                using (NpgsqlCommand cmd = new NpgsqlCommand($@"insert into extratime values ('{userName}',{minutes})
+                using (NpgsqlCommand cmd = new NpgsqlCommand($@"insert into extratime values ('{userName}',{minutes}, now())
                     ON CONFLICT(userName)
                     DO UPDATE SET
                       minutes = EXCLUDED.minutes;", conn))
