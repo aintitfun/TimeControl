@@ -20,7 +20,7 @@ namespace Backend
         private string connString;
         public ProcessSQL()
         {
-            connString = "Host=127.0.0.1;Username=postgres;Password=postgres01;Database=monitor;";
+            connString = "Host=127.0.0.1;Username=postgres;Password=abc;Database=monitor;";
         }
         public void CheckAndRecreateTables()
         {
