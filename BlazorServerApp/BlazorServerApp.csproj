@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net6.0-windows</TargetFramework>
+    <TargetFramework>net10.0-windows7.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
@@ -9,8 +9,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Npgsql" Version="6.0.1" />
-    <PackageReference Include="System.Management" Version="6.0.0" />
+    <PackageReference Include="Npgsql" Version="10.0.1" />
+    <PackageReference Include="System.Management" Version="10.0.2" />
   </ItemGroup>
 
 </Project>
